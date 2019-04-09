@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * @author Mystra77
  */
 public class Heroes extends Personajes{
-    private int nivel;
     private ArrayList<Objetos> objetosArray;
     private TipoConducta moral;
       
@@ -25,20 +24,10 @@ public class Heroes extends Personajes{
     }   
 
     public Heroes(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, 
-        int magia, int agilidad, int defensa, ArrayList<Habilidades> habilidadesArray, 
-        int nivel, ArrayList<Objetos> objetosArray, TipoConducta moral) {
+        int magia, int agilidad, int defensa, ArrayList<Habilidades> habilidadesArray, ArrayList<Objetos> objetosArray) {
         super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray);
-        this.nivel = nivel;
         this.objetosArray = objetosArray;
         this.moral = moral;
-    }
-
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
     }
 
     public ArrayList<Objetos> getObjetosArray() {
