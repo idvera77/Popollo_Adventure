@@ -26,7 +26,10 @@ public class Popollo_Adventures {
     public static void main(String[] args) {
         
         //Inicio.
-        Scanner sc = new Scanner (System.in);     
+        Scanner sc = new Scanner (System.in);    
+        String filepath = "1.wav";
+        Musica musicObjet = new Musica();
+        
         
         //Declaracion de variables
         //Habilidades
@@ -43,8 +46,7 @@ public class Popollo_Adventures {
         ArrayList<Habilidades> hechizosOfensivos= new ArrayList();
         hechizosOfensivos.add(helada);
         hechizosOfensivos.add(bolaDeFuego);
-        
-        
+             
         Habilidades curacionL = new Habilidades("Curar Heridadas Leves","Sana las heridas superficiales.",10,3,3);
         Habilidades curacionG = new Habilidades("Curar Heridas Graves","Sana cualquier tipo de heridas.", 40, 1,1);
             
@@ -66,8 +68,7 @@ public class Popollo_Adventures {
         ArrayList<Habilidades> golpesMagicosE = new ArrayList();
         golpesMagicosE.add(Cabezazo);
         golpesMagicosE.add(Morder);
-        
-        
+         
         //Objetos
         Objetos bombaP = new Objetos("Bomba Pequeña",15,3,"Pequeño artefacto explosivo, inflige 15 puntos de daño.");
         Objetos bombaG = new Objetos("Bomba Grande",50,1,"Gran artefacto explosivo, inflige 50 puntos de daño.");
@@ -77,9 +78,7 @@ public class Popollo_Adventures {
         objetosArray.add(bombaP);
         objetosArray.add(bombaG);
         objetosArray.add(pocion);
-        
-        
-        
+         
         Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 120, 120, 30, 10, 20, 30, habilidadesOfensivas, objetosArray);
         Heroes narcyl = new Heroes("Narcyl", "Sacerdotisa al cargo de Popollo", 70, 70, 15, 30, 15, 20, hechizosCurativos, objetosArray);
         Heroes mystra = new Heroes("Mystra", "Un adorable Popollito comilon", 90, 90, 10, 50, 30, 20, hechizosOfensivos, objetosArray);
@@ -103,9 +102,7 @@ public class Popollo_Adventures {
         combateDificil.add(golem);
         combateDificil.add(nigromante);
         
-        
-        
-        
+        System.out.println(heroesArray.get(1).getNombre());
         int opcion=0;
 
         String menuInicio="\nPor favor seleccione una opcion:"
@@ -122,7 +119,8 @@ public class Popollo_Adventures {
                 case 0:
                     System.out.println("Vuelve pronto ^_^");
                     break;
-                case 1:
+                case 1:      
+                    musicObjet.playMusic(filepath);
                     break;
                 case 2:
                     break;
