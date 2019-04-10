@@ -22,8 +22,7 @@ public class Combate {
         Random rand=new Random(System.nanoTime());
         int aleatorio, vida;
         
-      
-        
+        /*
         boolean Good=true;
         boolean Evil=true;
         
@@ -77,4 +76,7 @@ public class Combate {
             }
         }while(Good && Evil);     
     }   
+        */
+       
+    }
 }

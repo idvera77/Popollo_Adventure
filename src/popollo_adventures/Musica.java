@@ -15,13 +15,13 @@ import javax.sound.sampled.Clip;
  */
 public class Musica {
 
-    void playMusic (String musicLocation){
+    void iniciarMusica (String musicLocation){
         try{
-            File musicPath = new File(musicLocation);
+            File rutaMusica = new File(musicLocation);
             
-            if(musicPath.exists())
+            if(rutaMusica.exists())
             {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(rutaMusica);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
@@ -36,4 +36,8 @@ public class Musica {
             ex.printStackTrace();
         }
     } 
+    
+    void stopMusic (){
+       
+    }
 }
