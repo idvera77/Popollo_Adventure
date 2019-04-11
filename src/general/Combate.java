@@ -16,10 +16,10 @@ import java.util.Scanner;
  * @author Mystra77
  */
 public class Combate {
-    
+
 
    public static void Batalla(Heroes heroes, Enemigos enemigos){
-        
+
         Scanner sc=new Scanner(System.in);
         int dañar;
         int aleatorio;
@@ -46,7 +46,7 @@ public class Combate {
                             enemigos.daño(enemigos,dañar);
                             System.out.println(heroes.getNombre()+" inflige "+heroes.getFuerza()*2+" puntos de daño.");
                             System.out.println(+enemigos.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
-                            System.out.println(enemigos.getNombre()+" tiene "+enemigos.getSalud()+" puntos de vida restantes.\n");     
+                            System.out.println(enemigos.getNombre()+" tiene "+enemigos.getSalud()+" puntos de vida restantes.\n");
                         }else if(heroes.getAgilidad()==enemigos.getAgilidad()){
                             dañar = heroes.getFuerza();
                             enemigos.daño(enemigos,dañar);
@@ -62,7 +62,7 @@ public class Combate {
                                 System.out.println(heroes.getNombre()+" inflige "+heroes.getFuerza()+" puntos de daño.");
                                 System.out.println(+enemigos.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
                                 System.out.println(enemigos.getNombre()+" tiene "+enemigos.getSalud()+" puntos de vida restantes.\n");
-                            }  
+                            }
                         }
                         break;
 
@@ -72,7 +72,7 @@ public class Combate {
 
                     case 3:
                         String listaHabilidades="";
-                        
+
                         for (int i = 0; i < heroes.getHabilidadesArray().size(); i++) {
                             listaHabilidades +="("+(i)+")"+heroes.getHabilidadesArray().get(i).getNombre()+" ";
                         }
@@ -81,18 +81,18 @@ public class Combate {
                                 case 1:
                                     break;
                                 case 2:
-                                    break;    
-                            }        
+                                    break;
+                            }
                         break;
 
                     case 4:
                         break;
                 }
-                
+
             }else{
                 heroesVivos=false;
                 System.out.println("Derrota");
-            } 
+            }
             //TURNO ENEMIGO
             if(enemigos.getSalud()>0){
             aleatorio = NumeroAleatorio(0, 6);
@@ -104,13 +104,13 @@ public class Combate {
                         heroes.daño(heroes,dañar);
                         System.out.println(enemigos.getNombre()+" inflige "+enemigos.getFuerza()*2+" puntos de daño.");
                         System.out.println(+heroes.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
-                        System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes.");     
+                        System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes.");
                     }else if(enemigos.getAgilidad()==heroes.getAgilidad()){
                         dañar = enemigos.getFuerza();
                         heroes.daño(heroes,dañar);
                         System.out.println(enemigos.getNombre()+" inflige "+enemigos.getFuerza()+" puntos de daño.");
                         System.out.println(+heroes.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
-                        System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes."); 
+                        System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes.");
                     }else{
                         if(aleatorio==0){
                             System.out.println("Ataque fallado");
@@ -120,13 +120,13 @@ public class Combate {
                             System.out.println(enemigos.getNombre()+" inflige "+enemigos.getFuerza()+" puntos de daño.");
                                     System.out.println(+heroes.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
                                     System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes.");
-                                }  
-                            }    
-                }else if(aleatorio==4){            
-                    System.out.println("Uso Bloqueo");   
+                                }
+                            }
+                }else if(aleatorio==4){
+                    System.out.println("Uso Bloqueo");
                 }else{
                     System.out.println("Uso Habilidad");
-                }    
+                }
             }else{
                 enemigosVivos=false;
                 System.out.println("!!!Enemigos Derrotados!!!");
@@ -134,9 +134,9 @@ public class Combate {
             }
         }while(heroesVivos&&enemigosVivos);
     }
-    
+
     public static int NumeroAleatorio(int minimo,int maximo){
        int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));
        return num;
-   } 
+   }
 }
