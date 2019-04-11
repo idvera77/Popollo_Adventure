@@ -1,5 +1,5 @@
 
-package popollo_adventures;
+package general;
 
 import java.io.File;
 
@@ -14,10 +14,14 @@ import javax.sound.sampled.Clip;
  * @author Mystra77
  */
 public class Musica {
+    String rutaCancionVictoria = "Victoria.wav";
+    String rutaCancionBatalla = "Combates.wav";
+    
+    public static void iniciarMusica (){
+        String rutaCancionVictoria = "Victoria.wav";
 
-    void iniciarMusica (String musicLocation){
         try{
-            File rutaMusica = new File(musicLocation);
+            File rutaMusica = new File(rutaCancionVictoria);
             
             if(rutaMusica.exists())
             {

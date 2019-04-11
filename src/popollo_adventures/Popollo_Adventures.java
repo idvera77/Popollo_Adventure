@@ -7,12 +7,14 @@ package popollo_adventures;
 
 
 
+import general.Musica;
 import classes.Enemigos;
 import classes.Habilidades;
 import classes.Heroes;
 import classes.Objetos;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 /**
  *
@@ -27,14 +29,11 @@ public class Popollo_Adventures {
         
         //Inicio.
         Scanner sc = new Scanner (System.in);    
-        String filepath = "1.wav";
-        Musica musicObjet = new Musica();
-        
-        
+
         //Declaracion de variables
         //Habilidades
         Habilidades golpeFuerte = new Habilidades("Golpe Fuerte","Empleas todas tus fuerzas.",30,5,5);
-        Habilidades remolino = new Habilidades("Gira y gira.","Da un poco de mareo.",50,3,3);
+        Habilidades remolino = new Habilidades("Torbellino","Da un poco de mareo.",50,3,3);
         
         ArrayList<Habilidades> habilidadesOfensivas= new ArrayList();
         habilidadesOfensivas.add(golpeFuerte);
@@ -119,12 +118,12 @@ public class Popollo_Adventures {
                 case 0:
                     System.out.println("Vuelve pronto ^_^");
                     break;
-                case 1:      
-                    musicObjet.playMusic(filepath);
+                case 1:               
                     break;
                 case 2:
                     break;
-                case 3:
+                case 3:              
+                    general.Combate.Batalla(popollo, nigromante);
                     break;
                 case 4:
                     break;                       
@@ -133,5 +132,6 @@ public class Popollo_Adventures {
             }
         }while(opcion!=0);
     }
-    
 }
+
+
