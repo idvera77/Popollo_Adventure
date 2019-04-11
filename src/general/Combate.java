@@ -6,9 +6,7 @@
 package general;
 
 import classes.Enemigos;
-import classes.Habilidades;
 import classes.Heroes;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -76,7 +74,7 @@ public class Combate {
                         for (int i = 0; i < heroes.getHabilidadesArray().size(); i++) {
                             listaHabilidades +="("+(i)+")"+heroes.getHabilidadesArray().get(i).getNombre()+" ";
                         }
-                        System.out.println(listaHabilidades);
+                        System.out.println(listaHabilidades+"\n");
                             switch(opciones){
                                 case 1:
                                     break;

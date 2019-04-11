@@ -2,8 +2,6 @@
 package general;
 
 import java.io.File;
-
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -16,27 +14,27 @@ import javax.sound.sampled.Clip;
 public class Musica {
     String rutaCancionVictoria = "Victoria.wav";
     String rutaCancionBatalla = "Combates.wav";
-    
+
     public static void iniciarMusica (){
         String rutaCancionVictoria = "Victoria.wav";
 
         try{
             File rutaMusica = new File(rutaCancionVictoria);
-            
+
             if(rutaMusica.exists())
             {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(rutaMusica);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
-                clip.start();   
+                clip.start();
             }
             else
             {
                 System.out.println("No puedo encontrar el archivo");
-            }    
+            }
         }
         catch(Exception ex){
             ex.printStackTrace();
         }
-    } 
+    }
 }
