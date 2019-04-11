@@ -14,6 +14,7 @@ import classes.Objetos;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 /**
  *
  * @author Mystra77
@@ -121,9 +122,9 @@ public class Popollo_Adventures {
                 case 2:
                     break;
                 case 3:
-                    String rutaCancion = "Combates.wav";
+                    String rutaCancionBatalla = "Combates.wav";
                     Musica cancionBatalla = new Musica();
-                    cancionBatalla.iniciarMusica(rutaCancion);
+                    cancionBatalla.iniciarMusica(rutaCancionBatalla);
                     Batalla(popollo, nigromante);
                     break;
                 case 4:
@@ -143,7 +144,12 @@ public class Popollo_Adventures {
         boolean enemigosVivos=true;
         boolean defensaHeroe=false;
         boolean defensaEnemigo=false;
-        
+        /*
+        String rutaCancionPopollo = "popollo.wav";
+        Musica cancionPopollo = new Musica();
+        String rutaCancionNigro = "Combates.wav";
+        Musica cancionNigro = new Musica();
+        */
 
         do{
             //TURNO ALIADO
@@ -156,6 +162,7 @@ public class Popollo_Adventures {
 
                 switch(opciones){
                     case 1:
+                       //cancionPopollo.iniciarMusica(rutaCancionPopollo);
                        aleatorio = NumeroAleatorio(0, 2);
                        if(heroes.getAgilidad()>enemigos.getAgilidad()){
                             System.out.println("!!GOLPE CRITICO!!");
@@ -200,6 +207,7 @@ public class Popollo_Adventures {
             //TURNO ENEMIGO
             if(enemigos.getSalud()>0){
             aleatorio = NumeroAleatorio(0, 6);
+            //cancionNigro.iniciarMusica(rutaCancionNigro);
                 if(aleatorio<=3){
                     aleatorio = NumeroAleatorio(0, 2);
                     if(enemigos.getAgilidad()>heroes.getAgilidad()){
@@ -208,13 +216,13 @@ public class Popollo_Adventures {
                         heroes.daño(heroes,dañar);
                         System.out.println(enemigos.getNombre()+" inflige "+enemigos.getFuerza()*2+" puntos de daño.");
                         System.out.println(+heroes.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
-                        System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes.\n");     
+                        System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes.");     
                     }else if(enemigos.getAgilidad()==heroes.getAgilidad()){
                         dañar = enemigos.getFuerza();
                         heroes.daño(heroes,dañar);
                         System.out.println(enemigos.getNombre()+" inflige "+enemigos.getFuerza()+" puntos de daño.");
                         System.out.println(+heroes.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
-                        System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes.\n"); 
+                        System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes."); 
                     }else{
                         if(aleatorio==0){
                             System.out.println("Ataque fallado");
@@ -223,7 +231,7 @@ public class Popollo_Adventures {
                             heroes.daño(heroes,dañar);
                             System.out.println(enemigos.getNombre()+" inflige "+enemigos.getFuerza()+" puntos de daño.");
                                     System.out.println(+heroes.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
-                                    System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes.\n");
+                                    System.out.println(heroes.getNombre()+" tiene "+heroes.getSalud()+" puntos de vida restantes.");
                                 }  
                             }    
                 }else if(aleatorio==4){            
@@ -234,9 +242,9 @@ public class Popollo_Adventures {
             }else{
                 enemigosVivos=false;
                 System.out.println("!!!Enemigos Derrotados!!!");
-                String rutaCancion = "Victoria.wav";
-                Musica cancionVictoria = new Musica();
-                cancionVictoria.iniciarMusica(rutaCancion);
+                String rutaCancionVictoria = "Victoria.wav";
+                Musica cancionVictoria = new Musica();    
+                cancionVictoria.iniciarMusica(rutaCancionVictoria);
             }
         }while(heroesVivos&&enemigosVivos);
     }
@@ -245,8 +253,6 @@ public class Popollo_Adventures {
        int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));
        return num;
    }
-    
-    
 }
 
 
