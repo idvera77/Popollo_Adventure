@@ -24,7 +24,8 @@ public class Musica {
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(rutaMusica);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
-                clip.start();   
+                clip.start();
+                clip.loop(Clip.LOOP_CONTINUOUSLY);   
             }
             else
             {
@@ -35,4 +36,8 @@ public class Musica {
             ex.printStackTrace();
         }
     } 
+    
+    void stopMusic (){
+       
+    }
 }
