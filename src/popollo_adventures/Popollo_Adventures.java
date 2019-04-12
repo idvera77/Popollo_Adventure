@@ -119,8 +119,10 @@ public class Popollo_Adventures {
                     System.out.println("Vuelve pronto ^_^");
                     break;
                 case 1:
+                    general.Musica.iniciarMusicaBatalla();
                     break;
                 case 2:
+                    general.Musica.iniciarMusica();
                     break;
                 case 3:
                     general.Combate.Batalla(popollo, nigromante);

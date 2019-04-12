@@ -27,6 +27,33 @@ public class Musica {
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
+                Thread.sleep(20000);
+                clip.close();
+            }
+            else
+            {
+                System.out.println("No puedo encontrar el archivo");
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void iniciarMusicaBatalla (){
+        String rutaCancionVictoria = "Combates.wav";
+
+        try{
+            File rutaMusica = new File(rutaCancionVictoria);
+
+            if(rutaMusica.exists())
+            {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(rutaMusica);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+                Thread.sleep(20000);
+                clip.close();
             }
             else
             {
