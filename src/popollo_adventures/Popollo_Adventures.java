@@ -6,7 +6,7 @@
 package popollo_adventures;
 
 
-
+import general.Combate;
 import general.Musica;
 import classes.Enemigos;
 import classes.Habilidades;
@@ -26,10 +26,9 @@ public class Popollo_Adventures {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
         //Inicio.
         Scanner sc = new Scanner (System.in);
-
+        
         //Declaracion de variables
         //Habilidades
         Habilidades golpeFuerte = new Habilidades("Golpe Fuerte","Empleas todas tus fuerzas.",30,5,5);
@@ -118,14 +117,12 @@ public class Popollo_Adventures {
                 case 0:
                     System.out.println("Vuelve pronto ^_^");
                     break;
-                case 1:
-                    general.Musica.iniciarMusicaBatalla();
+                case 1:      
                     break;
-                case 2:
-                    general.Musica.iniciarMusica();
+                case 2:             
                     break;
                 case 3:
-                    general.Combate.Batalla(popollo, nigromante);
+                    Combate.Batalla(popollo, nigromante);
                     break;
                 case 4:
                     break;

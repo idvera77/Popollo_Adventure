@@ -12,22 +12,18 @@ import javax.sound.sampled.Clip;
  * @author Mystra77
  */
 public class Musica {
-    String rutaCancionVictoria = "Victoria.wav";
-    String rutaCancionBatalla = "Combates.wav";
 
-    public static void iniciarMusica (){
-        String rutaCancionVictoria = "Victoria.wav";
-
+    public static void iniciarMusica (String rutaSonido){
         try{
-            File rutaMusica = new File(rutaCancionVictoria);
+            File rutaMusica = new File(rutaSonido);
 
             if(rutaMusica.exists())
             {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(rutaMusica);
+                AudioInputStream audioInputVictoria = AudioSystem.getAudioInputStream(rutaMusica);
                 Clip clip = AudioSystem.getClip();
-                clip.open(audioInput);
+                clip.open(audioInputVictoria);
                 clip.start();
-                Thread.sleep(20000);
+                Thread.sleep(6000);
                 clip.close();
             }
             else
@@ -40,19 +36,17 @@ public class Musica {
         }
     }
     
-    public static void iniciarMusicaBatalla (){
-        String rutaCancionVictoria = "Combates.wav";
-
+    public static void iniciarSonidos (String rutaSonido){
         try{
-            File rutaMusica = new File(rutaCancionVictoria);
+            File rutaMusica = new File(rutaSonido);
 
             if(rutaMusica.exists())
             {
-                AudioInputStream audioInput = AudioSystem.getAudioInputStream(rutaMusica);
+                AudioInputStream audioInputSonido = AudioSystem.getAudioInputStream(rutaMusica);
                 Clip clip = AudioSystem.getClip();
-                clip.open(audioInput);
+                clip.open(audioInputSonido);
                 clip.start();
-                Thread.sleep(20000);
+                Thread.sleep(500);
                 clip.close();
             }
             else
