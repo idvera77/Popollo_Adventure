@@ -95,4 +95,9 @@ public class Personajes extends ElementoIdentificador{
                 this.salud -= 0;
         }
     }
+    
+    public void dañoHabilidades (Personajes personaje, int numero){
+        int dañoHabilidad = personaje.getMagia()*personaje.getHabilidadesArray().get(numero).getEspecial();
+        this.salud -= dañoHabilidad;
+    }
 }

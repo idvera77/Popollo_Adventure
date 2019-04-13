@@ -40,8 +40,8 @@ public class Combate {
             //TURNO ALIADO
             if(heroes.getSalud()>0){
                 System.out.println("----------------------------------------------");
-                System.out.println("Turno de "+heroes.getNombre());
-                System.out.println("Ataque(1),Defensa(2),Habilidades(3),Objetos(4)");
+                System.out.println("Turno de "+heroes.getNombre()+" - Vida restante: "+heroes.getSalud()+"/"+heroes.getSaludMaxima());
+                System.out.println("\tAtaque(1),Defensa(2),Habilidades(3),Objetos(4)");
                 int opciones=sc.nextInt();
                 System.out.println("----------------------------------------------");
 
@@ -52,17 +52,15 @@ public class Combate {
                             System.out.println("!!GOLPE CRITICO!!");
                             dañar = heroes.getFuerza()*2;
                             enemigos.daño(enemigos,dañar);
-                            System.out.println(heroes.getNombre()+" inflige "+heroes.getFuerza()*2+" puntos de daño.");
-                            System.out.println(+enemigos.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
-                            System.out.println(enemigos.getNombre()+" tiene "+enemigos.getSalud()+" puntos de vida restantes.\n");
-                            Musica.iniciarSonidos(rutaSonidoFisicoAliado);
+                            System.out.println("- "+heroes.getNombre()+" inflige "+heroes.getFuerza()*2+" puntos de daño.");
+                            System.out.println("- "+enemigos.getNombre()+" bloquea "+enemigos.getDefensa()+" puntos de daño."
+                                    +"\n");
                         }else if(heroes.getAgilidad()==enemigos.getAgilidad()){
                             dañar = heroes.getFuerza();
                             enemigos.daño(enemigos,dañar);
-                            System.out.println(heroes.getNombre()+" inflige "+heroes.getFuerza()+" puntos de daño.");
-                            System.out.println(+enemigos.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
-                            System.out.println(enemigos.getNombre()+" tiene "+enemigos.getSalud()+" puntos de vida restantes.\n");
-                            Musica.iniciarSonidos(rutaSonidoFisicoAliado);
+                            System.out.println("- "+heroes.getNombre()+" inflige "+heroes.getFuerza()+" puntos de daño.");
+                            System.out.println("- "+enemigos.getNombre()+" bloquea "+enemigos.getDefensa()+" puntos de daño."
+                                +"\n");
                         }else{
                             if(aleatorio==0){
                                 System.out.println("Ataque fallado");
@@ -70,31 +68,42 @@ public class Combate {
                                 dañar = heroes.getFuerza();
                                 enemigos.daño(enemigos,dañar);
                                 System.out.println(heroes.getNombre()+" inflige "+heroes.getFuerza()+" puntos de daño.");
-                                System.out.println(+enemigos.getDefensa()+" puntos de daño son bloqueados por la defensa enemiga.");
-                                System.out.println(enemigos.getNombre()+" tiene "+enemigos.getSalud()+" puntos de vida restantes.\n");
-                                Musica.iniciarSonidos(rutaSonidoFisicoAliado);
+                                System.out.println("- "+enemigos.getNombre()+" bloquea "+enemigos.getDefensa()+" puntos de daño."
+                                    +"\n");
                             }
                         }
+                        Musica.iniciarSonidos(rutaSonidoFisicoAliado);
                         break;
 
                     case 2:
                         Musica.iniciarSonidos(rutaSonidoDefensa);
-                        System.out.println(heroes.getNombre()+" aumenta su defensa contra el siguiente ataque.\n");
+                        System.out.println(heroes.getNombre()+" duplica su defensa durante un turno..\n");
                         break;
 
                     case 3:
-                        Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
+                        
                         String listaHabilidades="";
                         
 
                         for (int i = 0; i < heroes.getHabilidadesArray().size(); i++) {
-                            listaHabilidades +="("+(i)+")"+heroes.getHabilidadesArray().get(i).getNombre()+" ";
-                        }
-                        System.out.println(listaHabilidades+"\n");
+                            listaHabilidades +="\t("+(i+1)+")"+heroes.getHabilidadesArray().get(i).getNombre()+" - Usos restantes:*"+heroes.getHabilidadesArray().get(i).getUsosRestantes()+"*";
+                        }     
+                        System.out.println(listaHabilidades);
+                        opciones=sc.nextInt();
                             switch(opciones){
                                 case 1:
+                                    System.out.println(heroes.getNombre()+" usa "+heroes.getHabilidadesArray().get(0).getNombre());
+                                    Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
                                     break;
                                 case 2:
+                                    if(heroes.getHabilidadesArray().get(1).getUsosRestantes()!=0){
+                                        System.out.println(heroes.getNombre()+" usa "+heroes.getHabilidadesArray().get(1).getNombre());
+                                        heroes.getHabilidadesArray().get(1).setUsosRestantes(heroes.getHabilidadesArray().get(1).getUsosRestantes()-1);
+                                        enemigos.dañoHabilidades(heroes, opciones-1);
+                                        Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
+                                    }else{
+                                        System.out.println("No puedes utilizar la habilidad. Pierdes el turno.\n");
+                                    }
                                     break;
                             }
                         break;
@@ -105,11 +114,12 @@ public class Combate {
                 }
 
             }else{
-                heroesVivos=false;
                 System.out.println("Derrota");
+                heroesVivos=false;
             }
             //TURNO ENEMIGO
             if(enemigos.getSalud()>0){
+            System.out.println("Turno de "+enemigos.getNombre()+" - Vida restante: "+enemigos.getSalud()+"/"+enemigos.getSaludMaxima());
             aleatorio = NumeroAleatorio(0, 6);
                 if(aleatorio<=3){          
                     aleatorio = NumeroAleatorio(0, 2);

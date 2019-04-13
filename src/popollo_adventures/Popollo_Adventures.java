@@ -77,9 +77,9 @@ public class Popollo_Adventures {
         objetosArray.add(bombaG);
         objetosArray.add(pocion);
 
-        Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 120, 120, 30, 10, 20, 30, habilidadesOfensivas, objetosArray);
-        Heroes narcyl = new Heroes("Narcyl", "Sacerdotisa al cargo de Popollo", 70, 70, 15, 30, 15, 20, hechizosCurativos, objetosArray);
-        Heroes mystra = new Heroes("Mystra", "Un adorable Popollito comilon", 90, 90, 10, 50, 30, 20, hechizosOfensivos, objetosArray);
+        Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesOfensivas, objetosArray);
+        Heroes narcyl = new Heroes("Narcyl", "Sacerdotisa al cargo de Popollo", 60, 60, 15, 10, 15, 5, hechizosCurativos, objetosArray);
+        Heroes mystra = new Heroes("Mystra", "Un adorable Popollito comilon", 80, 80, 15, 15, 15, 5, hechizosOfensivos, objetosArray);
 
         ArrayList<Heroes> heroesArray = new ArrayList();
         heroesArray.add(popollo);
@@ -87,9 +87,9 @@ public class Popollo_Adventures {
         heroesArray.add(mystra);
 
         //Enemigos
-        Enemigos poring = new Enemigos("Poring", "Una gelatina rosa monisima", 60, 60, 10, 0, 20, 10, golpesSalvajesE, 100);
-        Enemigos golem = new Enemigos("Golem", "Una mole andante", 150, 150, 20, 0, 10, 50, golpesSalvajesE, 500);
-        Enemigos nigromante = new Enemigos ("Nigromante", "No tiene buen aspecto", 100, 100, 10, 30, 20, 10, golpesMagicosE, 1000);
+        Enemigos poring = new Enemigos("Poring", "Una gelatina rosa monisima", 60, 60, 20, 5, 10, 10, golpesSalvajesE, 100);
+        Enemigos golem = new Enemigos("Golem", "Una mole andante", 120, 120, 20, 10, 10, 15, golpesSalvajesE, 500);
+        Enemigos nigromante = new Enemigos ("Nigromante", "No tiene buen aspecto", 80, 80, 15, 10, 20, 10, golpesMagicosE, 1000);
 
         ArrayList<Enemigos> combateFacil = new ArrayList();
         combateFacil.add(poring);
