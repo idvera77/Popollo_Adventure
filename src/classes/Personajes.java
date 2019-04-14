@@ -5,12 +5,16 @@
  */
 package classes;
 
+import static general.Combate.NumeroAleatorio;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
  * @author Mystra77
  */
+
+
 public class Personajes extends ElementoIdentificador{
     public int saludMaxima;
     public int salud;
@@ -20,6 +24,18 @@ public class Personajes extends ElementoIdentificador{
     private int defensa;
     private ArrayList<Habilidades> habilidadesArray;
 
+    /**
+     * 
+     * @param nombre
+     * @param descripcion
+     * @param saludMaxima
+     * @param salud
+     * @param fuerza
+     * @param magia
+     * @param agilidad
+     * @param defensa
+     * @param habilidadesArray 
+     */
     public Personajes(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, int magia, int agilidad, int defensa, ArrayList<Habilidades> habilidadesArray) {
         super(nombre, descripcion);
         this.saludMaxima = saludMaxima;
@@ -87,7 +103,12 @@ public class Personajes extends ElementoIdentificador{
         this.habilidadesArray = habilidadesArray;
     }
     
-    public void daño(Personajes personaje, int daño){ 
+    /**
+     * Funcion para determinar el daño causado al personajeX, su defensa - el daño enemigo.
+     * @param personajeX Personaje que recibe daño en su salud
+     * @param daño Parametro externo que indica el daño que recibe el personajeX
+     */
+    public void daño(Personajes personajeX, int daño){ 
         int inflige = defensa-daño;
             if(inflige<=0){
                 this.salud -= -inflige;
@@ -96,36 +117,195 @@ public class Personajes extends ElementoIdentificador{
         }
     }
     
-    public void dañoHabilidades (Personajes personaje, int numero){
-        int dañoHabilidad = personaje.getMagia()*personaje.getHabilidadesArray().get(numero).getEspecial();
+    /**
+     * Funcion para golpear con ataques fisicos. Dependiendo de la agilidad de ambos cambian los resultados.
+     * @param personajeX Es el personaje que ataca y hace daño.
+     * @param personajeY Es el personaje que recibe el daño.
+     */
+    public void atacar(Personajes personajeX, Personajes personajeY){
+        int dañar;
+        int aleatorio = NumeroAleatorio(0, 2);
+        if(personajeX.getAgilidad()>personajeY.getAgilidad()){
+            System.out.println("!!GOLPE CRITICO!!");
+            dañar = personajeX.getFuerza()*2;
+            personajeY.daño(personajeY,dañar);
+            System.out.println("- "+personajeX.getNombre()+" inflige "+personajeX.getFuerza()*2+" puntos de daño.");
+            System.out.println("- "+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño.");
+        }else if(personajeX.getAgilidad()==personajeY.getAgilidad()){
+            dañar = personajeX.getFuerza();
+            personajeY.daño(personajeY,dañar);
+            System.out.println("- "+personajeX.getNombre()+" inflige "+personajeX.getFuerza()+" puntos de daño.");
+            System.out.println("- "+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño.");
+        }else{
+            if(aleatorio==0){
+                System.out.println("Ataque fallado");
+            }else{
+                dañar = personajeX.getFuerza();
+                personajeY.daño(personajeY,dañar);
+                System.out.println("- "+personajeX.getNombre()+" inflige "+personajeX.getFuerza()+" puntos de daño.");
+                System.out.println("- "+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño.");
+            }
+        }
+    }
+    
+    /**
+     * Muestra un listado de las habilidades y los usos restantes guardados en un ArrayList.
+     * @param personajeX Indicamos el personaje del cual queremos conocer sus habilidades.
+     */
+    public void MostrarHabilidades (Personajes personajeX){
+        String listaHabilidades="";
+            for (int i = 0; i < personajeX.getHabilidadesArray().size(); i++) {
+                listaHabilidades +="\t("+(i+1)+")"+personajeX.getHabilidadesArray().get(i).getNombre()
+                        +" - Usos restantes:*"+personajeX.getHabilidadesArray().get(i).getUsosRestantes()+"*";
+            }     
+        System.out.println(listaHabilidades);      
+    }
+    
+    /**
+     * Funcion para calcular el daño realizado por una habilidad, se multiplica el valor de magia por el valor Especial de una habilidad.
+     * @param personajeX Indica el personaje que utilizara las habilidades.
+     * @param numero Indica la habilidad seleccionada.
+     */
+    public void dañoHabilidades (Personajes personajeX, int numero){
+        int dañoHabilidad = personajeX.getMagia()*personajeX.getHabilidadesArray().get(numero).getEspecial();
         this.salud -= dañoHabilidad;
     }
     
-    public void curacionHabilidades (Personajes personaje, int numero){
-        int curacionHabilidad = personaje.getMagia()*personaje.getHabilidadesArray().get(numero).getEspecial();
+    /**
+     * Funcion para calcular la curacion realizada por una habilidad, se multiplica el valor de magia por el valor Especial de una habilidad.
+     * @param personajeX Indica el personaje que utilizara las habilidades.
+     * @param numero Indica la habilidad seleccionada
+     */
+    public void curacionHabilidades (Personajes personajeX, int numero){
+        int curacionHabilidad = personajeX.getMagia()*personajeX.getHabilidadesArray().get(numero).getEspecial();
         this.salud += curacionHabilidad;
-        if(personaje.salud>personaje.saludMaxima){
+        if(personajeX.salud>personajeX.saludMaxima){
             this.salud = this.saludMaxima;
         }
     }
     
-    public void dañoObjetos (Heroes heroes, int numero){
-        int dañoObjeto = heroes.getObjetosArray().get(numero).getPoder();
+    /**
+     * Funcion que permite utilizar una habilidad del heroe gastando usos restantes de esta, el enemigo recibe el daño de dicha habilidad.
+     * @param heroe Personaje que puede usar una habilidad mediante Scanner.
+     * @param enemigo Personaje que recibe el daño de una habilidad.
+     */
+    public void usarHabilidades(Heroes heroe, Enemigos enemigo){
+        Scanner sc = new Scanner (System.in);
+        int opciones = sc.nextInt();
+        if(heroe.getHabilidadesArray().get(opciones-1).getUsosRestantes()>0){
+            System.out.println("- "+heroe.getNombre()+" usa "+heroe.getHabilidadesArray().get(opciones-1).getNombre()
+                +" e inflige una cantidad de "+heroe.getMagia()*heroe.getHabilidadesArray().get(opciones-1).getEspecial()
+                    +" puntos de daño.");
+            heroe.getHabilidadesArray().get(opciones-1).setUsosRestantes(heroe.getHabilidadesArray().get(opciones-1).getUsosRestantes()-1);                     
+            enemigo.dañoHabilidades(heroe, opciones-1);
+        }else{
+          System.out.println("- No puedes utilizar la habilidad. Pierdes el turno.");  
+        }
+    }
+    
+    /**
+     * Funcion que permite utilizar una habilidad del enemigo gastando usos restantes de esta, el heroe recibe el daño de dicha habilidad.
+     * @param enemigo Personaje que utiliza una habilidad mediante un valor aleatorio.
+     * @param heroe Personaje que recibe el daño de una habilidad.
+     */
+    public void usarHabilidadesEnemigos(Enemigos enemigo, Heroes heroe){
+        int aleatorio = NumeroAleatorio(0, 1);  
+        if(enemigo.getHabilidadesArray().get(aleatorio).getUsosRestantes()>0){
+            System.out.println("- "+enemigo.getNombre()+" usa "+enemigo.getHabilidadesArray().get(aleatorio).getNombre()
+                +" e inflige una cantidad de "+enemigo.getMagia()*enemigo.getHabilidadesArray().get(aleatorio).getEspecial()+" puntos de daño.");
+            enemigo.getHabilidadesArray().get(aleatorio).setUsosRestantes(enemigo.getHabilidadesArray().get(aleatorio).getUsosRestantes()-1);                     
+            heroe.dañoHabilidades(enemigo, aleatorio); 
+        }else{    
+              System.out.println("- No puede utilizar la habilidad. Pierde el turno.");
+        }
+    }
+    
+    /**
+     * Muestra un listado de los objetos del heroe.
+     * @param heroe Indicamos el heroe del cual queremos conocer sus habilidades.
+     */
+    public void MostrarObjetos (Heroes heroe){
+        String listaObjetos="";
+            for (int i = 0; i < heroe.getObjetosArray().size(); i++) {
+                listaObjetos +="\t("+(i+1)+")"+heroe.getObjetosArray().get(i).getNombre()+" - Usos restantes:*"+heroe.getObjetosArray().get(i).getCantidad()+"*";
+            }     
+        System.out.println(listaObjetos);
+    }
+    
+    /**
+     * Funcion para calcular el daño realizado por un objeto.
+     * @param heroe Indica el personaje que utilizara el objeto.
+     * @param numero Indica el objeto seleccionado.
+     */
+    public void dañoObjetos (Heroes heroe, int numero){
+        int dañoObjeto = heroe.getObjetosArray().get(numero).getPoder();
         this.salud -= dañoObjeto;
     }
     
-    public void curacionObjetos (Heroes heroes, int numero){
-        int curacionObjeto = heroes.getObjetosArray().get(numero).getPoder();
+    /**
+     * Funcion para calcular la curacion realizada por un objeto.
+     * @param heroe Indica el personaje que utilizara el objeto.
+     * @param numero Indica el objeto seleccionado.
+     */
+    public void curacionObjetos (Heroes heroe, int numero){
+        int curacionObjeto = heroe.getObjetosArray().get(numero).getPoder();
         this.salud += curacionObjeto;
-        if(heroes.salud>heroes.saludMaxima){
+        if(heroe.salud>heroe.saludMaxima){
             this.salud = this.saludMaxima;
         }
     }
     
-    public void regenerarSalud(Personajes personaje){
+    /**
+     * Funcion que permite utilizar un objeto del heroe restando -1 a la cantidad maxima de este, el enemigo recibe el daño de dicho objeto.
+     * @param heroe Personaje que puede usar un objeto mediante Scanner.
+     * @param enemigo Personaje que recibe el daño de un objeto.
+     */
+    public void usarObjetos (Heroes heroe, Enemigos enemigo){
+        Scanner sc = new Scanner (System.in);
+        int opciones = sc.nextInt();
+        if(heroe.getObjetosArray().get(opciones-1).getCantidad()>0){
+            System.out.println("- "+heroe.getNombre()+" usa "+heroe.getObjetosArray().get(opciones-1).getNombre()
+                +" e inflige una cantidad de "+heroe.getObjetosArray().get(opciones-1).getPoder()+" puntos de daño.");
+            heroe.getObjetosArray().get(opciones-1).setCantidad(heroe.getObjetosArray().get(opciones-1).getCantidad()-1);                     
+            if(opciones==3){
+                heroe.curacionObjetos(heroe, opciones-1);       
+            }else{
+                enemigo.dañoObjetos(heroe, opciones-1);
+            }    
+        }else{    
+            System.out.println("- No te quedan objetos. Pierdes el turno.");
+        }                            
+    }
+    
+    /**
+     * Funcion que multiplica en 2 su atributo defensivo.
+     * @param personajeX Personaje que utilizada la funcion de bloqueo.
+     */
+    public void Bloqueo (Personajes personajeX){
+        this.defensa= defensa*2;
+    }
+    
+    /**
+     * Funcion que divide en 2 su atributo defensivo.
+     * @param personajeX Personaje que utilizada la funcion de bloqueoOff.
+     */
+    public void BloqueoOff (Personajes personajeX){
+        this.defensa = defensa/2;
+    }
+    
+    /**
+     * La salud se iguala con la saludMaxima, es decir realiza una curacion completa.
+     * @param personajeX Indica el personaje que realiza la funcion.
+     */
+    public void regenerarSalud(Personajes personajeX){
         this.salud = this.saludMaxima;
     }
-    public void regenerarSaludHabilidades(Personajes personaje){
+    
+    /**
+     * La salud se iguala con la saludMaxima, es decir realiza una curacion completa y tambien se restablecen todos los usos de las habilidades.
+     * @param personajeX Indica el personaje que realiza la funcion.
+     */
+    public void regenerarSaludHabilidades(Personajes personajeX){
         this.salud = this.saludMaxima;
         for (int i = 0; i < getHabilidadesArray().size(); i++) {
             getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());

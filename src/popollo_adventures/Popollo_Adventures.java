@@ -7,7 +7,6 @@ package popollo_adventures;
 
 
 import general.Combate;
-import general.Musica;
 import classes.Enemigos;
 import classes.Habilidades;
 import classes.Heroes;
@@ -78,13 +77,6 @@ public class Popollo_Adventures {
         objetosArray.add(pocion);
 
         Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesOfensivas, objetosArray);
-        Heroes narcyl = new Heroes("Narcyl", "Sacerdotisa al cargo de Popollo", 60, 60, 15, 10, 15, 5, hechizosCurativos, objetosArray);
-        Heroes mystra = new Heroes("Mystra", "Un adorable Popollito comilon", 80, 80, 15, 15, 15, 5, hechizosOfensivos, objetosArray);
-
-        ArrayList<Heroes> heroesArray = new ArrayList();
-        heroesArray.add(popollo);
-        heroesArray.add(narcyl);
-        heroesArray.add(mystra);
 
         //Enemigos
         Enemigos poring = new Enemigos("Poring", "Una gelatina rosa monisima", 60, 60, 20, 5, 10, 10, golpesSalvajesE, 100);
@@ -100,18 +92,20 @@ public class Popollo_Adventures {
         combateDificil.add(golem);
         combateDificil.add(nigromante);
 
-        System.out.println(heroesArray.get(1).getNombre());
         int opcion=0;
 
         String menuInicio="\nPor favor seleccione una opcion:"
             +"\n\t0 - Salir del juego."
             +"\n\t1 - Comenzar partida."
             +"\n\t2 - Ver galeria."
-            +"\n\t3 - Combate de prueba.";
+            +"\n\t3 - Combate de prueba."
+            +"\n\t4 - Punto de descanso."
+            +"\n\t5 - Tienda.";
 
         do{
             System.out.println(menuInicio);
             opcion=Integer.parseInt(sc.nextLine());
+            int Monedas = 500;
 
             switch(opcion){
                 case 0:
@@ -123,9 +117,34 @@ public class Popollo_Adventures {
                     break;
                 case 3:
                     Combate.Batalla(popollo, nigromante);
+                    Monedas += nigromante.getDropDinero();
+                    System.out.println(Monedas);
                     break;
                 case 4:
+                    opcion=Integer.parseInt(sc.nextLine());
+                        switch(opcion){
+                            case 1:
+                                System.out.println("Curar la vida y restablecer las habilidades.");
+                                popollo.regenerarSaludHabilidades(popollo);
+                                break;
+                            case 2:
+                                System.out.println("Cambiar las Habilidades");
+                                for (int i = 0; i < popollo.getHabilidadesArray().size(); i++) {
+                                   popollo.getHabilidadesArray().get(i).setUsosRestantes(popollo.getHabilidadesArray().get(i).getUsosMaximos());
+                                }           
+                                System.out.println("");
+                                break;
+                        }
                     break;
+                case 5:
+                    opcion=Integer.parseInt(sc.nextLine());
+                        switch(opcion){
+                            case 1:
+                                
+                                System.out.println("Punto de descanso.");
+                                break;
+                        }
+                    break;    
                 default:
                     System.out.println("Por favor selecciona una opcion correcta.");
             }
