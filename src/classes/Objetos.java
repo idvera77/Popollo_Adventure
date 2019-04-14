@@ -33,5 +33,5 @@ public class Objetos extends ElementoIdentificador{
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
+    }  
 }

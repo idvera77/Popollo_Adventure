@@ -31,8 +31,8 @@ public class Popollo_Adventures {
         
         //Declaracion de variables
         //Habilidades
-        Habilidades golpeFuerte = new Habilidades("Golpe Fuerte","Empleas todas tus fuerzas.",30,5,5);
-        Habilidades remolino = new Habilidades("Torbellino","Da un poco de mareo.",50,3,3);
+        Habilidades golpeFuerte = new Habilidades("Golpe Fuerte","Empleas todas tus fuerzas.",10,5,5);
+        Habilidades remolino = new Habilidades("Torbellino","Da un poco de mareo.",15,3,3);
 
         ArrayList<Habilidades> habilidadesOfensivas= new ArrayList();
         habilidadesOfensivas.add(golpeFuerte);
@@ -53,24 +53,24 @@ public class Popollo_Adventures {
         hechizosCurativos.add(curacionG);
 
         //Ataques Enemigos
-        Habilidades Cabezazo = new Habilidades("Cabezazo", "Fuerte embestida con la cabeza.", 15, 5, 5);
-        Habilidades Morder = new Habilidades("Morder", "Bocado fuerte.", 30, 2, 2);
+        Habilidades Cabezazo = new Habilidades("Cabezazo", "Fuerte embestida con la cabeza.", 15, 3, 5);
+        Habilidades Morder = new Habilidades("Morder", "Bocado fuerte.", 30, 1, 2);
 
         ArrayList<Habilidades> golpesSalvajesE = new ArrayList();
         golpesSalvajesE.add(Cabezazo);
         golpesSalvajesE.add(Morder);
 
-        Habilidades Llamarada = new Habilidades("Llamarada", "Envuelve al objetivo en llamas", 15, 5, 5);
-        Habilidades Acido = new Habilidades("Acido", "Puede derretir armaduras.", 30, 2, 2);
+        Habilidades Llamarada = new Habilidades("Llamarada", "Envuelve al objetivo en llamas", 5, 3, 5);
+        Habilidades Acido = new Habilidades("Acido", "Puede derretir armaduras.", 10, 1, 2);
 
         ArrayList<Habilidades> golpesMagicosE = new ArrayList();
-        golpesMagicosE.add(Cabezazo);
-        golpesMagicosE.add(Morder);
+        golpesMagicosE.add(Llamarada);
+        golpesMagicosE.add(Acido);
 
         //Objetos
-        Objetos bombaP = new Objetos("Bomba Pequeña",15,3,"Pequeño artefacto explosivo, inflige 15 puntos de daño.");
-        Objetos bombaG = new Objetos("Bomba Grande",50,1,"Gran artefacto explosivo, inflige 50 puntos de daño.");
-        Objetos pocion = new Objetos("Pocion",20,5,"Bebida que restaura 20 puntos de salud.");
+        Objetos bombaP = new Objetos("Bomba Pequeña",30,3,"Pequeño artefacto explosivo, inflige 15 puntos de daño.");
+        Objetos bombaG = new Objetos("Bomba Grande",70,1,"Gran artefacto explosivo, inflige 50 puntos de daño.");
+        Objetos pocion = new Objetos("Pocion",50,5,"Bebida que restaura 20 puntos de salud.");
 
         ArrayList<Objetos> objetosArray = new ArrayList();
         objetosArray.add(bombaP);
@@ -89,7 +89,7 @@ public class Popollo_Adventures {
         //Enemigos
         Enemigos poring = new Enemigos("Poring", "Una gelatina rosa monisima", 60, 60, 20, 5, 10, 10, golpesSalvajesE, 100);
         Enemigos golem = new Enemigos("Golem", "Una mole andante", 120, 120, 20, 10, 10, 15, golpesSalvajesE, 500);
-        Enemigos nigromante = new Enemigos ("Nigromante", "No tiene buen aspecto", 80, 80, 15, 10, 20, 10, golpesMagicosE, 1000);
+        Enemigos nigromante = new Enemigos ("Nigromante", "No tiene buen aspecto", 80, 80, 15, 5, 20, 10, golpesMagicosE, 1000);
 
         ArrayList<Enemigos> combateFacil = new ArrayList();
         combateFacil.add(poring);

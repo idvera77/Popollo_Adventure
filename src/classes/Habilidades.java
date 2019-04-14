@@ -43,5 +43,5 @@ public class Habilidades extends ElementoIdentificador{
 
     public void setUsosRestantes(int usosRestantes) {
         this.usosRestantes = usosRestantes;
-    }
+    }  
 }

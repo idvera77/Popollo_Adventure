@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author Mystra77
  */
 public class Personajes extends ElementoIdentificador{
-    private int saludMaxima;
-    private int salud;
+    public int saludMaxima;
+    public int salud;
     private int fuerza;
     private int magia;
     private int agilidad;
@@ -100,4 +100,35 @@ public class Personajes extends ElementoIdentificador{
         int dañoHabilidad = personaje.getMagia()*personaje.getHabilidadesArray().get(numero).getEspecial();
         this.salud -= dañoHabilidad;
     }
+    
+    public void curacionHabilidades (Personajes personaje, int numero){
+        int curacionHabilidad = personaje.getMagia()*personaje.getHabilidadesArray().get(numero).getEspecial();
+        this.salud += curacionHabilidad;
+        if(personaje.salud>personaje.saludMaxima){
+            this.salud = this.saludMaxima;
+        }
+    }
+    
+    public void dañoObjetos (Heroes heroes, int numero){
+        int dañoObjeto = heroes.getObjetosArray().get(numero).getPoder();
+        this.salud -= dañoObjeto;
+    }
+    
+    public void curacionObjetos (Heroes heroes, int numero){
+        int curacionObjeto = heroes.getObjetosArray().get(numero).getPoder();
+        this.salud += curacionObjeto;
+        if(heroes.salud>heroes.saludMaxima){
+            this.salud = this.saludMaxima;
+        }
+    }
+    
+    public void regenerarSalud(Personajes personaje){
+        this.salud = this.saludMaxima;
+    }
+    public void regenerarSaludHabilidades(Personajes personaje){
+        this.salud = this.saludMaxima;
+        for (int i = 0; i < getHabilidadesArray().size(); i++) {
+            getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());
+        }
+    } 
 }

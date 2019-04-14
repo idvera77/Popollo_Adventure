@@ -27,7 +27,5 @@ public class Enemigos extends Personajes{
 
     public void setDropDinero(int dropDinero) {
         this.dropDinero = dropDinero;
-    }
-    
-    
+    }   
 }

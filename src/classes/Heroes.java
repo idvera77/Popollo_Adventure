@@ -45,6 +45,4 @@ public class Heroes extends Personajes{
     public void setMoral(TipoConducta moral) {
         this.moral = moral;
     }
-    
-    
 }
