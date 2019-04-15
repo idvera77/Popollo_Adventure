@@ -14,21 +14,11 @@ import java.util.ArrayList;
 public class Heroes extends Personajes{
     private ArrayList<Objetos> objetosArray;
     public int dinero;
-    private TipoConducta moral;
-      
-    private enum TipoConducta{
-        LEGAL,
-        BUENO,
-        NEUTRAL,
-        MALO,
-        CAOTICO
-    }   
-
+    
     public Heroes(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, 
         int magia, int agilidad, int defensa, ArrayList<Habilidades> habilidadesArray, ArrayList<Objetos> objetosArray, int dinero) {
         super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray);
         this.objetosArray = objetosArray;
-        this.moral = moral;
         this.dinero = dinero;
     }
 
@@ -38,14 +28,6 @@ public class Heroes extends Personajes{
 
     public void setObjetosArray(ArrayList<Objetos> objetosArray) {
         this.objetosArray = objetosArray;
-    }
-
-    public TipoConducta getMoral() {
-        return moral;
-    }
-
-    public void setMoral(TipoConducta moral) {
-        this.moral = moral;
     }
 
     public int getDinero() {

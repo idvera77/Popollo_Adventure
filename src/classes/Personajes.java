@@ -13,8 +13,6 @@ import java.util.Scanner;
  *
  * @author Mystra77
  */
-
-
 public class Personajes extends ElementoIdentificador{
     public int saludMaxima;
     public int salud;
@@ -147,7 +145,7 @@ public class Personajes extends ElementoIdentificador{
             }
         }
     }
-    
+  
     /**
      * Muestra un listado de las habilidades y los usos restantes guardados en un ArrayList.
      * @param personajeX Indicamos el personaje del cual queremos conocer sus habilidades.
@@ -155,12 +153,27 @@ public class Personajes extends ElementoIdentificador{
     public void MostrarHabilidades (Personajes personajeX){
         String listaHabilidades="";
             for (int i = 0; i < personajeX.getHabilidadesArray().size(); i++) {
-                listaHabilidades +="\t("+(i+1)+")"+personajeX.getHabilidadesArray().get(i).getNombre()
-                        +" - Usos restantes:*"+personajeX.getHabilidadesArray().get(i).getUsosRestantes()+"*";
+                listaHabilidades +=" - ("+(i+1)+")"+personajeX.getHabilidadesArray().get(i).getNombre()
+                        +" | Usos: "+personajeX.getHabilidadesArray().get(i).getUsosRestantes();
             }     
         System.out.println(listaHabilidades);      
     }
     
+    /**
+     * Muestra un listado de las habilidades y los usos restantes guardados en un ArrayList.
+     * @param personajeX Indicamos el personaje del cual queremos conocer sus habilidades.
+     */
+    public void MostrarHabilidadesTotal (Personajes personajeX){
+        String listaHabilidades="";
+            for (int i = 0; i < personajeX.getHabilidadesArray().size(); i++) {
+                listaHabilidades +="("+(i+1)+")"+personajeX.getHabilidadesArray().get(i).getNombre()
+                        +" - Poder de Habilidad: "+personajeX.getHabilidadesArray().get(i).getEspecial()
+                        +" - Usos:*"+personajeX.getHabilidadesArray().get(i).getUsosMaximos()+"*"
+                        +" - Descripcion: "+personajeX.getHabilidadesArray().get(i).getDescripcion()
+                        +"\n";
+            }     
+        System.out.println(listaHabilidades);      
+    }    
     /**
      * Funcion para calcular el daño realizado por una habilidad, se multiplica el valor de magia por el valor Especial de una habilidad.
      * @param personajeX Indica el personaje que utilizara las habilidades.
@@ -198,11 +211,20 @@ public class Personajes extends ElementoIdentificador{
             usarHabilidades(heroe, enemigo);
         }else{
             if(heroe.getHabilidadesArray().get(opcion-1).getUsosRestantes()>0){
-                System.out.println("- "+heroe.getNombre()+" usa "+heroe.getHabilidadesArray().get(opcion-1).getNombre()
-                    +" e inflige una cantidad de "+heroe.getMagia()*heroe.getHabilidadesArray().get(opcion-1).getEspecial()
-                    +" puntos de daño.");
-                heroe.getHabilidadesArray().get(opcion-1).setUsosRestantes(heroe.getHabilidadesArray().get(opcion-1).getUsosRestantes()-1);                     
-                enemigo.dañoHabilidades(heroe, opcion-1);
+                String tipo = String.valueOf(heroe.getHabilidadesArray().get(opcion-1).getTipo());
+                if(tipo.equals("OFENSIVO")){
+                    System.out.println("- "+heroe.getNombre()+" usa "+heroe.getHabilidadesArray().get(opcion-1).getNombre()
+                        +" e inflige una cantidad de "+heroe.getMagia()*heroe.getHabilidadesArray().get(opcion-1).getEspecial()
+                        +" puntos de daño.");
+                    heroe.getHabilidadesArray().get(opcion-1).setUsosRestantes(heroe.getHabilidadesArray().get(opcion-1).getUsosRestantes()-1);                     
+                    enemigo.dañoHabilidades(heroe, opcion-1);
+                }else if(tipo.equals("SANACION")){
+                    System.out.println("- "+heroe.getNombre()+" usa "+heroe.getHabilidadesArray().get(opcion-1).getNombre()
+                        +" y recibe una curacion de "+heroe.getMagia()*heroe.getHabilidadesArray().get(opcion-1).getEspecial()
+                        +" puntos de salud.");
+                    heroe.getHabilidadesArray().get(opcion-1).setUsosRestantes(heroe.getHabilidadesArray().get(opcion-1).getUsosRestantes()-1);                     
+                    heroe.curacionHabilidades(heroe, opcion-1);
+                }    
             }else{
                 System.out.println("- No puedes utilizar la habilidad. Pierdes el turno.");  
             }
@@ -218,7 +240,8 @@ public class Personajes extends ElementoIdentificador{
         int aleatorio = NumeroAleatorio(0, 1);  
         if(enemigo.getHabilidadesArray().get(aleatorio).getUsosRestantes()>0){
             System.out.println("- "+enemigo.getNombre()+" usa "+enemigo.getHabilidadesArray().get(aleatorio).getNombre()
-                +" e inflige una cantidad de "+enemigo.getMagia()*enemigo.getHabilidadesArray().get(aleatorio).getEspecial()+" puntos de daño.");
+                +" e inflige una cantidad de "+enemigo.getMagia()*enemigo.getHabilidadesArray().get(aleatorio).getEspecial()
+                    +" puntos de daño.");
             enemigo.getHabilidadesArray().get(aleatorio).setUsosRestantes(enemigo.getHabilidadesArray().get(aleatorio).getUsosRestantes()-1);                     
             heroe.dañoHabilidades(enemigo, aleatorio); 
         }else{    
@@ -228,12 +251,28 @@ public class Personajes extends ElementoIdentificador{
     
     /**
      * Muestra un listado de los objetos del heroe.
-     * @param heroe Indicamos el heroe del cual queremos conocer sus habilidades.
+     * @param heroe Indicamos el heroe del cual queremos conocer sus objetos.
      */
     public void MostrarObjetos (Heroes heroe){
         String listaObjetos="";
             for (int i = 0; i < heroe.getObjetosArray().size(); i++) {
-                listaObjetos +="\t("+(i+1)+")"+heroe.getObjetosArray().get(i).getNombre()+" - Usos restantes:*"+heroe.getObjetosArray().get(i).getCantidad()+"*";
+                listaObjetos +=" - ("+(i+1)+")"+heroe.getObjetosArray().get(i).getNombre()
+                        +" | Cantidad: "+heroe.getObjetosArray().get(i).getCantidad();
+            }     
+        System.out.println(listaObjetos);
+    }
+    
+    /**
+     * Muestra un listado completo de los objetos.
+     * @param heroe 
+     */
+    public void MostrarObjetosTienda (Heroes heroe){
+                String listaObjetos="";
+            for (int i = 0; i < heroe.getObjetosArray().size(); i++) {
+                listaObjetos +="- ("+(i+1)+")"+heroe.getObjetosArray().get(i).getNombre()
+                        +" | Cantidad: "+heroe.getObjetosArray().get(i).getCantidad()+" | "
+                        +"Descripcion: "+heroe.getObjetosArray().get(i).getDescripcion()+" | "
+                        +"Precio: "+heroe.getObjetosArray().get(i).getPrecio()+" Monedas de oro.\n";
             }     
         System.out.println(listaObjetos);
     }
@@ -326,6 +365,7 @@ public class Personajes extends ElementoIdentificador{
             getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());
         }
     }    
+    
     /**
      * La salud se iguala con la saludMaxima, es decir realiza una curacion completa y tambien se restablecen todos los usos de las habilidades.
      * @param personajeX Indica el personaje que realiza la funcion.
@@ -344,62 +384,107 @@ public class Personajes extends ElementoIdentificador{
     public void puntoDescanso(Heroes heroe){
         Scanner sc = new Scanner (System.in);
         System.out.println("\t|Total de monedas de oro: *"+heroe.getDinero()+"*|");
-        String menuPuntoDescanso="Por favor seleccione una opcion:"
+        String menuPuntoDescanso="Una luz radiante te reconforta cuando te acercas a ella."
             +"\n\t0 - Salir."
             +"\n\t1 - Curar todos los daños recibidos - 100 Monedas de oro."
             +"\n\t2 - Restablecer el uso de las habilidades - 200 Monedas de oro."
-            +"\n\t3 - Curacion completa y restablecimiento de habilidades - 250 Monedas de oro."
-            +"\n\t4 - Cambiar Habilidades.";
+            +"\n\t3 - Curacion completa y restablecimiento de habilidades - 250 Monedas de oro.";
         System.out.println(menuPuntoDescanso);
         int opcion1=Integer.parseInt(sc.nextLine());
         switch(opcion1){
             case 0:
-                System.out.println("- Ten cuidado en tus proximas aventuras ^_^\n");
+                System.out.println("- Sientes tristeza al abandonar la luz.\n");
                 break;
             case 1:
                 if (heroe.dinero>=100) {
                     heroe.dinero -= 100; 
                     heroe.regenerarSalud(heroe);
-                    System.out.println("- Salud restablecida.\n");
+                    System.out.println("- Las heridas comienzan a curarse magicamente.\n");
+                    puntoDescanso(heroe);
                     break;
                 }else{
-                    System.out.println("- No tienes suficiente dinero.\n");
-                    heroe.puntoDescanso(heroe);
+                    System.out.println("- La luz emite un brillo debil.\n");
+                    puntoDescanso(heroe);
                 }
                 break;
             case 2:
                 if (heroe.dinero>=200) {
                     heroe.dinero -= 200;
                     heroe.regenerarHabilidades(heroe);
-                    System.out.println("- Uso de habilidades restablecido.\n");
+                    System.out.println("- Sientes que el cansancio abandona tu cuerpo.\n");
+                    puntoDescanso(heroe);
                     break;
                 }else{
-                    System.out.println("- No tienes suficiente dinero.\n");
-                    heroe.puntoDescanso(heroe);
+                    System.out.println("- La luz emite un brillo debil.\n");
+                    puntoDescanso(heroe);
                 }
                 break;
             case 3:
                 if (heroe.dinero>=250) {
                 heroe.dinero -= 250;
                 heroe.regenerarSaludHabilidades(heroe);
-                System.out.println("- Salud y habilidades restablecidas.\n");
+                System.out.println("- Nunca te has sentido mejor que ahora.\n");
+                puntoDescanso(heroe);
                 break;
             }else{
-                System.out.println("- No tienes suficiente dinero.\n");
-                heroe.puntoDescanso(heroe);
+                System.out.println("- La luz emite un brillo debil.\n");
+                puntoDescanso(heroe);
             }
-                break; 
-            case 4:
-                System.out.println("Cambiar las Habilidades");
-                for (int i = 0; i < heroe.getHabilidadesArray().size(); i++) {
-                    heroe.getHabilidadesArray().get(i).setUsosRestantes(heroe.getHabilidadesArray().get(i).getUsosMaximos());
-                }           
-                System.out.println("");
-                break;   
+                break;    
             default:
-                System.out.println("- Opcion incorrecta");
-                heroe.puntoDescanso(heroe);
+                System.out.println("- No comprendes como comunicarte con la luz.\n");
+                puntoDescanso(heroe);
             break;
-            }    
+        }    
+    }
+    
+    /**
+     * Funcion que nos aumenta la cantidad de objetos si tenemos el dinero necesario.
+     * @param heroe Indica el personaje que comprara los objetos.
+     * @param dinero Variable necesaria para comprar objetos, permite hacerlo o no dependiendo de la cantidad.
+     */
+    public void comprarObjetos(Heroes heroe, int dinero){
+        Scanner sc = new Scanner(System.in);
+        int opcion=Integer.parseInt(sc.nextLine());
+        if (heroe.dinero>=heroe.getObjetosArray().get(opcion-1).getPrecio()) {
+            heroe.dinero -= heroe.getObjetosArray().get(opcion-1).getPrecio();
+            heroe.getObjetosArray().get(opcion-1).setCantidad(heroe.getObjetosArray().get(opcion-1).getCantidad()+1);
+            System.out.println("Has obtenido 1 "+heroe.getObjetosArray().get(opcion-1).getNombre()+"! Buena compra señor.\n");
+            Tienda(heroe);
+        }else{
+            System.out.println("No tienes suficiente dinero. No me hagas perder el tiempo.\n");
+            Tienda(heroe);
+        }   
+    }
+    
+    /**
+     * 
+     * @param heroe 
+     */
+    public void Tienda(Heroes heroe){
+        Scanner sc = new Scanner (System.in);
+        System.out.println("\t|Total de monedas de oro: *"+heroe.getDinero()+"*|");
+        String menuTienda="¿Que desea comprar?:"
+            +"\n\t0 - Salir."
+            +"\n\t1 - Comprar mejoras para el personaje."
+            +"\n\t2 - Comprar objetos.";
+        System.out.println(menuTienda);
+        int opcion1=Integer.parseInt(sc.nextLine());
+        switch(opcion1){
+            case 0:
+                System.out.println("- Vuelva pronto, le esperamos con los brazos abiertos ^_^\n");
+                break;
+            case 1:
+                MostrarObjetos(heroe);
+                break;
+            case 2:
+                MostrarObjetosTienda(heroe);
+                comprarObjetos(heroe, heroe.getDinero());
+                break;
+            default:
+                System.out.println("- No entiendo lo que quiere decir, ¿puede repetir por favor?.\n");
+                Tienda(heroe);
+            break;
+        }    
     }
 }

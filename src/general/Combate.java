@@ -45,7 +45,7 @@ public class Combate {
                 }
                 System.out.println("----------------------------------------------");
                 System.out.println("Turno de "+heroe.getNombre()+" - Vida restante: "+heroe.getSalud()+"/"+heroe.getSaludMaxima());
-                System.out.println("\tAtaque(1), Defensa(2), Habilidades(3), Objetos(4)");
+                System.out.println("\tAtaque(1) | Defensa(2) | Habilidades(3) | Objetos(4)");
                 int opcion=Integer.parseInt(sc.nextLine());
 
                 switch(opcion){
@@ -55,7 +55,7 @@ public class Combate {
                         break;
 
                     case 2:    
-                        System.out.println("- Su defensa natural se multiplica por 2 durante un turno.\n");
+                        System.out.println("- La defensa natural se multiplica por 2 durante un turno.\n");
                         heroe.Bloqueo(heroe);
                         defensaHeroe=true;
                         Musica.iniciarSonidos(rutaSonidoDefensa);
@@ -72,7 +72,7 @@ public class Combate {
                         Musica.iniciarSonidos(rutaSonidoCuraciones);
                         break;
                     default:
-                        System.out.println("- Opcion incorrecta");
+                        System.out.println("- Se que estas nervioso pero debes centrarte!");
                         Batalla(heroe, enemigo);
                         break;
                 }
@@ -108,9 +108,9 @@ public class Combate {
                     }
                 }else{
                     enemigosVivos=false;
-                    System.out.println("!!!Enemigos Derrotados!!!");
+                    System.out.println("\n\t!!!Enemigos Derrotados!!!"
+                            +" Has ganado "+enemigo.getDropDinero()+" Monedas de oro.\n");
                     heroe.dinero += enemigo.getDropDinero();
-                    System.out.println("\n\tHas ganado "+enemigo.getDropDinero()+" Monedas de oro!!!");
                     Musica.iniciarMusica(rutaCancionVictoria);
                     //Despues de cada combate regeneramos la salud de los heroes y los enemigos (por si en otro eventos luchamos contra ellos.        
                     enemigo.regenerarSaludHabilidades(enemigo);

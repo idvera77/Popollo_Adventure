@@ -13,12 +13,14 @@ public class Objetos extends ElementoIdentificador{
     private int poder;
     private int cantidad;
     private tipoObjeto tipo;
+    private int precio;
 
-    public Objetos(String nombre, int poder, int cantidad, String descripcion, tipoObjeto tipo) {
+    public Objetos(String nombre, int poder, int cantidad, String descripcion, tipoObjeto tipo, int precio) {
         super(nombre, descripcion);
         this.poder = poder;
         this.cantidad = cantidad;
         this.tipo = tipo;
+        this.precio = precio;
     }
     
     public enum tipoObjeto{
@@ -48,6 +50,14 @@ public class Objetos extends ElementoIdentificador{
 
     public void setTipo(tipoObjeto tipo) {
         this.tipo = tipo;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
     
    
