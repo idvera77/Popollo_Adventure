@@ -153,8 +153,8 @@ public class Personajes extends ElementoIdentificador{
     public void MostrarHabilidades (Personajes personajeX){
         String listaHabilidades="";
             for (int i = 0; i < personajeX.getHabilidadesArray().size(); i++) {
-                listaHabilidades +=" - ("+(i+1)+")"+personajeX.getHabilidadesArray().get(i).getNombre()
-                        +" | Usos: "+personajeX.getHabilidadesArray().get(i).getUsosRestantes();
+                listaHabilidades +="- ("+(i+1)+")"+personajeX.getHabilidadesArray().get(i).getNombre()
+                        +" | Usos: "+personajeX.getHabilidadesArray().get(i).getUsosRestantes()+" ";
             }     
         System.out.println(listaHabilidades);      
     }
@@ -206,7 +206,7 @@ public class Personajes extends ElementoIdentificador{
         Scanner sc = new Scanner (System.in);
         int opcion = sc.nextInt();
         if(opcion-1>=heroe.getHabilidadesArray().size()){
-            System.out.println("- Opcion Incorrecta.");
+            System.out.println("- No recuerdas usar tus propias habilidades!");
             MostrarHabilidades(heroe);
             usarHabilidades(heroe, enemigo);
         }else{
@@ -256,8 +256,8 @@ public class Personajes extends ElementoIdentificador{
     public void MostrarObjetos (Heroes heroe){
         String listaObjetos="";
             for (int i = 0; i < heroe.getObjetosArray().size(); i++) {
-                listaObjetos +=" - ("+(i+1)+")"+heroe.getObjetosArray().get(i).getNombre()
-                        +" | Cantidad: "+heroe.getObjetosArray().get(i).getCantidad();
+                listaObjetos +="- ("+(i+1)+")"+heroe.getObjetosArray().get(i).getNombre()
+                        +" | Cantidad: "+heroe.getObjetosArray().get(i).getCantidad()+" ";
             }     
         System.out.println(listaObjetos);
     }
@@ -269,7 +269,7 @@ public class Personajes extends ElementoIdentificador{
     public void MostrarObjetosTienda (Heroes heroe){
                 String listaObjetos="";
             for (int i = 0; i < heroe.getObjetosArray().size(); i++) {
-                listaObjetos +="- ("+(i+1)+")"+heroe.getObjetosArray().get(i).getNombre()
+                listaObjetos +="\t"+(i+1)+" - "+heroe.getObjetosArray().get(i).getNombre()
                         +" | Cantidad: "+heroe.getObjetosArray().get(i).getCantidad()+" | "
                         +"Descripcion: "+heroe.getObjetosArray().get(i).getDescripcion()+" | "
                         +"Precio: "+heroe.getObjetosArray().get(i).getPrecio()+" Monedas de oro.\n";
@@ -309,7 +309,7 @@ public class Personajes extends ElementoIdentificador{
         Scanner sc = new Scanner (System.in);
         int opcion=Integer.parseInt(sc.nextLine());
         if(opcion-1>=heroe.getObjetosArray().size()){
-            System.out.println("- Opcion Incorrecta.");
+            System.out.println("- Ten cuidado al coger esos objetos!");
             MostrarObjetos(heroe);
             usarObjetos(heroe, enemigo);
         }else{
@@ -383,8 +383,8 @@ public class Personajes extends ElementoIdentificador{
      */
     public void puntoDescanso(Heroes heroe){
         Scanner sc = new Scanner (System.in);
-        System.out.println("\t|Total de monedas de oro: *"+heroe.getDinero()+"*|");
-        String menuPuntoDescanso="Una luz radiante te reconforta cuando te acercas a ella."
+        System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");
+        String menuPuntoDescanso="- Una luz radiante te reconforta cuando te acercas a ella."
             +"\n\t0 - Salir."
             +"\n\t1 - Curar todos los daños recibidos - 100 Monedas de oro."
             +"\n\t2 - Restablecer el uso de las habilidades - 200 Monedas de oro."
@@ -445,16 +445,26 @@ public class Personajes extends ElementoIdentificador{
      */
     public void comprarObjetos(Heroes heroe, int dinero){
         Scanner sc = new Scanner(System.in);
-        int opcion=Integer.parseInt(sc.nextLine());
-        if (heroe.dinero>=heroe.getObjetosArray().get(opcion-1).getPrecio()) {
-            heroe.dinero -= heroe.getObjetosArray().get(opcion-1).getPrecio();
-            heroe.getObjetosArray().get(opcion-1).setCantidad(heroe.getObjetosArray().get(opcion-1).getCantidad()+1);
-            System.out.println("Has obtenido 1 "+heroe.getObjetosArray().get(opcion-1).getNombre()+"! Buena compra señor.\n");
+        System.out.println("\t0 - Salir.");
+        MostrarObjetosTienda(heroe);
+        int opcion1=Integer.parseInt(sc.nextLine());
+        if(opcion1-1>=heroe.getObjetosArray().size()){
+            System.out.println("- Ese objeto no existe!\n");
+            comprarObjetos(heroe, dinero);
+        }else if(opcion1==0){ 
             Tienda(heroe);
         }else{
-            System.out.println("No tienes suficiente dinero. No me hagas perder el tiempo.\n");
-            Tienda(heroe);
-        }   
+            if (heroe.dinero>=heroe.getObjetosArray().get(opcion1-1).getPrecio()) {
+                heroe.dinero -= heroe.getObjetosArray().get(opcion1-1).getPrecio();
+                heroe.getObjetosArray().get(opcion1-1).setCantidad(heroe.getObjetosArray().get(opcion1-1).getCantidad()+1);
+                System.out.println("- Has obtenido 1 "+heroe.getObjetosArray().get(opcion1-1).getNombre()+"! Buena compra señor.\n"
+                +"- ¿Desea algo mas?");
+                comprarObjetos(heroe, dinero);
+            }else{
+                System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
+                comprarObjetos(heroe, dinero);
+            }   
+        }    
     }
     
     /**
@@ -463,8 +473,8 @@ public class Personajes extends ElementoIdentificador{
      */
     public void Tienda(Heroes heroe){
         Scanner sc = new Scanner (System.in);
-        System.out.println("\t|Total de monedas de oro: *"+heroe.getDinero()+"*|");
-        String menuTienda="¿Que desea comprar?:"
+        System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");
+        String menuTienda="- ¿Le interesa algo?:"
             +"\n\t0 - Salir."
             +"\n\t1 - Comprar mejoras para el personaje."
             +"\n\t2 - Comprar objetos.";
@@ -478,7 +488,7 @@ public class Personajes extends ElementoIdentificador{
                 MostrarObjetos(heroe);
                 break;
             case 2:
-                MostrarObjetosTienda(heroe);
+                System.out.println("- ¿Que objeto desea comprar?");
                 comprarObjetos(heroe, heroe.getDinero());
                 break;
             default:

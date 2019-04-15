@@ -108,7 +108,7 @@ public class Combate {
                     }
                 }else{
                     enemigosVivos=false;
-                    System.out.println("\n\t!!!Enemigos Derrotados!!!"
+                    System.out.println("\n\t!!!"+enemigo.getNombre()+" Derrotado!!!"
                             +" Has ganado "+enemigo.getDropDinero()+" Monedas de oro.\n");
                     heroe.dinero += enemigo.getDropDinero();
                     Musica.iniciarMusica(rutaCancionVictoria);
