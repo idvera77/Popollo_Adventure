@@ -28,7 +28,7 @@ public class Combate {
         String rutaSonidoCuraciones = "./sonidos/Curaciones.wav";
         
         Scanner sc=new Scanner(System.in);
-        int dañar;
+
         int aleatorio;
         boolean heroesVivos=true;
         boolean enemigosVivos=true;
@@ -46,9 +46,9 @@ public class Combate {
                 System.out.println("----------------------------------------------");
                 System.out.println("Turno de "+heroe.getNombre()+" - Vida restante: "+heroe.getSalud()+"/"+heroe.getSaludMaxima());
                 System.out.println("\tAtaque(1), Defensa(2), Habilidades(3), Objetos(4)");
-                int opciones=sc.nextInt();
+                int opcion=Integer.parseInt(sc.nextLine());
 
-                switch(opciones){
+                switch(opcion){
                     case 1:
                         heroe.atacar(heroe, enemigo);
                         Musica.iniciarSonidos(rutaSonidoFisicoAliado);
@@ -71,9 +71,14 @@ public class Combate {
                         heroe.usarObjetos(heroe, enemigo);
                         Musica.iniciarSonidos(rutaSonidoCuraciones);
                         break;
+                    default:
+                        System.out.println("- Opcion incorrecta");
+                        Batalla(heroe, enemigo);
+                        break;
                 }
             }else{
-                System.out.println("\n\tDERROTA - Juega mejor la proxima vez ^_^");
+                System.out.println("\n\tDERROTA - Juega mejor la proxima vez ^_^\n");
+                enemigo.regenerarSaludHabilidades(enemigo);
                 heroesVivos=false;
                 break;
             }
@@ -104,8 +109,8 @@ public class Combate {
                 }else{
                     enemigosVivos=false;
                     System.out.println("!!!Enemigos Derrotados!!!");
-                    System.out.println("Has ganado "+enemigo.getDropDinero()+" Monedas de oro!!!");
-                    //INCLUIR DINERO SOLTADO POR LOS ENEMIGOS
+                    heroe.dinero += enemigo.getDropDinero();
+                    System.out.println("\n\tHas ganado "+enemigo.getDropDinero()+" Monedas de oro!!!");
                     Musica.iniciarMusica(rutaCancionVictoria);
                     //Despues de cada combate regeneramos la salud de los heroes y los enemigos (por si en otro eventos luchamos contra ellos.        
                     enemigo.regenerarSaludHabilidades(enemigo);

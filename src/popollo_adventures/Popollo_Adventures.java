@@ -67,16 +67,16 @@ public class Popollo_Adventures {
         golpesMagicosE.add(Acido);
 
         //Objetos
-        Objetos bombaP = new Objetos("Bomba Pequeña",30,3,"Pequeño artefacto explosivo, inflige 15 puntos de daño.");
-        Objetos bombaG = new Objetos("Bomba Grande",70,1,"Gran artefacto explosivo, inflige 50 puntos de daño.");
-        Objetos pocion = new Objetos("Pocion",50,5,"Bebida que restaura 20 puntos de salud.");
+        Objetos bombaP = new Objetos("Bomba Pequeña",30,3,"Pequeño artefacto explosivo, inflige 15 puntos de daño.",Objetos.tipoObjeto.ATAQUE);
+        Objetos bombaG = new Objetos("Bomba Grande",70,1,"Gran artefacto explosivo, inflige 50 puntos de daño.",Objetos.tipoObjeto.ATAQUE);
+        Objetos pocion = new Objetos("Pocion",50,5,"Bebida que restaura 20 puntos de salud.",Objetos.tipoObjeto.CURACION);
 
         ArrayList<Objetos> objetosArray = new ArrayList();
         objetosArray.add(bombaP);
         objetosArray.add(bombaG);
         objetosArray.add(pocion);
 
-        Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesOfensivas, objetosArray);
+        Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesOfensivas, objetosArray, 500);
 
         //Enemigos
         Enemigos poring = new Enemigos("Poring", "Una gelatina rosa monisima", 60, 60, 20, 5, 10, 10, golpesSalvajesE, 100);
@@ -92,20 +92,20 @@ public class Popollo_Adventures {
         combateDificil.add(golem);
         combateDificil.add(nigromante);
 
-        int opcion=0;
-
-        String menuInicio="\nPor favor seleccione una opcion:"
+        int opcion;
+        String menuInicio="Por favor seleccione una opcion:"
             +"\n\t0 - Salir del juego."
             +"\n\t1 - Comenzar partida."
             +"\n\t2 - Ver galeria."
             +"\n\t3 - Combate de prueba."
             +"\n\t4 - Punto de descanso."
             +"\n\t5 - Tienda.";
+        
 
-        do{
+        
+        do{        
             System.out.println(menuInicio);
             opcion=Integer.parseInt(sc.nextLine());
-            int Monedas = 500;
 
             switch(opcion){
                 case 0:
@@ -117,36 +117,21 @@ public class Popollo_Adventures {
                     break;
                 case 3:
                     Combate.Batalla(popollo, nigromante);
-                    Monedas += nigromante.getDropDinero();
-                    System.out.println(Monedas);
                     break;
                 case 4:
-                    opcion=Integer.parseInt(sc.nextLine());
-                        switch(opcion){
-                            case 1:
-                                System.out.println("Curar la vida y restablecer las habilidades.");
-                                popollo.regenerarSaludHabilidades(popollo);
-                                break;
-                            case 2:
-                                System.out.println("Cambiar las Habilidades");
-                                for (int i = 0; i < popollo.getHabilidadesArray().size(); i++) {
-                                   popollo.getHabilidadesArray().get(i).setUsosRestantes(popollo.getHabilidadesArray().get(i).getUsosMaximos());
-                                }           
-                                System.out.println("");
-                                break;
-                        }
+                    popollo.puntoDescanso(popollo);
                     break;
                 case 5:
                     opcion=Integer.parseInt(sc.nextLine());
                         switch(opcion){
                             case 1:
-                                
                                 System.out.println("Punto de descanso.");
-                                break;
+                        break;
                         }
                     break;    
                 default:
-                    System.out.println("Por favor selecciona una opcion correcta.");
+                    System.out.println("- Opcion Incorrecta.\n");
+                    break;
             }
         }while(opcion!=0);
     }

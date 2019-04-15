@@ -191,15 +191,21 @@ public class Personajes extends ElementoIdentificador{
      */
     public void usarHabilidades(Heroes heroe, Enemigos enemigo){
         Scanner sc = new Scanner (System.in);
-        int opciones = sc.nextInt();
-        if(heroe.getHabilidadesArray().get(opciones-1).getUsosRestantes()>0){
-            System.out.println("- "+heroe.getNombre()+" usa "+heroe.getHabilidadesArray().get(opciones-1).getNombre()
-                +" e inflige una cantidad de "+heroe.getMagia()*heroe.getHabilidadesArray().get(opciones-1).getEspecial()
-                    +" puntos de daño.");
-            heroe.getHabilidadesArray().get(opciones-1).setUsosRestantes(heroe.getHabilidadesArray().get(opciones-1).getUsosRestantes()-1);                     
-            enemigo.dañoHabilidades(heroe, opciones-1);
+        int opcion = sc.nextInt();
+        if(opcion-1>=heroe.getHabilidadesArray().size()){
+            System.out.println("- Opcion Incorrecta.");
+            MostrarHabilidades(heroe);
+            usarHabilidades(heroe, enemigo);
         }else{
-          System.out.println("- No puedes utilizar la habilidad. Pierdes el turno.");  
+            if(heroe.getHabilidadesArray().get(opcion-1).getUsosRestantes()>0){
+                System.out.println("- "+heroe.getNombre()+" usa "+heroe.getHabilidadesArray().get(opcion-1).getNombre()
+                    +" e inflige una cantidad de "+heroe.getMagia()*heroe.getHabilidadesArray().get(opcion-1).getEspecial()
+                    +" puntos de daño.");
+                heroe.getHabilidadesArray().get(opcion-1).setUsosRestantes(heroe.getHabilidadesArray().get(opcion-1).getUsosRestantes()-1);                     
+                enemigo.dañoHabilidades(heroe, opcion-1);
+            }else{
+                System.out.println("- No puedes utilizar la habilidad. Pierdes el turno.");  
+            }
         }
     }
     
@@ -262,19 +268,29 @@ public class Personajes extends ElementoIdentificador{
      */
     public void usarObjetos (Heroes heroe, Enemigos enemigo){
         Scanner sc = new Scanner (System.in);
-        int opciones = sc.nextInt();
-        if(heroe.getObjetosArray().get(opciones-1).getCantidad()>0){
-            System.out.println("- "+heroe.getNombre()+" usa "+heroe.getObjetosArray().get(opciones-1).getNombre()
-                +" e inflige una cantidad de "+heroe.getObjetosArray().get(opciones-1).getPoder()+" puntos de daño.");
-            heroe.getObjetosArray().get(opciones-1).setCantidad(heroe.getObjetosArray().get(opciones-1).getCantidad()-1);                     
-            if(opciones==3){
-                heroe.curacionObjetos(heroe, opciones-1);       
-            }else{
-                enemigo.dañoObjetos(heroe, opciones-1);
-            }    
-        }else{    
-            System.out.println("- No te quedan objetos. Pierdes el turno.");
-        }                            
+        int opcion=Integer.parseInt(sc.nextLine());
+        if(opcion-1>=heroe.getObjetosArray().size()){
+            System.out.println("- Opcion Incorrecta.");
+            MostrarObjetos(heroe);
+            usarObjetos(heroe, enemigo);
+        }else{
+            if(heroe.getObjetosArray().get(opcion-1).getCantidad()>0){
+                String tipo = String.valueOf(heroe.getObjetosArray().get(opcion-1).getTipo());
+                if(tipo.equals("ATAQUE")){
+                    System.out.println("- "+heroe.getNombre()+" usa "+heroe.getObjetosArray().get(opcion-1).getNombre()
+                        +" e inflige una cantidad de "+heroe.getObjetosArray().get(opcion-1).getPoder()+" puntos de daño.");
+                    heroe.getObjetosArray().get(opcion-1).setCantidad(heroe.getObjetosArray().get(opcion-1).getCantidad()-1);  
+                    enemigo.dañoObjetos(heroe, opcion-1);  
+                }else if(tipo.equals("CURACION")){
+                    System.out.println("- "+heroe.getNombre()+" usa "+heroe.getObjetosArray().get(opcion-1).getNombre()
+                        +" y recibe una curacion de "+heroe.getObjetosArray().get(opcion-1).getPoder()+" puntos de salud.");
+                    heroe.getObjetosArray().get(opcion-1).setCantidad(heroe.getObjetosArray().get(opcion-1).getCantidad()-1);
+                    heroe.curacionObjetos(heroe, opcion-1);       
+                }    
+            }else{    
+                System.out.println("- No te quedan objetos. Pierdes el turno.");
+            } 
+        }     
     }
     
     /**
@@ -302,6 +318,15 @@ public class Personajes extends ElementoIdentificador{
     }
     
     /**
+     * Las habilidades igualan sus usosRestantes con los usos maximos, es decir se restablecen todos los usos de las habilidades.
+     * @param personajeX Indica el personaje que realiza la funcion.
+     */
+    public void regenerarHabilidades(Personajes personajeX){
+        for (int i = 0; i < getHabilidadesArray().size(); i++) {
+            getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());
+        }
+    }    
+    /**
      * La salud se iguala con la saludMaxima, es decir realiza una curacion completa y tambien se restablecen todos los usos de las habilidades.
      * @param personajeX Indica el personaje que realiza la funcion.
      */
@@ -311,4 +336,70 @@ public class Personajes extends ElementoIdentificador{
             getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());
         }
     } 
+    
+    /**
+     * Funcion que reune todas las de regenerar salud o restablecimiento de habilidades a cambio de dinero.
+     * @param heroe Personaje que recibe la regeneracion a cambio de dinero.
+     */
+    public void puntoDescanso(Heroes heroe){
+        Scanner sc = new Scanner (System.in);
+        System.out.println("\t|Total de monedas de oro: *"+heroe.getDinero()+"*|");
+        String menuPuntoDescanso="Por favor seleccione una opcion:"
+            +"\n\t0 - Salir."
+            +"\n\t1 - Curar todos los daños recibidos - 100 Monedas de oro."
+            +"\n\t2 - Restablecer el uso de las habilidades - 200 Monedas de oro."
+            +"\n\t3 - Curacion completa y restablecimiento de habilidades - 250 Monedas de oro."
+            +"\n\t4 - Cambiar Habilidades.";
+        System.out.println(menuPuntoDescanso);
+        int opcion1=Integer.parseInt(sc.nextLine());
+        switch(opcion1){
+            case 0:
+                System.out.println("- Ten cuidado en tus proximas aventuras ^_^\n");
+                break;
+            case 1:
+                if (heroe.dinero>=100) {
+                    heroe.dinero -= 100; 
+                    heroe.regenerarSalud(heroe);
+                    System.out.println("- Salud restablecida.\n");
+                    break;
+                }else{
+                    System.out.println("- No tienes suficiente dinero.\n");
+                    heroe.puntoDescanso(heroe);
+                }
+                break;
+            case 2:
+                if (heroe.dinero>=200) {
+                    heroe.dinero -= 200;
+                    heroe.regenerarHabilidades(heroe);
+                    System.out.println("- Uso de habilidades restablecido.\n");
+                    break;
+                }else{
+                    System.out.println("- No tienes suficiente dinero.\n");
+                    heroe.puntoDescanso(heroe);
+                }
+                break;
+            case 3:
+                if (heroe.dinero>=250) {
+                heroe.dinero -= 250;
+                heroe.regenerarSaludHabilidades(heroe);
+                System.out.println("- Salud y habilidades restablecidas.\n");
+                break;
+            }else{
+                System.out.println("- No tienes suficiente dinero.\n");
+                heroe.puntoDescanso(heroe);
+            }
+                break; 
+            case 4:
+                System.out.println("Cambiar las Habilidades");
+                for (int i = 0; i < heroe.getHabilidadesArray().size(); i++) {
+                    heroe.getHabilidadesArray().get(i).setUsosRestantes(heroe.getHabilidadesArray().get(i).getUsosMaximos());
+                }           
+                System.out.println("");
+                break;   
+            default:
+                System.out.println("- Opcion incorrecta");
+                heroe.puntoDescanso(heroe);
+            break;
+            }    
+    }
 }

@@ -12,13 +12,20 @@ package classes;
 public class Objetos extends ElementoIdentificador{
     private int poder;
     private int cantidad;
+    private tipoObjeto tipo;
 
-    public Objetos(String nombre, int poder, int cantidad, String descripcion) {
+    public Objetos(String nombre, int poder, int cantidad, String descripcion, tipoObjeto tipo) {
         super(nombre, descripcion);
         this.poder = poder;
         this.cantidad = cantidad;
+        this.tipo = tipo;
     }
-
+    
+    public enum tipoObjeto{
+        ATAQUE,
+        CURACION
+    };
+    
     public int getPoder() {
         return poder;
     }
@@ -34,4 +41,14 @@ public class Objetos extends ElementoIdentificador{
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }  
+
+    public tipoObjeto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(tipoObjeto tipo) {
+        this.tipo = tipo;
+    }
+    
+   
 }
