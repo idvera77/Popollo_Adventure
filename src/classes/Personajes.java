@@ -154,7 +154,8 @@ public class Personajes extends ElementoIdentificador{
         String listaHabilidades="";
             for (int i = 0; i < personajeX.getHabilidadesArray().size(); i++) {
                 listaHabilidades +="- ("+(i+1)+")"+personajeX.getHabilidadesArray().get(i).getNombre()
-                        +" | Usos: "+personajeX.getHabilidadesArray().get(i).getUsosRestantes()+" ";
+                        +" | Usos: "+personajeX.getHabilidadesArray().get(i).getUsosRestantes()
+                        +"/"+personajeX.getHabilidadesArray().get(i).getUsosMaximos()+" ";
             }     
         System.out.println(listaHabilidades);      
     }
@@ -166,10 +167,10 @@ public class Personajes extends ElementoIdentificador{
     public void MostrarHabilidadesTotal (Personajes personajeX){
         String listaHabilidades="";
             for (int i = 0; i < personajeX.getHabilidadesArray().size(); i++) {
-                listaHabilidades +="("+(i+1)+")"+personajeX.getHabilidadesArray().get(i).getNombre()
-                        +" - Poder de Habilidad: "+personajeX.getHabilidadesArray().get(i).getEspecial()
-                        +" - Usos:*"+personajeX.getHabilidadesArray().get(i).getUsosMaximos()+"*"
-                        +" - Descripcion: "+personajeX.getHabilidadesArray().get(i).getDescripcion()
+                listaHabilidades +="\t"+(i+1)+" - "+personajeX.getHabilidadesArray().get(i).getNombre()
+                        +" | Poder de Habilidad: "+personajeX.getHabilidadesArray().get(i).getEspecial()
+                        +" | Usos: "+personajeX.getHabilidadesArray().get(i).getUsosRestantes()+"/"+personajeX.getHabilidadesArray().get(i).getUsosMaximos()
+                        +" | Descripcion: "+personajeX.getHabilidadesArray().get(i).getDescripcion()
                         +"\n";
             }     
         System.out.println(listaHabilidades);      
@@ -384,7 +385,7 @@ public class Personajes extends ElementoIdentificador{
     public void puntoDescanso(Heroes heroe){
         Scanner sc = new Scanner (System.in);
         System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");
-        String menuPuntoDescanso="- Una luz radiante te reconforta cuando te acercas a ella."
+        String menuPuntoDescanso="- Una luz radiante te llama la atencion."
             +"\n\t0 - Salir."
             +"\n\t1 - Curar todos los daños recibidos - 100 Monedas de oro."
             +"\n\t2 - Restablecer el uso de las habilidades - 200 Monedas de oro."
@@ -458,25 +459,101 @@ public class Personajes extends ElementoIdentificador{
                 heroe.dinero -= heroe.getObjetosArray().get(opcion1-1).getPrecio();
                 heroe.getObjetosArray().get(opcion1-1).setCantidad(heroe.getObjetosArray().get(opcion1-1).getCantidad()+1);
                 System.out.println("- Has obtenido 1 "+heroe.getObjetosArray().get(opcion1-1).getNombre()+"! Buena compra señor.\n"
+                +"|Total de monedas de oro: *"+heroe.getDinero()+"*|\n"      
                 +"- ¿Desea algo mas?");
                 comprarObjetos(heroe, dinero);
             }else{
+                System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");
                 System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
+                System.out.println("- ¿Que objeto desea comprar?");
                 comprarObjetos(heroe, dinero);
             }   
         }    
     }
     
+    public void mejorarEstadisticas(Heroes heroe, int dinero){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");
+        String menuEstadisticas ="- ¿Que atributo quiere mejorar?:"
+            +"\n\t0 - Salir."
+            +"\n\t1 - Aumentar 50 puntos de Vida maxima - 500 Monedas."
+            +"\n\t2 - Aumentar 10 puntos de Fuerza - 750 Monedas."
+            +"\n\t3 - Aumentar 5 puntos de Magia - 1500 Monedas."
+            +"\n\t4 - Aumentar 5 puntos de Defensa - 1000 Monedas."
+            +"\n\t5 - Aumentar 5 de Agilidad - 750 Monedas.";   
+        System.out.println(menuEstadisticas);
+        int opcion1=Integer.parseInt(sc.nextLine());
+        switch(opcion1){
+            case 0:
+                Tienda(heroe);
+                break;
+            case 1:
+                if(heroe.dinero>=500){
+                    heroe.dinero -= 500;
+                    heroe.setSaludMaxima(heroe.getSaludMaxima()+50);
+                    heroe.setSalud(heroe.getSalud()+50);
+                    System.out.println("- La vida maxima aumenta en 50 puntos.");
+                }else{
+                    System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
+                }
+                mejorarEstadisticas(heroe, dinero);
+                break;
+            case 2:
+                if(heroe.dinero>=750){
+                    heroe.dinero -= 750;
+                    heroe.setFuerza(heroe.getFuerza()+10);
+                    System.out.println("- El atributo fuerza aumenta en 10 puntos.");
+                }else{
+                    System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");         
+                }
+                mejorarEstadisticas(heroe, dinero);
+                break;
+            case 3:
+                if(heroe.dinero>=1500){
+                    heroe.dinero -= 1500;
+                    heroe.setMagia(heroe.getMagia()+5); 
+                    System.out.println("- El atributo magia aumenta en 5 puntos.");
+                }else{
+                    System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
+                }
+                mejorarEstadisticas(heroe, dinero);
+                break;
+            case 4:
+                if(heroe.dinero>=1000){
+                    heroe.dinero -= 1000;
+                    heroe.setDefensa(heroe.getDefensa()+5); 
+                    System.out.println("- El atributo defensa aumenta en 5 puntos.");
+                }else{
+                    System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
+                }
+                mejorarEstadisticas(heroe, dinero);
+                break;
+            case 5:
+                if(heroe.dinero>=750){
+                    heroe.dinero -= 750;
+                    heroe.setAgilidad(heroe.getAgilidad()+5);  
+                    System.out.println("- El atributo agilidad aumenta en 5 puntos.");
+                }else{
+                    System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
+                }
+                mejorarEstadisticas(heroe, dinero);
+                break;
+            default:
+                System.out.println("- No entiendo lo que quiere decir, ¿puede repetir por favor?.\n");
+                mejorarEstadisticas(heroe, dinero);
+            break;
+        }    
+    }
     /**
-     * 
-     * @param heroe 
+     * Funcion para utilizar la Tienda en el juego, incluye varias opciones, menu y otras funciones relacionadas con comprar objetos.
+     * @param heroe Indica el personaje que utilizara la tienda.
      */
     public void Tienda(Heroes heroe){
         Scanner sc = new Scanner (System.in);
         System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");
         String menuTienda="- ¿Le interesa algo?:"
             +"\n\t0 - Salir."
-            +"\n\t1 - Comprar mejoras para el personaje."
+            +"\n\t1 - Aumentar atributos."
             +"\n\t2 - Comprar objetos.";
         System.out.println(menuTienda);
         int opcion1=Integer.parseInt(sc.nextLine());
@@ -485,9 +562,10 @@ public class Personajes extends ElementoIdentificador{
                 System.out.println("- Vuelva pronto, le esperamos con los brazos abiertos ^_^\n");
                 break;
             case 1:
-                MostrarObjetos(heroe);
+                mejorarEstadisticas(heroe, heroe.getDinero());
                 break;
             case 2:
+                System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");
                 System.out.println("- ¿Que objeto desea comprar?");
                 comprarObjetos(heroe, heroe.getDinero());
                 break;
@@ -497,4 +575,22 @@ public class Personajes extends ElementoIdentificador{
             break;
         }    
     }
+    
+    public void pantallaGeneralEstadisticas(Heroes heroe){
+        Scanner sc = new Scanner (System.in);  
+        System.out.println("\t!!!Atributos!!!");
+        System.out.println("\tVida: "+heroe.getSalud()+"/"+heroe.getSaludMaxima());
+        System.out.println("\tFuerza: "+heroe.getFuerza());
+        System.out.println("\tMagia: "+heroe.getMagia());
+        System.out.println("\tDefensa: "+heroe.getDefensa());
+        System.out.println("\tAgilidad: "+heroe.getAgilidad()+"\n");
+        System.out.println("\t!!!Habilidades!!!");
+        MostrarHabilidadesTotal(heroe);
+        System.out.println("\t!!!Objetos!!!");
+        MostrarObjetosTienda(heroe);
+        System.out.println("Pulse cualquier tecla para salir.");
+        sc.nextLine();
+        
+    
+}
 }

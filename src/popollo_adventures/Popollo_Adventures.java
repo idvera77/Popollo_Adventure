@@ -86,7 +86,8 @@ public class Popollo_Adventures {
             +"\n\t2 - Ver galeria."
             +"\n\t3 - Combate de prueba."
             +"\n\t4 - Punto de descanso."
-            +"\n\t5 - Tienda.";
+            +"\n\t5 - Tienda."
+            +"\n\t6 - Informacion general del heroe.";
         
         do{        
             System.out.println(menuInicio);
@@ -109,6 +110,9 @@ public class Popollo_Adventures {
                 case 5:
                     popollo.Tienda(popollo);
                     break;    
+                case 6:
+                    popollo.pantallaGeneralEstadisticas(popollo);
+                    break;   
                 default:
                     System.out.println("- Opcion Incorrecta. Parece que no tienes muchas ganas de jugar Y_Y\n");
                     break;
