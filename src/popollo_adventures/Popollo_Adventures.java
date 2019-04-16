@@ -10,6 +10,7 @@ import general.Combate;
 import classes.Enemigos;
 import classes.Habilidades;
 import classes.Heroes;
+import classes.Npcs;
 import classes.Objetos;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,7 +29,6 @@ public class Popollo_Adventures {
         //Inicio.
         Scanner sc = new Scanner (System.in);
         
-        //Declaracion de variables
         //Habilidades
         Habilidades golpeFuerte = new Habilidades("Golpe Fuerte","Empleas todas tus fuerzas.",10,6,6,Habilidades.tipoHechizo.OFENSIVO);
         Habilidades remolino = new Habilidades("Torbellino","Da un poco de mareo.",15,5,5,Habilidades.tipoHechizo.OFENSIVO);
@@ -71,13 +71,19 @@ public class Popollo_Adventures {
         objetosArray.add(bombaP);
         objetosArray.add(bombaG);
         objetosArray.add(pocion);
-
-        Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesHeroe, objetosArray, 500, 0);
+        
+        //Heroe
+        Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesHeroe, objetosArray, 500, 100);
 
         //Enemigos
         Enemigos poring = new Enemigos("Poring", "Una gelatina rosa monisima", 60, 60, 20, 5, 10, 10, golpesSalvajesE, 100);
         Enemigos golem = new Enemigos("Golem", "Una mole andante", 120, 120, 20, 10, 10, 15, golpesSalvajesE, 500);
         Enemigos nigromante = new Enemigos ("Nigromante", "No tiene buen aspecto", 80, 80, 15, 5, 20, 10, golpesMagicosE, 1000);
+        
+        //Npcs
+        Npcs narcyl = new Npcs ("Narcyl", "Sacerdotisa novata.",Npcs.tipoMoral.LEGAL);
+        Npcs tomberi = new Npcs("Tomberi", "Demasiado gruñon.", Npcs.tipoMoral.NEUTRAL);
+        Npcs mystra = new Npcs("Mystra", "Hechicera demente.", Npcs.tipoMoral.CAOTICO);     
 
         int opcion;
         String menuInicio="Por favor seleccione una opcion:"
@@ -87,7 +93,8 @@ public class Popollo_Adventures {
             +"\n\t3 - Combate de prueba."
             +"\n\t4 - Punto de descanso."
             +"\n\t5 - Tienda."
-            +"\n\t6 - Informacion general del heroe.";
+            +"\n\t6 - Informacion general del heroe."
+            +"\n\t7 - Eventos.";
         
         do{        
             System.out.println(menuInicio);
@@ -113,6 +120,9 @@ public class Popollo_Adventures {
                 case 6:
                     popollo.pantallaGeneralEstadisticas(popollo);
                     break;   
+                case 7:
+                    Npcs.Beneficios_Perjuicios(narcyl, popollo);
+                    break;     
                 default:
                     System.out.println("- Opcion Incorrecta. Parece que no tienes muchas ganas de jugar Y_Y\n");
                     break;

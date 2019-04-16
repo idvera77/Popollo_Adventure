@@ -47,4 +47,12 @@ public class Heroes extends Personajes{
     public void setReputacion(int reputacion) {
         this.reputacion = reputacion;
     }
+    
+    public void subirReputacion(Heroes heroe, int numero){
+        this.reputacion += numero;
+    }
+    
+    public void bajarReputacion(Heroes heroe, int numero){
+        this.reputacion -= numero;
+    }
 }
