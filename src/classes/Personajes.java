@@ -576,6 +576,10 @@ public class Personajes extends ElementoIdentificador{
         }    
     }
     
+    /**
+     * Muestra todas las estadisticas, objetos y habilidades.
+     * @param heroe Indica el personaje del cual necesitamos la informacion.
+     */
     public void pantallaGeneralEstadisticas(Heroes heroe){
         Scanner sc = new Scanner (System.in);  
         System.out.println("\t!!!Atributos!!!");
@@ -590,7 +594,5 @@ public class Personajes extends ElementoIdentificador{
         MostrarObjetosTienda(heroe);
         System.out.println("Pulse cualquier tecla para salir.");
         sc.nextLine();
-        
-    
-}
+    }
 }
