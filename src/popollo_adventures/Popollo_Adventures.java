@@ -74,7 +74,7 @@ public class Popollo_Adventures {
         objetosArray.add(pocion);
         
         //Heroe
-        Heroe popollo = new Heroe("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesHeroe, objetosArray, 500, 20);
+        Heroe popollo = new Heroe("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesHeroe, objetosArray, 500, -20);
 
         //Enemigos
         Enemigo poring = new Enemigo("Poring", "Una gelatina rosa monisima", 60, 60, 20, 5, 10, 10, golpesSalvajesE, 100);

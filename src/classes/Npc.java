@@ -92,8 +92,8 @@ public class Npc extends ElementoIdentificador{
                         System.out.println("- La proxima vez deja que sufran algo mas.");                      
                         heroe.dinero += 200;
                         System.out.println("- "+heroe.getNombre()+" ha recibido 200 monedas de oro.");
-                    }else if(reputacion>-20&&reputacion==0){
-                        System.out.println("- Deberias esforzarte mas por ayudar a los demas.");
+                    }else if(reputacion>-20&&reputacion<=0){
+                        System.out.println("- Acaso no sabes divertirte.");
                     }else{
                         System.out.println("- No me gusta tu actitud benevolente.");
                     }
