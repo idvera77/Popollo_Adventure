@@ -592,7 +592,7 @@ public class Personajes extends ElementoIdentificador{
         MostrarHabilidadesTotal(heroe);
         System.out.println("\t!!!Objetos!!!");
         MostrarObjetosTienda(heroe);
-        System.out.println("Pulse cualquier tecla para salir.");
+        System.out.println("*** Pulse cualquier tecla para salir ***");
         sc.nextLine();
     }
 }

@@ -22,6 +22,7 @@ public class Heroes extends Personajes{
         super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray);
         this.objetosArray = objetosArray;
         this.dinero = dinero;
+        this.reputacion = reputacion;
     }
 
     public ArrayList<Objetos> getObjetosArray() {

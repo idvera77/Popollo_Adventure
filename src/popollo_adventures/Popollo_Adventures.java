@@ -73,7 +73,7 @@ public class Popollo_Adventures {
         objetosArray.add(pocion);
         
         //Heroe
-        Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesHeroe, objetosArray, 500, 100);
+        Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesHeroe, objetosArray, 500, 20);
 
         //Enemigos
         Enemigos poring = new Enemigos("Poring", "Una gelatina rosa monisima", 60, 60, 20, 5, 10, 10, golpesSalvajesE, 100);
@@ -121,7 +121,9 @@ public class Popollo_Adventures {
                     popollo.pantallaGeneralEstadisticas(popollo);
                     break;   
                 case 7:
-                    Npcs.Beneficios_Perjuicios(narcyl, popollo);
+                    Npcs.afinidadNpcs(narcyl, popollo);
+                    Npcs.afinidadNpcs(tomberi, popollo);
+                    Npcs.afinidadNpcs(mystra, popollo);
                     break;     
                 default:
                     System.out.println("- Opcion Incorrecta. Parece que no tienes muchas ganas de jugar Y_Y\n");
