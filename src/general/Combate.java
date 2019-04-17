@@ -5,8 +5,8 @@
  */
 package general;
 
-import classes.Enemigos;
-import classes.Heroes;
+import classes.Enemigo;
+import classes.Heroe;
 import java.util.Scanner;
 
 /**

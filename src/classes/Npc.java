@@ -11,10 +11,10 @@ import java.util.Scanner;
  *
  * @author Mystra77
  */
-public class Npcs extends ElementoIdentificador{
+public class Npc extends ElementoIdentificador{
     private tipoMoral moral;
 
-    public Npcs(String nombre, String descripcion, tipoMoral moral) {
+    public Npc(String nombre, String descripcion, tipoMoral moral) {
         super(nombre, descripcion);
         this.moral = moral;
     }
@@ -33,7 +33,7 @@ public class Npcs extends ElementoIdentificador{
         this.moral = moral;
     }  
     
-    public static void afinidadNpcs(Npcs npcs, Heroes heroe){
+    public static void afinidadNpcs(Npc npcs, Heroe heroe){
         Scanner sc = new Scanner (System.in);
         int reputacion = heroe.getReputacion();
         System.out.println(reputacion);
@@ -102,7 +102,7 @@ public class Npcs extends ElementoIdentificador{
         sc.nextLine();    
     }
     
-    public void Final (Npcs npcs, Heroes heroe){
+    public void Final (Npc npcs, Heroe heroe){
         int reputacion = heroe.getReputacion();
         String tipo = String.valueOf(npcs.getMoral());
             if(tipo.equals("LEGAL")){

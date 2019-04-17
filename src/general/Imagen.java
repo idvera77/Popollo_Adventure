@@ -9,6 +9,6 @@ package general;
  *
  * @author Mystra77
  */
-public class Imagenes {
+public class Imagen {
     
 }

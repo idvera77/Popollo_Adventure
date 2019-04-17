@@ -13,14 +13,14 @@ import java.util.Scanner;
  *
  * @author Mystra77
  */
-public class Personajes extends ElementoIdentificador{
+public class Personaje extends ElementoIdentificador{
     public int saludMaxima;
     public int salud;
     private int fuerza;
     private int magia;
     private int agilidad;
     private int defensa;
-    private ArrayList<Habilidades> habilidadesArray;
+    private ArrayList<Habilidad> habilidadesArray;
 
     /**
      * 
@@ -34,7 +34,7 @@ public class Personajes extends ElementoIdentificador{
      * @param defensa
      * @param habilidadesArray 
      */
-    public Personajes(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, int magia, int agilidad, int defensa, ArrayList<Habilidades> habilidadesArray) {
+    public Personaje(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray) {
         super(nombre, descripcion);
         this.saludMaxima = saludMaxima;
         this.salud = salud;
@@ -93,11 +93,11 @@ public class Personajes extends ElementoIdentificador{
         this.defensa = defensa;
     }
 
-    public ArrayList<Habilidades> getHabilidadesArray() {
+    public ArrayList<Habilidad> getHabilidadesArray() {
         return habilidadesArray;
     }
 
-    public void setHabilidadesArray(ArrayList<Habilidades> habilidadesArray) {
+    public void setHabilidadesArray(ArrayList<Habilidad> habilidadesArray) {
         this.habilidadesArray = habilidadesArray;
     }
     
@@ -106,7 +106,7 @@ public class Personajes extends ElementoIdentificador{
      * @param personajeX Personaje que recibe daño en su salud
      * @param daño Parametro externo que indica el daño que recibe el personajeX
      */
-    public void daño(Personajes personajeX, int daño){ 
+    public void daño(Personaje personajeX, int daño){ 
         int inflige = defensa-daño;
             if(inflige<=0){
                 this.salud -= -inflige;
@@ -120,7 +120,7 @@ public class Personajes extends ElementoIdentificador{
      * @param personajeX Es el personaje que ataca y hace daño.
      * @param personajeY Es el personaje que recibe el daño.
      */
-    public void atacar(Personajes personajeX, Personajes personajeY){
+    public void atacar(Personaje personajeX, Personaje personajeY){
         int dañar;
         int aleatorio = NumeroAleatorio(0, 2);
         if(personajeX.getAgilidad()>personajeY.getAgilidad()){
@@ -150,7 +150,7 @@ public class Personajes extends ElementoIdentificador{
      * Muestra un listado de las habilidades y los usos restantes guardados en un ArrayList.
      * @param personajeX Indicamos el personaje del cual queremos conocer sus habilidades.
      */
-    public void MostrarHabilidades (Personajes personajeX){
+    public void MostrarHabilidades (Personaje personajeX){
         String listaHabilidades="";
             for (int i = 0; i < personajeX.getHabilidadesArray().size(); i++) {
                 listaHabilidades +="- ("+(i+1)+")"+personajeX.getHabilidadesArray().get(i).getNombre()
@@ -164,7 +164,7 @@ public class Personajes extends ElementoIdentificador{
      * Muestra un listado de las habilidades y los usos restantes guardados en un ArrayList.
      * @param personajeX Indicamos el personaje del cual queremos conocer sus habilidades.
      */
-    public void MostrarHabilidadesTotal (Personajes personajeX){
+    public void MostrarHabilidadesTotal (Personaje personajeX){
         String listaHabilidades="";
             for (int i = 0; i < personajeX.getHabilidadesArray().size(); i++) {
                 listaHabilidades +="\t"+(i+1)+" - "+personajeX.getHabilidadesArray().get(i).getNombre()
@@ -180,7 +180,7 @@ public class Personajes extends ElementoIdentificador{
      * @param personajeX Indica el personaje que utilizara las habilidades.
      * @param numero Indica la habilidad seleccionada.
      */
-    public void dañoHabilidades (Personajes personajeX, int numero){
+    public void dañoHabilidades (Personaje personajeX, int numero){
         int dañoHabilidad = personajeX.getMagia()*personajeX.getHabilidadesArray().get(numero).getEspecial();
         this.salud -= dañoHabilidad;
     }
@@ -190,7 +190,7 @@ public class Personajes extends ElementoIdentificador{
      * @param personajeX Indica el personaje que utilizara las habilidades.
      * @param numero Indica la habilidad seleccionada
      */
-    public void curacionHabilidades (Personajes personajeX, int numero){
+    public void curacionHabilidades (Personaje personajeX, int numero){
         int curacionHabilidad = personajeX.getMagia()*personajeX.getHabilidadesArray().get(numero).getEspecial();
         this.salud += curacionHabilidad;
         if(personajeX.salud>personajeX.saludMaxima){
@@ -203,7 +203,7 @@ public class Personajes extends ElementoIdentificador{
      * @param heroe Personaje que puede usar una habilidad mediante Scanner.
      * @param enemigo Personaje que recibe el daño de una habilidad.
      */
-    public void usarHabilidades(Heroes heroe, Enemigos enemigo){
+    public void usarHabilidades(Heroe heroe, Enemigo enemigo){
         Scanner sc = new Scanner (System.in);
         int opcion = sc.nextInt();
         if(opcion-1>=heroe.getHabilidadesArray().size()){
@@ -237,7 +237,7 @@ public class Personajes extends ElementoIdentificador{
      * @param enemigo Personaje que utiliza una habilidad mediante un valor aleatorio.
      * @param heroe Personaje que recibe el daño de una habilidad.
      */
-    public void usarHabilidadesEnemigos(Enemigos enemigo, Heroes heroe){
+    public void usarHabilidadesEnemigos(Enemigo enemigo, Heroe heroe){
         int aleatorio = NumeroAleatorio(0, 1);  
         if(enemigo.getHabilidadesArray().get(aleatorio).getUsosRestantes()>0){
             System.out.println("- "+enemigo.getNombre()+" usa "+enemigo.getHabilidadesArray().get(aleatorio).getNombre()
@@ -254,7 +254,7 @@ public class Personajes extends ElementoIdentificador{
      * Muestra un listado de los objetos del heroe.
      * @param heroe Indicamos el heroe del cual queremos conocer sus objetos.
      */
-    public void MostrarObjetos (Heroes heroe){
+    public void MostrarObjetos (Heroe heroe){
         String listaObjetos="";
             for (int i = 0; i < heroe.getObjetosArray().size(); i++) {
                 listaObjetos +="- ("+(i+1)+")"+heroe.getObjetosArray().get(i).getNombre()
@@ -267,7 +267,7 @@ public class Personajes extends ElementoIdentificador{
      * Muestra un listado completo de los objetos.
      * @param heroe 
      */
-    public void MostrarObjetosTienda (Heroes heroe){
+    public void MostrarObjetosTienda (Heroe heroe){
                 String listaObjetos="";
             for (int i = 0; i < heroe.getObjetosArray().size(); i++) {
                 listaObjetos +="\t"+(i+1)+" - "+heroe.getObjetosArray().get(i).getNombre()
@@ -283,7 +283,7 @@ public class Personajes extends ElementoIdentificador{
      * @param heroe Indica el personaje que utilizara el objeto.
      * @param numero Indica el objeto seleccionado.
      */
-    public void dañoObjetos (Heroes heroe, int numero){
+    public void dañoObjetos (Heroe heroe, int numero){
         int dañoObjeto = heroe.getObjetosArray().get(numero).getPoder();
         this.salud -= dañoObjeto;
     }
@@ -293,7 +293,7 @@ public class Personajes extends ElementoIdentificador{
      * @param heroe Indica el personaje que utilizara el objeto.
      * @param numero Indica el objeto seleccionado.
      */
-    public void curacionObjetos (Heroes heroe, int numero){
+    public void curacionObjetos (Heroe heroe, int numero){
         int curacionObjeto = heroe.getObjetosArray().get(numero).getPoder();
         this.salud += curacionObjeto;
         if(heroe.salud>heroe.saludMaxima){
@@ -306,7 +306,7 @@ public class Personajes extends ElementoIdentificador{
      * @param heroe Personaje que puede usar un objeto mediante Scanner.
      * @param enemigo Personaje que recibe el daño de un objeto.
      */
-    public void usarObjetos (Heroes heroe, Enemigos enemigo){
+    public void usarObjetos (Heroe heroe, Enemigo enemigo){
         Scanner sc = new Scanner (System.in);
         int opcion=Integer.parseInt(sc.nextLine());
         if(opcion-1>=heroe.getObjetosArray().size()){
@@ -337,7 +337,7 @@ public class Personajes extends ElementoIdentificador{
      * Funcion que multiplica en 2 su atributo defensivo.
      * @param personajeX Personaje que utilizada la funcion de bloqueo.
      */
-    public void Bloqueo (Personajes personajeX){
+    public void Bloqueo (Personaje personajeX){
         this.defensa= defensa*2;
     }
     
@@ -345,7 +345,7 @@ public class Personajes extends ElementoIdentificador{
      * Funcion que divide en 2 su atributo defensivo.
      * @param personajeX Personaje que utilizada la funcion de bloqueoOff.
      */
-    public void BloqueoOff (Personajes personajeX){
+    public void BloqueoOff (Personaje personajeX){
         this.defensa = defensa/2;
     }
     
@@ -353,7 +353,7 @@ public class Personajes extends ElementoIdentificador{
      * La salud se iguala con la saludMaxima, es decir realiza una curacion completa.
      * @param personajeX Indica el personaje que realiza la funcion.
      */
-    public void regenerarSalud(Personajes personajeX){
+    public void regenerarSalud(Personaje personajeX){
         this.salud = this.saludMaxima;
     }
     
@@ -361,7 +361,7 @@ public class Personajes extends ElementoIdentificador{
      * Las habilidades igualan sus usosRestantes con los usos maximos, es decir se restablecen todos los usos de las habilidades.
      * @param personajeX Indica el personaje que realiza la funcion.
      */
-    public void regenerarHabilidades(Personajes personajeX){
+    public void regenerarHabilidades(Personaje personajeX){
         for (int i = 0; i < getHabilidadesArray().size(); i++) {
             getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());
         }
@@ -371,7 +371,7 @@ public class Personajes extends ElementoIdentificador{
      * La salud se iguala con la saludMaxima, es decir realiza una curacion completa y tambien se restablecen todos los usos de las habilidades.
      * @param personajeX Indica el personaje que realiza la funcion.
      */
-    public void regenerarSaludHabilidades(Personajes personajeX){
+    public void regenerarSaludHabilidades(Personaje personajeX){
         this.salud = this.saludMaxima;
         for (int i = 0; i < getHabilidadesArray().size(); i++) {
             getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());
@@ -382,7 +382,7 @@ public class Personajes extends ElementoIdentificador{
      * Funcion que reune todas las de regenerar salud o restablecimiento de habilidades a cambio de dinero.
      * @param heroe Personaje que recibe la regeneracion a cambio de dinero.
      */
-    public void puntoDescanso(Heroes heroe){
+    public void puntoDescanso(Heroe heroe){
         Scanner sc = new Scanner (System.in);
         System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");
         String menuPuntoDescanso="- Una luz radiante te llama la atencion."
@@ -444,7 +444,7 @@ public class Personajes extends ElementoIdentificador{
      * @param heroe Indica el personaje que comprara los objetos.
      * @param dinero Variable necesaria para comprar objetos, permite hacerlo o no dependiendo de la cantidad.
      */
-    public void comprarObjetos(Heroes heroe, int dinero){
+    public void comprarObjetos(Heroe heroe, int dinero){
         Scanner sc = new Scanner(System.in);
         System.out.println("\t0 - Salir.");
         MostrarObjetosTienda(heroe);
@@ -471,7 +471,7 @@ public class Personajes extends ElementoIdentificador{
         }    
     }
     
-    public void mejorarEstadisticas(Heroes heroe, int dinero){
+    public void mejorarEstadisticas(Heroe heroe, int dinero){
         Scanner sc = new Scanner(System.in);
         System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");
         String menuEstadisticas ="- ¿Que atributo quiere mejorar?:"
@@ -548,7 +548,7 @@ public class Personajes extends ElementoIdentificador{
      * Funcion para utilizar la Tienda en el juego, incluye varias opciones, menu y otras funciones relacionadas con comprar objetos.
      * @param heroe Indica el personaje que utilizara la tienda.
      */
-    public void Tienda(Heroes heroe){
+    public void Tienda(Heroe heroe){
         Scanner sc = new Scanner (System.in);
         System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");
         String menuTienda="- ¿Le interesa algo?:"
@@ -580,7 +580,7 @@ public class Personajes extends ElementoIdentificador{
      * Muestra todas las estadisticas, objetos y habilidades.
      * @param heroe Indica el personaje del cual necesitamos la informacion.
      */
-    public void pantallaGeneralEstadisticas(Heroes heroe){
+    public void pantallaGeneralEstadisticas(Heroe heroe){
         Scanner sc = new Scanner (System.in);  
         System.out.println("\t!!!Atributos!!!");
         System.out.println("\tVida: "+heroe.getSalud()+"/"+heroe.getSaludMaxima());

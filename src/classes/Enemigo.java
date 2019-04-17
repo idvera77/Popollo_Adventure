@@ -11,12 +11,12 @@ import java.util.ArrayList;
  *
  * @author Mystra77
  */
-public class Enemigos extends Personajes{
+public class Enemigo extends Personaje{
     private int dropDinero;
 
-    public Enemigos(String nombre, String descripcion, int saludMaxima, 
+    public Enemigo(String nombre, String descripcion, int saludMaxima, 
         int salud, int fuerza, int magia, int agilidad, int defensa, 
-        ArrayList<Habilidades> habilidadesArray, int dropDinero) {
+        ArrayList<Habilidad> habilidadesArray, int dropDinero) {
         super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray);
         this.dropDinero = dropDinero;
     }

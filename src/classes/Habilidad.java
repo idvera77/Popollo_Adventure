@@ -9,13 +9,13 @@ package classes;
  *
  * @author Mystra77
  */
-public class Habilidades extends ElementoIdentificador{
+public class Habilidad extends ElementoIdentificador{
     private int especial;
     private int usosMaximos;
     private int usosRestantes;
     private tipoHechizo tipo;
 
-    public Habilidades(String nombre, String descripcion, int especial, int usosMaximos, int usosRestantes, tipoHechizo tipo) {
+    public Habilidad(String nombre, String descripcion, int especial, int usosMaximos, int usosRestantes, tipoHechizo tipo) {
         super(nombre, descripcion);
         this.especial = especial;
         this.usosMaximos = usosMaximos;

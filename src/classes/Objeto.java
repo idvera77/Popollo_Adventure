@@ -9,13 +9,13 @@ package classes;
  *
  * @author Mystra77
  */
-public class Objetos extends ElementoIdentificador{
+public class Objeto extends ElementoIdentificador{
     private int poder;
     private int cantidad;
     private tipoObjeto tipo;
     private int precio;
 
-    public Objetos(String nombre, int poder, int cantidad, String descripcion, tipoObjeto tipo, int precio) {
+    public Objeto(String nombre, int poder, int cantidad, String descripcion, tipoObjeto tipo, int precio) {
         super(nombre, descripcion);
         this.poder = poder;
         this.cantidad = cantidad;

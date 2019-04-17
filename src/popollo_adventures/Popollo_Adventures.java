@@ -7,11 +7,11 @@ package popollo_adventures;
 
 
 import general.Combate;
-import classes.Enemigos;
-import classes.Habilidades;
-import classes.Heroes;
-import classes.Npcs;
-import classes.Objetos;
+import classes.Enemigo;
+import classes.Habilidad;
+import classes.Heroe;
+import classes.Npc;
+import classes.Objeto;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,60 +30,60 @@ public class Popollo_Adventures {
         Scanner sc = new Scanner (System.in);
         
         //Habilidades
-        Habilidades golpeFuerte = new Habilidades("Golpe Fuerte","Empleas todas tus fuerzas.",10,6,6,Habilidades.tipoHechizo.OFENSIVO);
-        Habilidades remolino = new Habilidades("Torbellino","Da un poco de mareo.",15,5,5,Habilidades.tipoHechizo.OFENSIVO);
-        Habilidades helada = new Habilidades("Helada","Frio invernal.",20,4,4,Habilidades.tipoHechizo.OFENSIVO);
-        Habilidades bolaDeFuego = new Habilidades("Bola de Fuego","Envuelve al enemigo en llamas.",25,3,3,Habilidades.tipoHechizo.OFENSIVO);
-        Habilidades curacionL = new Habilidades("Curar Heridadas Leves","Sana las heridas superficiales.",15,3,3,Habilidades.tipoHechizo.SANACION);
-        Habilidades curacionG = new Habilidades("Curar Heridas Graves","Sana cualquier tipo de heridas.", 40, 1,1,Habilidades.tipoHechizo.SANACION);
+        Habilidad golpeFuerte = new Habilidad("Golpe Fuerte","Empleas todas tus fuerzas.",10,6,6,Habilidad.tipoHechizo.OFENSIVO);
+        Habilidad remolino = new Habilidad("Torbellino","Da un poco de mareo.",15,5,5,Habilidad.tipoHechizo.OFENSIVO);
+        Habilidad helada = new Habilidad("Helada","Frio invernal.",20,4,4,Habilidad.tipoHechizo.OFENSIVO);
+        Habilidad bolaDeFuego = new Habilidad("Bola de Fuego","Envuelve al enemigo en llamas.",25,3,3,Habilidad.tipoHechizo.OFENSIVO);
+        Habilidad curacionL = new Habilidad("Curar Heridadas Leves","Sana las heridas superficiales.",15,3,3,Habilidad.tipoHechizo.SANACION);
+        Habilidad curacionG = new Habilidad("Curar Heridas Graves","Sana cualquier tipo de heridas.", 40, 1,1,Habilidad.tipoHechizo.SANACION);
         
-        ArrayList<Habilidades> habilidadesHeroe = new ArrayList();
+        ArrayList<Habilidad> habilidadesHeroe = new ArrayList();
         habilidadesHeroe.add(golpeFuerte);
         habilidadesHeroe.add(remolino);
         habilidadesHeroe.add(curacionL);
         
-        ArrayList<Habilidades> habilidadesCambio = new ArrayList();
+        ArrayList<Habilidad> habilidadesCambio = new ArrayList();
         habilidadesCambio.add(helada);
         habilidadesCambio.add(bolaDeFuego);
         habilidadesCambio.add(curacionG);
 
-        //Ataques Enemigos
-        Habilidades Cabezazo = new Habilidades("Cabezazo", "Fuerte embestida con la cabeza.", 15, 3, 5,Habilidades.tipoHechizo.OFENSIVO);
-        Habilidades Morder = new Habilidades("Morder", "Bocado fuerte.", 30, 1, 2,Habilidades.tipoHechizo.OFENSIVO);
+        //Ataques Enemigo
+        Habilidad Cabezazo = new Habilidad("Cabezazo", "Fuerte embestida con la cabeza.", 15, 3, 5,Habilidad.tipoHechizo.OFENSIVO);
+        Habilidad Morder = new Habilidad("Morder", "Bocado fuerte.", 30, 1, 2,Habilidad.tipoHechizo.OFENSIVO);
 
-        ArrayList<Habilidades> golpesSalvajesE = new ArrayList();
+        ArrayList<Habilidad> golpesSalvajesE = new ArrayList();
         golpesSalvajesE.add(Cabezazo);
         golpesSalvajesE.add(Morder);
 
-        Habilidades Llamarada = new Habilidades("Llamarada", "Envuelve al objetivo en llamas", 5, 3, 5,Habilidades.tipoHechizo.OFENSIVO);
-        Habilidades Acido = new Habilidades("Acido", "Puede derretir armaduras.", 10, 1, 2,Habilidades.tipoHechizo.OFENSIVO);
+        Habilidad Llamarada = new Habilidad("Llamarada", "Envuelve al objetivo en llamas", 5, 3, 5,Habilidad.tipoHechizo.OFENSIVO);
+        Habilidad Acido = new Habilidad("Acido", "Puede derretir armaduras.", 10, 1, 2,Habilidad.tipoHechizo.OFENSIVO);
 
-        ArrayList<Habilidades> golpesMagicosE = new ArrayList();
+        ArrayList<Habilidad> golpesMagicosE = new ArrayList();
         golpesMagicosE.add(Llamarada);
         golpesMagicosE.add(Acido);
 
         //Objetos
-        Objetos bombaP = new Objetos("Bomba Pequeña",30,3,"Pequeño artefacto explosivo, inflige 30 puntos de daño.",Objetos.tipoObjeto.ATAQUE, 50);
-        Objetos bombaG = new Objetos("Bomba Grande",70,1,"Gran artefacto explosivo, inflige 70 puntos de daño.",Objetos.tipoObjeto.ATAQUE, 150);
-        Objetos pocion = new Objetos("Pocion",50,5,"Bebida que restaura 50 puntos de salud.",Objetos.tipoObjeto.CURACION, 75);
+        Objeto bombaP = new Objeto("Bomba Pequeña",30,3,"Pequeño artefacto explosivo, inflige 30 puntos de daño.",Objeto.tipoObjeto.ATAQUE, 50);
+        Objeto bombaG = new Objeto("Bomba Grande",70,1,"Gran artefacto explosivo, inflige 70 puntos de daño.",Objeto.tipoObjeto.ATAQUE, 150);
+        Objeto pocion = new Objeto("Pocion",50,5,"Bebida que restaura 50 puntos de salud.",Objeto.tipoObjeto.CURACION, 75);
 
-        ArrayList<Objetos> objetosArray = new ArrayList();
+        ArrayList<Objeto> objetosArray = new ArrayList();
         objetosArray.add(bombaP);
         objetosArray.add(bombaG);
         objetosArray.add(pocion);
         
         //Heroe
-        Heroes popollo = new Heroes("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesHeroe, objetosArray, 500, 20);
+        Heroe popollo = new Heroe("Popollo", "Un adorable Popollito comilon", 100, 100, 20, 5, 20, 10, habilidadesHeroe, objetosArray, 500, 20);
 
         //Enemigos
-        Enemigos poring = new Enemigos("Poring", "Una gelatina rosa monisima", 60, 60, 20, 5, 10, 10, golpesSalvajesE, 100);
-        Enemigos golem = new Enemigos("Golem", "Una mole andante", 120, 120, 20, 10, 10, 15, golpesSalvajesE, 500);
-        Enemigos nigromante = new Enemigos ("Nigromante", "No tiene buen aspecto", 80, 80, 15, 5, 20, 10, golpesMagicosE, 1000);
+        Enemigo poring = new Enemigo("Poring", "Una gelatina rosa monisima", 60, 60, 20, 5, 10, 10, golpesSalvajesE, 100);
+        Enemigo golem = new Enemigo("Golem", "Una mole andante", 120, 120, 20, 10, 10, 15, golpesSalvajesE, 500);
+        Enemigo nigromante = new Enemigo ("Nigromante", "No tiene buen aspecto", 80, 80, 15, 5, 20, 10, golpesMagicosE, 1000);
         
         //Npcs
-        Npcs narcyl = new Npcs ("Narcyl", "Sacerdotisa novata.",Npcs.tipoMoral.LEGAL);
-        Npcs tomberi = new Npcs("Tomberi", "Demasiado gruñon.", Npcs.tipoMoral.NEUTRAL);
-        Npcs mystra = new Npcs("Mystra", "Hechicera demente.", Npcs.tipoMoral.CAOTICO);     
+        Npc narcyl = new Npc ("Narcyl", "Sacerdotisa novata.",Npc.tipoMoral.LEGAL);
+        Npc tomberi = new Npc("Tomberi", "Demasiado gruñon.", Npc.tipoMoral.NEUTRAL);
+        Npc mystra = new Npc("Mystra", "Hechicera demente.", Npc.tipoMoral.CAOTICO);     
 
         int opcion;
         String menuInicio="Por favor seleccione una opcion:"
@@ -121,9 +121,9 @@ public class Popollo_Adventures {
                     popollo.pantallaGeneralEstadisticas(popollo);
                     break;   
                 case 7:
-                    Npcs.afinidadNpcs(narcyl, popollo);
-                    Npcs.afinidadNpcs(tomberi, popollo);
-                    Npcs.afinidadNpcs(mystra, popollo);
+                    Npc.afinidadNpcs(narcyl, popollo);
+                    Npc.afinidadNpcs(tomberi, popollo);
+                    Npc.afinidadNpcs(mystra, popollo);
                     break;     
                 default:
                     System.out.println("- Opcion Incorrecta. Parece que no tienes muchas ganas de jugar Y_Y\n");

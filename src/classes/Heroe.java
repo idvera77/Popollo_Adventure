@@ -11,25 +11,25 @@ import java.util.ArrayList;
  *
  * @author Mystra77
  */
-public class Heroes extends Personajes{
-    private ArrayList<Objetos> objetosArray;
+public class Heroe extends Personaje{
+    private ArrayList<Objeto> objetosArray;
     public int dinero;
     private int reputacion;
     
-    public Heroes(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, 
-        int magia, int agilidad, int defensa, ArrayList<Habilidades> habilidadesArray, 
-        ArrayList<Objetos> objetosArray, int dinero, int reputacion) {
+    public Heroe(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, 
+        int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray, 
+        ArrayList<Objeto> objetosArray, int dinero, int reputacion) {
         super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray);
         this.objetosArray = objetosArray;
         this.dinero = dinero;
         this.reputacion = reputacion;
     }
 
-    public ArrayList<Objetos> getObjetosArray() {
+    public ArrayList<Objeto> getObjetosArray() {
         return objetosArray;
     }
 
-    public void setObjetosArray(ArrayList<Objetos> objetosArray) {
+    public void setObjetosArray(ArrayList<Objeto> objetosArray) {
         this.objetosArray = objetosArray;
     }
 
@@ -49,11 +49,11 @@ public class Heroes extends Personajes{
         this.reputacion = reputacion;
     }
     
-    public void subirReputacion(Heroes heroe, int numero){
+    public void subirReputacion(Heroe heroe, int numero){
         this.reputacion += numero;
     }
     
-    public void bajarReputacion(Heroes heroe, int numero){
+    public void bajarReputacion(Heroe heroe, int numero){
         this.reputacion -= numero;
     }
 }
