@@ -14,6 +14,7 @@ import classes.Npc;
 import classes.Objeto;
 import java.util.ArrayList;
 import java.util.Scanner;
+import general.Eventos;
 
 
 /**
@@ -94,7 +95,14 @@ public class Popollo_Adventures {
             +"\n\t4 - Punto de descanso."
             +"\n\t5 - Tienda."
             +"\n\t6 - Informacion general del heroe."
-            +"\n\t7 - Eventos.";
+            +"\n\t7 - Comprobar afinidad con los Npcs."
+            +"\n\t8 - Multiples eventos.";
+        
+        String menuEvento="Por favor seleccione una opcion:"
+            +"\n\t0 - Salir."
+            +"\n\t1 - Vagabundo."
+            +"\n\t2 - Defensa de aldeanos."
+            +"\n\t3 - Crias de porings.";
         
         do{        
             System.out.println(menuInicio);
@@ -124,9 +132,27 @@ public class Popollo_Adventures {
                     Npc.afinidadNpcs(narcyl, popollo);
                     Npc.afinidadNpcs(tomberi, popollo);
                     Npc.afinidadNpcs(mystra, popollo);
-                    break;     
+                    break;
+                case 8:
+                    System.out.println(menuEvento);
+                    opcion=Integer.parseInt(sc.nextLine());
+                    switch(opcion){
+                        case 1:
+                            Eventos.vagabundo(popollo);
+                            break;
+                        case 2:
+                            Eventos.rescateAldeanos(popollo, nigromante);
+                            break;
+                        case 3:
+                            Eventos.criasPoring(popollo, poring);
+                            break;   
+                        default:
+                            System.out.println("- Opcion incorrecta.\n");
+                            break;
+                        }
+                    break;
                 default:
-                    System.out.println("- Opcion Incorrecta. Parece que no tienes muchas ganas de jugar Y_Y\n");
+                    System.out.println("- Opcion incorrecta. Parece que no tienes muchas ganas de jugar Y_Y\n");
                     break;
             }
         }while(opcion!=0);

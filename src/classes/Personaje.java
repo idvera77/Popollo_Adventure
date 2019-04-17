@@ -588,6 +588,7 @@ public class Personaje extends ElementoIdentificador{
         System.out.println("\tMagia: "+heroe.getMagia());
         System.out.println("\tDefensa: "+heroe.getDefensa());
         System.out.println("\tAgilidad: "+heroe.getAgilidad()+"\n");
+        System.out.println("\tReputacion: "+heroe.getReputacion()+" || "+"Monedas de oro: "+heroe.getDinero()+"\n");
         System.out.println("\t!!!Habilidades!!!");
         MostrarHabilidadesTotal(heroe);
         System.out.println("\t!!!Objetos!!!");

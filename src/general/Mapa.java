@@ -9,10 +9,6 @@ package general;
  *
  * @author Mystra77
  */
-public class Mapa extends classes.ElementoIdentificador{
+public class Mapa{
 
-    public Mapa(String nombre, String descripcion) {
-        super(nombre, descripcion);
-    }
-    
 }
