@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Combate {
 
 
-   public static void Batalla(Heroes heroe, Enemigos enemigo){
+   public static void Batalla(Heroe heroe, Enemigo enemigo){
        
         //Sonidos Combate
         String rutaCancionVictoria = "./sonidos/Victoria.wav";
