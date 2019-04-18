@@ -7,6 +7,7 @@ package general;
 
 import classes.Enemigo;
 import classes.Heroe;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -30,8 +31,7 @@ public class Combate {
         Scanner sc=new Scanner(System.in);
 
         int aleatorio;
-        boolean heroesVivos=true;
-        boolean enemigosVivos=true;
+        boolean Victoria=false;
         boolean defensaHeroe=false;
         boolean defensaEnemigo=false;
         
@@ -78,9 +78,7 @@ public class Combate {
                 }
             }else{
                 System.out.println("\n\tDERROTA - Juega mejor la proxima vez ^_^\n");
-                enemigo.regenerarSaludHabilidades(enemigo);
-                heroesVivos=false;
-                break;
+                System.exit(0); 
             }
             //TURNO ENEMIGO
             if(enemigo.getSalud()>0){
@@ -107,134 +105,20 @@ public class Combate {
                         Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
                     }
                 }else{
-                    enemigosVivos=false;
+                    Victoria=true;
                     System.out.println("\n\t!!!"+enemigo.getNombre()+" Derrotado!!!"
                             +" Has ganado "+enemigo.getDropDinero()+" Monedas de oro.\n");
                     heroe.dinero += enemigo.getDropDinero();
                     Musica.iniciarMusica(rutaCancionVictoria);
                     //Despues de cada combate regeneramos la salud de los heroes y los enemigos (por si en otro eventos luchamos contra ellos.        
-                    enemigo.regenerarSaludHabilidades(enemigo);
-                    break;
                 }
-        }while(heroesVivos&&enemigosVivos);
+        }while(!Victoria);
+        enemigo.regenerarSaludHabilidades(enemigo);
     }
 
     public static int NumeroAleatorio(int minimo,int maximo){
        int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));
        return num;
-    }
-    
-    public static void Batalla2(Heroe heroe, Enemigo enemigo){
-       
-        //Sonidos Combate
-        String rutaCancionVictoria = "./sonidos/Victoria.wav";
-        String rutaCancionCombates = "./sonidos/Combates.wav";
-        boolean victoria=false;
-        boolean derrota=false;
-      
-        do{
-            if(heroe.getSalud()>=0){
-                turnoAliado(heroe, enemigo);
-            }else{
-                derrota=true;
-                System.out.println("Derrota");
-                break;
-            }
-            if(enemigo.getSalud()>=0){
-                turnoEnemigo(enemigo, heroe);
-            }else{
-                victoria=true;
-                //Musica.iniciarMusica(rutaCancionVictoria);
-                System.out.println("\n\t!!!"+enemigo.getNombre()+" Derrotado!!!"
-                            +" Has ganado "+enemigo.getDropDinero()+" Monedas de oro.\n");
-                    heroe.dinero += enemigo.getDropDinero();
-            }
-        }while(!victoria&&!derrota);
-        enemigo.regenerarSaludHabilidades(enemigo);
-    }
-    
-    public static void turnoAliado (Heroe heroe, Enemigo enemigo){
-        String rutaSonidoFisicoAliado = "./sonidos/FisicoAliado.wav";
-        String rutaSonidoHabilidadesObjetos = "./sonidos/HabilidadesObjetos.wav";
-        String rutaSonidoDefensa = "./sonidos/Defensa.wav";
-        String rutaSonidoCuraciones = "./sonidos/Curaciones.wav";
-        Scanner sc = new Scanner(System.in);
-        boolean defensaHeroe=false;
-        
-
-            if(defensaHeroe==true){
-                heroe.BloqueoOff(heroe);
-                defensaHeroe=false;
-            }
-            System.out.println("----------------------------------------------");
-            System.out.println("Turno de "+heroe.getNombre()+" - Vida restante: "+heroe.getSalud()+"/"+heroe.getSaludMaxima());
-            System.out.println("\tAtaque(1) | Defensa(2) | Habilidades(3) | Objetos(4)");
-            int opcion=Integer.parseInt(sc.nextLine());
-
-            switch(opcion){
-                case 1:
-                    heroe.atacar(heroe, enemigo);
-                    Musica.iniciarSonidos(rutaSonidoFisicoAliado);
-                    break;
-
-                case 2:    
-                    System.out.println("- La defensa natural se multiplica por 2 durante un turno.\n");
-                    heroe.Bloqueo(heroe);
-                    defensaHeroe=true;
-                    Musica.iniciarSonidos(rutaSonidoDefensa);
-                    break;
-
-                case 3:
-                    heroe.MostrarHabilidades(heroe);
-                    heroe.usarHabilidades(heroe, enemigo);
-                    Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
-                    break;
-                case 4:
-                    heroe.MostrarObjetos(heroe);
-                    heroe.usarObjetos(heroe, enemigo);
-                    Musica.iniciarSonidos(rutaSonidoCuraciones);
-                    break;
-                default:
-                    System.out.println("- Se que estas nervioso pero debes centrarte!");
-                    Batalla(heroe, enemigo);
-                    break;
-            }
-        
-    }
-    
-    public static void turnoEnemigo(Enemigo enemigo, Heroe heroe) {
-
-        String rutaSonidoFisicoEnemigo = "./sonidos/FisicoEnemigo.wav";
-        String rutaSonidoHabilidadesObjetos = "./sonidos/HabilidadesObjetos.wav";
-        String rutaSonidoDefensa = "./sonidos/Defensa.wav";
-
-        boolean defensaEnemigo=false;
-        int aleatorio;
-        
-     
-                if(defensaEnemigo==true){
-                    enemigo.BloqueoOff(enemigo);
-                    defensaEnemigo=false;
-                }
-                System.out.println("----------------------------------------------");
-                System.out.println("Turno de "+enemigo.getNombre()+" - Vida restante: "+enemigo.getSalud()+"/"+enemigo.getSaludMaxima());
-                aleatorio = NumeroAleatorio(0, 6);                
-                    if(aleatorio<=3){ 
-                        System.out.println("\tDecide atacar!\n");
-                        enemigo.atacar(enemigo, heroe);
-                        Musica.iniciarSonidos(rutaSonidoFisicoEnemigo);       
-                    }else if(aleatorio==4){
-                        System.out.println("\tDecide usar bloqueo!\n");
-                        System.out.println("- Su defensa natural se multiplica por 2 durante un turno.");
-                        enemigo.Bloqueo(enemigo);
-                        defensaEnemigo=true;
-                        Musica.iniciarSonidos(rutaSonidoDefensa);
-                    }else{
-                        System.out.println("\tDecide usar una habilidad!\n");
-                        enemigo.usarHabilidadesEnemigos(enemigo, heroe);
-                        Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
-                    }
-                }
-    
+    } 
 }
 
