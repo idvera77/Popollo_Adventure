@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package general;
-import classes.Heroe;
-import classes.Enemigo;
-import classes.Npc;
+
+import clases.*;
 import java.util.Scanner;
 /**
  *

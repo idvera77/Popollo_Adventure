@@ -5,8 +5,7 @@
  */
 package general;
 
-import classes.Enemigo;
-import classes.Heroe;
+import clases.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -109,8 +108,7 @@ public class Combate {
                     System.out.println("\n\t!!!"+enemigo.getNombre()+" Derrotado!!!"
                             +" Has ganado "+enemigo.getDropDinero()+" Monedas de oro.\n");
                     heroe.dinero += enemigo.getDropDinero();
-                    Musica.iniciarMusica(rutaCancionVictoria);
-                    //Despues de cada combate regeneramos la salud de los heroes y los enemigos (por si en otro eventos luchamos contra ellos.        
+                    Musica.iniciarMusica(rutaCancionVictoria);    
                 }
         }while(!Victoria);
         enemigo.regenerarSaludHabilidades(enemigo);

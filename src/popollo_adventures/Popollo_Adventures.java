@@ -5,16 +5,10 @@
  */
 package popollo_adventures;
 
-
-import general.Combate;
-import classes.Enemigo;
-import classes.Habilidad;
-import classes.Heroe;
-import classes.Npc;
-import classes.Objeto;
+import clases.*;
+import general.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import general.Eventos;
 
 
 /**
@@ -30,6 +24,9 @@ public class Popollo_Adventures {
         //Inicio.
         Scanner sc = new Scanner (System.in);
         
+        //Abre ventana 
+        Ventana Ventana = new Ventana();
+           
         //Habilidades
         Habilidad golpeFuerte = new Habilidad("Golpe Fuerte","Empleas todas tus fuerzas.",10,6,6,Habilidad.tipoHechizo.OFENSIVO);
         Habilidad remolino = new Habilidad("Torbellino","Da un poco de mareo.",15,5,5,Habilidad.tipoHechizo.OFENSIVO);
@@ -87,6 +84,7 @@ public class Popollo_Adventures {
         Npc mystra = new Npc("Mystra", "Hechicera demente.", Npc.tipoMoral.CAOTICO);     
 
         int opcion;
+        
         String menuInicio="Por favor seleccione una opcion:"
             +"\n\t0 - Salir del juego."
             +"\n\t1 - Comenzar partida."
@@ -114,7 +112,8 @@ public class Popollo_Adventures {
                     break;
                 case 1:      
                     break;
-                case 2:             
+                case 2:   
+                    Ventana.setVisible(true);
                     break;
                 case 3:
                     Combate.Batalla(popollo, nigromante);
