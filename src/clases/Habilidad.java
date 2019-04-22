@@ -14,7 +14,16 @@ public class Habilidad extends ElementoIdentificador{
     private int usosMaximos;
     private int usosRestantes;
     private tipoHechizo tipo;
-
+    
+    /**
+     * Constructor de Habilidad
+     * @param nombre Variable de tipo String para indicar un nombre.
+     * @param descripcion Variable de tipo String para escribir una descripcion.
+     * @param especial Variable de tipo entero que indica el atributo especial.
+     * @param usosMaximos Variable de tipo entero que indica el numero maximo de usos de una habilidad.
+     * @param usosRestantes Variable de tipo entero que indica el numero restante de usos de una habilidad.
+     * @param tipo Variable tipo que nos permite indicar el tipo de hechizo y asi modificar ciertas funciones.
+     */
     public Habilidad(String nombre, String descripcion, int especial, int usosMaximos, int usosRestantes, tipoHechizo tipo) {
         super(nombre, descripcion);
         this.especial = especial;

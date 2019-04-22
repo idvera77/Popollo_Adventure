@@ -6,18 +6,23 @@
 package clases;
 
 /**
- *
+ * 
  * @author Mystra77
  */
 public class ElementoIdentificador {
     private String nombre;
     private String descripcion;
 
+    /**
+     * Constructor de ElementoIdenfiticador
+     * @param nombre Variable de tipo String para indicar un nombre.
+     * @param descripcion Variable de tipo String para escribir una descripcion.
+     */
     public ElementoIdentificador(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
-
+    
     public String getNombre() {
         return nombre;
     }

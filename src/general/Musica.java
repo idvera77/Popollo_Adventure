@@ -12,7 +12,11 @@ import javax.sound.sampled.Clip;
  * @author Mystra77
  */
 public class Musica {
-
+    
+    /**
+     * Funcion que nos permite crear AudioInput y gracias a una ruta añadimos sonidos.
+     * @param rutaSonido Indicamos la ruta donde esta guardado el sonido que queremos escuchar.
+     */
     public static void iniciarMusica (String rutaSonido){
         try{
             File rutaMusica = new File(rutaSonido);
@@ -36,6 +40,10 @@ public class Musica {
         }
     }
     
+    /**
+    * Funcion que nos permite crear AudioInput y gracias a una ruta añadimos sonidos.
+    * @param rutaSonido Indicamos la ruta donde esta guardado el sonido que queremos escuchar.
+    */
     public static void iniciarSonidos (String rutaSonido){
         try{
             File rutaMusica = new File(rutaSonido);

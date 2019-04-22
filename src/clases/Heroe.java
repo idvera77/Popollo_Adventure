@@ -16,6 +16,21 @@ public class Heroe extends Personaje{
     public int dinero;
     private int reputacion;
     
+    /**
+     * Constructor de Heroe
+     * @param nombre Variable de tipo String para indicar un nombre.
+     * @param descripcion Variable de tipo String para escribir una descripcion.
+     * @param saludMaxima Variable de tipo entero que indica la salud maxima.
+     * @param salud Variable de tipo entero que indica la salud actual.
+     * @param fuerza Variable de tipo entero que indica la fuerza actual.
+     * @param magia Variable de tipo entero que indica la magia actual.
+     * @param agilidad Variable de tipo entero que indica la agilidad actual.
+     * @param defensa Variable de tipo entero que indica la defensa actual.
+     * @param habilidadesArray Array con las habilidades.
+     * @param objetosArray Array con los objetos.
+     * @param dinero Variable de tipo entero que indica el dinero actual.
+     * @param reputacion Variable de tipo entero que indica la reputacion actual.
+     */
     public Heroe(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, 
         int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray, 
         ArrayList<Objeto> objetosArray, int dinero, int reputacion) {
@@ -49,10 +64,20 @@ public class Heroe extends Personaje{
         this.reputacion = reputacion;
     }
     
+    /**
+     * Funcion que nos permite aumentar la reputacion del heroe.
+     * @param heroe Heroe del cual aumentara su reputacion.
+     * @param numero Numero que subira la reputacion del heroe.
+     */
     public void subirReputacion(Heroe heroe, int numero){
         this.reputacion += numero;
     }
     
+    /**
+     * Funcion que nos permite disminuir la reputacion del heroe.
+     * @param heroe Heroe del cual disminuira su reputacion.
+     * @param numero Numero que bajara la reputacion del heroe.
+     */
     public void bajarReputacion(Heroe heroe, int numero){
         this.reputacion -= numero;
     }

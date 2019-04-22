@@ -13,7 +13,13 @@ import java.util.Scanner;
  */
 public class Npc extends ElementoIdentificador{
     private tipoMoral moral;
-
+    
+    /**
+     * Constructor de Npc
+     * @param nombre Variable de tipo String para indicar un nombre.
+     * @param descripcion Variable de tipo String para escribir una descripcion.
+     * @param moral Variable tipo que nos permite indicar la moral del npc y asi modificar ciertas funciones.
+     */
     public Npc(String nombre, String descripcion, tipoMoral moral) {
         super(nombre, descripcion);
         this.moral = moral;
@@ -33,6 +39,11 @@ public class Npc extends ElementoIdentificador{
         this.moral = moral;
     }  
     
+    /**
+     * Funcion que compara la reputacion del heroe y la moral del npc para añadir dialogos o dar recompensas al heroe.
+     * @param npcs Del cual conseguiremos beneficios o dialogos dependiendo de su moral.
+     * @param heroe Del cual sacaremos una reputacion y obtendra beneficios.
+     */
     public static void afinidadNpcs(Npc npcs, Heroe heroe){
         Scanner sc = new Scanner (System.in);
         int reputacion = heroe.getReputacion();
@@ -100,17 +111,5 @@ public class Npc extends ElementoIdentificador{
             }    
         System.out.println("*** Pulse cualquier tecla para salir ***");
         sc.nextLine();    
-    }
-    
-    public void Final (Npc npcs, Heroe heroe){
-        int reputacion = heroe.getReputacion();
-        String tipo = String.valueOf(npcs.getMoral());
-            if(tipo.equals("LEGAL")){
-                     
-            }else if(tipo.equals("NEUTRAL")){
-                 
-            }else if(tipo.equals("CAOTICO")){
-                
-            }    
     }
 }

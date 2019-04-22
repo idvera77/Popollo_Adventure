@@ -102,6 +102,7 @@ public class Popollo_Adventures {
             +"\n\t2 - Defensa de aldeanos."
             +"\n\t3 - Crias de porings.";
         
+        //Menu de pruebas, incluye toda las opciones para ver en un vistazo rapido que todo funciona.
         do{        
             System.out.println(menuInicio);
             opcion=Integer.parseInt(sc.nextLine());
@@ -111,7 +112,8 @@ public class Popollo_Adventures {
                     System.out.println("Vuelve pronto ^_^");
                     System.exit(0);
                     break;
-                case 1:      
+                case 1:   
+                    //Nada por ahora
                     break;
                 case 2:   
                     Ventana.setVisible(true);

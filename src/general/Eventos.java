@@ -13,6 +13,10 @@ import java.util.Scanner;
  */
 public class Eventos {
     
+    /**
+     * Funcion que simila un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
+     * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
+     */
     public static void vagabundo(Heroe heroe){
         Scanner sc = new Scanner(System.in);
         int opcion;
@@ -52,6 +56,11 @@ public class Eventos {
         }  
     }
     
+    /**
+     * Funcion que simila un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
+     * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
+     * @param enemigo Indica el enemigo que luchara contra el heroe.
+     */   
     public static void rescateAldeanos(Heroe heroe, Enemigo enemigo){
         Scanner sc = new Scanner(System.in);
         int opcion;
@@ -94,6 +103,11 @@ public class Eventos {
         }  
     }
     
+    /**
+    * Funcion que simila un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
+    * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
+    * @param enemigo Indica el enemigo que luchara contra el heroe.
+    */   
     public static void criasPoring(Heroe heroe, Enemigo enemigo) {
         Scanner sc = new Scanner(System.in);
         int opcion;

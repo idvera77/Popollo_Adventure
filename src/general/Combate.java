@@ -6,7 +6,6 @@
 package general;
 
 import clases.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -37,7 +36,9 @@ public class Combate {
 
         do{
             //TURNO ALIADO
+            //Comprobacion de que el heroe tiene mas de 0 puntos de salud.
             if(heroe.getSalud()>0){
+                //Comprobacion de que el heroe tiene activada la mejora de defensa, si es true la disminuye ya que ha pasado un turno. 
                 if(defensaHeroe==true){
                     heroe.BloqueoOff(heroe);
                     defensaHeroe=false;
@@ -80,7 +81,9 @@ public class Combate {
                 System.exit(0); 
             }
             //TURNO ENEMIGO
+            //Comprobacion de que el heroe tiene mas de 0 puntos de salud.    
             if(enemigo.getSalud()>0){
+                //Comprobacion de que el enemigo tiene activada la mejora de defensa, si es true la disminuye ya que ha pasado un turno. 
                 if(defensaEnemigo==true){
                     enemigo.BloqueoOff(enemigo);
                     defensaEnemigo=false;

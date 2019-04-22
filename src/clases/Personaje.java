@@ -23,16 +23,16 @@ public class Personaje extends ElementoIdentificador{
     private ArrayList<Habilidad> habilidadesArray;
 
     /**
-     * 
-     * @param nombre
-     * @param descripcion
-     * @param saludMaxima
-     * @param salud
-     * @param fuerza
-     * @param magia
-     * @param agilidad
-     * @param defensa
-     * @param habilidadesArray 
+     * Constructor de Personaje
+     * @param nombre Variable de tipo String para indicar un nombre.
+     * @param descripcion Variable de tipo String para escribir una descripcion.
+     * @param saludMaxima Variable de tipo entero que indica la salud maxima.
+     * @param salud Variable de tipo entero que indica la salud actual.
+     * @param fuerza Variable de tipo entero que indica la fuerza actual.
+     * @param magia Variable de tipo entero que indica la magia actual.
+     * @param agilidad Variable de tipo entero que indica la agilidad actual.
+     * @param defensa Variable de tipo entero que indica la defensa actual.
+     * @param habilidadesArray Array con las habilidades.
      */
     public Personaje(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray) {
         super(nombre, descripcion);
@@ -471,6 +471,11 @@ public class Personaje extends ElementoIdentificador{
         }    
     }
     
+    /**
+     *  Funcion que nos aumenta los atributos del heroe si tenemos el dinero necesario.
+     * @param heroe Indica el personaje que aumentara los atributos.
+     * @param dinero Variable necesaria para comprar mejoras de atributos, permite hacerlo o no dependiendo de la cantidad.
+     */
     public void mejorarEstadisticas(Heroe heroe, int dinero){
         Scanner sc = new Scanner(System.in);
         System.out.println("|Total de monedas de oro: *"+heroe.getDinero()+"*|");

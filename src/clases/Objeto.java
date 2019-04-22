@@ -14,7 +14,16 @@ public class Objeto extends ElementoIdentificador{
     private int cantidad;
     private tipoObjeto tipo;
     private int precio;
-
+    
+    /**
+     * Constructor de Npc
+     * @param nombre Variable de tipo String para indicar un nombre.
+     * @param poder Variable de tipo entero que indica el poder del objeto actual.
+     * @param cantidad Variable de tipo entero que indica la cantidad disponible del objeo.
+     * @param descripcion Variable de tipo String para escribir una descripcion.
+     * @param tipo Variable tipo que nos permite indicar el tipo de objeto y asi modificar ciertas funciones.
+     * @param precio Variable de tipo entero que indica el precio de un objeto.
+     */
     public Objeto(String nombre, int poder, int cantidad, String descripcion, tipoObjeto tipo, int precio) {
         super(nombre, descripcion);
         this.poder = poder;
