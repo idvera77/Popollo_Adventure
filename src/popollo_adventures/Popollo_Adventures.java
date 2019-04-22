@@ -109,6 +109,7 @@ public class Popollo_Adventures {
             switch(opcion){
                 case 0:
                     System.out.println("Vuelve pronto ^_^");
+                    System.exit(0);
                     break;
                 case 1:      
                     break;
