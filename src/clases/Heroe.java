@@ -6,6 +6,7 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -39,7 +40,8 @@ public class Heroe extends Personaje{
         this.dinero = dinero;
         this.reputacion = reputacion;
     }
-
+    
+    //Getters y Setters
     public ArrayList<Objeto> getObjetosArray() {
         return objetosArray;
     }
@@ -64,6 +66,9 @@ public class Heroe extends Personaje{
         this.reputacion = reputacion;
     }
     
+    //FUNCIONES
+    
+    //Reputacion
     /**
      * Funcion que nos permite aumentar la reputacion del heroe.
      * @param heroe Heroe del cual aumentara su reputacion.

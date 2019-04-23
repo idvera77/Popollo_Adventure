@@ -68,6 +68,4 @@ public class Objeto extends ElementoIdentificador{
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-    
-   
 }

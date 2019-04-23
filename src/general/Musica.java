@@ -54,7 +54,7 @@ public class Musica {
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioInputSonido);
                 clip.start();
-                Thread.sleep(500);
+                Thread.sleep(400);
                 clip.close();
             }
             else
