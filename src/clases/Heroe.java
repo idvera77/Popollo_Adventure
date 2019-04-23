@@ -14,7 +14,6 @@ import java.util.Scanner;
  */
 public class Heroe extends Personaje{
     private ArrayList<Objeto> objetosArray;
-    public int dinero;
     private int reputacion;
     
     /**
@@ -28,16 +27,15 @@ public class Heroe extends Personaje{
      * @param agilidad Variable de tipo entero que indica la agilidad actual.
      * @param defensa Variable de tipo entero que indica la defensa actual.
      * @param habilidadesArray Array con las habilidades.
-     * @param objetosArray Array con los objetos.
      * @param dinero Variable de tipo entero que indica el dinero actual.
+     * @param objetosArray Array con los objetos.
      * @param reputacion Variable de tipo entero que indica la reputacion actual.
      */
     public Heroe(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, 
         int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray, 
         ArrayList<Objeto> objetosArray, int dinero, int reputacion) {
-        super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray);
+        super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray, dinero);
         this.objetosArray = objetosArray;
-        this.dinero = dinero;
         this.reputacion = reputacion;
     }
     
@@ -48,14 +46,6 @@ public class Heroe extends Personaje{
 
     public void setObjetosArray(ArrayList<Objeto> objetosArray) {
         this.objetosArray = objetosArray;
-    }
-
-    public int getDinero() {
-        return dinero;
-    }
-
-    public void setDinero(int dinero) {
-        this.dinero = dinero;
     }
 
     public int getReputacion() {

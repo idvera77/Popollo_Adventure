@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * @author Mystra77
  */
 public class Enemigo extends Personaje{
-    private int dropDinero;
     
     /**
      * Constructor de Enemigo
@@ -30,20 +29,9 @@ public class Enemigo extends Personaje{
      */
     public Enemigo(String nombre, String descripcion, int saludMaxima, 
         int salud, int fuerza, int magia, int agilidad, int defensa, 
-        ArrayList<Habilidad> habilidadesArray, int dropDinero) {
-        super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray);
-        this.dropDinero = dropDinero;
+        ArrayList<Habilidad> habilidadesArray, int dinero) {
+        super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray, dinero);
     }
-    
-    //Getters y Setters
-    
-    public int getDropDinero() {
-        return dropDinero;
-    }
-
-    public void setDropDinero(int dropDinero) {
-        this.dropDinero = dropDinero;
-    }   
     
     //FUNCIONES
     

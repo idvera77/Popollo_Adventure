@@ -126,8 +126,8 @@ public class Combate {
                 }else{
                     Victoria=true;
                     System.out.println("\n\t!!!"+enemigo.getNombre()+" Derrotado!!!"
-                            +" Has ganado "+enemigo.getDropDinero()+" Monedas de oro.\n");
-                    heroe.dinero += enemigo.getDropDinero();
+                            +" Has ganado "+enemigo.getDinero()+" Monedas de oro.\n");
+                    heroe.dinero += enemigo.getDinero();
                     Musica.iniciarMusica(rutaCancionVictoria);    
                 }
         }while(!Victoria);
