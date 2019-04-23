@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class Combate {
 
 //Primer combate 
-    public static void Batalla(Heroe heroe, Enemigo enemigo){
+    public static void batalla(Heroe heroe, Enemigo enemigo){
        
         //Sonidos Combate
         String rutaCancionVictoria = "./sonidos/Victoria.wav";
@@ -80,7 +80,7 @@ public class Combate {
                             break;
                         default:
                             System.out.println("- Se que estas nervioso pero debes centrarte!");
-                            Batalla(heroe, enemigo);
+                            batalla(heroe, enemigo);
                             break;
                     }
                 } catch (InterruptedException ex) {

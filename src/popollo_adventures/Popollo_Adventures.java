@@ -119,13 +119,13 @@ public class Popollo_Adventures {
                     Ventana.setVisible(true);
                     break;
                 case 3:
-                    Combate.Batalla(popollo, nigromante);
+                    Combate.batalla(popollo, nigromante);
                     break;
                 case 4:
                     popollo.puntoDescanso();
                     break;
                 case 5:
-                    popollo.Tienda();
+                    popollo.tienda();
                     break;    
                 case 6:
                     popollo.pantallaGeneralEstadisticas();

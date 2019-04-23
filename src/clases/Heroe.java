@@ -356,7 +356,7 @@ public class Heroe extends Personaje{
             System.out.println("- Ese objeto no existe!\n");
             comprarObjetos();
         }else if(opcion1==0){ 
-            Tienda();
+            tienda();
         }else{
             if (dinero>=getObjetosArray().get(opcion1-1).getPrecio()) {
                 dinero -= getObjetosArray().get(opcion1-1).getPrecio();
@@ -391,7 +391,7 @@ public class Heroe extends Personaje{
         int opcion1=Integer.parseInt(sc.nextLine());
         switch(opcion1){
             case 0:
-                Tienda();
+                tienda();
                 break;
             case 1:
                 if(dinero>=500){
@@ -454,7 +454,7 @@ public class Heroe extends Personaje{
     /**
      * Funcion para utilizar la Tienda en el juego, incluye varias opciones, menu y otras funciones relacionadas con comprar objetos.
      */
-    public void Tienda(){
+    public void tienda(){
         Scanner sc = new Scanner (System.in);
         System.out.println("|Total de monedas de oro: *"+getDinero()+"*|");
         String menuTienda="- ¿Le interesa algo?:"
@@ -477,7 +477,7 @@ public class Heroe extends Personaje{
                 break;
             default:
                 System.out.println("- No entiendo lo que quiere decir, ¿puede repetir por favor?.\n");
-                Tienda();
+                tienda();
             break;
         }    
     }      
