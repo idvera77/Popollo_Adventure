@@ -24,12 +24,12 @@ public class Habilidad extends ElementoIdentificador{
      * @param usosRestantes Variable de tipo entero que indica el numero restante de usos de una habilidad.
      * @param tipo Variable tipo que nos permite indicar el tipo de hechizo y asi modificar ciertas funciones.
      */
-    public Habilidad(String nombre, String descripcion, int especial, int usosMaximos, int usosRestantes, tipoHechizo tipo) {
+    public Habilidad(String nombre, String descripcion, int especial, int usosMaximos, int usosRestantes, String tipo) {
         super(nombre, descripcion);
         this.especial = especial;
         this.usosMaximos = usosMaximos;
         this.usosRestantes = usosRestantes;
-        this.tipo = tipo;
+        setTipo(tipo);
     }
     
     public enum tipoHechizo{
@@ -65,7 +65,16 @@ public class Habilidad extends ElementoIdentificador{
         return tipo;
     }
 
-    public void setTipo(tipoHechizo tipo) {
-        this.tipo = tipo;
+    public void setTipo(String tipo) {
+        switch(tipo.toLowerCase()){
+            case "ofensivo":
+                this.tipo=tipoHechizo.OFENSIVO;
+                break;
+            case "sanacion":
+                this.tipo=tipoHechizo.SANACION;
+                break;
+            default:
+                break;
+        }
     }
 }

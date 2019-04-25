@@ -20,9 +20,9 @@ public class Npc extends ElementoIdentificador{
      * @param descripcion Variable de tipo String para escribir una descripcion.
      * @param moral Variable tipo que nos permite indicar la moral del npc y asi modificar ciertas funciones.
      */
-    public Npc(String nombre, String descripcion, tipoMoral moral) {
+    public Npc(String nombre, String descripcion, String moral) {
         super(nombre, descripcion);
-        this.moral = moral;
+        setMoral(moral);
     }
      
     public enum tipoMoral{
@@ -35,12 +35,24 @@ public class Npc extends ElementoIdentificador{
         return moral;
     }
 
-    public void setMoral(tipoMoral moral) {
-        this.moral = moral;
-    }  
+    public void setMoral(String moral) {
+        switch(moral.toLowerCase()){
+           case "legal":
+               this.moral=tipoMoral.LEGAL;
+               break;
+           case "neutral":
+               this.moral=tipoMoral.NEUTRAL;
+               break;
+           case "caotico":
+               this.moral=tipoMoral.CAOTICO;
+               break;    
+           default:
+               break;
+        }  
+    }
     
     /**
-     * Funcion que compara la reputacion del heroe y la moral del npc para aÃ±adir dialogos o dar recompensas al heroe.
+     * Funcion que compara la reputacion del heroe y la moral del npc para añadir dialogos o dar recompensas al heroe.
      * @param npcs Del cual conseguiremos beneficios o dialogos dependiendo de su moral.
      * @param heroe Del cual sacaremos una reputacion y obtendra beneficios.
      */
