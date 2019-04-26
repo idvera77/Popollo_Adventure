@@ -24,18 +24,36 @@ public class Objeto extends ElementoIdentificador{
      * @param tipo Variable tipo que nos permite indicar el tipo de objeto y asi modificar ciertas funciones.
      * @param precio Variable de tipo entero que indica el precio de un objeto.
      */
-    public Objeto(String nombre, int poder, int cantidad, String descripcion, tipoObjeto tipo, int precio) {
+    public Objeto(String nombre, String descripcion, int poder, int cantidad, String tipo, int precio) {
         super(nombre, descripcion);
         this.poder = poder;
         this.cantidad = cantidad;
-        this.tipo = tipo;
+        setTipo(tipo);
         this.precio = precio;
     }
     
     public enum tipoObjeto{
-        ATAQUE,
-        CURACION
+        OFENSIVO,
+        CURATIVO
     };
+    
+    public tipoObjeto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo)  {
+           switch(tipo.toLowerCase()){
+           case "ofensivo":
+               this.tipo=tipoObjeto.OFENSIVO;
+               break;
+           case "curativo":
+               this.tipo=tipoObjeto.CURATIVO;
+               break;
+           default:
+               break;
+       }
+        
+    }
     
     public int getPoder() {
         return poder;
@@ -52,14 +70,6 @@ public class Objeto extends ElementoIdentificador{
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }  
-
-    public tipoObjeto getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(tipoObjeto tipo) {
-        this.tipo = tipo;
-    }
 
     public int getPrecio() {
         return precio;

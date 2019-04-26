@@ -21,7 +21,6 @@ public class Combate {
        
         //Sonidos Combate
         String rutaCancionVictoria = "./sonidos/Victoria.wav";
-        String rutaCancionCombates = "./sonidos/Combates.wav";
         String rutaSonidoFisicoAliado = "./sonidos/FisicoAliado.wav";
         String rutaSonidoFisicoEnemigo = "./sonidos/FisicoEnemigo.wav";
         String rutaSonidoHabilidadesObjetos = "./sonidos/HabilidadesObjetos.wav";
@@ -40,12 +39,12 @@ public class Combate {
             //TURNO ALIADO
             //Comprobacion de que el heroe tiene mas de 0 puntos de salud.
             if(heroe.getSalud()>0){
+            	if(defensaHeroe==true){
+                    heroe.BloqueoOff(heroe);
+                    defensaHeroe=false;
+                }
                 try {
                     //Comprobacion de que el heroe tiene activada la mejora de defensa, si es true la disminuye ya que ha pasado un turno.
-                    if(defensaHeroe==true){
-                        heroe.BloqueoOff(heroe);
-                        defensaHeroe=false;
-                    }
                     System.out.println("----------------------------------------------");
                     System.out.println("Turno de "+heroe.getNombre()+" - Vida restante: "+heroe.getSalud()+"/"+heroe.getSaludMaxima());
                     System.out.println("\tAtaque(1) | Defensa(2) | Habilidades(3) | Objetos(4)");
@@ -127,7 +126,12 @@ public class Combate {
                     Victoria=true;
                     System.out.println("\n\t!!!"+enemigo.getNombre()+" Derrotado!!!"
                             +" Has ganado "+enemigo.getDinero()+" Monedas de oro.\n");
-                    heroe.dinero += enemigo.getDinero();
+                    heroe.subirNivel(enemigo.getExperiencia());
+                    heroe.dinero += enemigo.getDinero();  
+                    if(defensaEnemigo==true){
+                        enemigo.BloqueoOff(enemigo);
+                        defensaEnemigo=false;
+                    }
                     Musica.iniciarMusica(rutaCancionVictoria);    
                 }
         }while(!Victoria);

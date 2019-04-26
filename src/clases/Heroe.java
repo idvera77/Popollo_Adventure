@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class Heroe extends Personaje{
     private ArrayList<Objeto> objetosArray;
     private int reputacion;
+    private int nivel;
     
     /**
      * Constructor de Heroe
@@ -27,16 +28,19 @@ public class Heroe extends Personaje{
      * @param agilidad Variable de tipo entero que indica la agilidad actual.
      * @param defensa Variable de tipo entero que indica la defensa actual.
      * @param habilidadesArray Array con las habilidades.
-     * @param dinero Variable de tipo entero que indica el dinero actual.
      * @param objetosArray Array con los objetos.
      * @param reputacion Variable de tipo entero que indica la reputacion actual.
+     * @param dinero Variable de tipo entero que indica el dinero actual.
+     * @param experiencia Variable de tipo entero que indica la experiencia actual.
+     * @param nivel Variable de tipo entero que indica el nivel actual
      */
-    public Heroe(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, 
-        int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray, 
-        ArrayList<Objeto> objetosArray, int dinero, int reputacion) {
-        super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray, dinero);
+    public Heroe(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, int magia, int agilidad, 
+        int defensa, ArrayList<Habilidad> habilidadesArray, ArrayList<Objeto> objetosArray, int dinero, 
+        int reputacion, int experiencia, int nivel) {
+        super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray, dinero, experiencia);
         this.objetosArray = objetosArray;
         this.reputacion = reputacion;
+        this.nivel = nivel;
     }
     
     //Getters y Setters
@@ -55,25 +59,59 @@ public class Heroe extends Personaje{
     public void setReputacion(int reputacion) {
         this.reputacion = reputacion;
     }
-    
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
     //FUNCIONES
+    
+    //Subir de nivel
+    public void subirNivel(int numero){
+        experiencia += numero;
+        System.out.println("Tu experiencia aumenta en "+numero+".");
+        if(experiencia>=100){
+            System.out.println("Subes de Nivel!!!");
+            this.experiencia = 0;    
+            if(nivel % 2 == 0){
+                System.out.println("Tus atributos aumentan ^_^\n"
+                        +"\tMagia + 1 puntos\n"
+                        +"\tAgilidad + 1 puntos\n");
+                setMagia(getMagia()+1);
+                setAgilidad(getAgilidad()+1);
+            }else{
+                System.out.println("Tus atributos aumentan ^_^\n"
+                        +"\tSalud + 20 puntos\n"
+                        +"\tFuerza + 2 puntos\n"
+                        +"\tDefensa + 2 puntos\n");
+                setSaludMaxima(getSaludMaxima()+20);
+                setSalud(getSalud()+20);
+                setFuerza(getFuerza()+2);
+                setDefensa(getDefensa()+2);
+            }
+        }else{
+            System.out.println("Necesitas "+(100-getExperiencia())+" puntos mas para subir de nivel.");
+        }
+    }
     
     //Reputacion
     /**
      * Funcion que nos permite aumentar la reputacion del heroe.
-     * @param heroe Heroe del cual aumentara su reputacion.
      * @param numero Numero que subira la reputacion del heroe.
      */
-    public void subirReputacion(Heroe heroe, int numero){
+    public void subirReputacion(int numero){
         this.reputacion += numero;
     }
     
     /**
      * Funcion que nos permite disminuir la reputacion del heroe.
-     * @param heroe Heroe del cual disminuira su reputacion.
      * @param numero Numero que bajara la reputacion del heroe.
      */
-    public void bajarReputacion(Heroe heroe, int numero){
+    public void bajarReputacion(int numero){
         this.reputacion -= numero;
     }
     
@@ -148,7 +186,7 @@ public class Heroe extends Personaje{
                         +" puntos de daño.");
                     getHabilidadesArray().get(opcion-1).setUsosRestantes(getHabilidadesArray().get(opcion-1).getUsosRestantes()-1);                     
                     dañoHabilidadesHeroe(enemigo, opcion-1);
-                }else if(tipo.equals("SANACION")){
+                }else if(tipo.equals("CURATIVO")){
                     System.out.println("- "+getNombre()+" usa "+getHabilidadesArray().get(opcion-1).getNombre()
                         +" y recibe una curacion de "+getMagia()*getHabilidadesArray().get(opcion-1).getEspecial()
                         +" puntos de salud.");
@@ -226,12 +264,12 @@ public class Heroe extends Personaje{
         }else{
             if(getObjetosArray().get(opcion-1).getCantidad()>0){
                 String tipo = String.valueOf(getObjetosArray().get(opcion-1).getTipo());
-                if(tipo.equals("ATAQUE")){
+                if(tipo.equals("OFENSIVO")){
                     System.out.println("- "+getNombre()+" usa "+getObjetosArray().get(opcion-1).getNombre()
                         +" e inflige una cantidad de "+getObjetosArray().get(opcion-1).getPoder()+" puntos de daño.");
                     getObjetosArray().get(opcion-1).setCantidad(getObjetosArray().get(opcion-1).getCantidad()-1);  
                     dañoObjetos(enemigo, opcion-1);
-                }else if(tipo.equals("CURACION")){
+                }else if(tipo.equals("CURATIVO")){
                     System.out.println("- "+getNombre()+" usa "+getObjetosArray().get(opcion-1).getNombre()
                         +" y recibe una curacion de "+getObjetosArray().get(opcion-1).getPoder()+" puntos de salud.");
                     getObjetosArray().get(opcion-1).setCantidad(getObjetosArray().get(opcion-1).getCantidad()-1);

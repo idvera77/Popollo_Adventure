@@ -21,6 +21,7 @@ public class Personaje extends ElementoIdentificador{
     private int defensa;
     private ArrayList<Habilidad> habilidadesArray;
     public int dinero;
+    public int experiencia;
 
     /**
      * Constructor de Personaje
@@ -34,8 +35,9 @@ public class Personaje extends ElementoIdentificador{
      * @param defensa Variable de tipo entero que indica la defensa actual.
      * @param habilidadesArray Array con las habilidades.
      * @param dinero Variable de tipo entero que indica el dinero actual.
-     */
-    public Personaje(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray, int dinero) {
+     * @param experiencia Puntos de experiencia.
+    */
+    public Personaje(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray, int dinero, int experiencia) {
         super(nombre, descripcion);
         this.saludMaxima = saludMaxima;
         this.salud = salud;
@@ -45,6 +47,7 @@ public class Personaje extends ElementoIdentificador{
         this.defensa = defensa;
         this.habilidadesArray = habilidadesArray;
         this.dinero = dinero;
+        this.experiencia = experiencia;
     }
     
     //Getters y Setters
@@ -111,6 +114,14 @@ public class Personaje extends ElementoIdentificador{
 
     public void setDinero(int dinero) {
         this.dinero = dinero;
+    }
+
+    public int getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
     }
     
     //FUNCIONES

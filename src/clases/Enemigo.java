@@ -25,12 +25,12 @@ public class Enemigo extends Personaje{
      * @param agilidad Variable de tipo entero que indica la agilidad actual.
      * @param defensa Variable de tipo entero que indica la defensa actual.
      * @param habilidadesArray Array con las habilidades.
-     * @param dropDinero Variable de tipo entero que indica el dinero..
+     * @param dinero Variable de tipo entero que indica el dinero actual.
      */
     public Enemigo(String nombre, String descripcion, int saludMaxima, 
         int salud, int fuerza, int magia, int agilidad, int defensa, 
-        ArrayList<Habilidad> habilidadesArray, int dinero) {
-        super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray, dinero);
+        ArrayList<Habilidad> habilidadesArray, int dinero, int experiencia) {
+        super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray, dinero, experiencia);
     }
     
     //FUNCIONES

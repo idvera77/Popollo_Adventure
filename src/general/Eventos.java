@@ -36,7 +36,7 @@ public class Eventos {
             case 2:
                 System.out.println("- Te acercas al hombre y le ayudas a levantarse, te comenta que hace dias que no ha podido comer.\n"
                         + "- Le ofreces un poco de tu comida y hablais amistosamente durante un rato.");
-                heroe.subirReputacion(heroe, 10);
+                heroe.subirReputacion(10);
                 System.out.println("- La reputacion del heroe aumenta.\n");
                 System.out.println("*** Pulse cualquier tecla para continuar ***");
                 sc.nextLine();
@@ -44,7 +44,7 @@ public class Eventos {
             case 3:
                 System.out.println("- Buscas en los bolsillos mientras intenta defenderse aunque no tiene fuerzas para ello.");
                 heroe.dinero += 100;
-                heroe.subirReputacion(heroe, -10);
+                heroe.subirReputacion(-10);
                 System.out.println("- Obtienes 100 monedas de oro. || La reputacion del heroe baja.\n");
                 System.out.println("*** Pulse cualquier tecla para continuar ***");
                 sc.nextLine();
@@ -83,7 +83,7 @@ public class Eventos {
                 System.out.println("- Los aldeanos te felicitan por rescatarlos y te ofrecen una tarta con una pinta estupenda.");
                 heroe.saludMaxima += 20;
                 heroe.salud += 20;
-                heroe.subirReputacion(heroe, 20);
+                heroe.subirReputacion(20);
                 System.out.println("- La salud maxima del heroe aumenta. || La reputacion del heroe aumenta.\n");
                 System.out.println("*** Pulse cualquier tecla para continuar ***");
                 sc.nextLine();
@@ -91,7 +91,7 @@ public class Eventos {
             case 3:
                 System.out.println("- Aprovechas la confusion de la multitud y saqueas todo lo que puedes.");
                 heroe.dinero += 1000;
-                heroe.subirReputacion(heroe, -20);
+                heroe.subirReputacion(20);
                 System.out.println("- Obtienes 1000 monedas de oro || La reputacion del heroe baja.\n");
                 System.out.println("*** Pulse cualquier tecla para continuar ***");
                 sc.nextLine();
@@ -127,7 +127,7 @@ public class Eventos {
             case 2:
                 System.out.println("- El pequeño poring empieza a darte mimitos y notas una gran calidez en tu corazon.");
                 heroe.setMagia(heroe.getMagia()+1);
-                heroe.subirReputacion(heroe, 10);
+                heroe.subirReputacion(10);
                 System.out.println("- El atributo magia del heroe aumenta. || La reputacion del heroe aumenta.\n");
                 System.out.println("*** Pulse cualquier tecla para continuar ***");
                 sc.nextLine();
