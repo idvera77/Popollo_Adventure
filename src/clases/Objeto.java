@@ -14,7 +14,7 @@ public class Objeto extends ElementoIdentificador{
     private int cantidad;
     private tipoObjeto tipo;
     private int precio;
-    
+
     /**
      * Constructor de Npc
      * @param nombre Variable de tipo String para indicar un nombre.
@@ -31,12 +31,12 @@ public class Objeto extends ElementoIdentificador{
         setTipo(tipo);
         this.precio = precio;
     }
-    
+
     public enum tipoObjeto{
         OFENSIVO,
         CURATIVO
     };
-    
+
     public tipoObjeto getTipo() {
         return tipo;
     }
@@ -52,9 +52,9 @@ public class Objeto extends ElementoIdentificador{
            default:
                break;
        }
-        
+
     }
-    
+
     public int getPoder() {
         return poder;
     }
@@ -69,7 +69,7 @@ public class Objeto extends ElementoIdentificador{
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }  
+    }
 
     public int getPrecio() {
         return precio;

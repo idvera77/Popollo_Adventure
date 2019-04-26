@@ -14,7 +14,7 @@ public class Habilidad extends ElementoIdentificador{
     private int usosMaximos;
     private int usosRestantes;
     private tipoHechizo tipo;
-    
+
     /**
      * Constructor de Habilidad
      * @param nombre Variable de tipo String para indicar un nombre.
@@ -31,7 +31,7 @@ public class Habilidad extends ElementoIdentificador{
         this.usosRestantes = usosRestantes;
         setTipo(tipo);
     }
-    
+
     public enum tipoHechizo{
         OFENSIVO,
         CURATIVO
@@ -44,7 +44,7 @@ public class Habilidad extends ElementoIdentificador{
     public void setEspecial(int especial) {
         this.especial = especial;
     }
-    
+
     public int getUsosMaximos() {
         return usosMaximos;
     }
@@ -59,7 +59,7 @@ public class Habilidad extends ElementoIdentificador{
 
     public void setUsosRestantes(int usosRestantes) {
         this.usosRestantes = usosRestantes;
-    }  
+    }
 
     public tipoHechizo getTipo() {
         return tipo;

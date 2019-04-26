@@ -31,33 +31,33 @@ public class Popollo_Adventures {
         try {
             //Inicio.
             Scanner sc = new Scanner (System.in);
-            
+
             //Conectando a base de datos
             Connection connection=null;
             try {
                 connection=DriverManager.getConnection(
                         "jdbc:mysql://localhost:3306/popollo_adventure"
                         ,"root","admin");
-                
+
                 System.out.println("Conexion a base de datos iniciada.\n");
             } catch (SQLException ex) {
                 System.err.println("La conexion a la base de datos ha fallado");
                 ex.printStackTrace();
             }
-            
+
             //Importando datos
             Statement stm=connection.createStatement();
             ResultSet rs;
-            
+
             //Creando el heroe
             //Habilidades
             rs=stm.executeQuery("SELECT * FROM habilidad WHERE Heroe_nombre= 'Popollo' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesHeroe=new ArrayList();
-            while(rs.next()){        
-                habilidadesHeroe.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"), 
-                    rs.getInt("usosMaximos"),rs.getInt("usosRestantes"), rs.getString("tipo")));   
+            while(rs.next()){
+                habilidadesHeroe.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
+                    rs.getInt("usosMaximos"),rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-            
+
             //Objetos
             rs=stm.executeQuery("SELECT * FROM objeto WHERE Heroe_nombre= 'Popollo' ORDER BY ID ASC");
             ArrayList<Objeto> objetosHeroe=new ArrayList<>();
@@ -66,7 +66,7 @@ public class Popollo_Adventures {
                     rs.getString("descripcion"), rs.getInt("poder"), rs.getInt("cantidad"),
                     rs.getString("tipo"), rs.getInt("precio")));
             }
-            
+
             //Estadisticas
             rs=stm.executeQuery("SELECT * FROM Heroe");
             rs.next();
@@ -82,48 +82,48 @@ public class Popollo_Adventures {
                 int reputacion=rs.getInt("reputacion");
                 int experiencia=rs.getInt("experiencia");
                 int nivel=rs.getInt("nivel");
-                
+
             //Constructor del Heroe
-            Heroe popollo = new Heroe(nombre, descripcion, saludMax, salud, fuerza, magia, agilidad, 
+            Heroe popollo = new Heroe(nombre, descripcion, saludMax, salud, fuerza, magia, agilidad,
                 defensa, habilidadesHeroe, objetosHeroe, dinero, reputacion, experiencia, nivel);
-        
+
             //Creando enemigos
             //Habilidades
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Poring' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesPoring=new ArrayList();
             while (rs.next()) {
-                habilidadesPoring.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"), 
-                        rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));             
+                habilidadesPoring.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
+                        rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-            
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Nigromante' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesNigromante=new ArrayList();
             while (rs.next()) {
-                habilidadesNigromante.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"), 
-                        rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));             
+                habilidadesNigromante.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
+                        rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-            
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Golem' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesGolem=new ArrayList();
             while (rs.next()) {
-                habilidadesGolem.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"), 
-                        rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));             
+                habilidadesGolem.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
+                        rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-            
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Goblin' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesGoblin=new ArrayList();
             while (rs.next()) {
-                habilidadesGoblin.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"), 
-                        rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));             
+                habilidadesGoblin.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
+                        rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-            
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Pulpoi' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesPulpoi=new ArrayList();
             while (rs.next()) {
-                habilidadesPulpoi.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"), 
-                        rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));       
+                habilidadesPulpoi.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
+                        rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-            
+
             //Estadisticas y constructor.
             //Poring
             rs=stm.executeQuery("SELECT * FROM enemigo WHERE nombre= 'Poring'");
@@ -138,11 +138,11 @@ public class Popollo_Adventures {
                 defensa=rs.getInt("defensa");
                 dinero=rs.getInt("dinero");
                 experiencia=rs.getInt("experiencia");
-                
-        
-            Enemigo poring = new Enemigo(nombre, descripcion, saludMax, salud, 
+
+
+            Enemigo poring = new Enemigo(nombre, descripcion, saludMax, salud,
                     fuerza, magia, agilidad, defensa, habilidadesPoring, dinero, experiencia);
-            
+
             //Nigromante
             rs=stm.executeQuery("SELECT * FROM enemigo WHERE nombre= 'Nigromante'");
             rs.next();
@@ -156,11 +156,11 @@ public class Popollo_Adventures {
                 defensa=rs.getInt("defensa");
                 dinero=rs.getInt("dinero");
                 experiencia=rs.getInt("experiencia");
-                
-        
-            Enemigo nigromante = new Enemigo(nombre, descripcion, saludMax, salud, 
+
+
+            Enemigo nigromante = new Enemigo(nombre, descripcion, saludMax, salud,
                     fuerza, magia, agilidad, defensa, habilidadesNigromante, dinero, experiencia);
-            
+
             //Golem
             rs=stm.executeQuery("SELECT * FROM enemigo WHERE nombre= 'Golem'");
             rs.next();
@@ -174,11 +174,11 @@ public class Popollo_Adventures {
                 defensa=rs.getInt("defensa");
                 dinero=rs.getInt("dinero");
                 experiencia=rs.getInt("experiencia");
-                
-        
-            Enemigo golem = new Enemigo(nombre, descripcion, saludMax, salud, 
+
+
+            Enemigo golem = new Enemigo(nombre, descripcion, saludMax, salud,
                     fuerza, magia, agilidad, defensa, habilidadesGolem, dinero, experiencia);
-            
+
             //Goblin
             rs=stm.executeQuery("SELECT * FROM enemigo WHERE nombre= 'Goblin'");
             rs.next();
@@ -192,11 +192,11 @@ public class Popollo_Adventures {
                 defensa=rs.getInt("defensa");
                 dinero=rs.getInt("dinero");
                 experiencia=rs.getInt("experiencia");
-                
-        
-            Enemigo goblin = new Enemigo(nombre, descripcion, saludMax, salud, 
+
+
+            Enemigo goblin = new Enemigo(nombre, descripcion, saludMax, salud,
                     fuerza, magia, agilidad, defensa, habilidadesGoblin, dinero, experiencia);
-            
+
             //Pulpoi - Jefe Final.
             rs=stm.executeQuery("SELECT * FROM enemigo WHERE nombre= 'Pulpoi'");
             rs.next();
@@ -210,50 +210,50 @@ public class Popollo_Adventures {
                 defensa=rs.getInt("defensa");
                 dinero=rs.getInt("dinero");
                 experiencia=rs.getInt("experiencia");
-                
-        
-            Enemigo pulpoi = new Enemigo(nombre, descripcion, saludMax, salud, 
-                    fuerza, magia, agilidad, defensa, habilidadesPulpoi, dinero, experiencia);  
-            
+
+
+            Enemigo pulpoi = new Enemigo(nombre, descripcion, saludMax, salud,
+                    fuerza, magia, agilidad, defensa, habilidadesPulpoi, dinero, experiencia);
+
             //Npcs Constructor
              rs=stm.executeQuery("SELECT * FROM npc WHERE nombre= 'Narcyl'");
             rs.next();
                 nombre=rs.getString("nombre");
                 descripcion=rs.getString("descripcion");
                 String moral=rs.getString("moral");
-                
+
             Npc narcyl = new Npc (nombre, descripcion, moral);
-            
+
             rs=stm.executeQuery("SELECT * FROM npc WHERE nombre= 'Tomberi'");
             rs.next();
                 nombre=rs.getString("nombre");
                 descripcion=rs.getString("descripcion");
                 moral=rs.getString("moral");
-                
+
             Npc tomberi = new Npc (nombre, descripcion, moral);
-            
+
             rs=stm.executeQuery("SELECT * FROM npc WHERE nombre= 'Mystra'");
             rs.next();
                 nombre=rs.getString("nombre");
                 descripcion=rs.getString("descripcion");
                 moral=rs.getString("moral");
-                
+
             Npc mystra = new Npc (nombre, descripcion, moral);
-                
+
             /**
              * Npc narcyl = new Npc ("Narcyl", "Sacerdotisa novata.", "legal");
              * Npc tomberi = new Npc("Tomberi", "Demasiado gruñon.", "neutral");
              * Npc mystra = new Npc("Mystra", "Hechicera demente.", "caotico");
              */
-            
-            
-            //Fin de importar los registros.  
-            
-            
-            
+
+
+            //Fin de importar los registros.
+
+
+
             //Abre ventana
             int opcion;
-            
+
             String menuInicio="Por favor seleccione una opcion:"
                     +"\n\t0 - Salir del juego."
                     +"\n\t1 - Comenzar partida."
@@ -264,18 +264,18 @@ public class Popollo_Adventures {
                     +"\n\t6 - Informacion general del heroe."
                     +"\n\t7 - Comprobar afinidad con los Npcs."
                     +"\n\t8 - Multiples eventos.";
-            
+
             String menuEvento="Por favor seleccione una opcion:"
                     +"\n\t0 - Salir."
                     +"\n\t1 - Vagabundo."
                     +"\n\t2 - Defensa de aldeanos."
                     +"\n\t3 - Crias de porings.";
-            
+
             //Menu de pruebas, incluye toda las opciones para ver en un vistazo rapido que todo funciona.
             do{
                 System.out.println(menuInicio);
                 opcion=Integer.parseInt(sc.nextLine());
-                
+
                 switch(opcion){
                     case 0:
                         System.out.println("Vuelve pronto ^_^");
