@@ -43,7 +43,7 @@ public class Eventos {
                 break;
             case 3:
                 System.out.println("- Buscas en los bolsillos mientras intenta defenderse aunque no tiene fuerzas para ello.");
-                heroe.dinero += 100;
+                heroe.setDinero(heroe.getDinero()+100);  
                 heroe.subirReputacion(-10);
                 System.out.println("- Obtienes 100 monedas de oro. || La reputacion del heroe baja.\n");
                 System.out.println("*** Pulse cualquier tecla para continuar ***");
@@ -81,8 +81,8 @@ public class Eventos {
                 System.out.println("- Te acercas rapidamente y comienza tu batalla.");
                 Combate.batalla(heroe, enemigo);
                 System.out.println("- Los aldeanos te felicitan por rescatarlos y te ofrecen una tarta con una pinta estupenda.");
-                heroe.saludMaxima += 20;
-                heroe.salud += 20;
+                heroe.setSaludMaxima(heroe.getSaludMaxima()+20);
+                heroe.setSalud(heroe.getSalud()+20);
                 heroe.subirReputacion(20);
                 System.out.println("- La salud maxima del heroe aumenta. || La reputacion del heroe aumenta.\n");
                 System.out.println("*** Pulse cualquier tecla para continuar ***");
@@ -90,7 +90,7 @@ public class Eventos {
                 break;
             case 3:
                 System.out.println("- Aprovechas la confusion de la multitud y saqueas todo lo que puedes.");
-                heroe.dinero += 1000;
+                heroe.setDinero(heroe.getDinero()+1000);  
                 heroe.subirReputacion(20);
                 System.out.println("- Obtienes 1000 monedas de oro || La reputacion del heroe baja.\n");
                 System.out.println("*** Pulse cualquier tecla para continuar ***");
@@ -135,7 +135,7 @@ public class Eventos {
             case 3:
                 System.out.println("- Golpeas al pequeño poring.");
                 Combate.batalla(heroe, enemigo);
-                heroe.dinero += 1500;
+                heroe.setDinero(heroe.getDinero()+1500);  
                 System.out.println("- Encuentras en la madriguera un monton de monedas de oro.");
                 System.out.println("- Obtienes 1500 monedas de oro || La reputacion del heroe baja.\n");
                 System.out.println("*** Pulse cualquier tecla para continuar ***");

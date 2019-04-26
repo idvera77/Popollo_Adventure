@@ -52,7 +52,7 @@ public class Npc extends ElementoIdentificador{
     }
     
     /**
-     * Funcion que compara la reputacion del heroe y la moral del npc para añadir dialogos o dar recompensas al heroe.
+     * Funcion que compara la reputacion del heroe y la moral del npc para aï¿½adir dialogos o dar recompensas al heroe.
      * @param npcs Del cual conseguiremos beneficios o dialogos dependiendo de su moral.
      * @param heroe Del cual sacaremos una reputacion y obtendra beneficios.
      */
@@ -65,17 +65,17 @@ public class Npc extends ElementoIdentificador{
                 System.out.println("|"+npcs.getNombre()+" quiere hablar contigo.|");
                     if(reputacion>=100){
                         System.out.println("- Eres un dios entre los mortales. No merezco seguir a tu lado pero te apoyare en todo lo que pueda.");
-                        heroe.saludMaxima += 200;
-                        heroe.salud += 200;
+                        heroe.setSaludMaxima(heroe.getSaludMaxima()+200);
+                        heroe.setSalud(heroe.getSalud()+200);
                         heroe.setDefensa(heroe.getDefensa()+10);
                         System.out.println("- "+heroe.getNombre()+" ha recibido la bendicion de "+npcs.getNombre()+". (Aumento de varios atributos recibido)");
                     }else if(reputacion<100&&reputacion>=50){
                         System.out.println("- Estoy orgullosa de haberte conocido, te seguire apoyando.");
-                        heroe.dinero += 1000;
+                        heroe.setDinero(heroe.getDinero()+1000);
                         System.out.println("- "+heroe.getNombre()+" ha recibido 1000 monedas de oro.");
                     }else if(reputacion<50&&reputacion>=20){
                         System.out.println("- Estas realizando buenas acciones, seras un buen heroe.");                      
-                        heroe.dinero += 500;
+                        heroe.setDinero(heroe.getDinero()+500);
                         System.out.println("- "+heroe.getNombre()+" ha recibido 500 monedas de oro.");
                     }else if(reputacion<20&&reputacion>=0){
                         System.out.println("- Deberias esforzarte mas por ayudar a los demas.");
@@ -91,11 +91,11 @@ public class Npc extends ElementoIdentificador{
                     System.out.println("- "+heroe.getNombre()+" ha recibido la bendicion de "+npcs.getNombre()+". (Aumento de varios atributos recibido)");
                 }else if(reputacion>20&&reputacion<=50){
                     System.out.println("- Espero que no cambies, no me gusta la gente emocional.");
-                    heroe.dinero += 200;    
+                    heroe.setDinero(heroe.getDinero()+200);    
                     System.out.println("- "+heroe.getNombre()+" ha recibido 200 monedas de oro.");
                 }else if(reputacion<-20&&reputacion>=-50){
                     System.out.println("- Espero que no cambies, no me gusta la gente emocional.");                      
-                    heroe.dinero += 200;    
+                    heroe.setDinero(heroe.getDinero()+200);   
                     System.out.println("- "+heroe.getNombre()+" ha recibido 200 monedas de oro.");
                 }else{
                     System.out.println("- Eres otro cabeza hueca, no te dejes llevar por los sentimientos.");
@@ -109,11 +109,11 @@ public class Npc extends ElementoIdentificador{
                         System.out.println("- "+heroe.getNombre()+" ha recibido la bendicion de "+npcs.getNombre()+". (Aumento de varios atributos recibido)");
                     }else if(reputacion>-100&&reputacion<=-50){
                         System.out.println("- Vas por buen camino, pronto quemaremos ciudades enteras.");
-                        heroe.dinero += 500;
+                        heroe.setDinero(heroe.getDinero()+500);  
                         System.out.println("- "+heroe.getNombre()+" ha recibido 500 monedas de oro.");
                     }else if(reputacion>-50&&reputacion<=-20){
                         System.out.println("- La proxima vez deja que sufran algo mas.");                      
-                        heroe.dinero += 200;
+                        heroe.setDinero(heroe.getDinero()+200);  
                         System.out.println("- "+heroe.getNombre()+" ha recibido 200 monedas de oro.");
                     }else if(reputacion>-20&&reputacion<=0){
                         System.out.println("- Acaso no sabes divertirte.");

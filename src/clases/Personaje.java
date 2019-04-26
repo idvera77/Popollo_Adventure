@@ -13,15 +13,15 @@ import java.util.ArrayList;
  * @author Mystra77
  */
 public class Personaje extends ElementoIdentificador{
-    public int saludMaxima;
-    public int salud;
+    private int saludMaxima;
+    private int salud;
     private int fuerza;
     private int magia;
     private int agilidad;
     private int defensa;
     private ArrayList<Habilidad> habilidadesArray;
-    public int dinero;
-    public int experiencia;
+    private int dinero;
+    private int experiencia;
 
     /**
      * Constructor de Personaje

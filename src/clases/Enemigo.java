@@ -39,7 +39,7 @@ public class Enemigo extends Personaje{
      * La salud se iguala con la saludMaxima, es decir realiza una curacion completa y tambien se restablecen todos los usos de las habilidades.
      */
     public void restablecerEnemigo(){
-        this.salud = this.saludMaxima;
+        setSalud(getSaludMaxima());
         for (int i = 0; i < getHabilidadesArray().size(); i++) {
             getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());
         }
@@ -52,7 +52,7 @@ public class Enemigo extends Personaje{
      */
     public void dañoHabilidadesEnemigo(Heroe heroe, int numero){
         int dañoHabilidad = getMagia()*getHabilidadesArray().get(numero).getEspecial();
-        heroe.salud -= dañoHabilidad;
+        heroe.setSalud(heroe.getSalud()-dañoHabilidad);
     }   
     
     /**

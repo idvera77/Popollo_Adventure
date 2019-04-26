@@ -127,7 +127,7 @@ public class Combate {
                     System.out.println("\n\t!!!"+enemigo.getNombre()+" Derrotado!!!"
                             +" Has ganado "+enemigo.getDinero()+" Monedas de oro.\n");
                     heroe.subirNivel(enemigo.getExperiencia());
-                    heroe.dinero += enemigo.getDinero();
+                    heroe.setDinero(heroe.getDinero()+enemigo.getDinero());
                     if(defensaEnemigo==true){
                         enemigo.BloqueoOff(enemigo);
                         defensaEnemigo=false;

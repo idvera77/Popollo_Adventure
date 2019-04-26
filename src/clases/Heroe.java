@@ -72,11 +72,11 @@ public class Heroe extends Personaje{
     
     //Subir de nivel
     public void subirNivel(int numero){
-        experiencia += numero;
+        setExperiencia(getExperiencia()+numero);
         System.out.println("Tu experiencia aumenta en "+numero+".");
-        if(experiencia>=100){
+        if(getExperiencia()>=100){
             System.out.println("Subes de Nivel!!!");
-            this.experiencia = 0;    
+            setExperiencia(0);    
             if(nivel % 2 == 0){
                 System.out.println("Tus atributos aumentan ^_^\n"
                         +"\tMagia + 1 puntos\n"
@@ -151,7 +151,7 @@ public class Heroe extends Personaje{
      */
     public void dañoHabilidadesHeroe (Enemigo enemigo, int numero){
         int dañoHabilidad = getMagia()*getHabilidadesArray().get(numero).getEspecial();
-        enemigo.salud -= dañoHabilidad;
+        enemigo.setSalud(enemigo.getSalud()-dañoHabilidad);
     }
     
     /**
@@ -160,9 +160,9 @@ public class Heroe extends Personaje{
      */
     public void curacionHabilidades (int numero){
         int curacionHabilidad = getMagia()*getHabilidadesArray().get(numero).getEspecial();
-        this.salud += curacionHabilidad;
-        if(salud>saludMaxima){
-            this.salud = this.saludMaxima;
+        setSalud(getSalud()+curacionHabilidad);
+        if(getSalud()>getSaludMaxima()){
+            setSalud(getSaludMaxima());
         }
     }
     
@@ -234,7 +234,7 @@ public class Heroe extends Personaje{
      */
     public void dañoObjetos (Enemigo enemigo,int numero){
         int dañoObjeto = getObjetosArray().get(numero).getPoder();
-        enemigo.salud -= dañoObjeto;
+        enemigo.setSalud(enemigo.getSalud()-dañoObjeto);
     }
     
         
@@ -244,9 +244,9 @@ public class Heroe extends Personaje{
      */
     public void curacionObjetos (int numero){
         int curacionObjeto = getObjetosArray().get(numero).getPoder();
-        this.salud += curacionObjeto;
-        if(salud>saludMaxima){
-            this.salud = this.saludMaxima;
+        setSalud(getSalud()+curacionObjeto);
+        if(getSalud()>getSaludMaxima()){
+           setSalud(getSaludMaxima());
         }
     }
     
@@ -288,7 +288,7 @@ public class Heroe extends Personaje{
      * La salud se iguala con la saludMaxima, es decir realiza una curacion completa.
      */
     public void regenerarSalud(){
-        this.salud = this.saludMaxima;
+        setSalud(getSaludMaxima());
     }
     
     /**
@@ -304,7 +304,7 @@ public class Heroe extends Personaje{
      * La salud se iguala con la saludMaxima, es decir realiza una curacion completa y tambien se restablecen todos los usos de las habilidades.
      */
     public void regenerarSaludHabilidades(){
-        this.salud = this.saludMaxima;
+        setSalud(getSaludMaxima());
         for (int i = 0; i < getHabilidadesArray().size(); i++) {
             getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());
         }
@@ -328,8 +328,8 @@ public class Heroe extends Personaje{
                 System.out.println("- Sientes tristeza al abandonar la luz.\n");
                 break;
             case 1:
-                if (dinero>=100) {
-                    dinero -= 100; 
+                if (getDinero()>=100) {
+                    setDinero(getDinero()-100); 
                     regenerarSalud();
                     System.out.println("- Las heridas comienzan a curarse magicamente.\n");
                     puntoDescanso();
@@ -340,8 +340,8 @@ public class Heroe extends Personaje{
                 }
                 break;
             case 2:
-                if (dinero>=200) {
-                    dinero -= 200;
+                if (getDinero()>200) {
+                    setDinero(getDinero()-200);
                     regenerarHabilidades();
                     System.out.println("- Sientes que el cansancio abandona tu cuerpo.\n");
                     puntoDescanso();
@@ -352,8 +352,8 @@ public class Heroe extends Personaje{
                 }
                 break;
             case 3:
-                if (dinero>=250) {
-                dinero -= 250;
+                if (getDinero()>=250) {
+                setDinero(getDinero()-250);
                 regenerarSaludHabilidades();
                 System.out.println("- Nunca te has sentido mejor que ahora.\n");
                 puntoDescanso();
@@ -386,8 +386,8 @@ public class Heroe extends Personaje{
         }else if(opcion1==0){ 
             tienda();
         }else{
-            if (dinero>=getObjetosArray().get(opcion1-1).getPrecio()) {
-                dinero -= getObjetosArray().get(opcion1-1).getPrecio();
+            if (getDinero()>=getObjetosArray().get(opcion1-1).getPrecio()) {
+                setDinero(getDinero()-getObjetosArray().get(opcion1-1).getPrecio());
                 getObjetosArray().get(opcion1-1).setCantidad(getObjetosArray().get(opcion1-1).getCantidad()+1);
                 System.out.println("- Has obtenido 1 "+getObjetosArray().get(opcion1-1).getNombre()+"! Buena compra señor.\n"
                 +"|Total de monedas de oro: *"+getDinero()+"*|\n"      
@@ -422,8 +422,8 @@ public class Heroe extends Personaje{
                 tienda();
                 break;
             case 1:
-                if(dinero>=500){
-                    dinero -= 500;
+                if(getDinero()>=500){
+                    setDinero(getDinero()-500);
                     setSaludMaxima(getSaludMaxima()+50);
                     setSalud(getSalud()+50);
                     System.out.println("- La vida maxima aumenta en 50 puntos.");
@@ -433,8 +433,8 @@ public class Heroe extends Personaje{
                 mejorarEstadisticas();
                 break;
             case 2:
-                if(dinero>=750){
-                    dinero -= 750;
+                if(getDinero()>=750){
+                    setDinero(getDinero()-750);
                     setFuerza(getFuerza()+10);
                     System.out.println("- El atributo fuerza aumenta en 10 puntos.");
                 }else{
@@ -443,8 +443,8 @@ public class Heroe extends Personaje{
                 mejorarEstadisticas();
                 break;
             case 3:
-                if(dinero>=1500){
-                    dinero -= 1500;
+                if(getDinero()>=1500){
+                    setDinero(getDinero()-1500);
                     setMagia(getMagia()+5); 
                     System.out.println("- El atributo magia aumenta en 5 puntos.");
                 }else{
@@ -453,8 +453,8 @@ public class Heroe extends Personaje{
                 mejorarEstadisticas();
                 break;
             case 4:
-                if(dinero>=1000){
-                    dinero -= 1000;
+                if(getDinero()>=1000){
+                    setDinero(getDinero()-1000);
                     setDefensa(getDefensa()+5); 
                     System.out.println("- El atributo defensa aumenta en 5 puntos.");
                 }else{
@@ -463,8 +463,8 @@ public class Heroe extends Personaje{
                 mejorarEstadisticas();
                 break;
             case 5:
-                if(dinero>=750){
-                    dinero -= 750;
+                if(getDinero()>=750){
+                    setDinero(getDinero()-750);
                     setAgilidad(getAgilidad()+5);  
                     System.out.println("- El atributo agilidad aumenta en 5 puntos.");
                 }else{
