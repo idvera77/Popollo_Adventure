@@ -149,11 +149,18 @@ public class Personaje extends ElementoIdentificador{
         int dañar;
         int aleatorio = NumeroAleatorio(0, 2);
         if(personajeX.getAgilidad()>personajeY.getAgilidad()){
-            System.out.println("!!GOLPE CRITICO!!");
-            dañar = personajeX.getFuerza()*2;
-            personajeY.daño(personajeY,dañar);
-            System.out.println("- "+personajeX.getNombre()+" inflige "+personajeX.getFuerza()*2+" puntos de daño.");
-            System.out.println("- "+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño.");
+            if(aleatorio==0){
+                System.out.println("!!GOLPE CRITICO!!");
+                dañar = personajeX.getFuerza()*2;
+                personajeY.daño(personajeY,dañar);
+                System.out.println("- "+personajeX.getNombre()+" inflige "+personajeX.getFuerza()*2+" puntos de daño.");
+                System.out.println("- "+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño.");
+            }else{
+                dañar = personajeX.getFuerza();
+                personajeY.daño(personajeY,dañar);
+                System.out.println("- "+personajeX.getNombre()+" inflige "+personajeX.getFuerza()+" puntos de daño.");
+                System.out.println("- "+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño.");
+            }
         }else if(personajeX.getAgilidad()==personajeY.getAgilidad()){
             dañar = personajeX.getFuerza();
             personajeY.daño(personajeY,dañar);

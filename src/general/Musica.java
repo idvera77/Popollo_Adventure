@@ -32,7 +32,7 @@ public class Musica {
             }
             else
             {
-                System.out.println("No puedo encontrar el archivo");
+                System.out.println("No pudo encontrarse el archivo");
             }
         }
         catch(Exception ex){
@@ -59,7 +59,7 @@ public class Musica {
             }
             else
             {
-                System.out.println("No puedo encontrar el archivo");
+                System.out.println("No pudo encontrarse el archivo");
             }
         }
         catch(Exception ex){

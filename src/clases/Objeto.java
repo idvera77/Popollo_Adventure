@@ -5,6 +5,8 @@
  */
 package clases;
 
+import exceptions.InvalidTipoException;
+
 /**
  *
  * @author Mystra77
@@ -24,7 +26,7 @@ public class Objeto extends ElementoIdentificador{
      * @param tipo Variable tipo que nos permite indicar el tipo de objeto y asi modificar ciertas funciones.
      * @param precio Variable de tipo entero que indica el precio de un objeto.
      */
-    public Objeto(String nombre, String descripcion, int poder, int cantidad, String tipo, int precio) {
+    public Objeto(String nombre, String descripcion, int poder, int cantidad, String tipo, int precio) throws InvalidTipoException{
         super(nombre, descripcion);
         this.poder = poder;
         this.cantidad = cantidad;
@@ -41,7 +43,7 @@ public class Objeto extends ElementoIdentificador{
         return tipo;
     }
 
-    public void setTipo(String tipo)  {
+    public void setTipo(String tipo) throws InvalidTipoException{
            switch(tipo.toLowerCase()){
            case "ofensivo":
                this.tipo=tipoObjeto.OFENSIVO;
@@ -50,9 +52,8 @@ public class Objeto extends ElementoIdentificador{
                this.tipo=tipoObjeto.CURATIVO;
                break;
            default:
-               break;
+               throw new InvalidTipoException(tipo+" no es valido. Solo puede ser 'ofensivo' o 'curativo'");
        }
-
     }
 
     public int getPoder() {

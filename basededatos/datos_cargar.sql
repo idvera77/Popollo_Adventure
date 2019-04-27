@@ -9,19 +9,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema popollo_adventure
+-- Schema popollo_adventure_cargar
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema popollo_adventure
+-- Schema popollo_adventure_cargar
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `popollo_adventure` DEFAULT CHARACTER SET utf8 ;
-USE `popollo_adventure` ;
+CREATE SCHEMA IF NOT EXISTS `popollo_adventure_cargar` DEFAULT CHARACTER SET utf8 ;
+USE `popollo_adventure_cargar` ;
 
 -- -----------------------------------------------------
--- Table `popollo_adventure`.`Heroe`
+-- Table `popollo_adventure_cargar`.`Heroe`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `popollo_adventure`.`Heroe` (
+CREATE TABLE IF NOT EXISTS `popollo_adventure_cargar`.`Heroe` (
   `nombre` VARCHAR(45) NOT NULL,
   `descripcion` VARCHAR(100) NULL,
   `saludMaxima` INT NULL,
@@ -39,9 +39,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `popollo_adventure`.`Enemigo`
+-- Table `popollo_adventure_cargar`.`Enemigo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `popollo_adventure`.`Enemigo` (
+CREATE TABLE IF NOT EXISTS `popollo_adventure_cargar`.`Enemigo` (
   `nombre` VARCHAR(45) NOT NULL,
   `descripcion` VARCHAR(100) NULL,
   `saludMaxima` INT NULL,
@@ -57,9 +57,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `popollo_adventure`.`Objeto`
+-- Table `popollo_adventure_cargar`.`Objeto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `popollo_adventure`.`Objeto` (
+CREATE TABLE IF NOT EXISTS `popollo_adventure_cargar`.`Objeto` (
   `ID` INT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `descripcion` VARCHAR(100) NULL,
@@ -72,16 +72,16 @@ CREATE TABLE IF NOT EXISTS `popollo_adventure`.`Objeto` (
   INDEX `fk_Objeto_Heroe1_idx` (`Heroe_nombre` ASC) VISIBLE,
   CONSTRAINT `fk_Objeto_Heroe1`
     FOREIGN KEY (`Heroe_nombre`)
-    REFERENCES `popollo_adventure`.`Heroe` (`nombre`)
+    REFERENCES `popollo_adventure_cargar`.`Heroe` (`nombre`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `popollo_adventure`.`Habilidad`
+-- Table `popollo_adventure_cargar`.`Habilidad`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `popollo_adventure`.`Habilidad` (
+CREATE TABLE IF NOT EXISTS `popollo_adventure_cargar`.`Habilidad` (
   `ID` INT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `descripcion` VARCHAR(100) NULL,
@@ -94,16 +94,16 @@ CREATE TABLE IF NOT EXISTS `popollo_adventure`.`Habilidad` (
   INDEX `fk_Habilidad_Heroe_idx` (`Heroe_nombre` ASC) VISIBLE,
   CONSTRAINT `fk_Habilidad_Heroe`
     FOREIGN KEY (`Heroe_nombre`)
-    REFERENCES `popollo_adventure`.`Heroe` (`nombre`)
+    REFERENCES `popollo_adventure_cargar`.`Heroe` (`nombre`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `popollo_adventure`.`Npc`
+-- Table `popollo_adventure_cargar`.`Npc`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `popollo_adventure`.`Npc` (
+CREATE TABLE IF NOT EXISTS `popollo_adventure_cargar`.`Npc` (
   `nombre` VARCHAR(45) NOT NULL,
   `descripcion` VARCHAR(100) NULL,
   `moral` VARCHAR(45) NULL,
@@ -112,9 +112,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `popollo_adventure`.`Habilidad_Enemigo`
+-- Table `popollo_adventure_cargar`.`Habilidad_Enemigo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `popollo_adventure`.`Habilidad_Enemigo` (
+CREATE TABLE IF NOT EXISTS `popollo_adventure_cargar`.`Habilidad_Enemigo` (
   `ID` INT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `descripcion` VARCHAR(100) NULL,
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `popollo_adventure`.`Habilidad_Enemigo` (
   INDEX `fk_Habilidad_Enemigo_Enemigo1_idx` (`Enemigo_nombre` ASC) VISIBLE,
   CONSTRAINT `fk_Habilidad_Enemigo_Enemigo1`
     FOREIGN KEY (`Enemigo_nombre`)
-    REFERENCES `popollo_adventure`.`Enemigo` (`nombre`)
+    REFERENCES `popollo_adventure_cargar`.`Enemigo` (`nombre`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -136,26 +136,6 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
-
-
--- Introducir datos
--- Heroe
-insert into heroe values(
-	'Popollo',
-    'Un adorable popollito comilon.',
-    80,
-    80,
-    20,
-    5,
-    10,
-    10,
-    500,
-    0,
-    0,
-    1
-);
 
 -- Enemigos
 insert into enemigo values(
@@ -239,40 +219,6 @@ insert into npc values(
 	'Mystra',
     'Hechicera demente.',
     'caotico'
-);
-
--- Habilidades del Heroe
-insert into habilidad values(
-	1,
-	'Proyectil Magico',
-	'Disparas chispas magicas de tus manos.',
-	7,
-    5,
-    5,
-    'ofensivo',
-    'Popollo'
-);
-
-insert into habilidad values(
-	2,
-	'Flecha Helada',
-	'Lanzas una flecha que congela todo a su paso.',
-	12,
-    3,
-    3,
-    'ofensivo',
-    'Popollo'
-);
-
-insert into habilidad values(
-	3,
-	'Curar Heridas',
-	'Sana las heridas superficiales.',
-	8,
-    3,
-    3,
-    'curativo',
-    'Popollo'
 );
 
 -- Habilidades del enemigo Poring
@@ -389,40 +335,5 @@ insert into habilidad_enemigo values(
     'ofensivo',
     'Pulpoi'
 );
-
-insert into objeto values(
-	1,
-	'Bomba Pequeña',
-    'Inflige 30 puntos de daño.',
-	30,
-	3,
-	'ofensivo',
-    100,
-    'Popollo'
-);
-
-insert into objeto values(
-	2,
-	'Bomba Grande',
-	'Inflige 100 puntos de daño.',
-	100,
-	1,
-	'ofensivo',
-    500,
-    'Popollo'
-);
-
-insert into objeto values(
-	3,
-	'Pocion',
-	'Restablece 50 puntos de salud.',
-	50,
-	5,
-	'curativo',
-	250,
-    'Popollo'
-);
-
-
 
 

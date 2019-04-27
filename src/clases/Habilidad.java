@@ -5,6 +5,8 @@
  */
 package clases;
 
+import exceptions.InvalidTipoException;
+
 /**
  *
  * @author Mystra77
@@ -24,7 +26,7 @@ public class Habilidad extends ElementoIdentificador{
      * @param usosRestantes Variable de tipo entero que indica el numero restante de usos de una habilidad.
      * @param tipo Variable tipo que nos permite indicar el tipo de hechizo y asi modificar ciertas funciones.
      */
-    public Habilidad(String nombre, String descripcion, int especial, int usosMaximos, int usosRestantes, String tipo) {
+    public Habilidad(String nombre, String descripcion, int especial, int usosMaximos, int usosRestantes, String tipo) throws InvalidTipoException{
         super(nombre, descripcion);
         this.especial = especial;
         this.usosMaximos = usosMaximos;
@@ -65,7 +67,7 @@ public class Habilidad extends ElementoIdentificador{
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(String tipo) throws InvalidTipoException {
         switch(tipo.toLowerCase()){
             case "ofensivo":
                 this.tipo=tipoHechizo.OFENSIVO;
@@ -74,7 +76,7 @@ public class Habilidad extends ElementoIdentificador{
                 this.tipo=tipoHechizo.CURATIVO;
                 break;
             default:
-                break;
+                throw new InvalidTipoException(tipo+" no es valido. Solo puede ser 'ofensivo' o 'curativo'");
         }
     }
 }

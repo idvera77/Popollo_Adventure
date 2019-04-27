@@ -125,7 +125,8 @@ public class Combate {
                 }else{
                     Victoria=true;
                     System.out.println("\n\t!!!"+enemigo.getNombre()+" Derrotado!!!"
-                            +" Has ganado "+enemigo.getDinero()+" Monedas de oro.\n");
+                            +" Recibes "+enemigo.getDinero()+" Monedas de oro y "
+                            + enemigo.getExperiencia()+" puntos de experiencia.");
                     heroe.subirNivel(enemigo.getExperiencia());
                     heroe.setDinero(heroe.getDinero()+enemigo.getDinero());
                     if(defensaEnemigo==true){

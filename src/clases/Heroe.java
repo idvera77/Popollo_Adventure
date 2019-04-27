@@ -73,28 +73,25 @@ public class Heroe extends Personaje{
     //Subir de nivel
     public void subirNivel(int numero){
         setExperiencia(getExperiencia()+numero);
-        System.out.println("Tu experiencia aumenta en "+numero+".");
         if(getExperiencia()>=100){
-            System.out.println("Subes de Nivel!!!");
             setExperiencia(0);    
             if(nivel % 2 == 0){
-                System.out.println("Tus atributos aumentan ^_^\n"
-                        +"\tMagia + 1 puntos\n"
-                        +"\tAgilidad + 1 puntos\n");
+                System.out.println("\t\t!!!Subes de nivel!!! Tus atributos aumentan ^_^\n"
+                        +"\t\t\tMagia + 1 puntos.\n"
+                        +"\t\t\tAgilidad + 1 puntos.");
                 setMagia(getMagia()+1);
                 setAgilidad(getAgilidad()+1);
             }else{
-                System.out.println("Tus atributos aumentan ^_^\n"
-                        +"\tSalud + 20 puntos\n"
-                        +"\tFuerza + 2 puntos\n"
-                        +"\tDefensa + 2 puntos\n");
+                System.out.println("\t\t!!!Subes de nivel!!! Tus atributos aumentan ^_^\n"
+                        +"\t\t\tSalud + 20 puntos.\n"
+                        +"\t\t\tFuerza + 2 puntos.\n"
+                        +"\t\t\tDefensa + 2 puntos.");
                 setSaludMaxima(getSaludMaxima()+20);
                 setSalud(getSalud()+20);
                 setFuerza(getFuerza()+2);
                 setDefensa(getDefensa()+2);
             }
         }else{
-            System.out.println("Necesitas "+(100-getExperiencia())+" puntos mas para subir de nivel.");
         }
     }
     
@@ -328,8 +325,8 @@ public class Heroe extends Personaje{
                 System.out.println("- Sientes tristeza al abandonar la luz.\n");
                 break;
             case 1:
-                if (getDinero()>=100) {
-                    setDinero(getDinero()-100); 
+                if (getDinero()>=300) {
+                    setDinero(getDinero()-300); 
                     regenerarSalud();
                     System.out.println("- Las heridas comienzan a curarse magicamente.\n");
                     puntoDescanso();
@@ -340,8 +337,8 @@ public class Heroe extends Personaje{
                 }
                 break;
             case 2:
-                if (getDinero()>200) {
-                    setDinero(getDinero()-200);
+                if (getDinero()>750) {
+                    setDinero(getDinero()-750);
                     regenerarHabilidades();
                     System.out.println("- Sientes que el cansancio abandona tu cuerpo.\n");
                     puntoDescanso();
@@ -352,8 +349,8 @@ public class Heroe extends Personaje{
                 }
                 break;
             case 3:
-                if (getDinero()>=250) {
-                setDinero(getDinero()-250);
+                if (getDinero()>=1000) {
+                setDinero(getDinero()-1000);
                 regenerarSaludHabilidades();
                 System.out.println("- Nunca te has sentido mejor que ahora.\n");
                 puntoDescanso();
@@ -410,11 +407,11 @@ public class Heroe extends Personaje{
         System.out.println("|Total de monedas de oro: *"+getDinero()+"*|");
         String menuEstadisticas ="- ¿Que atributo quiere mejorar?:"
             +"\n\t0 - Salir."
-            +"\n\t1 - Aumentar 50 puntos de Vida maxima - 500 Monedas."
-            +"\n\t2 - Aumentar 10 puntos de Fuerza - 750 Monedas."
-            +"\n\t3 - Aumentar 5 puntos de Magia - 1500 Monedas."
-            +"\n\t4 - Aumentar 5 puntos de Defensa - 1000 Monedas."
-            +"\n\t5 - Aumentar 5 de Agilidad - 750 Monedas.";   
+            +"\n\t1 - Aumentar 20 puntos de Vida maxima - 750 Monedas."
+            +"\n\t2 - Aumentar 5 puntos de Fuerza - 1000 Monedas."
+            +"\n\t3 - Aumentar 1 puntos de Magia - 1500 Monedas."
+            +"\n\t4 - Aumentar 2 puntos de Defensa - 1000 Monedas."
+            +"\n\t5 - Aumentar 2 de Agilidad - 1000 Monedas.";   
         System.out.println(menuEstadisticas);
         int opcion1=Integer.parseInt(sc.nextLine());
         switch(opcion1){
@@ -422,21 +419,21 @@ public class Heroe extends Personaje{
                 tienda();
                 break;
             case 1:
-                if(getDinero()>=500){
-                    setDinero(getDinero()-500);
-                    setSaludMaxima(getSaludMaxima()+50);
-                    setSalud(getSalud()+50);
-                    System.out.println("- La vida maxima aumenta en 50 puntos.");
+                if(getDinero()>=750){
+                    setDinero(getDinero()-750);
+                    setSaludMaxima(getSaludMaxima()+20);
+                    setSalud(getSalud()+20);
+                    System.out.println("- La vida maxima aumenta en 20 puntos.");
                 }else{
                     System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
                 }
                 mejorarEstadisticas();
                 break;
             case 2:
-                if(getDinero()>=750){
-                    setDinero(getDinero()-750);
-                    setFuerza(getFuerza()+10);
-                    System.out.println("- El atributo fuerza aumenta en 10 puntos.");
+                if(getDinero()>=1000){
+                    setDinero(getDinero()-1000);
+                    setFuerza(getFuerza()+5);
+                    System.out.println("- El atributo fuerza aumenta en 5 puntos.");
                 }else{
                     System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");         
                 }
@@ -445,8 +442,8 @@ public class Heroe extends Personaje{
             case 3:
                 if(getDinero()>=1500){
                     setDinero(getDinero()-1500);
-                    setMagia(getMagia()+5); 
-                    System.out.println("- El atributo magia aumenta en 5 puntos.");
+                    setMagia(getMagia()+1); 
+                    System.out.println("- El atributo magia aumenta en 1 punto.");
                 }else{
                     System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
                 }
@@ -455,18 +452,18 @@ public class Heroe extends Personaje{
             case 4:
                 if(getDinero()>=1000){
                     setDinero(getDinero()-1000);
-                    setDefensa(getDefensa()+5); 
-                    System.out.println("- El atributo defensa aumenta en 5 puntos.");
+                    setDefensa(getDefensa()+2); 
+                    System.out.println("- El atributo defensa aumenta en 2 puntos.");
                 }else{
                     System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
                 }
                 mejorarEstadisticas();
                 break;
             case 5:
-                if(getDinero()>=750){
-                    setDinero(getDinero()-750);
-                    setAgilidad(getAgilidad()+5);  
-                    System.out.println("- El atributo agilidad aumenta en 5 puntos.");
+                if(getDinero()>=1000){
+                    setDinero(getDinero()-1000);
+                    setAgilidad(getAgilidad()+2);  
+                    System.out.println("- El atributo agilidad aumenta en 2 puntos.");
                 }else{
                     System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
                 }
@@ -517,13 +514,15 @@ public class Heroe extends Personaje{
      */
     public void pantallaGeneralEstadisticas(){
         Scanner sc = new Scanner (System.in);  
-        System.out.println("\t!!!Atributos!!!");
+        System.out.println("\tNivel: "+getNivel()+" ("+getExperiencia()+"/100)");;
         System.out.println("\tVida: "+getSalud()+"/"+getSaludMaxima());
         System.out.println("\tFuerza: "+getFuerza());
         System.out.println("\tMagia: "+getMagia());
         System.out.println("\tDefensa: "+getDefensa());
-        System.out.println("\tAgilidad: "+getAgilidad()+"\n");
-        System.out.println("\tReputacion: "+getReputacion()+" || "+"Monedas de oro: "+getDinero()+"\n");
+        System.out.println("\tAgilidad: "+getAgilidad());
+        System.out.println("\t------------");
+        System.out.println("\tReputacion: "+getReputacion());
+        System.out.println("\tDinero: "+getDinero()+"\n");
         System.out.println("\t!!!Habilidades!!!");
         mostrarHabilidadesTotal();
         System.out.println("\t!!!Objetos!!!");

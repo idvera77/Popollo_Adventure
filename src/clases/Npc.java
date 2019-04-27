@@ -5,6 +5,7 @@
  */
 package clases;
 
+import exceptions.InvalidTipoException;
 import java.util.Scanner;
 
 /**
@@ -20,7 +21,7 @@ public class Npc extends ElementoIdentificador{
      * @param descripcion Variable de tipo String para escribir una descripcion.
      * @param moral Variable tipo que nos permite indicar la moral del npc y asi modificar ciertas funciones.
      */
-    public Npc(String nombre, String descripcion, String moral) {
+    public Npc(String nombre, String descripcion, String moral) throws InvalidMoralException {
         super(nombre, descripcion);
         setMoral(moral);
     }
@@ -35,7 +36,7 @@ public class Npc extends ElementoIdentificador{
         return moral;
     }
 
-    public void setMoral(String moral) {
+    public void setMoral(String moral) throws InvalidMoralException{
         switch(moral.toLowerCase()){
            case "legal":
                this.moral=tipoMoral.LEGAL;
@@ -47,7 +48,7 @@ public class Npc extends ElementoIdentificador{
                this.moral=tipoMoral.CAOTICO;
                break;    
            default:
-               break;
+               throw new InvalidMoralException(moral+" no es valida. Solo puede ser 'legal', 'neutral' o 'caotico'.");
         }  
     }
     
