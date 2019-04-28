@@ -71,16 +71,21 @@ public class Heroe extends Personaje{
     //FUNCIONES
     
     //Subir de nivel
+    /**
+     * Funcion que nos permite subir el nivel del heroe si llega a 100 puntos de experiencia.
+     * @param numero Numero que subira la experiencia del heroe
+     */
     public void subirNivel(int numero){
         setExperiencia(getExperiencia()+numero);
         if(getExperiencia()>=100){
-            setExperiencia(0);    
+            setExperiencia(getExperiencia()-100);    
             if(nivel % 2 == 0){
                 System.out.println("\t\t!!!Subes de nivel!!! Tus atributos aumentan ^_^\n"
                         +"\t\t\tMagia + 1 puntos.\n"
                         +"\t\t\tAgilidad + 1 puntos.");
                 setMagia(getMagia()+1);
                 setAgilidad(getAgilidad()+1);
+                setNivel(getNivel()+1);
             }else{
                 System.out.println("\t\t!!!Subes de nivel!!! Tus atributos aumentan ^_^\n"
                         +"\t\t\tSalud + 20 puntos.\n"
@@ -90,6 +95,7 @@ public class Heroe extends Personaje{
                 setSalud(getSalud()+20);
                 setFuerza(getFuerza()+2);
                 setDefensa(getDefensa()+2);
+                setNivel(getNivel()+1);
             }
         }else{
         }
@@ -315,9 +321,9 @@ public class Heroe extends Personaje{
         System.out.println("|Total de monedas de oro: *"+getDinero()+"*|");
         String menuPuntoDescanso="- Una luz radiante te llama la atencion."
             +"\n\t0 - Salir."
-            +"\n\t1 - Curar todos los daños recibidos - 100 Monedas de oro."
-            +"\n\t2 - Restablecer el uso de las habilidades - 200 Monedas de oro."
-            +"\n\t3 - Curacion completa y restablecimiento de habilidades - 250 Monedas de oro.";
+            +"\n\t1 - Curar todos los daños recibidos - 300 Monedas de oro."
+            +"\n\t2 - Restablecer el uso de las habilidades - 750 Monedas de oro."
+            +"\n\t3 - Curacion completa y restablecimiento de habilidades - 1000 Monedas de oro.";
         System.out.println(menuPuntoDescanso);
         int opcion1=Integer.parseInt(sc.nextLine());
         switch(opcion1){

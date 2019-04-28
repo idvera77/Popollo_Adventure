@@ -44,13 +44,12 @@ public class Popollo_Adventures {
         String menuPruebas="\nPor favor seleccione una opcion:"
             +"\n\t0 - Salir del juego."
             +"\n\t1 - Guardar partida."
-            +"\n\t2 - Cargar partida."
-            +"\n\t3 - Combate de prueba."
-            +"\n\t4 - Punto de descanso."
-            +"\n\t5 - Tienda."
-            +"\n\t6 - Informacion general del heroe."
-            +"\n\t7 - Comprobar afinidad con los Npcs."
-            +"\n\t8 - Multiples eventos.";
+            +"\n\t2 - Combate de prueba."
+            +"\n\t3 - Punto de descanso."
+            +"\n\t4 - Tienda."
+            +"\n\t5 - Informacion general del heroe."
+            +"\n\t6 - Comprobar afinidad con los Npcs."
+            +"\n\t7 - Multiples eventos.";
 
         String menuEvento="Por favor seleccione una opcion:"
             +"\n\t0 - Salir."
@@ -309,47 +308,62 @@ public class Popollo_Adventures {
                                 ,"root","admin");
                             
                             //Guardando parametros del heroe
-                            PreparedStatement smt1 = connection.prepareStatement("INSERT INTO heroe "
-                                + "(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, dinero, reputacion, experiencia, nivel) "
-                                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-                                smt1.setString(1, popollo.getNombre());
-                                smt1.setString(2, popollo.getDescripcion());
-                                smt1.setInt(3, popollo.getSaludMaxima());
-                                smt1.setInt(4, popollo.getSalud());
-                                smt1.setInt(5, popollo.getFuerza());
-                                smt1.setInt(6, popollo.getMagia());
-                                smt1.setInt(7, popollo.getAgilidad());
-                                smt1.setInt(8, popollo.getDefensa());
-                                smt1.setInt(9, popollo.getDinero());
-                                smt1.setInt(10, popollo.getReputacion());
-                                smt1.setInt(11, popollo.getExperiencia());
-                                smt1.setInt(12, popollo.getNivel());
-                                smt1.executeUpdate();      
-                            System.out.println("Partida guardada sin problemas ^^");    
+                            PreparedStatement smt = connection.prepareStatement("UPDATE heroe "
+                                + "SET nombre = ?, descripcion = ?, saludMaxima = ?, salud = ?, fuerza = ?, magia = ?, agilidad = ?"
+                                    + ", defensa = ?, dinero = ?, reputacion = ?, experiencia = ?, nivel = ? WHERE nombre = 'Popollo'");
+                                smt.setString(1, popollo.getNombre());
+                                smt.setString(2, popollo.getDescripcion());
+                                smt.setInt(3, popollo.getSaludMaxima());
+                                smt.setInt(4, popollo.getSalud());
+                                smt.setInt(5, popollo.getFuerza());
+                                smt.setInt(6, popollo.getMagia());
+                                smt.setInt(7, popollo.getAgilidad());
+                                smt.setInt(8, popollo.getDefensa());
+                                smt.setInt(9, popollo.getDinero());
+                                smt.setInt(10, popollo.getReputacion());
+                                smt.setInt(11, popollo.getExperiencia());
+                                smt.setInt(12, popollo.getNivel());  
+                                smt.executeUpdate();
+                            
+                                //Solo modificamos la variable que realmente cambia, en este caso los usos restantes
+                                for (int i = 0; i < habilidadesHeroe.size(); i++) {
+                                    smt = connection.prepareStatement("UPDATE habilidad "
+                                    + "SET usosRestantes = ? WHERE heroe_nombre = 'Popollo' AND ID = "+(i+1)+"");
+                                    smt.setInt(1, popollo.getHabilidadesArray().get(i).getUsosRestantes());  
+                                    smt.executeUpdate();
+                                } 
+                                
+                                //Solo modificamos la variable que realmente cambia, en este caso la cantidad
+                                for (int i = 0; i < objetosHeroe.size(); i++) {
+                                    smt = connection.prepareStatement("UPDATE objeto "
+                                    + "SET cantidad = ? WHERE heroe_nombre = 'Popollo' AND ID = "+(i+1)+"");
+                                    smt.setInt(1, popollo.getObjetosArray().get(i).getCantidad());  
+                                    smt.executeUpdate();
+                                } 
+                            System.out.println("Partida guardada sin problemas ^^");      
                             break;
                         case 2:
-                            break;
-                        case 3:
                             Combate.batalla(popollo, nigromante);
                             break;
-                        case 4:
+                        case 3:
                             popollo.puntoDescanso();
                             break;
-                        case 5:
+                        case 4:
                             popollo.tienda();
                             break;
-                        case 6:
+                        case 5:
                             popollo.pantallaGeneralEstadisticas();
                             break;
-                        case 7:
+                        case 6:
                             Npc.afinidadNpcs(narcyl, popollo);
                             Npc.afinidadNpcs(tomberi, popollo);
                             Npc.afinidadNpcs(mystra, popollo);
                             break;
-                        case 8:
+                        case 7:
                             System.out.println(menuEvento);
-                            opcion=Integer.parseInt(sc.nextLine());
-                            switch(opcion){
+                            int opcionEvento=Integer.parseInt(sc.nextLine());
+                            do{
+                            switch(opcionEvento){
                                 case 1:
                                     Eventos.vagabundo(popollo);
                                     break;
@@ -363,6 +377,7 @@ public class Popollo_Adventures {
                                     System.out.println("- Opcion incorrecta.\n");
                                     break;
                             }
+                            }while(opcionEvento!=0&&opcionEvento!=1&&opcionEvento!=2&&opcionEvento!=3);
                             break;
                         default:
                             System.out.println("- Opcion incorrecta. Parece que no tienes muchas ganas de jugar Y_Y\n");

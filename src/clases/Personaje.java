@@ -147,7 +147,7 @@ public class Personaje extends ElementoIdentificador{
      */
     public void atacar(Personaje personajeX, Personaje personajeY){
         int dañar;
-        int aleatorio = NumeroAleatorio(0, 2);
+        int aleatorio = NumeroAleatorio(0, 3);
         if(personajeX.getAgilidad()>personajeY.getAgilidad()){
             if(aleatorio==0){
                 System.out.println("!!GOLPE CRITICO!!");

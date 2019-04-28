@@ -137,6 +137,23 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+-- Introducir datos
+-- Heroe
+insert into heroe values(
+	'Popollo',
+    'Un adorable popollito comilon.',
+    80,
+    80,
+    20,
+    5,
+    10,
+    10,
+    500,
+    0,
+    0,
+    1
+);
+
 -- Enemigos
 insert into enemigo values(
 	'Poring',
@@ -219,6 +236,40 @@ insert into npc values(
 	'Mystra',
     'Hechicera demente.',
     'caotico'
+);
+
+-- Habilidades del Heroe
+insert into habilidad values(
+	1,
+	'Proyectil Magico',
+	'Disparas chispas magicas de tus manos.',
+	7,
+    5,
+    5,
+    'ofensivo',
+    'Popollo'
+);
+
+insert into habilidad values(
+	2,
+	'Flecha Helada',
+	'Lanzas una flecha que congela todo a su paso.',
+	12,
+    3,
+    3,
+    'ofensivo',
+    'Popollo'
+);
+
+insert into habilidad values(
+	3,
+	'Curar Heridas',
+	'Sana las heridas superficiales.',
+	8,
+    3,
+    3,
+    'curativo',
+    'Popollo'
 );
 
 -- Habilidades del enemigo Poring
@@ -334,6 +385,39 @@ insert into habilidad_enemigo values(
     3,
     'ofensivo',
     'Pulpoi'
+);
+
+insert into objeto values(
+	1,
+	'Bomba Pequeña',
+    'Inflige 30 puntos de daño.',
+	30,
+	3,
+	'ofensivo',
+    100,
+    'Popollo'
+);
+
+insert into objeto values(
+	2,
+	'Bomba Grande',
+	'Inflige 100 puntos de daño.',
+	100,
+	1,
+	'ofensivo',
+    500,
+    'Popollo'
+);
+
+insert into objeto values(
+	3,
+	'Pocion',
+	'Restablece 50 puntos de salud.',
+	50,
+	5,
+	'curativo',
+	250,
+    'Popollo'
 );
 
 

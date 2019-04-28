@@ -60,7 +60,6 @@ public class Npc extends ElementoIdentificador{
     public static void afinidadNpcs(Npc npcs, Heroe heroe){
         Scanner sc = new Scanner (System.in);
         int reputacion = heroe.getReputacion();
-        System.out.println(reputacion);
         String tipo = String.valueOf(npcs.getMoral());
             if(tipo.equals("LEGAL")){
                 System.out.println("|"+npcs.getNombre()+" quiere hablar contigo.|");
