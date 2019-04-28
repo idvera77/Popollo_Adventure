@@ -34,7 +34,10 @@ public class Popollo_Adventures {
         Scanner sc = new Scanner (System.in);
         Connection connection=null;
         int opcion;
-              
+        
+        Ventana_Inicio inicio = new Ventana_Inicio();
+        inicio.setVisible(true);
+        
         //Menus
         String menuInicio="\nPor favor seleccione una opcion:"
             +"\n\t0 - Salir del juego."
@@ -287,8 +290,7 @@ public class Popollo_Adventures {
 
             Npc mystra = new Npc (nombreNpc, descripcionNpc, moralNpc);
                 
-            //Fin de importar los registros.            
-           
+            //Fin de importar los registros.             
                         
             //Menu de pruebas, incluye toda las opciones para ver en un vistazo rapido que todo funciona.
                 do{
