@@ -35,8 +35,8 @@ public class Popollo_Adventures {
         Connection connection=null;
         int opcion;
         
-        Ventana_Inicio inicio = new Ventana_Inicio();
-        inicio.setVisible(true);
+        Ventana inicio = new Ventana();
+        inicio.setVisible(true);   
         
         //Menus
         String menuInicio="\nPor favor seleccione una opcion:"
