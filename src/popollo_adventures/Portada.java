@@ -1,13 +1,14 @@
 package popollo_adventures;
 
 import javax.swing.JPanel;
-
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import clases.*;
+import general.*;
 
 
 public class Portada extends JPanel {
@@ -49,7 +50,6 @@ public class Portada extends JPanel {
 		imagenPortada.setBounds(0, 0, 1008, 536);
 		imagenPortada.setIcon(new ImageIcon(".\\imagenes\\pantallaInicio.png"));
 		add(imagenPortada);
-		
 			
 	}
 }

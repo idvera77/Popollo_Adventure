@@ -37,13 +37,13 @@ public class Galeria extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		botonPuntoDescanso.setBounds(548, 329, 165, 23);
+		botonPuntoDescanso.setBounds(548, 400, 165, 23);
 		add(botonPuntoDescanso);
 		
 		JButton botonPopollo = new JButton("Popollo");
 		botonPopollo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				imagenGaleria.setIcon(imagenes[1]);
+				imagenGaleria.setIcon(imagenes[0]);
 			}
 		});
 		botonPopollo.setBounds(548, 100, 165, 23);
@@ -52,6 +52,7 @@ public class Galeria extends JPanel{
 		JButton botonMystra = new JButton("Mystra");
 		botonMystra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				imagenGaleria.setIcon(imagenes[1]);
 			}
 		});
 		botonMystra.setBounds(548, 176, 165, 23);
@@ -70,7 +71,7 @@ public class Galeria extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		botonTomberi.setBounds(548, 400, 165, 23);
+		botonTomberi.setBounds(548, 329, 165, 23);
 		add(botonTomberi);
 		
 		JButton botonPoring = new JButton("Poring");
