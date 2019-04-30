@@ -1,4 +1,3 @@
-
 package general;
 
 import java.io.File;
@@ -9,7 +8,7 @@ import javax.sound.sampled.Clip;
 
 /**
  *
- * @author Mystra77
+ * @author Ivan Diaz Vera
  */
 public class Musica {
     
