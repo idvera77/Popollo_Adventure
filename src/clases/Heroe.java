@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clases;
 
 import java.util.ArrayList;
@@ -10,7 +5,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Mystra77
+ * @author Ivan Diaz Vera
  */
 public class Heroe extends Personaje{
     private ArrayList<Objeto> objetosArray;
@@ -343,7 +338,7 @@ public class Heroe extends Personaje{
                 }
                 break;
             case 2:
-                if (getDinero()>750) {
+                if (getDinero()>=750) {
                     setDinero(getDinero()-750);
                     regenerarHabilidades();
                     System.out.println("- Sientes que el cansancio abandona tu cuerpo.\n");

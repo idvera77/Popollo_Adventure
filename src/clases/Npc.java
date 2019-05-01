@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package clases;
 
-import exceptions.InvalidTipoException;
+import exceptions.InvalidMoralException;
 import java.util.Scanner;
 
 /**
  *
- * @author Mystra77
+ * @author Ivan Diaz Vera
  */
 public class Npc extends ElementoIdentificador{
     private tipoMoral moral;
