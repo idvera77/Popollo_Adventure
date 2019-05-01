@@ -29,12 +29,12 @@ import java.awt.event.ActionEvent;
 public class Mapa extends Paneles {
 	public Mapa(JFrame ventana, Connection connect) {
 		Paneles panelMapa=this;
-		
+
 		//importando datos
         try {
             Statement stm=connect.createStatement();
-            ResultSet rs;    
-                
+            ResultSet rs;
+
             //Creando el heroe
             //Habilidades
             rs=stm.executeQuery("SELECT * FROM habilidad WHERE Heroe_nombre= 'Popollo' ORDER BY ID ASC");
@@ -43,7 +43,7 @@ public class Mapa extends Paneles {
                 habilidadesHeroe.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"),rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             //Objetos
             rs=stm.executeQuery("SELECT * FROM objeto WHERE Heroe_nombre= 'Popollo' ORDER BY ID ASC");
             ArrayList<Objeto> objetosHeroe=new ArrayList<>();
@@ -52,7 +52,7 @@ public class Mapa extends Paneles {
                     rs.getString("descripcion"), rs.getInt("poder"), rs.getInt("cantidad"),
                         rs.getString("tipo"), rs.getInt("precio")));
             }
-                
+
             //Estadisticas
             rs=stm.executeQuery("SELECT * FROM Heroe");
             rs.next();
@@ -68,11 +68,11 @@ public class Mapa extends Paneles {
             int reputacionHeroe=rs.getInt("reputacion");
             int experienciaHeroe=rs.getInt("experiencia");
             int nivelHeroe=rs.getInt("nivel");
-                
+
             //Constructor del Heroe
             Heroe popollo = new Heroe(nombreHeroe, descripcionHeroe, saludMaxHeroe, saludHeroe, fuerzaHeroe, magiaHeroe, agilidadHeroe,
-                defensaHeroe, habilidadesHeroe, objetosHeroe, dineroHeroe, reputacionHeroe, experienciaHeroe, nivelHeroe); 
-            
+                defensaHeroe, habilidadesHeroe, objetosHeroe, dineroHeroe, reputacionHeroe, experienciaHeroe, nivelHeroe);
+
             //Creando enemigos
             //Habilidades
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Poring' ORDER BY ID ASC");
@@ -81,14 +81,14 @@ public class Mapa extends Paneles {
                 habilidadesPoring.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Nigromante' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesNigromante=new ArrayList();
             while (rs.next()) {
                 habilidadesNigromante.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Golem' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesGolem=new ArrayList();
             while (rs.next()) {
@@ -102,14 +102,14 @@ public class Mapa extends Paneles {
                 habilidadesGoblin.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Pulpoi' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesPulpoi=new ArrayList();
             while (rs.next()) {
                 habilidadesPulpoi.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             //Estadisticas y constructor.
             //Poring
             rs=stm.executeQuery("SELECT * FROM enemigo WHERE nombre= 'Poring'");
@@ -127,7 +127,7 @@ public class Mapa extends Paneles {
 
 
             Enemigo poring = new Enemigo(nombreEnemigo, descripcionEnemigo, saludMaxEnemigo, saludEnemigo,
-                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesPoring, 
+                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesPoring,
                     dineroEnemigo, experienciaEnemigo);
 
             //Nigromante
@@ -146,7 +146,7 @@ public class Mapa extends Paneles {
 
 
             Enemigo nigromante = new Enemigo(nombreEnemigo, descripcionEnemigo, saludMaxEnemigo, saludEnemigo,
-                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesNigromante, 
+                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesNigromante,
                     dineroEnemigo, experienciaEnemigo);
 
             //Golem
@@ -165,7 +165,7 @@ public class Mapa extends Paneles {
 
 
             Enemigo golem = new Enemigo(nombreEnemigo, descripcionEnemigo, saludMaxEnemigo, saludEnemigo,
-                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesGolem, 
+                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesGolem,
                     dineroEnemigo, experienciaEnemigo);
 
             //Goblin
@@ -184,7 +184,7 @@ public class Mapa extends Paneles {
 
 
             Enemigo goblin = new Enemigo(nombreEnemigo, descripcionEnemigo, saludMaxEnemigo, saludEnemigo,
-                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesGoblin, 
+                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesGoblin,
                     dineroEnemigo, experienciaEnemigo);
 
             //Pulpoi - Jefe Final.
@@ -203,7 +203,7 @@ public class Mapa extends Paneles {
 
 
             Enemigo pulpoi = new Enemigo(nombreEnemigo, descripcionEnemigo, saludMaxEnemigo, saludEnemigo,
-                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesPulpoi, 
+                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesPulpoi,
                     dineroEnemigo, experienciaEnemigo);
 
             //Npcs Constructor
@@ -230,22 +230,22 @@ public class Mapa extends Paneles {
             moralNpc=rs.getString("moral");
 
             Npc mystra = new Npc (nombreNpc, descripcionNpc, moralNpc);
-            
-            //Fin de importar los datos.   
+
+            //Fin de importar los datos.
             //Añadiendo botones
-            
+
     		Botones botonGuardarPartida = new Botones("Guardar Partida");
     		botonGuardarPartida.setBounds(759, 98, 165, 23);
     		add(botonGuardarPartida);
-    		
+
     		Botones botonTienda = new Botones("Tienda");
     		botonTienda.setBounds(759, 132, 165, 23);
     		add(botonTienda);
-    		
+
     		Botones botonPuntoDescanso = new Botones("Punto de descanso");
     		botonPuntoDescanso.setBounds(759, 166, 165, 23);
     		add(botonPuntoDescanso);
-    		
+
     		Botones botonSalir = new Botones("Salir");
     		botonSalir.setBounds(709, 428, 215, 23);
     		add(botonSalir);
@@ -255,32 +255,32 @@ public class Mapa extends Paneles {
     			@Override
     			public void mouseClicked(MouseEvent e) {
     				guardarPartida(connect, popollo, habilidadesHeroe, objetosHeroe);
-    				System.out.println("Partida guardada con exito.");			
+    				System.out.println("Partida guardada con exito.");
     			}
     		});
-    		
+
     		botonPuntoDescanso.addMouseListener(new MouseAdapter() {
     			@Override
     			public void mouseClicked(MouseEvent e) {
     				PuntoDescanso panelDescanso=new PuntoDescanso(ventana, popollo, connect);
     				ventana.setContentPane(panelDescanso);
-    				panelMapa.setVisible(false);	
+    				panelMapa.setVisible(false);
     			}
     		});
-    		
+
     		botonTienda.addMouseListener(new MouseAdapter() {
     			@Override
     			public void mouseClicked(MouseEvent e) {
     				Tienda panelTienda=new Tienda(ventana, popollo, connect);
     				ventana.setContentPane(panelTienda);
-    				panelMapa.setVisible(false);	
+    				panelMapa.setVisible(false);
     			}
     		});
-    		
+
     		botonSalir.addMouseListener(new MouseAdapter() {
     			@Override
     			public void mouseClicked(MouseEvent e) {
-    					System.exit(0);  
+    					System.exit(0);
     			}
     		});
             } catch (SQLException ex) {
@@ -290,14 +290,14 @@ public class Mapa extends Paneles {
             } catch (InvalidTipoException | InvalidMoralException ex) {
                 ex.printStackTrace();
                 System.err.println(ex.getMessage());
-            }      
+            }
 	}
-	
+
 	public void guardarPartida(Connection connect, Heroe heroe, ArrayList<Habilidad> habilidadesHeroe, ArrayList<Objeto> objetosHeroe) {
 		try {
 			connect=DriverManager.getConnection(
 	                "jdbc:mysql://localhost:3306/popollo_adventure_cargar","root","admin");
-		    
+
 		    //Guardando parametros del heroe
 		    PreparedStatement smt = connect.prepareStatement("UPDATE heroe "
 		        + "SET nombre = ?, descripcion = ?, saludMaxima = ?, salud = ?, fuerza = ?, magia = ?, agilidad = ?"
@@ -313,43 +313,43 @@ public class Mapa extends Paneles {
 		        smt.setInt(9, heroe.getDinero());
 		        smt.setInt(10, heroe.getReputacion());
 		        smt.setInt(11, heroe.getExperiencia());
-		        smt.setInt(12, heroe.getNivel());  
+		        smt.setInt(12, heroe.getNivel());
 		        smt.executeUpdate();
-		    
+
 	        //Solo modificamos la variable que realmente cambia, en este caso los usos restantes
 	        for (int i = 0; i < habilidadesHeroe.size(); i++) {
 	            smt = connect.prepareStatement("UPDATE habilidad "
 	            + "SET usosRestantes = ? WHERE heroe_nombre = 'Popollo' AND ID = "+(i+1)+"");
-	            smt.setInt(1, heroe.getHabilidadesArray().get(i).getUsosRestantes());  
+	            smt.setInt(1, heroe.getHabilidadesArray().get(i).getUsosRestantes());
 	            smt.executeUpdate();
-	        } 
-	        
+	        }
+
 	        //Solo modificamos la variable que realmente cambia, en este caso la cantidad
 	        for (int i = 0; i < objetosHeroe.size(); i++) {
 	            smt = connect.prepareStatement("UPDATE objeto "
 	            + "SET cantidad = ? WHERE heroe_nombre = 'Popollo' AND ID = "+(i+1)+"");
-	            smt.setInt(1, heroe.getObjetosArray().get(i).getCantidad());  
+	            smt.setInt(1, heroe.getObjetosArray().get(i).getCantidad());
 	            smt.executeUpdate();
 	        }
 	        } catch (SQLException ex) {
 	            Logger.getLogger(Popollo_Adventures.class.getName()).log(Level.SEVERE, null, ex);
 	            ex.getStackTrace();
 	            System.err.println("\n!!!Error al conectarse con la base de datos!!!");
-	        }      
-	}  
+	        }
+	}
 }
-	
+
 
 /**
- *         
-		
+ *
+
         /**
          * Scanner sc = new Scanner (System.in);
          * int opcion;
-      
-        
+
+
         //Menus
-        
+
         String menuPruebas="\nPor favor seleccione una opcion:"
             +"\n\t0 - Salir del juego."
             +"\n\t1 - Guardar partida."
@@ -364,15 +364,15 @@ public class Mapa extends Paneles {
             +"\n\t0 - Salir."
             +"\n\t1 - Vagabundo."
             +"\n\t2 - Defensa de aldeanos."
-            +"\n\t3 - Crias de porings.";  
-            
+            +"\n\t3 - Crias de porings.";
+
         //Conectando a la base de datos
-       
+
         try {
             //Importando datos
             Statement stm=connect.createStatement();
-            ResultSet rs;    
-                
+            ResultSet rs;
+
             //Creando el heroe
             //Habilidades
             rs=stm.executeQuery("SELECT * FROM habilidad WHERE Heroe_nombre= 'Popollo' ORDER BY ID ASC");
@@ -381,7 +381,7 @@ public class Mapa extends Paneles {
                 habilidadesHeroe.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"),rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             //Objetos
             rs=stm.executeQuery("SELECT * FROM objeto WHERE Heroe_nombre= 'Popollo' ORDER BY ID ASC");
             ArrayList<Objeto> objetosHeroe=new ArrayList<>();
@@ -390,7 +390,7 @@ public class Mapa extends Paneles {
                     rs.getString("descripcion"), rs.getInt("poder"), rs.getInt("cantidad"),
                         rs.getString("tipo"), rs.getInt("precio")));
             }
-                
+
             //Estadisticas
             rs=stm.executeQuery("SELECT * FROM Heroe");
             rs.next();
@@ -406,11 +406,11 @@ public class Mapa extends Paneles {
             int reputacionHeroe=rs.getInt("reputacion");
             int experienciaHeroe=rs.getInt("experiencia");
             int nivelHeroe=rs.getInt("nivel");
-                
+
             //Constructor del Heroe
             Heroe popollo = new Heroe(nombreHeroe, descripcionHeroe, saludMaxHeroe, saludHeroe, fuerzaHeroe, magiaHeroe, agilidadHeroe,
-                defensaHeroe, habilidadesHeroe, objetosHeroe, dineroHeroe, reputacionHeroe, experienciaHeroe, nivelHeroe); 
-            
+                defensaHeroe, habilidadesHeroe, objetosHeroe, dineroHeroe, reputacionHeroe, experienciaHeroe, nivelHeroe);
+
             //Creando enemigos
             //Habilidades
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Poring' ORDER BY ID ASC");
@@ -419,35 +419,35 @@ public class Mapa extends Paneles {
                 habilidadesPoring.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Nigromante' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesNigromante=new ArrayList();
             while (rs.next()) {
                 habilidadesNigromante.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Golem' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesGolem=new ArrayList();
             while (rs.next()) {
                 habilidadesGolem.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Goblin' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesGoblin=new ArrayList();
             while (rs.next()) {
                 habilidadesGoblin.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             rs=stm.executeQuery("SELECT * FROM habilidad_enemigo WHERE Enemigo_nombre= 'Pulpoi' ORDER BY ID ASC");
             ArrayList<Habilidad> habilidadesPulpoi=new ArrayList();
             while (rs.next()) {
                 habilidadesPulpoi.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
                     rs.getInt("usosMaximos"), rs.getInt("usosRestantes"), rs.getString("tipo")));
             }
-                
+
             //Estadisticas y constructor.
             //Poring
             rs=stm.executeQuery("SELECT * FROM enemigo WHERE nombre= 'Poring'");
@@ -465,7 +465,7 @@ public class Mapa extends Paneles {
 
 
             Enemigo poring = new Enemigo(nombreEnemigo, descripcionEnemigo, saludMaxEnemigo, saludEnemigo,
-                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesPoring, 
+                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesPoring,
                     dineroEnemigo, experienciaEnemigo);
 
             //Nigromante
@@ -484,7 +484,7 @@ public class Mapa extends Paneles {
 
 
             Enemigo nigromante = new Enemigo(nombreEnemigo, descripcionEnemigo, saludMaxEnemigo, saludEnemigo,
-                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesNigromante, 
+                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesNigromante,
                     dineroEnemigo, experienciaEnemigo);
 
             //Golem
@@ -503,7 +503,7 @@ public class Mapa extends Paneles {
 
 
             Enemigo golem = new Enemigo(nombreEnemigo, descripcionEnemigo, saludMaxEnemigo, saludEnemigo,
-                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesGolem, 
+                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesGolem,
                     dineroEnemigo, experienciaEnemigo);
 
             //Goblin
@@ -522,7 +522,7 @@ public class Mapa extends Paneles {
 
 
             Enemigo goblin = new Enemigo(nombreEnemigo, descripcionEnemigo, saludMaxEnemigo, saludEnemigo,
-                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesGoblin, 
+                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesGoblin,
                     dineroEnemigo, experienciaEnemigo);
 
             //Pulpoi - Jefe Final.
@@ -541,7 +541,7 @@ public class Mapa extends Paneles {
 
 
             Enemigo pulpoi = new Enemigo(nombreEnemigo, descripcionEnemigo, saludMaxEnemigo, saludEnemigo,
-                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesPulpoi, 
+                    fuerzaEnemigo, magiaEnemigo, agilidadEnemigo, defensaEnemigo, habilidadesPulpoi,
                     dineroEnemigo, experienciaEnemigo);
 
             //Npcs Constructor
@@ -568,16 +568,16 @@ public class Mapa extends Paneles {
             moralNpc=rs.getString("moral");
 
             Npc mystra = new Npc (nombreNpc, descripcionNpc, moralNpc);
-                
-            //Fin de importar los registros.        
-            
-          
-                        
+
+            //Fin de importar los registros.
+
+
+
             //Menu de pruebas, incluye toda las opciones para ver en un vistazo rapido que todo funciona.
                 do{
                     System.out.println(menuPruebas);
                     opcion=Integer.parseInt(sc.nextLine());
-                    
+
                     switch(opcion){
                         case 0:
                             System.out.println("Vuelve pronto ^_^");
@@ -589,7 +589,7 @@ public class Mapa extends Paneles {
                             connect=DriverManager.getConnection(
                                 "jdbc:mysql://localhost:3306/popollo_adventure_cargar"
                                 ,"root","");
-                            
+
                             //Guardando parametros del heroe
                             PreparedStatement smt = connect.prepareStatement("UPDATE heroe "
                                 + "SET nombre = ?, descripcion = ?, saludMaxima = ?, salud = ?, fuerza = ?, magia = ?, agilidad = ?"
@@ -605,25 +605,25 @@ public class Mapa extends Paneles {
                                 smt.setInt(9, popollo.getDinero());
                                 smt.setInt(10, popollo.getReputacion());
                                 smt.setInt(11, popollo.getExperiencia());
-                                smt.setInt(12, popollo.getNivel());  
+                                smt.setInt(12, popollo.getNivel());
                                 smt.executeUpdate();
-                            
+
                                 //Solo modificamos la variable que realmente cambia, en este caso los usos restantes
                                 for (int i = 0; i < habilidadesHeroe.size(); i++) {
                                     smt = connect.prepareStatement("UPDATE habilidad "
                                     + "SET usosRestantes = ? WHERE heroe_nombre = 'Popollo' AND ID = "+(i+1)+"");
-                                    smt.setInt(1, popollo.getHabilidadesArray().get(i).getUsosRestantes());  
+                                    smt.setInt(1, popollo.getHabilidadesArray().get(i).getUsosRestantes());
                                     smt.executeUpdate();
-                                } 
-                                
+                                }
+
                                 //Solo modificamos la variable que realmente cambia, en este caso la cantidad
                                 for (int i = 0; i < objetosHeroe.size(); i++) {
                                     smt = connect.prepareStatement("UPDATE objeto "
                                     + "SET cantidad = ? WHERE heroe_nombre = 'Popollo' AND ID = "+(i+1)+"");
-                                    smt.setInt(1, popollo.getObjetosArray().get(i).getCantidad());  
+                                    smt.setInt(1, popollo.getObjetosArray().get(i).getCantidad());
                                     smt.executeUpdate();
-                                } 
-                            System.out.println("Partida guardada sin problemas ^^");      
+                                }
+                            System.out.println("Partida guardada sin problemas ^^");
                             break;
                         case 2:
                             Combate.batalla(popollo, nigromante);
@@ -666,7 +666,7 @@ public class Mapa extends Paneles {
                             System.out.println("- Opcion incorrecta. Parece que no tienes muchas ganas de jugar Y_Y\n");
                             break;
                     }
-                }while(opcion!=0);           
+                }while(opcion!=0);
             } catch (SQLException ex) {
                 Logger.getLogger(Popollo_Adventures.class.getName()).log(Level.SEVERE, null, ex);
                 ex.getStackTrace();
@@ -674,5 +674,5 @@ public class Mapa extends Paneles {
             } catch (InvalidTipoException | InvalidMoralException ex) {
                 ex.printStackTrace();
                 System.err.println(ex.getMessage());
-            }      
-         */	
+            }
+         */
