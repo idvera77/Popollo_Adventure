@@ -14,8 +14,10 @@ import componentes.Botones;
 import componentes.Paneles;
 
 public class PantallaInicio extends Paneles {
-	public PantallaInicio(JFrame ventana) {
+	private Ventana ventana;
+	public PantallaInicio(Ventana ventanaInicio) {
 		Paneles panelInicio=this;
+		this.ventana=ventanaInicio;
 		
 		//Añadiendo Botones
 				Botones botonIniciar = new Botones("Comenzar Partida");
@@ -44,8 +46,8 @@ public class PantallaInicio extends Paneles {
 				botonIniciar.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						Connection connect = iniciarPartida();
-						Mapa panelMapa=new Mapa(ventana, connect);
+						//Connection connect = iniciarPartida();
+						Mapa panelMapa=new Mapa(ventana);
 						ventana.setContentPane(panelMapa);
 						panelInicio.setVisible(false);
 					}
@@ -54,9 +56,9 @@ public class PantallaInicio extends Paneles {
 				botonCargar.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						Connection connect = cargarPartida();
-						Mapa panelMapa=new Mapa(ventana, connect);
-						ventana.setContentPane(panelMapa);
+						//Connection connect = cargarPartida();
+						Mapa panelMapa=new Mapa(ventanaInicio);
+						ventanaInicio.setContentPane(panelMapa);
 						panelInicio.setVisible(false);
 					}
 				});
@@ -64,8 +66,8 @@ public class PantallaInicio extends Paneles {
 				botonGaleria.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						Galeria panelGaleria=new Galeria(ventana);
-						ventana.setContentPane(panelGaleria);
+						Galeria panelGaleria=new Galeria(ventanaInicio);
+						ventanaInicio.setContentPane(panelGaleria);
 						panelInicio.setVisible(false);
 					}
 				});
@@ -79,31 +81,5 @@ public class PantallaInicio extends Paneles {
 				
 			}
 			
-			//Funcion que conecta con la base de datos y nos devuelve una conexion si no ocurre ningun error.
-			public Connection iniciarPartida() {
-				try {
-					 Connection connect=DriverManager.getConnection("jdbc:mysql://localhost:3306/popollo_adventure","root","admin");
-					 System.out.println("Conexion establecida");
-					 return connect;
-					 
-				} catch (SQLException ex) {
-				    System.err.println("La conexion a bd ha fallado");
-				    ex.printStackTrace();
-				    return null;
-				}
-			}
 			
-			//Funcion que conecta con la base de base de datos para cargar partida y nos devuelve una conexion si no ocurre ningun error.
-			public Connection cargarPartida() {
-				try {
-					 Connection connect=DriverManager.getConnection("jdbc:mysql://localhost:3306/popollo_adventure","root","admin");
-					 System.out.println("Conexion establecida");
-					 return connect;
-					 
-				} catch (SQLException ex) {
-				    System.err.println("La conexion a bd ha fallado");
-				    ex.printStackTrace();
-				    return null;
-				}
-	}
 }

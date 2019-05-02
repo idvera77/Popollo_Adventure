@@ -311,202 +311,85 @@ public class Heroe extends Personaje{
     /**
      * Funcion que reune todas las de regenerar salud o restablecimiento de habilidades a cambio de dinero.
      */
-    public void puntoDescanso(){
-        Scanner sc = new Scanner (System.in);
-        System.out.println("|Total de monedas de oro: *"+getDinero()+"*|");
-        String menuPuntoDescanso="- Una luz radiante te llama la atencion."
-            +"\n\t0 - Salir."
-            +"\n\t1 - Curar todos los daños recibidos - 300 Monedas de oro."
-            +"\n\t2 - Restablecer el uso de las habilidades - 750 Monedas de oro."
-            +"\n\t3 - Curacion completa y restablecimiento de habilidades - 1000 Monedas de oro.";
-        System.out.println(menuPuntoDescanso);
-        int opcion1=Integer.parseInt(sc.nextLine());
-        switch(opcion1){
+    public void puntoDescanso(int numero){
+        switch(numero){ 
             case 0:
-                System.out.println("- Sientes tristeza al abandonar la luz.\n");
-                break;
-            case 1:
                 if (getDinero()>=300) {
                     setDinero(getDinero()-300); 
                     regenerarSalud();
                     System.out.println("- Las heridas comienzan a curarse magicamente.\n");
-                    puntoDescanso();
                     break;
-                }else{
-                    System.out.println("- La luz emite un brillo debil.\n");
-                    puntoDescanso();
                 }
                 break;
-            case 2:
+            case 1:
                 if (getDinero()>=750) {
                     setDinero(getDinero()-750);
                     regenerarHabilidades();
                     System.out.println("- Sientes que el cansancio abandona tu cuerpo.\n");
-                    puntoDescanso();
-                    break;
-                }else{
-                    System.out.println("- La luz emite un brillo debil.\n");
-                    puntoDescanso();
                 }
-                break;
-            case 3:
+                 break;
+            case 2:
                 if (getDinero()>=1000) {
                 setDinero(getDinero()-1000);
                 regenerarSaludHabilidades();
                 System.out.println("- Nunca te has sentido mejor que ahora.\n");
-                puntoDescanso();
-                break;
-            }else{
-                System.out.println("- La luz emite un brillo debil.\n");
-                puntoDescanso();
-            }
-                break;    
-            default:
-                System.out.println("- No comprendes como comunicarte con la luz.\n");
-                puntoDescanso();
-            break;
+                }
+                break;         
         }    
     } 
     
-    //Funciones de compra.
-    
+    //Funciones de compra
     /**
      * Funcion que nos aumenta la cantidad de objetos si tenemos el dinero necesario.
+     * @param numero Nos indica el objeto de la tienda.
      */
-    public void comprarObjetos(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("\t0 - Salir.");
-        mostrarObjetosTienda();
-        int opcion1=Integer.parseInt(sc.nextLine());
-        if(opcion1-1>=getObjetosArray().size()){
-            System.out.println("- Ese objeto no existe!\n");
-            comprarObjetos();
-        }else if(opcion1==0){ 
-            tienda();
-        }else{
-            if (getDinero()>=getObjetosArray().get(opcion1-1).getPrecio()) {
-                setDinero(getDinero()-getObjetosArray().get(opcion1-1).getPrecio());
-                getObjetosArray().get(opcion1-1).setCantidad(getObjetosArray().get(opcion1-1).getCantidad()+1);
-                System.out.println("- Has obtenido 1 "+getObjetosArray().get(opcion1-1).getNombre()+"! Buena compra señor.\n"
-                +"|Total de monedas de oro: *"+getDinero()+"*|\n"      
-                +"- ¿Desea algo mas?");
-                comprarObjetos();
-            }else{
-                System.out.println("|Total de monedas de oro: *"+getDinero()+"*|");
-                System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
-                System.out.println("- ¿Que objeto desea comprar?");
-                comprarObjetos();
-            }   
-        }    
+    public void comprarObjetos(int numero){
+        if (getDinero()>=getObjetosArray().get(numero).getPrecio()) {
+            setDinero(getDinero()-getObjetosArray().get(numero).getPrecio());
+            getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()+1); 
+        }  
     }
     
     /**
      *  Funcion que nos aumenta los atributos del heroe si tenemos el dinero necesario.
+     *  * @param numero Nos indica el atributo.
      */
-    public void mejorarEstadisticas(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("|Total de monedas de oro: *"+getDinero()+"*|");
-        String menuEstadisticas ="- ¿Que atributo quiere mejorar?:"
-            +"\n\t0 - Salir."
-            +"\n\t1 - Aumentar 20 puntos de Vida maxima - 750 Monedas."
-            +"\n\t2 - Aumentar 5 puntos de Fuerza - 1000 Monedas."
-            +"\n\t3 - Aumentar 1 puntos de Magia - 1500 Monedas."
-            +"\n\t4 - Aumentar 2 puntos de Defensa - 1000 Monedas."
-            +"\n\t5 - Aumentar 2 de Agilidad - 1000 Monedas.";   
-        System.out.println(menuEstadisticas);
-        int opcion1=Integer.parseInt(sc.nextLine());
-        switch(opcion1){
+    public void mejorarEstadisticas(int numero){
+        switch(numero){
             case 0:
-                tienda();
-                break;
-            case 1:
-                if(getDinero()>=750){
+            	if(getDinero()>=750){
                     setDinero(getDinero()-750);
                     setSaludMaxima(getSaludMaxima()+20);
                     setSalud(getSalud()+20);
-                    System.out.println("- La vida maxima aumenta en 20 puntos.");
-                }else{
-                    System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
-                }
-                mejorarEstadisticas();
-                break;
-            case 2:
-                if(getDinero()>=1000){
-                    setDinero(getDinero()-1000);
-                    setFuerza(getFuerza()+5);
-                    System.out.println("- El atributo fuerza aumenta en 5 puntos.");
-                }else{
-                    System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");         
-                }
-                mejorarEstadisticas();
-                break;
-            case 3:
-                if(getDinero()>=1500){
-                    setDinero(getDinero()-1500);
-                    setMagia(getMagia()+1); 
-                    System.out.println("- El atributo magia aumenta en 1 punto.");
-                }else{
-                    System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
-                }
-                mejorarEstadisticas();
-                break;
-            case 4:
-                if(getDinero()>=1000){
-                    setDinero(getDinero()-1000);
-                    setDefensa(getDefensa()+2); 
-                    System.out.println("- El atributo defensa aumenta en 2 puntos.");
-                }else{
-                    System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
-                }
-                mejorarEstadisticas();
-                break;
-            case 5:
-                if(getDinero()>=1000){
-                    setDinero(getDinero()-1000);
-                    setAgilidad(getAgilidad()+2);  
-                    System.out.println("- El atributo agilidad aumenta en 2 puntos.");
-                }else{
-                    System.out.println("- No tienes suficiente dinero. No me hagas perder el tiempo.");
-                }
-                mejorarEstadisticas();
-                break;
-            default:
-                System.out.println("- No entiendo lo que quiere decir, ¿puede repetir por favor?.\n");
-                mejorarEstadisticas();
-            break;
-        }    
-    }
-    
-    /**
-     * Funcion para utilizar la Tienda en el juego, incluye varias opciones, menu y otras funciones relacionadas con comprar objetos.
-     */
-    public void tienda(){
-        Scanner sc = new Scanner (System.in);
-        System.out.println("|Total de monedas de oro: *"+getDinero()+"*|");
-        String menuTienda="- ¿Le interesa algo?:"
-            +"\n\t0 - Salir."
-            +"\n\t1 - Aumentar atributos."
-            +"\n\t2 - Comprar objetos.";
-        System.out.println(menuTienda);
-        int opcion1=Integer.parseInt(sc.nextLine());
-        switch(opcion1){
-            case 0:
-                System.out.println("- Vuelva pronto, le esperamos con los brazos abiertos ^_^\n");
+            	}
                 break;
             case 1:
-                mejorarEstadisticas();
+            	if(getDinero()>=1000){
+                    setDinero(getDinero()-1000);
+                    setFuerza(getFuerza()+5);
+                }
                 break;
             case 2:
-                System.out.println("|Total de monedas de oro: *"+getDinero()+"*|");
-                System.out.println("- ¿Que objeto desea comprar?");
-                comprarObjetos();
+            	if(getDinero()>=1500){
+                    setDinero(getDinero()-1500);
+                    setMagia(getMagia()+1); 
+                }
                 break;
-            default:
-                System.out.println("- No entiendo lo que quiere decir, ¿puede repetir por favor?.\n");
-                tienda();
-            break;
+            case 3:
+            	if(getDinero()>=1000){
+                    setDinero(getDinero()-1000);
+                    setDefensa(getDefensa()+2); 
+            	}
+                break;
+            case 4:
+            	if(getDinero()>=1000){
+                    setDinero(getDinero()-1000);
+                    setAgilidad(getAgilidad()+2);  
+                }
+                break;
         }    
-    }      
+    }
+     
     
     //Funciones de apoyo
     
