@@ -77,7 +77,7 @@ public class Descanso extends Paneles{
 		botonAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.volverPantallaPrincipal();
+				v.volverPantallaPrincipal("Descanso");
 			}
 		});		
 	}

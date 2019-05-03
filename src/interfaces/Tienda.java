@@ -10,8 +10,6 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
-import clases.Heroe;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -259,7 +257,7 @@ public class Tienda extends Paneles{
 		botonAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.volverPantallaPrincipal();
+				v.volverPantallaPrincipal("Tienda");
 			}
 		});
 		

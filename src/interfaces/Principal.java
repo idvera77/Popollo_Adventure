@@ -32,12 +32,15 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import java.awt.TextArea;
 
 
 public class Principal extends Paneles {
 	private Ventana ventana;
-	private Heroe heroe;
-	
+
 	public Principal(Ventana v) {
 		super();
 		this.ventana=v;
@@ -111,8 +114,26 @@ public class Principal extends Paneles {
 		reputacionActual.setText(" Reputacion: "+Integer.toString(ventana.heroe.getReputacion()));
 		reputacionActual.setBounds(255, 328, 130, 25);
 		add(reputacionActual);
-	
+		
+		PanelTexto experienciaActual = new PanelTexto();
+		experienciaActual.setText(" Experiencia: ");
+		experienciaActual.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		experienciaActual.setBounds(389, 328, 130, 25);
+		add(experienciaActual);
+		
         //Añadiendo botones
+		
+		Botones combatePrueba = new Botones("Combate Prueba");
+		combatePrueba.setBounds(255, 186, 218, 23);
+		add(combatePrueba);
+		
+		Botones eventoPrueba = new Botones("Evento Prueba");
+		eventoPrueba.setBounds(255, 222, 218, 23);
+		add(eventoPrueba);
+		
+		Botones pruebaAfinidad = new Botones("Afinidad");
+		pruebaAfinidad.setBounds(255, 259, 218, 23);
+		add(pruebaAfinidad);
         
 		Botones botonGuardarPartida = new Botones("Guardar Partida");
 		botonGuardarPartida.setBounds(759, 98, 165, 23);
@@ -131,11 +152,33 @@ public class Principal extends Paneles {
 		add(botonSalir);
 
 		//Eventos de botones
-		botonGuardarPartida.addMouseListener(new MouseAdapter() {
+		
+		combatePrueba.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.guardarPartida(ventana.heroe.getHabilidadesArray(), ventana.heroe.getObjetosArray());
-				System.out.println("Partida guardada con exito.");			
+				ventana.cargarPantallaLucha();
+				general.Combate.batalla(ventana.heroe, ventana.enemigosArray.get(0));
+			}
+		});
+		
+		eventoPrueba.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				v.cargarPantallaTienda();
+			}
+		});	
+		
+		pruebaAfinidad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				v.cargarPantallaDescanso();
+			}
+		});	
+		
+		botonSalir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+					System.exit(0);  
 			}
 		});
 		
@@ -160,11 +203,22 @@ public class Principal extends Paneles {
 			}
 		});
 		
+
+
 		JLabel cuadro1 = new JLabel("");
+		cuadro1.setHorizontalAlignment(SwingConstants.CENTER);
+		cuadro1.setFont(new Font("Bahnschrift", Font.BOLD, 15));
 		cuadro1.setBackground(new Color(204, 204, 204));
+		cuadro1.setText("<html>Nivel: "+Integer.toString(ventana.heroe.getNivel())
+			+"<br/>Salud: "+Integer.toString(ventana.heroe.getSalud())+"/"+Integer.toString(ventana.heroe.getSaludMaxima())
+			+"<br/>Fuerza: "+Integer.toString(ventana.heroe.getFuerza())
+			+"<br/>Magia: "+Integer.toString(ventana.heroe.getMagia())
+			+"<br/>Defensa: "+Integer.toString(ventana.heroe.getDefensa())
+			+"<br/>Agilidad: "+Integer.toString(ventana.heroe.getAgilidad())	
+			+"</html>");
 		cuadro1.setOpaque(true);
 		cuadro1.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		cuadro1.setBounds(142, 51, 527, 124);
+		cuadro1.setBounds(10, 159, 145, 147);
 		add(cuadro1);
 		
 		JLabel cuadro2 = new JLabel("");
@@ -179,6 +233,7 @@ public class Principal extends Paneles {
 		imagenDescanso.setBounds(0, 0, 1008, 536);
 		imagenDescanso.setIcon(new ImageIcon("./imagenes/mapa.jpg"));
 		add(imagenDescanso);	
+
            
 	}
 }

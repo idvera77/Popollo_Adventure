@@ -26,12 +26,13 @@ public class Ventana extends JFrame{
 	private Principal pantallaPrincipal;
 	private Tienda pantallaTienda;
 	private Descanso pantallaDescanso;
-	private Combate pantallaCombate;
+	private Lucha pantallaLucha;
 	private Evento pantallaEvento;
 
-	public Connection connect;
-	public Heroe heroe;
-	public Enemigo enemigo;
+	Connection connect;
+	Heroe heroe;
+	ArrayList<Enemigo> enemigosArray;
+	ArrayList<Npc> npcsArray;
 	
 	public Ventana() {
 		super();
@@ -88,45 +89,41 @@ public class Ventana extends JFrame{
        
         this.heroe= new Heroe(nombreHeroe, descripcionHeroe, saludMaxHeroe, saludHeroe, fuerzaHeroe, magiaHeroe, agilidadHeroe,
             defensaHeroe, habilidadesHeroe, objetosHeroe, dineroHeroe, reputacionHeroe, experienciaHeroe, nivelHeroe); 
-        
 
+		//Enemigos y sus habilidades
+        ArrayList<Habilidad> habilidadesPoring=new ArrayList();
+	        habilidadesPoring.add(new Habilidad("Pedo magico", "Flatulencia rosada.", 7, 5, 5, "ofensivo"));
+	        habilidadesPoring.add(new Habilidad("Tirar jellopy", "Mejor no digo de donde sale.", 10, 3, 3, "ofensivo"));           
 		
-
+		ArrayList<Habilidad> habilidadesNigromante=new ArrayList();
+	        habilidadesNigromante.add(new Habilidad("Lanzar maldicion", "Dolor intenso en las entrañas.", 5, 5, 5, "ofensivo"));
+	        habilidadesNigromante.add(new Habilidad("Flecha acida", "Derrite armaduras y quema la carne.", 10, 3, 3, "ofensivo"));          
 		
-			//Enemigos y sus habilidades
-	        ArrayList<Habilidad> habilidadesPoring=new ArrayList();
-		        habilidadesPoring.add(new Habilidad("Pedo magico", "Flatulencia rosada.", 7, 5, 5, "ofensivo"));
-		        habilidadesPoring.add(new Habilidad("Tirar jellopy", "Mejor no digo de donde sale.", 10, 3, 3, "ofensivo"));           
-			
-			ArrayList<Habilidad> habilidadesNigromante=new ArrayList();
-		        habilidadesNigromante.add(new Habilidad("Lanzar maldicion", "Dolor intenso en las entrañas.", 5, 5, 5, "ofensivo"));
-		        habilidadesNigromante.add(new Habilidad("Flecha acida", "Derrite armaduras y quema la carne.", 10, 3, 3, "ofensivo"));          
-			
-			ArrayList<Habilidad> habilidadesGolem=new ArrayList();
-		        habilidadesGolem.add(new Habilidad("Mina magica", "El suelo a tu alrededor explota.", 5, 5, 5, "ofensivo"));
-		        habilidadesGolem.add(new Habilidad("Llamarada", "Quema el aire a su alrededor.", 7, 3, 3, "ofensivo"));     
-			
-			ArrayList<Habilidad> habilidadesGoblin=new ArrayList();
-		        habilidadesGoblin.add(new Habilidad("Lanza envenenada", "La punta de lanza brilla con un color extraña.", 10, 5, 5, "ofensivo"));
-		        habilidadesGoblin.add(new Habilidad("Flecha venenosa", "Es mejor que no te alcance.", 15, 3, 3, "ofensivo"));     
-			
-			ArrayList<Habilidad> habilidadesPulpoi=new ArrayList();
-		        habilidadesPulpoi.add(new Habilidad("Cosquillas", "Flatulencia rosada.", 10, 5, 5, "ofensivo"));
-		        habilidadesPulpoi.add(new Habilidad("Mirada viciosa", "Te desnuda con la mirada.", 15, 3, 3, "ofensivo"));               
-			
-			ArrayList<Enemigo> enemigosArray=new ArrayList();
-				enemigosArray.add(new Enemigo("Poring", "Una pequeña bola rosita", 60, 60,15, 3, 10, 5, habilidadesPoring, 500, 25));
-				enemigosArray.add(new Enemigo("Nigromante", "Da grima verlo", 80, 80, 20, 5, 15, 15, habilidadesNigromante, 1000, 50));
-				enemigosArray.add(new Enemigo("Golem", "Un muro enorme de piedra.", 150, 150, 30, 5, 15, 25, habilidadesGolem, 1500, 60));
-				enemigosArray.add(new Enemigo("Goblin", "Es muy rapido", 120, 120, 20, 3, 30, 10, habilidadesGoblin, 1500, 60));
-				enemigosArray.add(new Enemigo("Pulpoi", "Pulpo pervertido.", 300, 300, 40, 5, 20, 30, habilidadesPulpoi, 2500, 100));	
-			
-			
-			//Npcs
-			ArrayList<Npc> npcsArray=new ArrayList();	
-				npcsArray.add(new Npc("Narcyl", "Sacerdotisa novata.", "legal"));
-				npcsArray.add(new Npc("Tomberi", "Demasiado gruñon.", "neutral"));
-				npcsArray.add(new Npc("Mystra", "Hechicera demente.", "caotico"));
+		ArrayList<Habilidad> habilidadesGolem=new ArrayList();
+	        habilidadesGolem.add(new Habilidad("Mina magica", "El suelo a tu alrededor explota.", 5, 5, 5, "ofensivo"));
+	        habilidadesGolem.add(new Habilidad("Llamarada", "Quema el aire a su alrededor.", 7, 3, 3, "ofensivo"));     
+		
+		ArrayList<Habilidad> habilidadesGoblin=new ArrayList();
+	        habilidadesGoblin.add(new Habilidad("Lanza envenenada", "La punta de lanza brilla con un color extraña.", 10, 5, 5, "ofensivo"));
+	        habilidadesGoblin.add(new Habilidad("Flecha venenosa", "Es mejor que no te alcance.", 15, 3, 3, "ofensivo"));     
+		
+		ArrayList<Habilidad> habilidadesPulpoi=new ArrayList();
+	        habilidadesPulpoi.add(new Habilidad("Cosquillas", "Flatulencia rosada.", 10, 5, 5, "ofensivo"));
+	        habilidadesPulpoi.add(new Habilidad("Mirada viciosa", "Te desnuda con la mirada.", 15, 3, 3, "ofensivo"));               
+		
+		this.enemigosArray=new ArrayList();
+			enemigosArray.add(new Enemigo("Poring", "Una pequeña bola rosita", 60, 60,15, 3, 10, 5, habilidadesPoring, 500, 25));
+			enemigosArray.add(new Enemigo("Nigromante", "Da grima verlo", 80, 80, 20, 5, 15, 15, habilidadesNigromante, 1000, 50));
+			enemigosArray.add(new Enemigo("Golem", "Un muro enorme de piedra.", 150, 150, 30, 5, 15, 25, habilidadesGolem, 1500, 60));
+			enemigosArray.add(new Enemigo("Goblin", "Es muy rapido", 120, 120, 20, 3, 30, 10, habilidadesGoblin, 1500, 60));
+			enemigosArray.add(new Enemigo("Pulpoi", "Pulpo pervertido.", 300, 300, 40, 5, 20, 30, habilidadesPulpoi, 2500, 100));	
+		
+		
+		//Npcs
+		this.npcsArray=new ArrayList();	
+			npcsArray.add(new Npc("Narcyl", "Sacerdotisa novata.", "legal"));
+			npcsArray.add(new Npc("Tomberi", "Demasiado gruñon.", "neutral"));
+			npcsArray.add(new Npc("Mystra", "Hechicera demente.", "caotico"));
 				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -145,11 +142,14 @@ public class Ventana extends JFrame{
 		this.connect = connect;
 	}
 	
-	
-	
-	
-	//nueva partida - cargar funcion - guardar
-	
+	public Heroe getHeroe() {
+		return heroe;
+	}
+
+	public void setHeroe(Heroe heroe) {
+		this.heroe = heroe;
+	}
+
 	//Funcion que conecta con la base de datos y nos devuelve una conexion si no ocurre ningun error.
 	public Connection iniciarPartida() {
 		try {
@@ -269,80 +269,67 @@ public class Ventana extends JFrame{
 	 * De pantalla principal a pantalla tienda
 	 */
 	public void cargarPantallaTienda() {
-			if(this.pantallaTienda==null) {
-				this.pantallaTienda=new Tienda(this);
-			}
-			this.setTitle("Tienda");
-			this.pantallaPrincipal.setVisible(false);
-			this.setContentPane(this.pantallaTienda);
-			this.pantallaTienda.setVisible(true);
+		this.pantallaTienda=new Tienda(this);
+		this.setTitle("Tienda");
+		this.pantallaPrincipal.setVisible(false);
+		this.setContentPane(this.pantallaTienda);
+		this.pantallaTienda.setVisible(true);
 	}
 	
 	/**
 	 * De pantalla principal a pantalla descanso
 	 */
 	public void cargarPantallaDescanso() {
-			if(this.pantallaDescanso==null) {
-				this.pantallaDescanso=new Descanso(this);
-			}
-			this.setTitle("Descanso");
-			this.pantallaPrincipal.setVisible(false);
-			this.setContentPane(this.pantallaDescanso);
-			this.pantallaDescanso.setVisible(true);
+		this.pantallaDescanso=new Descanso(this);
+		this.setTitle("Descanso");
+		this.pantallaPrincipal.setVisible(false);
+		this.setContentPane(this.pantallaDescanso);
+		this.pantallaDescanso.setVisible(true);
 	}
 	
 	/**
 	 * De pantalla principal a pantalla evento
 	 */
 	public void cargarPantallaEvento() {
-			if(this.pantallaEvento==null) {
-				this.pantallaEvento=new Evento(this);
-			}
-			this.setTitle("Evento");
-			this.pantallaPrincipal.setVisible(false);
-			this.setContentPane(this.pantallaEvento);
-			this.pantallaEvento.setVisible(true);
+		this.pantallaEvento=new Evento(this);
+		this.setTitle("Evento");
+		this.pantallaPrincipal.setVisible(false);
+		this.setContentPane(this.pantallaEvento);
+		this.pantallaEvento.setVisible(true);
 	}
 	
 	/**
 	 * De pantalla principal a pantalla combate
 	 */
-	public void cargarPantallaCombate() {
-			if(this.pantallaCombate==null) {
-				this.pantallaCombate=new Combate(this);
-			}
-			this.setTitle("Combate");
-			this.pantallaPrincipal.setVisible(false);
-			this.setContentPane(this.pantallaCombate);
-			this.pantallaCombate.setVisible(true);
+	public void cargarPantallaLucha() {
+		this.pantallaLucha=new Lucha(this);
+		this.setTitle("Combate");
+		this.pantallaPrincipal.setVisible(false);
+		this.setContentPane(this.pantallaLucha);
+		this.pantallaLucha.setVisible(true);
 	}
 	
 	/**
 	 * Volver de cualquier lugar a la pantalla principal
 	 */
-	public void volverPantallaPrincipal() {
-		if(this.pantallaPrincipal==null) {
-			this.pantallaPrincipal=new Principal(this);
+	public void volverPantallaPrincipal(String cadena) {
+		switch(cadena) {
+			case "Tienda":
+				this.pantallaTienda.setVisible(false);	
+				break;
+			case "Descanso":
+				this.pantallaDescanso.setVisible(false);
+				break;
+			case "Evento":
+				this.pantallaEvento.setVisible(false);
+				break;
+			case "Lucha":
+				this.pantallaLucha.setVisible(false);
+				break;		
 		}
+		this.pantallaPrincipal=new Principal(this);
 		this.setTitle("Principal");
-		if(this.pantallaTienda==null) {
-			this.pantallaTienda=new Tienda(this);
-		}
-		if(this.pantallaEvento==null) {
-			this.pantallaEvento=new Evento(this);
-		}
-		if(this.pantallaDescanso==null) {
-			this.pantallaDescanso=new Descanso(this);
-		}
-		if(this.pantallaCombate==null) {
-			this.pantallaCombate=new Combate(this);
-		}
-		this.pantallaTienda.setVisible(false);
-		this.pantallaEvento.setVisible(false);
-		this.pantallaDescanso.setVisible(false);
-		this.pantallaCombate.setVisible(false);
 		this.setContentPane(this.pantallaPrincipal);
 		this.pantallaPrincipal.setVisible(true);
-}
-
+	}
 }
