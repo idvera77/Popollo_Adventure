@@ -1,4 +1,4 @@
-package popollo_adventures;
+package interfaces;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,15 +9,17 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import componentes.Botones;
 import componentes.Paneles;
 
-public class PantallaInicio extends Paneles {
+public class Inicio extends Paneles {
 	private Ventana ventana;
-	public PantallaInicio(Ventana ventanaInicio) {
-		Paneles panelInicio=this;
-		this.ventana=ventanaInicio;
+	
+	public Inicio(Ventana v) {
+		super();
+		this.ventana=v;
 		
 		//Añadiendo Botones
 				Botones botonIniciar = new Botones("Comenzar Partida");
@@ -46,29 +48,21 @@ public class PantallaInicio extends Paneles {
 				botonIniciar.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						//Connection connect = iniciarPartida();
-						Mapa panelMapa=new Mapa(ventana);
-						ventana.setContentPane(panelMapa);
-						panelInicio.setVisible(false);
+						ventana.cargarPantallaPrincipal();
 					}
 				});
 				
 				botonCargar.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						//Connection connect = cargarPartida();
-						Mapa panelMapa=new Mapa(ventanaInicio);
-						ventanaInicio.setContentPane(panelMapa);
-						panelInicio.setVisible(false);
+						ventana.cargarPantallaPrincipal();
 					}
 				});
 				
 				botonGaleria.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						Galeria panelGaleria=new Galeria(ventanaInicio);
-						ventanaInicio.setContentPane(panelGaleria);
-						panelInicio.setVisible(false);
+						ventana.cargarPantallaGaleria();
 					}
 				});
 				

@@ -1,7 +1,6 @@
-package popollo_adventures;
+package interfaces;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
@@ -12,9 +11,10 @@ import java.awt.event.MouseEvent;
 
 public class Galeria extends Paneles{
 	private Ventana ventana;
-	public Galeria(Ventana ventanaGaleria) {
-		Paneles panelGaleria=this;
-		this.ventana=ventanaGaleria;
+	
+	public Galeria(Ventana v) {
+		super();
+		this.ventana=v;
 		
 		ImageIcon[] imagenes = new ImageIcon[4];
 		imagenes[0] = new ImageIcon(".\\imagenes\\popollo.png");
@@ -147,9 +147,7 @@ public class Galeria extends Paneles{
 		botonAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				PantallaInicio panelPortada=new PantallaInicio(ventana);
-				ventana.setContentPane(panelPortada);
-				panelGaleria.setVisible(false);
+				ventana.volverPantallaInicio();
 			}
 		});
 	}		

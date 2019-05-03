@@ -1,25 +1,23 @@
-package popollo_adventures;
+package interfaces;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import clases.Heroe;
 import componentes.Botones;
 import componentes.Paneles;
 import componentes.PanelTexto;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
-public class PuntoDescanso extends Paneles{
+public class Descanso extends Paneles{
 	private Ventana ventana;
-	public PuntoDescanso(Ventana ventanaDescanso, Heroe heroe) {
-		Paneles panelDescanso=this;
-		this.ventana=ventanaDescanso;
+	
+	public Descanso(Ventana v) {
+		super();
+		this.ventana=v;
 		
 		PanelTexto mostrarDinero = new PanelTexto();
 		mostrarDinero.setText(" Oro: "+ventana.heroe.getDinero());
@@ -79,9 +77,7 @@ public class PuntoDescanso extends Paneles{
 		botonAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Mapa panelMapa =new Mapa(ventana);
-				ventana.setContentPane(panelMapa);
-				panelDescanso.setVisible(false);
+				v.volverPantallaPrincipal();
 			}
 		});		
 	}

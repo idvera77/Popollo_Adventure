@@ -1,4 +1,4 @@
-package popollo_adventures;
+package interfaces;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,6 +9,9 @@ import componentes.Paneles;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
+import clases.Heroe;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -16,10 +19,10 @@ import java.awt.event.ActionEvent;
 public class Tienda extends Paneles{
 	private Ventana ventana;
 	
-	public Tienda(Ventana ventanaTienda) {
-		Paneles panelTienda=this;
-		this.ventana=ventanaTienda;
-		
+	public Tienda(Ventana v) {
+		super();
+		this.ventana=v;
+
 		PanelTexto mostrarDinero = new PanelTexto();
 		mostrarDinero.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		mostrarDinero.setBounds(10, 40, 109, 25);
@@ -183,7 +186,7 @@ public class Tienda extends Paneles{
 		comprarBombaP.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.comprarObjetos(0);
+				v.heroe.comprarObjetos(0);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 				cantidadBombaP.setText(Integer.toString(ventana.heroe.getObjetosArray().get(0).getCantidad()));	
 			}
@@ -256,9 +259,7 @@ public class Tienda extends Paneles{
 		botonAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Mapa panelMapa =new Mapa(ventana);
-				ventana.setContentPane(panelMapa);
-				panelTienda.setVisible(false);
+				v.volverPantallaPrincipal();
 			}
 		});
 		

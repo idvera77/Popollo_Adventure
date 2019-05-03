@@ -1,4 +1,4 @@
-package popollo_adventures;
+package interfaces;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,15 +21,25 @@ import exceptions.InvalidMoralException;
 import exceptions.InvalidTipoException;
 
 public class Ventana extends JFrame{
-	PantallaInicio panelPrincipal;	
-	Connection connect;
-	Heroe heroe;
-	Enemigo enemigo;
+	private Inicio pantallaInicio;	
+	private Galeria pantallaGaleria;
+	private Principal pantallaPrincipal;
+	private Tienda pantallaTienda;
+	private Descanso pantallaDescanso;
+	private Combate pantallaCombate;
+	private Evento pantallaEvento;
+
+	public Connection connect;
+	public Heroe heroe;
+	public Enemigo enemigo;
+	
 	public Ventana() {
-		setTitle("Popollo Adventure");
-		this.setSize(1024,576);
-		panelPrincipal=new PantallaInicio(this);
-		setContentPane(panelPrincipal);
+		super();
+		this.setTitle("Popollo Adventure");
+		pantallaInicio=new Inicio(this);
+		setSize(1024,576);
+		setVisible(true);
+		setContentPane(pantallaInicio);
 		setLocationRelativeTo(null);
 		
 		try {
@@ -118,9 +128,6 @@ public class Ventana extends JFrame{
 				npcsArray.add(new Npc("Tomberi", "Demasiado gruñon.", "neutral"));
 				npcsArray.add(new Npc("Mystra", "Hechicera demente.", "caotico"));
 				
-				System.out.println(heroe.getObjetosArray().get(0).getNombre());
-				System.out.println(heroe.getObjetosArray().get(1).getNombre());
-				System.out.println(heroe.getObjetosArray().get(2).getNombre());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -211,10 +218,131 @@ public class Ventana extends JFrame{
 	            smt.executeUpdate();
 	        }
 	        } catch (SQLException ex) {
-	            Logger.getLogger(Popollo_Adventures.class.getName()).log(Level.SEVERE, null, ex);
+	            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
 	            ex.getStackTrace();
 	            System.err.println("\n!!!Error al conectarse con la base de datos!!!");
 	        }      
 	} 
 	
+	//Movimiento entre paneles.	
+	
+	/**
+	 * De pantalla de inicio a pantalla principal
+	 */
+	public void cargarPantallaPrincipal() {
+		if(this.pantallaPrincipal==null) {
+			this.pantallaPrincipal=new Principal(this);
+		}
+		this.setTitle("Principal");
+		this.pantallaInicio.setVisible(false);
+		this.setContentPane(this.pantallaPrincipal);
+		this.pantallaPrincipal.setVisible(true);
+	}
+	
+	/**
+	 * De pantalla de inicio a pantalla galeria
+	 */
+	public void cargarPantallaGaleria() {
+		if(this.pantallaGaleria==null) {
+			this.pantallaGaleria=new Galeria(this);
+		}
+		this.setTitle("Galeria");
+		this.pantallaInicio.setVisible(false);
+		this.setContentPane(this.pantallaGaleria);
+		this.pantallaGaleria.setVisible(true);
+	}
+	
+	/**
+	 * De pantalla galeria a pantalla de inicio
+	 */
+	public void volverPantallaInicio() {
+		if(this.pantallaInicio==null) {
+			this.pantallaInicio=new Inicio(this);
+		}
+		this.setTitle("Popollo Adventure");
+		this.pantallaGaleria.setVisible(false);
+		this.setContentPane(this.pantallaInicio);
+		this.pantallaInicio.setVisible(true);
+	}
+	
+	/**
+	 * De pantalla principal a pantalla tienda
+	 */
+	public void cargarPantallaTienda() {
+			if(this.pantallaTienda==null) {
+				this.pantallaTienda=new Tienda(this);
+			}
+			this.setTitle("Tienda");
+			this.pantallaPrincipal.setVisible(false);
+			this.setContentPane(this.pantallaTienda);
+			this.pantallaTienda.setVisible(true);
+	}
+	
+	/**
+	 * De pantalla principal a pantalla descanso
+	 */
+	public void cargarPantallaDescanso() {
+			if(this.pantallaDescanso==null) {
+				this.pantallaDescanso=new Descanso(this);
+			}
+			this.setTitle("Descanso");
+			this.pantallaPrincipal.setVisible(false);
+			this.setContentPane(this.pantallaDescanso);
+			this.pantallaDescanso.setVisible(true);
+	}
+	
+	/**
+	 * De pantalla principal a pantalla evento
+	 */
+	public void cargarPantallaEvento() {
+			if(this.pantallaEvento==null) {
+				this.pantallaEvento=new Evento(this);
+			}
+			this.setTitle("Evento");
+			this.pantallaPrincipal.setVisible(false);
+			this.setContentPane(this.pantallaEvento);
+			this.pantallaEvento.setVisible(true);
+	}
+	
+	/**
+	 * De pantalla principal a pantalla combate
+	 */
+	public void cargarPantallaCombate() {
+			if(this.pantallaCombate==null) {
+				this.pantallaCombate=new Combate(this);
+			}
+			this.setTitle("Combate");
+			this.pantallaPrincipal.setVisible(false);
+			this.setContentPane(this.pantallaCombate);
+			this.pantallaCombate.setVisible(true);
+	}
+	
+	/**
+	 * Volver de cualquier lugar a la pantalla principal
+	 */
+	public void volverPantallaPrincipal() {
+		if(this.pantallaPrincipal==null) {
+			this.pantallaPrincipal=new Principal(this);
+		}
+		this.setTitle("Principal");
+		if(this.pantallaTienda==null) {
+			this.pantallaTienda=new Tienda(this);
+		}
+		if(this.pantallaEvento==null) {
+			this.pantallaEvento=new Evento(this);
+		}
+		if(this.pantallaDescanso==null) {
+			this.pantallaDescanso=new Descanso(this);
+		}
+		if(this.pantallaCombate==null) {
+			this.pantallaCombate=new Combate(this);
+		}
+		this.pantallaTienda.setVisible(false);
+		this.pantallaEvento.setVisible(false);
+		this.pantallaDescanso.setVisible(false);
+		this.pantallaCombate.setVisible(false);
+		this.setContentPane(this.pantallaPrincipal);
+		this.pantallaPrincipal.setVisible(true);
+}
+
 }

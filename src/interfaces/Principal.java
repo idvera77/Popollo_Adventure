@@ -1,4 +1,4 @@
-package popollo_adventures;
+package interfaces;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -34,12 +34,13 @@ import java.awt.event.ActionEvent;
 import java.awt.Component;
 
 
-public class Mapa extends Paneles {
+public class Principal extends Paneles {
 	private Ventana ventana;
 	private Heroe heroe;
-	public Mapa(Ventana ventanaMapa) {
-		Paneles panelMapa=this;
-		this.ventana=ventanaMapa;
+	
+	public Principal(Ventana v) {
+		super();
+		this.ventana=v;
 		
 		PanelTexto mostrarDinero = new PanelTexto();
 		mostrarDinero.setBorder(new LineBorder(new Color(0, 0, 0), 3));
@@ -121,9 +122,9 @@ public class Mapa extends Paneles {
 		botonTienda.setBounds(759, 132, 165, 23);
 		add(botonTienda);
 		
-		Botones botonPuntoDescanso = new Botones("Punto de descanso");
-		botonPuntoDescanso.setBounds(759, 166, 165, 23);
-		add(botonPuntoDescanso);
+		Botones botonDescanso = new Botones("Punto de descanso");
+		botonDescanso.setBounds(759, 166, 165, 23);
+		add(botonDescanso);
 		
 		Botones botonSalir = new Botones("Salir");
 		botonSalir.setBounds(709, 428, 215, 23);
@@ -138,23 +139,19 @@ public class Mapa extends Paneles {
 			}
 		});
 		
-		botonPuntoDescanso.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PuntoDescanso panelDescanso=new PuntoDescanso(ventanaMapa, heroe);
-				ventana.setContentPane(panelDescanso);
-				panelMapa.setVisible(false);	
-			}
-		});
-		
 		botonTienda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Tienda panelTienda=new Tienda(ventana);
-				ventanaMapa.setContentPane(panelTienda);
-				panelMapa.setVisible(false);	
+				v.cargarPantallaTienda();
 			}
-		});
+		});	
+		
+		botonDescanso.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				v.cargarPantallaDescanso();
+			}
+		});	
 		
 		botonSalir.addMouseListener(new MouseAdapter() {
 			@Override
