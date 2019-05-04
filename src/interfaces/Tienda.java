@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import componentes.Botones;
+import componentes.LabelTexto;
 import componentes.PanelTexto;
 import componentes.Paneles;
 import java.awt.Color;
@@ -12,6 +13,7 @@ import javax.swing.border.LineBorder;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 
 public class Tienda extends Paneles{
@@ -20,16 +22,10 @@ public class Tienda extends Paneles{
 	public Tienda(Ventana v) {
 		super();
 		this.ventana=v;
-
-		PanelTexto mostrarDinero = new PanelTexto();
-		mostrarDinero.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		mostrarDinero.setBounds(10, 40, 109, 25);
-		mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
-		add(mostrarDinero);
 		
 		PanelTexto panelPrecioObjeto = new PanelTexto();
 		panelPrecioObjeto.setText("Precio");
-		panelPrecioObjeto.setBounds(302, 96, 54, 23);
+		panelPrecioObjeto.setBounds(310, 96, 54, 23);
 		add(panelPrecioObjeto);
 		
 		PanelTexto panelComprar = new PanelTexto();
@@ -39,146 +35,150 @@ public class Tienda extends Paneles{
 		
 		PanelTexto panelCantidad = new PanelTexto();
 		panelCantidad.setText("Cantidad");
-		panelCantidad.setBounds(60, 96, 72, 23);
+		panelCantidad.setBounds(65, 96, 76, 23);
 		add(panelCantidad);
 		
 		PanelTexto cantidadBombaP = new PanelTexto();
 		cantidadBombaP.setText(Integer.toString(ventana.heroe.getObjetosArray().get(0).getCantidad()));
-		cantidadBombaP.setBounds(91, 160, 54, 25);
+		cantidadBombaP.setBounds(91, 130, 41, 25);
 		add(cantidadBombaP);
 		
 		PanelTexto cantidadBombaG = new PanelTexto();
 		cantidadBombaG.setText(Integer.toString(ventana.heroe.getObjetosArray().get(1).getCantidad()));
-		cantidadBombaG.setBounds(91, 192, 41, 23);
+		cantidadBombaG.setBounds(91, 160, 41, 23);
 		add(cantidadBombaG);
 		
 		PanelTexto cantidadPocion = new PanelTexto();
 		cantidadPocion.setText(Integer.toString(ventana.heroe.getObjetosArray().get(2).getCantidad()));
-		cantidadPocion.setBounds(91, 128, 41, 23);
+		cantidadPocion.setBounds(91, 190, 41, 23);
 		add(cantidadPocion);
 		
 		PanelTexto precioBombaP = new PanelTexto();
 		precioBombaP.setText(Integer.toString(ventana.heroe.getObjetosArray().get(0).getPrecio()));
-		precioBombaP.setBounds(319, 160, 41, 23);
+		precioBombaP.setBounds(322, 130, 41, 23);
 		add(precioBombaP);
 		
 		PanelTexto precioBombaG = new PanelTexto();
 		precioBombaG.setText(Integer.toString(ventana.heroe.getObjetosArray().get(1).getPrecio()));
-		precioBombaG.setBounds(319, 192, 41, 23);
+		precioBombaG.setBounds(322, 160, 41, 23);
 		add(precioBombaG);
 		
 		PanelTexto precioPocion = new PanelTexto();
 		precioPocion.setText(Integer.toString(ventana.heroe.getObjetosArray().get(2).getPrecio()));
-		precioPocion.setBounds(319, 128, 41, 23);
+		precioPocion.setBounds(322, 190, 41, 23);
 		add(precioPocion);
 		
 		PanelTexto panelAtributosActual = new PanelTexto();
 		panelAtributosActual.setText("Actual");
-		panelAtributosActual.setBounds(73, 260, 59, 23);
+		panelAtributosActual.setBounds(65, 255, 59, 23);
 		add(panelAtributosActual);
 		
 		PanelTexto panelMejorar = new PanelTexto();
 		panelMejorar.setText("Mejorar");
-		panelMejorar.setBounds(191, 260, 109, 23);
+		panelMejorar.setBounds(176, 255, 109, 23);
 		add(panelMejorar);
 		
 		PanelTexto panelPrecioAtributo = new PanelTexto();
 		panelPrecioAtributo.setText("Precio");
-		panelPrecioAtributo.setBounds(310, 260, 54, 23);
+		panelPrecioAtributo.setBounds(300, 255, 54, 23);
 		add(panelPrecioAtributo);
 		
 		PanelTexto precioSalud = new PanelTexto();
 		precioSalud.setText("750");
-		precioSalud.setBounds(322, 290, 33, 23);
+		precioSalud.setBounds(312, 290, 33, 23);
 		add(precioSalud);
 		
 		PanelTexto precioFuerza = new PanelTexto();
 		precioFuerza.setText("1000");
-		precioFuerza.setBounds(319, 322, 41, 23);
+		precioFuerza.setBounds(309, 322, 41, 23);
 		add(precioFuerza);
 		
 		PanelTexto precioMagia = new PanelTexto();
 		precioMagia.setText("1500");
-		precioMagia.setBounds(319, 354, 41, 23);
+		precioMagia.setBounds(309, 354, 41, 23);
 		add(precioMagia);
 		
 		PanelTexto precioDefensa = new PanelTexto();
 		precioDefensa.setText("1000");
-		precioDefensa.setBounds(319, 386, 41, 23);
+		precioDefensa.setBounds(309, 386, 41, 23);
 		add(precioDefensa);
 		
 		PanelTexto precioAgilidad = new PanelTexto();
 		precioAgilidad.setText("1000");
-		precioAgilidad.setBounds(319, 417, 41, 23);
+		precioAgilidad.setBounds(309, 417, 41, 23);
 		add(precioAgilidad);
 		
 		PanelTexto saludActual = new PanelTexto();
 		saludActual.setText(Integer.toString(ventana.heroe.getSaludMaxima()));
-		saludActual.setBounds(91, 290, 41, 23);
+		saludActual.setBounds(81, 290, 41, 23);
 		add(saludActual);
 		
 		PanelTexto fuerzaActual = new PanelTexto();
 		fuerzaActual.setText(Integer.toString(ventana.heroe.getFuerza()));
-		fuerzaActual.setBounds(91, 322, 41, 23);
+		fuerzaActual.setBounds(81, 322, 41, 23);
 		add(fuerzaActual);
 		
 		PanelTexto magiaActual = new PanelTexto();
 		magiaActual.setText(Integer.toString(ventana.heroe.getMagia()));
-		magiaActual.setBounds(91, 354, 41, 23);
+		magiaActual.setBounds(81, 354, 41, 23);
 		add(magiaActual);
 		
 		PanelTexto defensaActual = new PanelTexto();
 		defensaActual.setText(Integer.toString(ventana.heroe.getDefensa()));
-		defensaActual.setBounds(91, 386, 41, 23);
+		defensaActual.setBounds(81, 386, 41, 23);
 		add(defensaActual);
 		
 		PanelTexto agilidadActual = new PanelTexto();
 		agilidadActual.setText(Integer.toString(ventana.heroe.getAgilidad()));
-		agilidadActual.setBounds(91, 417, 41, 23);
+		agilidadActual.setBounds(81, 417, 41, 23);
 		add(agilidadActual);
 		
 		//Añadiendo botones
 		//Eventos de botones
 		Botones comprarBombaP = new Botones("Bomba Pequeña");
-		comprarBombaP.setBounds(147, 160, 149, 25);
+		comprarBombaP.setBounds(141, 130, 159, 25);
 		add(comprarBombaP);
 		
 		Botones comprarBombaG = new Botones("Bomba Grande");
-		comprarBombaG.setBounds(147, 192, 149, 25);
+		comprarBombaG.setBounds(141, 160, 159, 25);
 		add(comprarBombaG);
 		
 		Botones comprarPocion = new Botones("Pocion");
-		comprarPocion.setBounds(147, 128, 149, 25);
+		comprarPocion.setBounds(141, 190, 159, 25);
 		add(comprarPocion);
 		
 		Botones mejorarSalud = new Botones("Salud maxima +20");
-		mejorarSalud.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		mejorarSalud.setBounds(141, 290, 159, 25);
+		mejorarSalud.setBounds(131, 290, 159, 25);
 		add(mejorarSalud);
 		
 		Botones mejorarFuerza = new Botones("Fuerza +5");
-		mejorarFuerza.setBounds(141, 322, 159, 25);
+		mejorarFuerza.setBounds(131, 322, 159, 25);
 		add(mejorarFuerza);
 		
 		Botones mejorarMagia = new Botones("Magia +1");
-		mejorarMagia.setBounds(141, 354, 159, 25);
+		mejorarMagia.setBounds(131, 354, 159, 25);
 		add(mejorarMagia);
 		
 		Botones mejorarAgilidad = new Botones("Agilidad +2");
-		mejorarAgilidad.setBounds(141, 417, 159, 25);
+		mejorarAgilidad.setBounds(131, 417, 159, 25);
 		add(mejorarAgilidad);
 		
 		Botones mejorarDefensa = new Botones("Defensa +2");
-		mejorarDefensa.setBounds(141, 386, 159, 25);
+		mejorarDefensa.setBounds(131, 386, 159, 25);
 		add(mejorarDefensa);
 		
 		
 		Botones botonAtras = new Botones("Volver al mapa");
 		botonAtras.setBounds(709, 428, 215, 23);
 		add(botonAtras);
+		
+		LabelTexto mostrarDinero = new LabelTexto();
+		mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
+		mostrarDinero.setBackground(new Color(204, 204, 204));
+		mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(ventana.heroe.getDinero())
+				+"</b></center></html>");
+		mostrarDinero.setBounds(10, 29, 109, 40);
+		add(mostrarDinero);
 			
 		//Eventos de botones
 		comprarBombaP.addMouseListener(new MouseAdapter() {

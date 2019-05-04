@@ -7,10 +7,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import componentes.Botones;
+import componentes.LabelTexto;
 import componentes.Paneles;
 import componentes.PanelTexto;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Font;
 
 public class Descanso extends Paneles{
 	private Ventana ventana;
@@ -19,10 +21,11 @@ public class Descanso extends Paneles{
 		super();
 		this.ventana=v;
 		
-		PanelTexto mostrarDinero = new PanelTexto();
-		mostrarDinero.setText(" Oro: "+ventana.heroe.getDinero());
-		mostrarDinero.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		mostrarDinero.setBounds(815, 107, 109, 25);
+		LabelTexto mostrarDinero = new LabelTexto();
+		mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
+		mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(ventana.heroe.getDinero())
+				+"</b></center></html>");
+		mostrarDinero.setBounds(10, 29, 109, 40);
 		add(mostrarDinero);
 		
 		//Añadiendo botones

@@ -127,6 +127,7 @@ public class Heroe extends Personaje{
         System.out.println(listaHabilidades);      
     }
     
+    
     /**
      * Muestra un listado de las habilidades y los usos restantes guardados en un ArrayList.
      */

@@ -4,135 +4,43 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
-import clases.Enemigo;
-import clases.Habilidad;
-import clases.Heroe;
-import clases.Npc;
-import clases.Objeto;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import componentes.Botones;
-import componentes.PanelTexto;
+import componentes.LabelTexto;
 import componentes.Paneles;
-import exceptions.InvalidTipoException;
-import exceptions.InvalidMoralException;
-import java.awt.event.ActionListener;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.Component;
-import javax.swing.JTextField;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.TextArea;
 
+import java.awt.Color;
+import java.awt.Font;
 
 public class Principal extends Paneles {
 	private Ventana ventana;
-
+	
 	public Principal(Ventana v) {
 		super();
 		this.ventana=v;
 		
-		PanelTexto mostrarDinero = new PanelTexto();
-		mostrarDinero.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		mostrarDinero.setBounds(160, 328, 98, 25);
-		mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
-		add(mostrarDinero);
-		
-		PanelTexto cantidadBombaP = new PanelTexto();
-		cantidadBombaP.setText("Bomba Pequeña: "+Integer.toString(ventana.heroe.getObjetosArray().get(0).getCantidad()));
-		cantidadBombaP.setBounds(179, 371, 165, 25);
-		add(cantidadBombaP);
-		
-		PanelTexto cantidadBombaG = new PanelTexto();
-		cantidadBombaG.setText("Bomba Grande: "+Integer.toString(ventana.heroe.getObjetosArray().get(1).getCantidad()));
-		cantidadBombaG.setBounds(179, 401, 165, 23);
-		add(cantidadBombaG);
-		
-		PanelTexto cantidadPocion = new PanelTexto();
-		cantidadPocion.setText("Pocion: "+Integer.toString(ventana.heroe.getObjetosArray().get(2).getCantidad()));
-		cantidadPocion.setBounds(179, 431, 165, 23);
-		add(cantidadPocion);
-
-		PanelTexto habilidad1 = new PanelTexto();
-		habilidad1.setText(ventana.heroe.getHabilidadesArray().get(0).getNombre()+": "+Integer.toString(ventana.heroe.getHabilidadesArray().get(0).getUsosRestantes())
-			+"/"+Integer.toString(ventana.heroe.getHabilidadesArray().get(0).getUsosMaximos()));
-		habilidad1.setBounds(344, 371, 175, 23);
-		add(habilidad1);
-		
-		PanelTexto habilidad2 = new PanelTexto();
-		habilidad2.setText(ventana.heroe.getHabilidadesArray().get(1).getNombre()+": "+Integer.toString(ventana.heroe.getHabilidadesArray().get(1).getUsosRestantes())
-		+"/"+Integer.toString(ventana.heroe.getHabilidadesArray().get(1).getUsosMaximos()));
-		habilidad2.setBounds(344, 401, 175, 23);
-		add(habilidad2);
-		
-		PanelTexto habilidad3 = new PanelTexto();
-		habilidad3.setText(ventana.heroe.getHabilidadesArray().get(2).getNombre()+": "+Integer.toString(ventana.heroe.getHabilidadesArray().get(2).getUsosRestantes())
-		+"/"+Integer.toString(ventana.heroe.getHabilidadesArray().get(2).getUsosMaximos()));
-		habilidad3.setBounds(344, 431, 175, 23);
-		add(habilidad3);		
-		
-		PanelTexto saludActual = new PanelTexto();
-		saludActual.setText("Salud: "+Integer.toString(ventana.heroe.getSalud())+"/"+Integer.toString(ventana.heroe.getSaludMaxima()));
-		saludActual.setBounds(29, 341, 120, 23);
-		add(saludActual);
-		
-		PanelTexto fuerzaActual = new PanelTexto();
-		fuerzaActual.setText("Fuerza: "+Integer.toString(ventana.heroe.getFuerza()));
-		fuerzaActual.setBounds(29, 371, 120, 23);
-		add(fuerzaActual);
-		
-		PanelTexto magiaActual = new PanelTexto();
-		magiaActual.setText("Magia: "+Integer.toString(ventana.heroe.getMagia()));
-		magiaActual.setBounds(29, 401, 120, 23);
-		add(magiaActual);
-		
-		PanelTexto defensaActual = new PanelTexto();
-		defensaActual.setText("Defensa: "+Integer.toString(ventana.heroe.getDefensa()));
-		defensaActual.setBounds(29, 431, 120, 23);
-		add(defensaActual);
-		
-		PanelTexto agilidadActual = new PanelTexto();
-		agilidadActual.setText("Agilidad: "+Integer.toString(ventana.heroe.getAgilidad()));
-		agilidadActual.setBounds(29, 461, 120, 23);
-		add(agilidadActual);
-    		
-		PanelTexto reputacionActual = new PanelTexto() ;
-		reputacionActual.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		reputacionActual.setText(" Reputacion: "+Integer.toString(ventana.heroe.getReputacion()));
-		reputacionActual.setBounds(255, 328, 130, 25);
-		add(reputacionActual);
-		
-		PanelTexto experienciaActual = new PanelTexto();
-		experienciaActual.setText(" Experiencia: ");
-		experienciaActual.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		experienciaActual.setBounds(389, 328, 130, 25);
-		add(experienciaActual);
+		//Lista de eventos y progreso.
+		ventana.barraExploracion.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
+		ventana.barraExploracion.setStringPainted(true);
+		ventana.barraExploracion.setForeground(new Color(88, 164, 146));
+		ventana.barraExploracion.setFont(new Font("Bahnschrift", Font.BOLD, 15));
+		ventana.barraExploracion.setBounds(218, 42, 481, 70);
+		add(ventana.barraExploracion);
 		
         //Añadiendo botones
 		
 		Botones combatePrueba = new Botones("Combate Prueba");
-		combatePrueba.setBounds(255, 186, 218, 23);
+		combatePrueba.setBounds(709, 200, 218, 23);
 		add(combatePrueba);
 		
 		Botones eventoPrueba = new Botones("Evento Prueba");
-		eventoPrueba.setBounds(255, 222, 218, 23);
+		eventoPrueba.setBounds(709, 234, 218, 23);
 		add(eventoPrueba);
 		
 		Botones pruebaAfinidad = new Botones("Afinidad");
-		pruebaAfinidad.setBounds(255, 259, 218, 23);
+		pruebaAfinidad.setBounds(709, 268, 218, 23);
 		add(pruebaAfinidad);
         
 		Botones botonGuardarPartida = new Botones("Guardar Partida");
@@ -147,6 +55,10 @@ public class Principal extends Paneles {
 		botonDescanso.setBounds(759, 166, 165, 23);
 		add(botonDescanso);
 		
+		Botones botoAvanzar = new Botones("Avanzar");
+		botoAvanzar.setBounds(354, 123, 218, 23);
+		add(botoAvanzar);
+		
 		Botones botonSalir = new Botones("Salir");
 		botonSalir.setBounds(709, 428, 215, 23);
 		add(botonSalir);
@@ -157,7 +69,8 @@ public class Principal extends Paneles {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.cargarPantallaLucha();
-				general.Combate.batalla(ventana.heroe, ventana.enemigosArray.get(0));
+				general.Combate.batalla(ventana.heroe, ventana.enemigosArray.get(0));	
+				avanzarBarraProgreso();
 			}
 		});
 		
@@ -175,10 +88,11 @@ public class Principal extends Paneles {
 			}
 		});	
 		
-		botonSalir.addMouseListener(new MouseAdapter() {
+		botonGuardarPartida.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-					System.exit(0);  
+				System.out.println("guardado");
+				ventana.guardarPartida(ventana.heroe.getHabilidadesArray(), ventana.heroe.getObjetosArray()); 
 			}
 		});
 		
@@ -196,6 +110,13 @@ public class Principal extends Paneles {
 			}
 		});	
 		
+		botoAvanzar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				avanzarBarraProgreso();
+			}
+		});
+		
 		botonSalir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -203,45 +124,90 @@ public class Principal extends Paneles {
 			}
 		});
 		
-
-
-		JLabel cuadro1 = new JLabel("");
-		cuadro1.setHorizontalAlignment(SwingConstants.CENTER);
-		cuadro1.setFont(new Font("Bahnschrift", Font.BOLD, 15));
-		cuadro1.setBackground(new Color(204, 204, 204));
-		cuadro1.setText("<html>Nivel: "+Integer.toString(ventana.heroe.getNivel())
-			+"<br/>Salud: "+Integer.toString(ventana.heroe.getSalud())+"/"+Integer.toString(ventana.heroe.getSaludMaxima())
-			+"<br/>Fuerza: "+Integer.toString(ventana.heroe.getFuerza())
-			+"<br/>Magia: "+Integer.toString(ventana.heroe.getMagia())
-			+"<br/>Defensa: "+Integer.toString(ventana.heroe.getDefensa())
-			+"<br/>Agilidad: "+Integer.toString(ventana.heroe.getAgilidad())	
-			+"</html>");
-		cuadro1.setOpaque(true);
-		cuadro1.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		cuadro1.setBounds(10, 159, 145, 147);
-		add(cuadro1);
+		LabelTexto mostrarAtributos = new LabelTexto();
+		mostrarAtributos.setText("<html><center><b>Nivel:&ensp;"+Integer.toString(ventana.heroe.getNivel())+" ("+Integer.toString(ventana.heroe.getExperiencia())+"/100)</b>"
+			+"<br/>Salud:&ensp;"+Integer.toString(ventana.heroe.getSalud())+"/"+Integer.toString(ventana.heroe.getSaludMaxima())
+			+"<br/>Fuerza:&ensp;"+Integer.toString(ventana.heroe.getFuerza())
+			+"<br/>Magia:&ensp;"+Integer.toString(ventana.heroe.getMagia())
+			+"<br/>Defensa:&ensp;"+Integer.toString(ventana.heroe.getDefensa())
+			+"<br/>Agilidad:&ensp;"+Integer.toString(ventana.heroe.getAgilidad())	
+			+"</center></html>");
+		mostrarAtributos.setBounds(10, 370, 130, 155);
+		add(mostrarAtributos);
 		
-		JLabel cuadro2 = new JLabel("");
-		cuadro2.setOpaque(true);
-		cuadro2.setBackground(new Color(204, 204, 204));
-		cuadro2.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		cuadro2.setBounds(10, 328, 516, 171);
-		add(cuadro2);	
+		LabelTexto mostrarHabilidades = new LabelTexto();
+		mostrarHabilidades.setText("<html><center><b>Habilidades</b><br/>"
+				+ventana.heroe.getHabilidadesArray().get(0).getNombre()+"&ensp;"
+				+Integer.toString(ventana.heroe.getHabilidadesArray().get(0).getUsosRestantes())+"/"
+				+Integer.toString(ventana.heroe.getHabilidadesArray().get(0).getUsosMaximos())+"<br/>"
+				+ventana.heroe.getHabilidadesArray().get(1).getNombre()+"&ensp;"
+				+Integer.toString(ventana.heroe.getHabilidadesArray().get(1).getUsosRestantes())+"/"
+				+Integer.toString(ventana.heroe.getHabilidadesArray().get(1).getUsosMaximos())+"<br/>"
+				+ventana.heroe.getHabilidadesArray().get(2).getNombre()+"&ensp;"
+				+Integer.toString(ventana.heroe.getHabilidadesArray().get(2).getUsosRestantes())+"/"
+				+Integer.toString(ventana.heroe.getHabilidadesArray().get(2).getUsosMaximos())+"<br/>"
+				+"</center></html>");
+		mostrarHabilidades.setBounds(150, 436, 220, 89);
+		add(mostrarHabilidades);
+
+		LabelTexto mostrarObjetos = new LabelTexto();
+		mostrarObjetos.setText("<html><center><b>Objetos</b><br/>"
+				+ventana.heroe.getObjetosArray().get(0).getNombre()+"&ensp;"
+				+Integer.toString(ventana.heroe.getObjetosArray().get(0).getCantidad())+"<br/>"
+				+ventana.heroe.getObjetosArray().get(1).getNombre()+"&ensp;"
+				+Integer.toString(ventana.heroe.getObjetosArray().get(1).getCantidad())+"<br/>"
+				+ventana.heroe.getObjetosArray().get(2).getNombre()+"&ensp;"
+				+Integer.toString(ventana.heroe.getObjetosArray().get(2).getCantidad())+"<br/>"
+				+"</center></html>");
+		mostrarObjetos.setBounds(380, 436, 220, 89);
+		add(mostrarObjetos);
+		
+		LabelTexto mostrarDineroReputacion = new LabelTexto();
+		mostrarDineroReputacion.setText("<html><center><b>Oro:&ensp;"+Integer.toString(ventana.heroe.getDinero())
+				+"<br/>Reputacion:&ensp;"+Integer.toString(ventana.heroe.getReputacion())	
+				+"</b></center></html>");
+		mostrarDineroReputacion.setBounds(10, 29, 130, 51);
+		add(mostrarDineroReputacion);
 		
 		//Imagen de fondo
 		JLabel imagenDescanso = new JLabel("");
 		imagenDescanso.setBounds(0, 0, 1008, 536);
 		imagenDescanso.setIcon(new ImageIcon("./imagenes/mapa.jpg"));
-		add(imagenDescanso);	
-
-           
+		add(imagenDescanso);	        
+	}	
+	
+	public void avanzarBarraProgreso() {
+		ventana.barraExploracion.setValue(ventana.barraExploracion.getValue()+1);
+		if(ventana.barraExploracion.getValue()==0) {
+			ventana.barraExploracion.setString("Comienza tu aventura");
+		}
+		else if(ventana.barraExploracion.getValue()==1) {
+			ventana.barraExploracion.setString("Un pequeño paso para un gran Popollo");			
+		}
+		else if(ventana.barraExploracion.getValue()>=2&&ventana.barraExploracion.getValue()<=5) {
+			ventana.barraExploracion.setString("Es duro pero solo tu puedes conseguirlo!!!");			
+		}
+		else if(ventana.barraExploracion.getValue()>=6&&ventana.barraExploracion.getValue()<=9) {
+			ventana.barraExploracion.setString("Eres un gran heroe Popollo");			
+		}
+		else if(ventana.barraExploracion.getValue()==10) {
+			ventana.barraExploracion.setString("Acabas de llegar a la mitad de tu recorrido, animo Popollo!!!");			
+		}
+		else if(ventana.barraExploracion.getValue()>=11&&ventana.barraExploracion.getValue()<=14) {
+			ventana.barraExploracion.setString("Todo el mundo empieza a conocerte");			
+		}
+		else if(ventana.barraExploracion.getValue()>=15&&ventana.barraExploracion.getValue()<=19) {
+			ventana.barraExploracion.setString("Estamos en la recta final, esfuerzate al maximo ");			
+		}
+		else {
+			ventana.barraExploracion.setString("Solo tu puedes derrotar al temible Pulpoi");			
+		}
+		ventana.barraExploracion.getString();
 	}
+	
 }
 	
 
-/**
- *         
-		
         /**
          * Scanner sc = new Scanner (System.in);
          * int opcion;

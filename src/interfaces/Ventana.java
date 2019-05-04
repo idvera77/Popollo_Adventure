@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,6 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import javax.swing.JProgressBar;
+import javax.swing.border.LineBorder;
 
 import clases.Enemigo;
 import clases.Habilidad;
@@ -28,6 +32,7 @@ public class Ventana extends JFrame{
 	private Descanso pantallaDescanso;
 	private Lucha pantallaLucha;
 	private Evento pantallaEvento;
+	JProgressBar barraExploracion;
 
 	Connection connect;
 	Heroe heroe;
@@ -133,6 +138,10 @@ public class Ventana extends JFrame{
             ex.printStackTrace();
             System.err.println(ex.getMessage());
         }	
+		
+		//Barra de progreso que se usa en varios sitios
+		this.barraExploracion = new JProgressBar(0,20);
+		this.barraExploracion.setString("Comienza tu aventura");
 	}
 	
 	public Connection getConnect() {
