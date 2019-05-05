@@ -10,9 +10,6 @@ import componentes.Paneles;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Font;
 
 
@@ -23,49 +20,52 @@ public class Tienda extends Paneles{
 		super();
 		this.ventana=v;
 		
+		//Sonido
+		String rutaSonido = "./sonidos/Comprar.wav";
+		
 		PanelTexto panelPrecioObjeto = new PanelTexto();
 		panelPrecioObjeto.setText("Precio");
-		panelPrecioObjeto.setBounds(310, 96, 54, 23);
+		panelPrecioObjeto.setBounds(300, 96, 54, 23);
 		add(panelPrecioObjeto);
 		
 		PanelTexto panelComprar = new PanelTexto();
 		panelComprar.setText("Comprar");
-		panelComprar.setBounds(186, 96, 76, 23);
+		panelComprar.setBounds(176, 96, 76, 23);
 		add(panelComprar);
 		
 		PanelTexto panelCantidad = new PanelTexto();
 		panelCantidad.setText("Cantidad");
-		panelCantidad.setBounds(65, 96, 76, 23);
+		panelCantidad.setBounds(55, 96, 76, 23);
 		add(panelCantidad);
 		
 		PanelTexto cantidadBombaP = new PanelTexto();
 		cantidadBombaP.setText(Integer.toString(ventana.heroe.getObjetosArray().get(0).getCantidad()));
-		cantidadBombaP.setBounds(91, 130, 41, 25);
+		cantidadBombaP.setBounds(81, 130, 41, 25);
 		add(cantidadBombaP);
 		
 		PanelTexto cantidadBombaG = new PanelTexto();
 		cantidadBombaG.setText(Integer.toString(ventana.heroe.getObjetosArray().get(1).getCantidad()));
-		cantidadBombaG.setBounds(91, 160, 41, 23);
+		cantidadBombaG.setBounds(81, 160, 41, 23);
 		add(cantidadBombaG);
 		
 		PanelTexto cantidadPocion = new PanelTexto();
 		cantidadPocion.setText(Integer.toString(ventana.heroe.getObjetosArray().get(2).getCantidad()));
-		cantidadPocion.setBounds(91, 190, 41, 23);
+		cantidadPocion.setBounds(81, 190, 41, 23);
 		add(cantidadPocion);
 		
 		PanelTexto precioBombaP = new PanelTexto();
 		precioBombaP.setText(Integer.toString(ventana.heroe.getObjetosArray().get(0).getPrecio()));
-		precioBombaP.setBounds(322, 130, 41, 23);
+		precioBombaP.setBounds(312, 130, 41, 23);
 		add(precioBombaP);
 		
 		PanelTexto precioBombaG = new PanelTexto();
 		precioBombaG.setText(Integer.toString(ventana.heroe.getObjetosArray().get(1).getPrecio()));
-		precioBombaG.setBounds(322, 160, 41, 23);
+		precioBombaG.setBounds(312, 160, 41, 23);
 		add(precioBombaG);
 		
 		PanelTexto precioPocion = new PanelTexto();
 		precioPocion.setText(Integer.toString(ventana.heroe.getObjetosArray().get(2).getPrecio()));
-		precioPocion.setBounds(322, 190, 41, 23);
+		precioPocion.setBounds(312, 190, 41, 23);
 		add(precioPocion);
 		
 		PanelTexto panelAtributosActual = new PanelTexto();
@@ -136,15 +136,15 @@ public class Tienda extends Paneles{
 		//Añadiendo botones
 		//Eventos de botones
 		Botones comprarBombaP = new Botones("Bomba Pequeña");
-		comprarBombaP.setBounds(141, 130, 159, 25);
+		comprarBombaP.setBounds(131, 130, 159, 25);
 		add(comprarBombaP);
 		
 		Botones comprarBombaG = new Botones("Bomba Grande");
-		comprarBombaG.setBounds(141, 160, 159, 25);
+		comprarBombaG.setBounds(131, 160, 159, 25);
 		add(comprarBombaG);
 		
 		Botones comprarPocion = new Botones("Pocion");
-		comprarPocion.setBounds(141, 190, 159, 25);
+		comprarPocion.setBounds(131, 190, 159, 25);
 		add(comprarPocion);
 		
 		Botones mejorarSalud = new Botones("Salud maxima +20");
@@ -184,7 +184,7 @@ public class Tienda extends Paneles{
 		comprarBombaP.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.heroe.comprarObjetos(0);
+				v.heroe.comprarObjetos(0, rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 				cantidadBombaP.setText(Integer.toString(ventana.heroe.getObjetosArray().get(0).getCantidad()));	
 			}
@@ -193,7 +193,7 @@ public class Tienda extends Paneles{
 		comprarBombaG.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {	
-				ventana.heroe.comprarObjetos(1);
+				ventana.heroe.comprarObjetos(1, rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 				cantidadBombaG.setText(Integer.toString(ventana.heroe.getObjetosArray().get(1).getCantidad()));					
 			}
@@ -202,7 +202,7 @@ public class Tienda extends Paneles{
 		comprarPocion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.comprarObjetos(2);
+				ventana.heroe.comprarObjetos(2, rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 				cantidadPocion.setText(Integer.toString(ventana.heroe.getObjetosArray().get(2).getCantidad()));	
 			}
@@ -211,7 +211,7 @@ public class Tienda extends Paneles{
 		mejorarSalud.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.mejorarEstadisticas(0);
+				ventana.heroe.mejorarEstadisticas(0, rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 				saludActual.setText(Integer.toString(ventana.heroe.getSaludMaxima()));
 			}
@@ -220,7 +220,7 @@ public class Tienda extends Paneles{
 		mejorarFuerza.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.mejorarEstadisticas(1);
+				ventana.heroe.mejorarEstadisticas(1, rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 				fuerzaActual.setText(Integer.toString(ventana.heroe.getFuerza()));
 			}
@@ -229,7 +229,7 @@ public class Tienda extends Paneles{
 		mejorarMagia.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.mejorarEstadisticas(2);
+				ventana.heroe.mejorarEstadisticas(2, rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 				magiaActual.setText(Integer.toString(ventana.heroe.getMagia()));
 			}
@@ -238,7 +238,7 @@ public class Tienda extends Paneles{
 		mejorarDefensa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.mejorarEstadisticas(3);
+				ventana.heroe.mejorarEstadisticas(3, rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 				defensaActual.setText(Integer.toString(ventana.heroe.getDefensa()));
 			}
@@ -247,7 +247,7 @@ public class Tienda extends Paneles{
 		mejorarAgilidad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.mejorarEstadisticas(4);
+				ventana.heroe.mejorarEstadisticas(4, rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 				agilidadActual.setText(Integer.toString(ventana.heroe.getAgilidad()));
 				defensaActual.setText(Integer.toString(ventana.heroe.getDefensa()));

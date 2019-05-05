@@ -65,4 +65,25 @@ public class Musica {
             ex.printStackTrace();
         }
     }
+    
+    public static void sonidosBoton(String rutaSonido){
+        try{
+            File rutaMusica = new File(rutaSonido);
+
+            if(rutaMusica.exists())
+            {
+                AudioInputStream audioInputSonido = AudioSystem.getAudioInputStream(rutaMusica);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputSonido);
+                clip.start();
+            }
+            else
+            {
+                System.out.println("No pudo encontrarse el archivo");
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
 }

@@ -11,6 +11,7 @@ public class Heroe extends Personaje{
     private ArrayList<Objeto> objetosArray;
     private int reputacion;
     private int nivel;
+    private int explorar;
     
     /**
      * Constructor de Heroe
@@ -27,15 +28,17 @@ public class Heroe extends Personaje{
      * @param reputacion Variable de tipo entero que indica la reputacion actual.
      * @param dinero Variable de tipo entero que indica el dinero actual.
      * @param experiencia Variable de tipo entero que indica la experiencia actual.
-     * @param nivel Variable de tipo entero que indica el nivel actual
+     * @param nivel Variable de tipo entero que indica el nivel actual.
+     * @param explorar Variable de tipo entero que indica en que posicion se encuentra popollo.
      */
     public Heroe(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, int magia, int agilidad, 
         int defensa, ArrayList<Habilidad> habilidadesArray, ArrayList<Objeto> objetosArray, int dinero, 
-        int reputacion, int experiencia, int nivel) {
+        int reputacion, int experiencia, int nivel, int explorar) {
         super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray, dinero, experiencia);
         this.objetosArray = objetosArray;
         this.reputacion = reputacion;
         this.nivel = nivel;
+        this.explorar = explorar;
     }
     
     //Getters y Setters
@@ -62,10 +65,19 @@ public class Heroe extends Personaje{
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
+    
+    
+    public int getExplorar() {
+		return explorar;
+	}
+
+	public void setExplorar(int explorar) {
+		this.explorar = explorar;
+	}
 
     //FUNCIONES
     
-    //Subir de nivel
+	//Subir de nivel
     /**
      * Funcion que nos permite subir el nivel del heroe si llega a 100 puntos de experiencia.
      * @param numero Numero que subira la experiencia del heroe
@@ -312,13 +324,13 @@ public class Heroe extends Personaje{
     /**
      * Funcion que reune todas las de regenerar salud o restablecimiento de habilidades a cambio de dinero.
      */
-    public void puntoDescanso(int numero){
+    public void puntoDescanso(int numero, String rutaSonido){
         switch(numero){ 
             case 0:
                 if (getDinero()>=300) {
                     setDinero(getDinero()-300); 
                     regenerarSalud();
-                    System.out.println("- Las heridas comienzan a curarse magicamente.\n");
+                    general.Musica.sonidosBoton(rutaSonido);
                     break;
                 }
                 break;
@@ -326,14 +338,14 @@ public class Heroe extends Personaje{
                 if (getDinero()>=750) {
                     setDinero(getDinero()-750);
                     regenerarHabilidades();
-                    System.out.println("- Sientes que el cansancio abandona tu cuerpo.\n");
+                    general.Musica.sonidosBoton(rutaSonido);
                 }
                  break;
             case 2:
                 if (getDinero()>=1000) {
                 setDinero(getDinero()-1000);
                 regenerarSaludHabilidades();
-                System.out.println("- Nunca te has sentido mejor que ahora.\n");
+                general.Musica.sonidosBoton(rutaSonido);
                 }
                 break;         
         }    
@@ -344,10 +356,11 @@ public class Heroe extends Personaje{
      * Funcion que nos aumenta la cantidad de objetos si tenemos el dinero necesario.
      * @param numero Nos indica el objeto de la tienda.
      */
-    public void comprarObjetos(int numero){
+    public void comprarObjetos(int numero, String rutaSonido){
         if (getDinero()>=getObjetosArray().get(numero).getPrecio()) {
             setDinero(getDinero()-getObjetosArray().get(numero).getPrecio());
             getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()+1); 
+            general.Musica.sonidosBoton(rutaSonido);
         }  
     }
     
@@ -355,37 +368,42 @@ public class Heroe extends Personaje{
      *  Funcion que nos aumenta los atributos del heroe si tenemos el dinero necesario.
      *  * @param numero Nos indica el atributo.
      */
-    public void mejorarEstadisticas(int numero){
+    public void mejorarEstadisticas(int numero, String rutaSonido){
         switch(numero){
             case 0:
             	if(getDinero()>=750){
                     setDinero(getDinero()-750);
                     setSaludMaxima(getSaludMaxima()+20);
                     setSalud(getSalud()+20);
+                    general.Musica.sonidosBoton(rutaSonido);
             	}
                 break;
             case 1:
             	if(getDinero()>=1000){
                     setDinero(getDinero()-1000);
                     setFuerza(getFuerza()+5);
+                    general.Musica.sonidosBoton(rutaSonido);
                 }
                 break;
             case 2:
             	if(getDinero()>=1500){
                     setDinero(getDinero()-1500);
                     setMagia(getMagia()+1); 
+                    general.Musica.sonidosBoton(rutaSonido);
                 }
                 break;
             case 3:
             	if(getDinero()>=1000){
                     setDinero(getDinero()-1000);
                     setDefensa(getDefensa()+2); 
+                    general.Musica.sonidosBoton(rutaSonido);
             	}
                 break;
             case 4:
             	if(getDinero()>=1000){
                     setDinero(getDinero()-1000);
                     setAgilidad(getAgilidad()+2);  
+                    general.Musica.sonidosBoton(rutaSonido);
                 }
                 break;
         }    

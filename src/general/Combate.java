@@ -16,7 +16,7 @@ public class Combate {
 
         //Sonidos Combate
         String rutaCancionVictoria = "./sonidos/Victoria.wav";
-        String rutaSonidoFisicoAliado = "./sonidos/FisicoAliado.wav";
+        String rutaSonidoFisicoAliado = "./sonidos/Atacar.wav";
         String rutaSonidoFisicoEnemigo = "./sonidos/FisicoEnemigo.wav";
         String rutaSonidoHabilidadesObjetos = "./sonidos/HabilidadesObjetos.wav";
         String rutaSonidoDefensa = "./sonidos/Defensa.wav";

@@ -21,6 +21,9 @@ public class Inicio extends Paneles {
 		super();
 		this.ventana=v;
 		
+		//Sonido
+		String rutaSonido = "./sonidos/Login.wav";
+				
 		//Añadiendo Botones
 				Botones botonIniciar = new Botones("Comenzar Partida");
 				botonIniciar.setBounds(397, 326, 215, 23);
@@ -49,13 +52,15 @@ public class Inicio extends Paneles {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						ventana.cargarPantallaPrincipal();
+						general.Musica.sonidosBoton(rutaSonido);
 					}
 				});
 				
 				botonCargar.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						ventana.cargarPantallaPrincipal();
+						ventana.cargarPartida();
+						general.Musica.sonidosBoton(rutaSonido);
 					}
 				});
 				
@@ -69,7 +74,15 @@ public class Inicio extends Paneles {
 				botonSalir.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						System.exit(0);
+						if(ventana.getConnect()!=null) {
+							try {
+								ventana.connect.close();
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}	
+							System.exit(0);
 					}
 				});
 				

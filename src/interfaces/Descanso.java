@@ -21,6 +21,9 @@ public class Descanso extends Paneles{
 		super();
 		this.ventana=v;
 		
+		//Sonido
+		String rutaSonido = "./sonidos/Curaciones.wav";
+		
 		LabelTexto mostrarDinero = new LabelTexto();
 		mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
 		mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(ventana.heroe.getDinero())
@@ -56,7 +59,7 @@ public class Descanso extends Paneles{
 		botonCuracion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.puntoDescanso(0);
+				ventana.heroe.puntoDescanso(0, rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 			}
 		});
@@ -64,7 +67,7 @@ public class Descanso extends Paneles{
 		botonRecargaHabilidades.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.puntoDescanso(1);
+				ventana.heroe.puntoDescanso(1,rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 			}
 		});
@@ -72,7 +75,7 @@ public class Descanso extends Paneles{
 		botonRecuperacionCompleta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.puntoDescanso(2);
+				ventana.heroe.puntoDescanso(2,rutaSonido);
 				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
 			}
 		});
