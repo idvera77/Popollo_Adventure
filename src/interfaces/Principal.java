@@ -204,7 +204,7 @@ public class Principal extends Paneles {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.cargarPantallaLucha();
-				general.Combate.batalla(ventana.heroe, ventana.enemigosArray.get(0));	
+				//general.Combate.batalla(ventana.heroe, ventana.enemigosArray.get(0));	
 				avanzarBarraProgreso();
 			}
 		});
