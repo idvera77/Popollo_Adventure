@@ -74,7 +74,7 @@ public class Eventos {
                 break;
             case 2:
                 System.out.println("- Te acercas rapidamente y comienza tu batalla.");
-                Combate.batalla(heroe, enemigo);
+                //Combate.batalla(heroe, enemigo);
                 System.out.println("- Los aldeanos te felicitan por rescatarlos y te ofrecen una tarta con una pinta estupenda.");
                 heroe.setSaludMaxima(heroe.getSaludMaxima()+20);
                 heroe.setSalud(heroe.getSalud()+20);
@@ -129,7 +129,7 @@ public class Eventos {
                 break;
             case 3:
                 System.out.println("- Golpeas al pequeño poring.");
-                Combate.batalla(heroe, enemigo);
+                //Combate.batalla(heroe, enemigo);
                 heroe.setDinero(heroe.getDinero()+1500);  
                 System.out.println("- Encuentras en la madriguera un monton de monedas de oro.");
                 System.out.println("- Obtienes 1500 monedas de oro || La reputacion del heroe baja.\n");

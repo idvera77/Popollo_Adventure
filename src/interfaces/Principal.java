@@ -212,7 +212,8 @@ public class Principal extends Paneles {
 		eventoPrueba.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.cargarPantallaTienda();
+				//general.Combate.batalla(ventana.heroe, ventana.enemigosArray.get(0));
+
 			}
 		});	
 		

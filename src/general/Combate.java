@@ -1,6 +1,9 @@
 package general;
 
 import clases.*;
+import interfaces.Lucha;
+import interfaces.Ventana;
+
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,10 +13,10 @@ import java.util.logging.Logger;
  * @author Ivan Diaz Vera
  */
 public class Combate {
-
+	
 //Primer combate
     public static void batalla(Heroe heroe, Enemigo enemigo){
-
+    	
         //Sonidos Combate
         String rutaCancionVictoria = "./sonidos/Victoria.wav";
         String rutaSonidoFisicoAliado = "./sonidos/Atacar.wav";
@@ -74,7 +77,7 @@ public class Combate {
                             break;
                         default:
                             System.out.println("- Se que estas nervioso pero debes centrarte!");
-                            batalla(heroe, enemigo);
+                            //batalla(heroe, enemigo);
                             break;
                     }
                 } catch (InterruptedException ex) {
