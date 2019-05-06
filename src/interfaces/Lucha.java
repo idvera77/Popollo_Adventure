@@ -15,6 +15,7 @@ import javax.swing.border.LineBorder;
 
 
 import componentes.Botones;
+import componentes.BotonesCombate;
 import componentes.LabelTexto;
 import componentes.Paneles;
 import general.Combate;
@@ -31,7 +32,8 @@ public class Lucha extends Paneles{
 	public Lucha lucha;
 	public JProgressBar vidaHeroe;
 	public JProgressBar vidaEnemigo;
-	public LabelTexto registroBatalla;
+	public LabelTexto registroBatallaHeroe;
+	public LabelTexto registroBatallaEnemigo;
 	
 	public Lucha(Ventana v) {
 		super();
@@ -75,67 +77,73 @@ public class Lucha extends Paneles{
 		vidaEnemigo.setValue(ventana.enemigosArray.get(0).getSalud());
 		add(vidaEnemigo);
 		
-		LabelTexto registroBatalla = new LabelTexto();
-		registroBatalla.setBounds(281, 118, 446, 206);
-		add(registroBatalla);
+		//Paneles Texto
+		LabelTexto registroBatallaHeroe = new LabelTexto();
+		registroBatallaHeroe.setBounds(281, 120, 446, 103);
+		add(registroBatallaHeroe);
+		
+		LabelTexto registroBatallaEnemigo = new LabelTexto();
+		registroBatallaEnemigo.setBounds(281, 221, 446, 103);
+		add(registroBatallaEnemigo);
 		
 		LabelTexto Versus = new LabelTexto();
 		Versus.setFont(new Font("Bahnschrift", Font.BOLD, 25));
 		Versus.setText("<html><center>"+ventana.heroe.getNombre()+"&ensp;Versus&ensp;"+ventana.enemigosArray.get(0).getNombre()+"</b></center></html>");
 		Versus.setBounds(281, 49, 446, 58);
 		add(Versus);
-		Versus.setFont(new Font("Bahnschrift", Font.BOLD, 25));
 		
-		Botones botonAtacar = new Botones("");
-		botonAtacar.setBounds(145, 367, 165, 23);
+		//Botones
+		BotonesCombate botonAtacar = new BotonesCombate("");
+		botonAtacar.setIcon(new ImageIcon("./imagenes/botonEspada.png"));
+		botonAtacar.setBounds(252, 347, 115, 115);
 		add(botonAtacar);
 		
-		JButton botonDefender = new JButton("");
-		botonDefender.setBackground(new Color(240,240,240));
-		botonDefender.setBorderPainted(false);
+		BotonesCombate botonDefender = new BotonesCombate("");
 		botonDefender.setIcon(new ImageIcon("./imagenes/botonEscudo.png"));
-		botonDefender.setBounds(336, 335, 115, 115);
+		botonDefender.setBounds(381, 347, 115, 115);
 		add(botonDefender);
 		
 		
-		Botones botonHabilidades = new Botones("");
-		botonHabilidades.setBounds(495, 367, 165, 23);
+		BotonesCombate botonHabilidades = new BotonesCombate("");
+		botonHabilidades.setIcon(new ImageIcon("./imagenes/botonMagia.png"));
+		botonHabilidades.setBounds(511, 347, 115, 115);
 		add(botonHabilidades);
 		
-		Botones botonObjetos = new Botones("");
-		botonObjetos.setBounds(670, 367, 165, 23);
+		BotonesCombate botonObjetos = new BotonesCombate("");
+		botonObjetos.setIcon(new ImageIcon("./imagenes/botonObjeto.png"));
+		botonObjetos.setBounds(642, 347, 115, 115);
 		add(botonObjetos);
 		
 		Botones boton1Habilidad = new Botones("1");
 		boton1Habilidad.setVisible(false);
-		boton1Habilidad.setBounds(242, 367, 165, 23);
+		boton1Habilidad.setBounds(317, 347, 115, 115);
 		add(boton1Habilidad);
 		
 		Botones boton2Habilidad = new Botones("2");
 		boton2Habilidad.setVisible(false);
-		boton2Habilidad.setBounds(417, 367, 165, 23);
+		boton2Habilidad.setBounds(446, 347, 115, 115);
 		add(boton2Habilidad);
 		
 		Botones boton3Habilidad = new Botones("3");
 		boton3Habilidad.setVisible(false);
-		boton3Habilidad.setBounds(592, 367, 165, 23);
+		boton3Habilidad.setBounds(577, 347, 115, 115);
 		add(boton3Habilidad);
 		
 		Botones botonAtras = new Botones("Volver al mapa");
-		botonAtras.setBounds(709, 428, 215, 23);
+		botonAtras.setBounds(20, 482, 215, 23);
 		add(botonAtras);
 		
 		
 		//Imagenes
 		JLabel iconoDefensaHeroe = new JLabel("");
 		iconoDefensaHeroe.setBounds(152, 166, 158, 170);
-		iconoDefensaHeroe.setIcon(new ImageIcon("./imagenes/Escudo.png"));
+		iconoDefensaHeroe.setIcon(new ImageIcon("./imagenes/miniEscudo.png"));
 		iconoDefensaHeroe.setVisible(false);
 		add(iconoDefensaHeroe);
 		
 		JLabel iconoDefensaEnemigo = new JLabel("");
 		iconoDefensaEnemigo.setBounds(688, 166, 158, 170);
-		iconoDefensaEnemigo.setIcon(new ImageIcon("./imagenes/Escudo.png"));
+		iconoDefensaEnemigo.setIcon(new ImageIcon("./imagenes/miniEscudo.png"));
 		iconoDefensaEnemigo.setVisible(false);
 		add(iconoDefensaEnemigo);
 		
@@ -153,121 +161,127 @@ public class Lucha extends Paneles{
 		imagenEnemigo.setIcon(imagenes[3]);
 		add(imagenEnemigo);
 		
+		//Imagen de fondo
+		JLabel imagenBatalla = new JLabel("");
+		imagenBatalla.setBounds(0, 0, 1008, 536);
+		imagenBatalla.setIcon(new ImageIcon("./imagenes/batalla.jpg"));
+		add(imagenBatalla);	
+
+		
 		//Eventos de botones
-				botonAtacar.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						atacarHeroe(ataqueHeroeSonido, registroBatalla);
-					}
-				});
+		botonAtacar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				atacarHeroe(ataqueHeroeSonido, registroBatallaHeroe, registroBatallaEnemigo);
 				
-				botonDefender.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						iconoDefensaHeroe.setVisible(true);
-
-					}
-				});
-				
-				botonHabilidades.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						botonAtacar.setVisible(false);
-						botonDefender.setVisible(false);
-						botonHabilidades.setVisible(false);
-						botonObjetos.setVisible(false);
-						boton1Habilidad.setVisible(true);
-						boton2Habilidad.setVisible(true);
-						boton3Habilidad.setVisible(true);
-					}
-				});
-				
-				botonObjetos.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						botonAtacar.setVisible(false);
-						botonDefender.setVisible(false);
-						botonHabilidades.setVisible(false);
-						botonObjetos.setVisible(false);
-						boton1Habilidad.setVisible(true);
-						boton2Habilidad.setVisible(true);
-						boton3Habilidad.setVisible(true);
-					}
-				});
-				
-				boton1Habilidad.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						boton1Habilidad.setVisible(false);
-						boton2Habilidad.setVisible(false);
-						boton3Habilidad.setVisible(false);
-						botonAtacar.setVisible(true);
-						botonDefender.setVisible(true);
-						botonHabilidades.setVisible(true);
-						botonObjetos.setVisible(true);
-					}
-				});
-				
-				boton2Habilidad.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						boton1Habilidad.setVisible(false);
-						boton2Habilidad.setVisible(false);
-						boton3Habilidad.setVisible(false);
-						botonAtacar.setVisible(true);
-						botonDefender.setVisible(true);
-						botonHabilidades.setVisible(true);
-						botonObjetos.setVisible(true);
-					}
-				});
-
-				boton3Habilidad.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						boton1Habilidad.setVisible(false);
-						boton2Habilidad.setVisible(false);
-						boton3Habilidad.setVisible(false);
-						botonAtacar.setVisible(true);
-						botonDefender.setVisible(true);
-						botonHabilidades.setVisible(true);
-						botonObjetos.setVisible(true);
-					}
-				});
-				
-				botonAtras.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						v.volverPantallaPrincipal("Batalla");
-					}
-				});
-	}	
+			}
+		});
+		
+		botonDefender.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				iconoDefensaHeroe.setVisible(true);
+			}
+		});
+		
+		botonHabilidades.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				botonAtacar.setVisible(false);
+				botonDefender.setVisible(false);
+				botonHabilidades.setVisible(false);
+				botonObjetos.setVisible(false);
+				boton1Habilidad.setVisible(true);
+				boton2Habilidad.setVisible(true);
+				boton3Habilidad.setVisible(true);
+			}
+		});
+		
+		botonObjetos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				botonAtacar.setVisible(false);
+				botonDefender.setVisible(false);
+				botonHabilidades.setVisible(false);
+				botonObjetos.setVisible(false);
+				boton1Habilidad.setVisible(true);
+				boton2Habilidad.setVisible(true);
+				boton3Habilidad.setVisible(true);
+			}
+		});
+		
+		boton1Habilidad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				boton1Habilidad.setVisible(false);
+				boton2Habilidad.setVisible(false);
+				boton3Habilidad.setVisible(false);
+				botonAtacar.setVisible(true);
+				botonDefender.setVisible(true);
+				botonHabilidades.setVisible(true);
+				botonObjetos.setVisible(true);
+			}
+		});
+		
+		boton2Habilidad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				boton1Habilidad.setVisible(false);
+				boton2Habilidad.setVisible(false);
+				boton3Habilidad.setVisible(false);
+				botonAtacar.setVisible(true);
+				botonDefender.setVisible(true);
+				botonHabilidades.setVisible(true);
+				botonObjetos.setVisible(true);
+			}
+		});
 	
-	public void vidaHeroe() {
-		vidaHeroe.setValue(ventana.heroe.getSalud());
-		vidaHeroe.setString(Integer.toString(ventana.heroe.getSalud()));
-	}
-	
-	public void vidaEnemigo() {
-		vidaEnemigo.setValue(ventana.enemigosArray.get(0).getSalud());
-		vidaEnemigo.setString(Integer.toString(ventana.enemigosArray.get(0).getSalud()));
-	}
-	
-	public void atacarHeroe(String ataqueHeroeSonido, LabelTexto registroBatalla) {
-		ventana.heroe.atacar(ventana.heroe, ventana.enemigosArray.get(0));
-		registroBatalla.setText("<html><center><b>"+ventana.heroe.getNombre()
-				+"&ensp;inflige una cantidad de "+ventana.heroe.getFuerza()+" puntos de daño."
-				+"</html>");
-		vidaEnemigo();
-		general.Musica.sonidosBoton(ataqueHeroeSonido);
-		ataqueEnemigo();
-		vidaHeroe();
-	}
-	
-	public void ataqueEnemigo() {
-        String rutaCancionVictoria = "./sonidos/Victoria.wav";
-        String rutaSonidoFisicoEnemigo = "./sonidos/FisicoEnemigo.wav";
-        String rutaSonidoHabilidadesObjetos = "./sonidos/HabilidadesObjetos.wav";
-        String rutaSonidoDefensa = "./sonidos/Defensa.wav";
+		boton3Habilidad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				boton1Habilidad.setVisible(false);
+				boton2Habilidad.setVisible(false);
+				boton3Habilidad.setVisible(false);
+				botonAtacar.setVisible(true);
+				botonDefender.setVisible(true);
+				botonHabilidades.setVisible(true);
+				botonObjetos.setVisible(true);
+			}
+		});
+		
+		botonAtras.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				v.volverPantallaPrincipal("Batalla");
+			}
+		});
+					
+		}	
+		
+		public void vidaHeroe() {
+			vidaHeroe.setValue(ventana.heroe.getSalud());
+			vidaHeroe.setString(Integer.toString(ventana.heroe.getSalud()));
+		}
+		
+		public void vidaEnemigo() {
+			vidaEnemigo.setValue(ventana.enemigosArray.get(0).getSalud());
+			vidaEnemigo.setString(Integer.toString(ventana.enemigosArray.get(0).getSalud()));
+		}
+		
+		public void atacarHeroe(String ataqueHeroeSonido, LabelTexto registroBatallaHeroe, LabelTexto registroBatallaEnemigo) {
+			ventana.heroe.atacar(ventana.heroe, ventana.enemigosArray.get(0));
+			registroBatallaHeroe.setText("<html><center><b>"+ventana.heroe.getNombre()
+					+" inflige "+ventana.heroe.getFuerza()+" puntos de daño.<br>"
+					+ventana.enemigosArray.get(0).getNombre()+"&ensp;bloquea&ensp;"+ventana.enemigosArray.get(0).getDefensa()+"&ensp;puntos de daño."
+					+"</center></b></html>");
+			vidaEnemigo();
+			general.Musica.sonidosBoton(ataqueHeroeSonido);
+			ataqueEnemigo(registroBatallaEnemigo);
+			vidaHeroe();
+		}
+		
+		public void ataqueEnemigo(LabelTexto registroBatallaEnemigo) {
+	        String rutaCancionVictoria = "./sonidos/Victoria.wav";
 
 
         int aleatorio;
@@ -275,38 +289,32 @@ public class Lucha extends Paneles{
         boolean defensaHeroe=false;
         boolean defensaEnemigo=false;
         
-		ventana.enemigosArray.get(0).atacar(ventana.enemigosArray.get(0),ventana.heroe);
 		if(ventana.enemigosArray.get(0).getSalud()>0){
             //Comprobacion de que el enemigo tiene activada la mejora de defensa, si es true la disminuye ya que ha pasado un turno.
             if(defensaEnemigo==true){
                     ventana.enemigosArray.get(0).BloqueoOff(ventana.enemigosArray.get(0));
                     defensaEnemigo=false;
                 }
-            try {
-                System.out.println("----------------------------------------------");
-                System.out.println("Turno de "+(ventana.enemigosArray.get(0).getNombre()+" - Vida restante: "+(ventana.enemigosArray.get(0).getSalud()+"/"+ventana.enemigosArray.get(0).getSaludMaxima())));
+            
                 aleatorio = NumeroAleatorio(0, 6);
                 if(aleatorio<=3){
-                    System.out.println("\tDecide atacar!\n");
                     ventana.enemigosArray.get(0).atacar(ventana.enemigosArray.get(0), ventana.heroe);
-                    Musica.iniciarSonidos(rutaSonidoFisicoEnemigo);
-                    Thread.sleep(150);
+                    registroBatallaEnemigo.setText("<html><center><b>"+ventana.enemigosArray.get(0).getNombre()
+	    				+" inflige "+ventana.enemigosArray.get(0).getFuerza()+"&ensp;puntos de daño.<br>"
+	    				+ventana.heroe.getNombre()+"&ensp;bloquea&ensp;"+ventana.heroe.getDefensa()+"&ensp;puntos de daño."
+	    				+"</center></b></html>");
+                    vidaHeroe();
                 }else if(aleatorio==4){
                     System.out.println("\tDecide usar bloqueo!\n");
                     System.out.println("- Su defensa natural se multiplica por 2 durante un turno.");
                     ventana.enemigosArray.get(0).Bloqueo(ventana.enemigosArray.get(0));
                     defensaEnemigo=true;
-                    Musica.iniciarSonidos(rutaSonidoDefensa);
-                    Thread.sleep(150);
+                    vidaHeroe();
                 }else{
                     System.out.println("\tDecide usar una habilidad!\n");
                     ventana.enemigosArray.get(0).usarHabilidadesEnemigos(ventana.heroe);
-                    Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
-                    Thread.sleep(150);
+                    vidaHeroe();
                 }
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Combate.class.getName()).log(Level.SEVERE, null, ex);
-            }
             }else{
                 Victoria=true;
                 System.out.println("\n\t!!!"+ventana.enemigosArray.get(0).getNombre()+" Derrotado!!!"
