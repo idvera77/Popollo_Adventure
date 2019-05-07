@@ -3,6 +3,8 @@ package clases;
 import static general.Combate.NumeroAleatorio;
 import java.util.ArrayList;
 
+import componentes.LabelTexto;
+
 /**
  *
  * @author Ivan Diaz Vera
@@ -54,16 +56,18 @@ public class Enemigo extends Personaje{
      * Funcion que permite utilizar una habilidad del enemigo gastando usos restantes de esta, el heroe recibe el daño de dicha habilidad.
      * @param heroe Personaje que recibe el daño de una habilidad.
      */
-    public void usarHabilidadesEnemigos(Heroe heroe){
+    public void usarHabilidadesEnemigos(Heroe heroe, LabelTexto registro){
         int aleatorio = NumeroAleatorio(0, 1);  
-        if(getHabilidadesArray().get(aleatorio).getUsosRestantes()>0){
-            System.out.println("- "+getNombre()+" usa "+getHabilidadesArray().get(aleatorio).getNombre()
-                +" e inflige una cantidad de "+getMagia()*getHabilidadesArray().get(aleatorio).getEspecial()
-                    +" puntos de daño.");
-            getHabilidadesArray().get(aleatorio).setUsosRestantes(getHabilidadesArray().get(aleatorio).getUsosRestantes()-1);                     
-            dañoHabilidadesEnemigo(heroe, aleatorio); 
-        }else{    
-              System.out.println("- No puede utilizar la habilidad. Pierde el turno.");
-        }
+        String resultadoUso="<html><center><b>"+getNombre()+" utiliza una habilidad!<br>";
+	        if(getHabilidadesArray().get(aleatorio).getUsosRestantes()>0){
+	        	resultadoUso+=(getHabilidadesArray().get(aleatorio).getNombre()+" inflige "
+	        			+getMagia()*getHabilidadesArray().get(aleatorio).getEspecial() +" puntos de daño.");
+	        	resultadoUso+="</b></center></html>";
+	        	registro.setText(resultadoUso);
+	            getHabilidadesArray().get(aleatorio).setUsosRestantes(getHabilidadesArray().get(aleatorio).getUsosRestantes()-1);                     
+	            dañoHabilidadesEnemigo(heroe, aleatorio); 
+	        }else{    
+	        	registro.setText("<html><center><b>"+getNombre()+" falla al intentar utilizar una habilidad!</b></center></html>");
+	        }
     }    
 }

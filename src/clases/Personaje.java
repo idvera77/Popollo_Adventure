@@ -3,6 +3,8 @@ package clases;
 import static general.Combate.NumeroAleatorio;
 import java.util.ArrayList;
 
+import componentes.LabelTexto;
+
 /**
  *
  * @author Mystra77
@@ -134,45 +136,7 @@ public class Personaje extends ElementoIdentificador{
                 this.salud -= 0;
         }
     }
-    
-    /**
-     * Funcion para golpear con ataques fisicos. Dependiendo de la agilidad de ambos cambian los resultados.
-     * @param personajeX Es el personaje que ataca y hace daño.
-     * @param personajeY Es el personaje que recibe el daño.
-     */
-    public void atacar(Personaje personajeX, Personaje personajeY){
-        int dañar;
-        int aleatorio = NumeroAleatorio(0, 3);
-        if(personajeX.getAgilidad()>personajeY.getAgilidad()){
-            if(aleatorio==0){
-                System.out.println("!!GOLPE CRITICO!!");
-                dañar = personajeX.getFuerza()*2;
-                personajeY.daño(personajeY,dañar);
-                System.out.println("- "+personajeX.getNombre()+" inflige "+personajeX.getFuerza()*2+" puntos de daño.");
-                System.out.println("- "+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño.");
-            }else{
-                dañar = personajeX.getFuerza();
-                personajeY.daño(personajeY,dañar);
-                System.out.println("- "+personajeX.getNombre()+" inflige "+personajeX.getFuerza()+" puntos de daño.");
-                System.out.println("- "+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño.");
-            }
-        }else if(personajeX.getAgilidad()==personajeY.getAgilidad()){
-            dañar = personajeX.getFuerza();
-            personajeY.daño(personajeY,dañar);
-            System.out.println("- "+personajeX.getNombre()+" inflige "+personajeX.getFuerza()+" puntos de daño.");
-            System.out.println("- "+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño.");
-        }else{
-            if(aleatorio==0){
-                System.out.println("Ataque fallado");
-            }else{
-                dañar = personajeX.getFuerza();
-                personajeY.daño(personajeY,dañar);
-                System.out.println("- "+personajeX.getNombre()+" inflige "+personajeX.getFuerza()+" puntos de daño.");
-                System.out.println("- "+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño.");
-            }
-        }
-    }
-  
+   
     /**
      * Funcion que multiplica en 2 su atributo defensivo.
      * @param personajeX Personaje que utilizada la funcion de bloqueo.

@@ -50,7 +50,7 @@ public class Combate {
 
                     switch(opcion){
                         case 1:
-                            heroe.atacar(heroe, enemigo);
+                            //heroe.atacar(heroe, enemigo);
                             Musica.iniciarSonidos(rutaSonidoFisicoAliado);
                             Thread.sleep(350);
                             break;
@@ -64,14 +64,14 @@ public class Combate {
                             break;
 
                         case 3:
-                            heroe.mostrarHabilidades();
-                            heroe.usarHabilidades(enemigo);
+                           // heroe.mostrarHabilidades();
+                            //heroe.usarHabilidades(enemigo);
                             Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
                             Thread.sleep(350);
                             break;
                         case 4:
-                            heroe.mostrarObjetos();
-                            heroe.usarObjetos(enemigo);
+                            //heroe.mostrarObjetos();
+                            //heroe.usarObjetos(enemigo);
                             Musica.iniciarSonidos(rutaSonidoCuraciones);
                             Thread.sleep(350);
                             break;
@@ -101,7 +101,7 @@ public class Combate {
                     aleatorio = NumeroAleatorio(0, 6);
                     if(aleatorio<=3){
                         System.out.println("\tDecide atacar!\n");
-                        enemigo.atacar(enemigo, heroe);
+                        //enemigo.atacar(enemigo, heroe);
                         Musica.iniciarSonidos(rutaSonidoFisicoEnemigo);
                         Thread.sleep(150);
                     }else if(aleatorio==4){
@@ -113,7 +113,7 @@ public class Combate {
                         Thread.sleep(150);
                     }else{
                         System.out.println("\tDecide usar una habilidad!\n");
-                        enemigo.usarHabilidadesEnemigos(heroe);
+                        //enemigo.usarHabilidadesEnemigos(heroe);
                         Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
                         Thread.sleep(150);
                     }

@@ -3,6 +3,8 @@ package clases;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import componentes.LabelTexto;
+
 /**
  *
  * @author Ivan Diaz Vera
@@ -129,14 +131,17 @@ public class Heroe extends Personaje{
     /**
      * Muestra un listado de las habilidades y los usos restantes guardados en un ArrayList.
      */
-    public void mostrarHabilidades (){
+    public void mostrarHabilidades (LabelTexto registro){
+    	
         String listaHabilidades="";
+        listaHabilidades +="<html><center><b>";
             for (int i = 0; i < getHabilidadesArray().size(); i++) {
-                listaHabilidades +="- ("+(i+1)+")"+getHabilidadesArray().get(i).getNombre()
-                        +" | Usos: "+getHabilidadesArray().get(i).getUsosRestantes()
-                        +"/"+getHabilidadesArray().get(i).getUsosMaximos()+" ";
+                listaHabilidades +="("+(i+1)+") "+getHabilidadesArray().get(i).getNombre()
+                        +" | Usos:\n "+getHabilidadesArray().get(i).getUsosRestantes()
+                        +"/"+getHabilidadesArray().get(i).getUsosMaximos()+"<br>";
             }     
-        System.out.println(listaHabilidades);      
+            listaHabilidades+="</b></center></html>";
+            registro.setText(listaHabilidades);   
     }
     
     
@@ -181,13 +186,13 @@ public class Heroe extends Personaje{
      * Funcion que permite utilizar una habilidad del heroe gastando usos restantes de esta, el enemigo recibe el daño de dicha habilidad.
      * @param enemigo Personaje que recibe el daño de una habilidad.
      */
-    public void usarHabilidades(Enemigo enemigo){
+    public void usarHabilidades(Enemigo enemigo, LabelTexto registro){
         Scanner sc = new Scanner (System.in);
         int opcion = sc.nextInt();
         if(opcion-1>=getHabilidadesArray().size()){
             System.out.println("- No recuerdas usar tus propias habilidades!");
-            mostrarHabilidades();
-            usarHabilidades(enemigo);
+            mostrarHabilidades(registro);
+            usarHabilidades(enemigo, registro);
         }else{
             if(getHabilidadesArray().get(opcion-1).getUsosRestantes()>0){
                 String tipo = String.valueOf(getHabilidadesArray().get(opcion-1).getTipo());
@@ -215,13 +220,15 @@ public class Heroe extends Personaje{
     /**
      * Muestra un listado de los objetos del heroe.
      */
-    public void mostrarObjetos (){
+    public void mostrarObjetos (LabelTexto registro){
         String listaObjetos="";
+        listaObjetos+="<html><center><b>";
             for (int i = 0; i < getObjetosArray().size(); i++) {
-                listaObjetos +="- ("+(i+1)+")"+getObjetosArray().get(i).getNombre()
-                        +" | Cantidad: "+getObjetosArray().get(i).getCantidad()+" ";
+                listaObjetos +="("+(i+1)+")"+getObjetosArray().get(i).getNombre()
+                        +" | Cantidad: "+getObjetosArray().get(i).getCantidad()+"<br>";
             }     
-        System.out.println(listaObjetos);
+            listaObjetos+="</b></center></html>";
+            registro.setText(listaObjetos);
     }
     
     /**
@@ -265,13 +272,13 @@ public class Heroe extends Personaje{
      * Funcion que permite utilizar un objeto del heroe restando -1 a la cantidad maxima de este, el enemigo recibe el daño de dicho objeto.
      * @param enemigo Personaje que recibe el daño de un objeto.
      */
-    public void usarObjetos (Enemigo enemigo){
+    public void usarObjetos (Enemigo enemigo, LabelTexto registro){
         Scanner sc = new Scanner (System.in);
         int opcion=Integer.parseInt(sc.nextLine());
         if(opcion-1>=getObjetosArray().size()){
             System.out.println("- Ten cuidado al coger esos objetos!");
-            mostrarObjetos();
-            usarObjetos(enemigo);
+            mostrarObjetos(registro);
+            usarObjetos(enemigo, registro);
         }else{
             if(getObjetosArray().get(opcion-1).getCantidad()>0){
                 String tipo = String.valueOf(getObjetosArray().get(opcion-1).getTipo());

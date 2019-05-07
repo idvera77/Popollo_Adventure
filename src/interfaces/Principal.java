@@ -100,7 +100,7 @@ public class Principal extends Paneles {
 			        objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 100 puntos de daño.", 100, 1, "ofensivo", 500));
 			        objetosHeroe.add(new Objeto("Pocion", "Restablece 50 puntos de salud.", 50, 5, "curativo", 250));
 		        
-			        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 80, 80, 20, 5, 10, 10, habilidadesHeroe, objetosHeroe, 50000, 0, 0, 1, 0));
+			        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 100000, 1000000, 20, 5, 10, 10, habilidadesHeroe, objetosHeroe, 50000, 0, 0, 1, 0));
 		     } catch (InvalidTipoException e1) {
 					e1.printStackTrace();
 			 }
@@ -132,7 +132,7 @@ public class Principal extends Paneles {
 			
 			    //Guardo los enemigos en un ArrayList por comodidad.
 				ventana.enemigosArray = new ArrayList();
-					ventana.enemigosArray.add(new Enemigo("Poring", "Una pequeña bola rosita", 60, 60,15, 3, 10, 5, habilidadesPoring, 500, 25));
+					ventana.enemigosArray.add(new Enemigo("Poring", "Una pequeña bola rosita", 60, 60, 15, 3, 10, 5, habilidadesPoring, 500, 25));
 					ventana.enemigosArray.add(new Enemigo("Nigromante", "Da grima verlo", 80, 80, 20, 5, 15, 15, habilidadesNigromante, 1000, 50));
 					ventana.enemigosArray.add(new Enemigo("Golem", "Un muro enorme de piedra.", 150, 150, 30, 5, 15, 25, habilidadesGolem, 1500, 60));
 					ventana.enemigosArray.add(new Enemigo("Goblin", "Es muy rapido", 120, 120, 20, 3, 30, 10, habilidadesGoblin, 1500, 60));
@@ -271,25 +271,25 @@ public class Principal extends Paneles {
 
 		
 		LabelTexto mostrarAtributos = new LabelTexto();
-		mostrarAtributos.setText("<html><center><b>Nivel:&ensp;"+Integer.toString(ventana.heroe.getNivel())+"</b></center>"
-			+"Salud:&ensp;"+Integer.toString(ventana.heroe.getSalud())+"/"+Integer.toString(ventana.heroe.getSaludMaxima())
-			+"<br/>Fuerza:&ensp;"+Integer.toString(ventana.heroe.getFuerza())
-			+"<br/>Magia:&ensp;"+Integer.toString(ventana.heroe.getMagia())
-			+"<br/>Defensa:&ensp;"+Integer.toString(ventana.heroe.getDefensa())
-			+"<br/>Agilidad:&ensp;"+Integer.toString(ventana.heroe.getAgilidad())	
+		mostrarAtributos.setText("<html><center><b>Nivel: "+Integer.toString(ventana.heroe.getNivel())+"</b></center>"
+			+"Salud: "+Integer.toString(ventana.heroe.getSalud())+"/"+Integer.toString(ventana.heroe.getSaludMaxima())
+			+"<br/>Fuerza: "+Integer.toString(ventana.heroe.getFuerza())
+			+"<br/>Magia: "+Integer.toString(ventana.heroe.getMagia())
+			+"<br/>Defensa: "+Integer.toString(ventana.heroe.getDefensa())
+			+"<br/>Agilidad: "+Integer.toString(ventana.heroe.getAgilidad())	
 			+"</html>");
 		mostrarAtributos.setBounds(10, 370, 130, 155);
 		add(mostrarAtributos);
 		
 		LabelTexto mostrarHabilidades = new LabelTexto();
 		mostrarHabilidades.setText("<html><center><b>Habilidades</b></center>"
-				+ventana.heroe.getHabilidadesArray().get(0).getNombre()+"&ensp;"
+				+ventana.heroe.getHabilidadesArray().get(0).getNombre()+" "
 				+Integer.toString(ventana.heroe.getHabilidadesArray().get(0).getUsosRestantes())+"/"
 				+Integer.toString(ventana.heroe.getHabilidadesArray().get(0).getUsosMaximos())+"<br/>"
-				+ventana.heroe.getHabilidadesArray().get(1).getNombre()+"&ensp;"
+				+ventana.heroe.getHabilidadesArray().get(1).getNombre()+" "
 				+Integer.toString(ventana.heroe.getHabilidadesArray().get(1).getUsosRestantes())+"/"
 				+Integer.toString(ventana.heroe.getHabilidadesArray().get(1).getUsosMaximos())+"<br/>"
-				+ventana.heroe.getHabilidadesArray().get(2).getNombre()+"&ensp;"
+				+ventana.heroe.getHabilidadesArray().get(2).getNombre()+" "
 				+Integer.toString(ventana.heroe.getHabilidadesArray().get(2).getUsosRestantes())+"/"
 				+Integer.toString(ventana.heroe.getHabilidadesArray().get(2).getUsosMaximos())+"<br/>"
 				+"</html>");
@@ -298,19 +298,19 @@ public class Principal extends Paneles {
 
 		LabelTexto mostrarObjetos = new LabelTexto();
 		mostrarObjetos.setText("<html><center><b>Objetos</b></center>"
-				+ventana.heroe.getObjetosArray().get(0).getNombre()+"&ensp;"
+				+ventana.heroe.getObjetosArray().get(0).getNombre()+" "
 				+Integer.toString(ventana.heroe.getObjetosArray().get(0).getCantidad())+"<br/>"
-				+ventana.heroe.getObjetosArray().get(1).getNombre()+"&ensp;"
+				+ventana.heroe.getObjetosArray().get(1).getNombre()+" "
 				+Integer.toString(ventana.heroe.getObjetosArray().get(1).getCantidad())+"<br/>"
-				+ventana.heroe.getObjetosArray().get(2).getNombre()+"&ensp;"
+				+ventana.heroe.getObjetosArray().get(2).getNombre()+" "
 				+Integer.toString(ventana.heroe.getObjetosArray().get(2).getCantidad())+"<br/>"
 				+"</html>");
 		mostrarObjetos.setBounds(334, 436, 174, 89);
 		add(mostrarObjetos);
 		
 		LabelTexto mostrarDineroReputacion = new LabelTexto();
-		mostrarDineroReputacion.setText("<html><b>Oro:&ensp;"+Integer.toString(ventana.heroe.getDinero())
-				+"<br/>Reputacion:&ensp;"+Integer.toString(ventana.heroe.getReputacion())	
+		mostrarDineroReputacion.setText("<html><b>Oro: "+Integer.toString(ventana.heroe.getDinero())
+				+"<br/>Reputacion: "+Integer.toString(ventana.heroe.getReputacion())	
 				+"</b></html>");
 		mostrarDineroReputacion.setBounds(10, 29, 130, 51);
 		add(mostrarDineroReputacion);

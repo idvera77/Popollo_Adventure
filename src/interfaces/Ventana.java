@@ -129,6 +129,18 @@ public class Ventana extends JFrame{
 	} 
 	
 	//Movimiento entre paneles.	
+	/**
+	 * Volver a pantalla de inicio despues de derrota
+	 */
+	public void cargarPantallaInicio() {
+		if(this.pantallaInicio==null) {
+			this.pantallaInicio=new Inicio(this);
+		}
+		this.setTitle("Popollo Adventure");
+		this.pantallaLucha.setVisible(false);
+		this.setContentPane(this.pantallaInicio);
+		this.pantallaInicio.setVisible(true);
+	}
 	
 	/**
 	 * De pantalla de inicio a pantalla principal
