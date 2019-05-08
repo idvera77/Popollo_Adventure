@@ -101,6 +101,7 @@ public class Principal extends Paneles {
 			        objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 100 puntos de daño.", 100, 1, "ofensivo", 500));
 			        objetosHeroe.add(new Objeto("Pocion", "Restablece 50 puntos de salud.", 50, 5, "curativo", 250));
 		        
+			        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 10000, 10000, 20, 5, 10, 10, habilidadesHeroe, objetosHeroe, 50000, 0, 0, 1, 0));
 		     } catch (InvalidTipoException e1) {
 					e1.printStackTrace();
 			 }
@@ -163,6 +164,7 @@ public class Principal extends Paneles {
 		add(ventana.barraExploracion);
 		
 		//Eventos	
+		
 	
         //Añadiendo botones
 		
@@ -203,7 +205,7 @@ public class Principal extends Paneles {
 		combatePrueba.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.cargarPantallaLucha();
+				ventana.cargarPantallaLucha(0);
 				//general.Combate.batalla(ventana.heroe, ventana.enemigosArray.get(0));	
 				avanzarBarraProgreso();
 			}
@@ -212,7 +214,7 @@ public class Principal extends Paneles {
 		eventoPrueba.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//general.Combate.batalla(ventana.heroe, ventana.enemigosArray.get(0));
+				ventana.cargarPantallaLucha(1);
 
 			}
 		});	
