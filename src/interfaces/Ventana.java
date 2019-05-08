@@ -128,20 +128,7 @@ public class Ventana extends JFrame{
 	        }      
 	} 
 	
-	//Movimiento entre paneles.	
-	/**
-	 * Volver a pantalla de inicio despues de derrota
-	 */
-	public void cargarPantallaInicio() {
-		if(this.pantallaInicio==null) {
-			this.pantallaInicio=new Inicio(this);
-		}
-		this.setTitle("Popollo Adventure");
-		this.pantallaLucha.setVisible(false);
-		this.setContentPane(this.pantallaInicio);
-		this.pantallaInicio.setVisible(true);
-	}
-	
+	//Movimiento entre paneles
 	/**
 	 * De pantalla de inicio a pantalla principal
 	 */
@@ -216,9 +203,10 @@ public class Ventana extends JFrame{
 	
 	/**
 	 * De pantalla principal a pantalla combate
+	 * @param adversario Entero el indicaremos la posicion del enemigo guardado en un arrayList
 	 */
-	public void cargarPantallaLucha() {
-		this.pantallaLucha=new Lucha(this);
+	public void cargarPantallaLucha(int adversario) {
+		this.pantallaLucha=new Lucha(this, adversario);
 		this.setTitle("Combate");
 		this.pantallaPrincipal.setVisible(false);
 		this.setContentPane(this.pantallaLucha);

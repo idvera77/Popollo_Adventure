@@ -238,7 +238,7 @@ public class Heroe extends Personaje{
      * Funcion que permite utilizar una habilidad del heroe gastando usos restantes de esta, el enemigo recibe el daño de dicha habilidad.
      * @param enemigo Personaje que recibe el daño de una habilidad.
      */
-    public void usarHabilidades(int numero, Enemigo enemigo, LabelTexto registro){
+    public void usarHabilidades(int numero, Enemigo enemigo, LabelTexto registro, String rutaSonido1, String rutaSonido2){
         if(getHabilidadesArray().get(numero).getUsosRestantes()>0){
             String tipo = String.valueOf(getHabilidadesArray().get(numero).getTipo());
             if(tipo.equals("OFENSIVO")){
@@ -248,6 +248,7 @@ public class Heroe extends Personaje{
             	registro.setText(resultadoUso);
                 getHabilidadesArray().get(numero).setUsosRestantes(getHabilidadesArray().get(numero).getUsosRestantes()-1);                     
                 dañoHabilidadesHeroe(enemigo, numero);
+                general.Musica.sonidosBoton(rutaSonido1);
             }else if(tipo.equals("CURATIVO")){
             	String resultadoUso="<html><center><b>"+getHabilidadesArray().get(numero).getNombre()
                         +" restablece "+getMagia()*getHabilidadesArray().get(numero).getEspecial()
@@ -255,6 +256,7 @@ public class Heroe extends Personaje{
                 	registro.setText(resultadoUso);
                 getHabilidadesArray().get(numero).setUsosRestantes(getHabilidadesArray().get(numero).getUsosRestantes()-1);                     
                 curacionHabilidades(numero);
+                general.Musica.sonidosBoton(rutaSonido2);
             }    
         }else{
         	registro.setText("<html><center><b>No tienes suficiente energia.</b></center></html>");  
@@ -287,7 +289,7 @@ public class Heroe extends Personaje{
      * Funcion que permite utilizar un objeto del heroe restando -1 a la cantidad maxima de este, el enemigo recibe el daño de dicho objeto.
      * @param enemigo Personaje que recibe el daño de un objeto.
      */
-    public void usarObjetos (int numero, Enemigo enemigo, LabelTexto registro){
+    public void usarObjetos (int numero, Enemigo enemigo, LabelTexto registro, String rutaSonido1, String rutaSonido2){
         if(getObjetosArray().get(numero).getCantidad()>0){
             String tipo = String.valueOf(getObjetosArray().get(numero).getTipo());
             if(tipo.equals("OFENSIVO")){
@@ -297,6 +299,7 @@ public class Heroe extends Personaje{
             	registro.setText(resultadoUso);
                 getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()-1);  
                 dañoObjetos(enemigo, numero);
+                general.Musica.sonidosBoton(rutaSonido1);
             }else if(tipo.equals("CURATIVO")){
             	String resultadoUso="<html><center><b>"+getObjetosArray().get(numero).getNombre()
             			+" restablece "+getObjetosArray().get(numero).getPoder()
@@ -304,6 +307,7 @@ public class Heroe extends Personaje{
             	registro.setText(resultadoUso);
                 getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()-1);
                 curacionObjetos(numero);       
+                general.Musica.sonidosBoton(rutaSonido2);
             }    
         }else{    
         	registro.setText("<html><center><b>No tienes suficientes objetos.</b></center></html>");
