@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
+import clases.Heroe;
 import clases.Personaje;
 import componentes.Botones;
 import componentes.BotonesCombate;
@@ -17,13 +18,11 @@ import componentes.Paneles;
 import general.Musica;
 
 import javax.swing.JProgressBar;
-import javax.swing.JTextField;
 import java.awt.Font;
 
 
 public class Lucha extends Paneles{
 	private Ventana ventana;
-	private JTextField textField;
 	public Lucha lucha;
 	private JProgressBar vidaHeroe, vidaEnemigo;
 	public LabelTexto registroBatallaHeroe, registroBatallaEnemigo, registroVictoriaDerrota;
@@ -39,8 +38,7 @@ public class Lucha extends Paneles{
 	public Lucha(Ventana v) {
 		super();
 		this.ventana=v;
-		int aleatorio;
-
+		
 		//Imagenes
 		ImageIcon[] imagenes = new ImageIcon[4];
 		imagenes[0] = new ImageIcon(".\\imagenes\\luchaPopollo.png");
@@ -54,6 +52,12 @@ public class Lucha extends Paneles{
         habilidadesObjetosSonido = "./sonidos/HabilidadesObjetos.wav";
         defensaSonido = "./sonidos/Defensa.wav";
         curacionSonido = "./sonidos/Curaciones.wav";
+		
+		//Paneles Texto
+		registroVictoriaDerrota = new LabelTexto();
+		registroVictoriaDerrota.setOpaque(false);
+		registroVictoriaDerrota .setBounds(281, 120, 446, 204);
+		add(registroVictoriaDerrota );
         
         //Barras de salud
 		this.vidaHeroe = new JProgressBar(0, ventana.heroe.getSaludMaxima());
@@ -150,12 +154,6 @@ public class Lucha extends Paneles{
 		iconoDefensaEnemigo.setVisible(false);
 		add(iconoDefensaEnemigo);
 		
-		//Paneles Texto
-		registroVictoriaDerrota = new LabelTexto();
-		registroVictoriaDerrota.setOpaque(false);
-		registroVictoriaDerrota .setBounds(281, 120, 446, 204);
-		add(registroVictoriaDerrota );
-		
 		registroBatallaHeroe = new LabelTexto();
 		registroBatallaHeroe.setBounds(281, 120, 446, 103);
 		add(registroBatallaHeroe);
@@ -213,7 +211,7 @@ public class Lucha extends Paneles{
 		botonHabilidades.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.mostrarHabilidades(registroBatallaHeroe);
+				ventana.heroe.mostrarHabilidadesCombate(registroBatallaHeroe);
 				mostrarBotonHabilidades();
 				iconoDefensaHeroe.setVisible(false);
 			}
@@ -221,31 +219,32 @@ public class Lucha extends Paneles{
 		
 		botonObjetos.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.mostrarHabilidades(registroBatallaHeroe);
-				mostrarBotonObjetos();	
+			public void mouseClicked(MouseEvent e) {			
+				ventana.heroe.mostrarObjetosCombate(registroBatallaHeroe);
+				mostrarBotonObjetos();
 				iconoDefensaHeroe.setVisible(false);
+
 			}
 		});
 		
 		boton1Habilidad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ocultarBotonHabilidades();
+				usarHabilidadHeroe(0);
 			}
 		});
 		
 		boton2Habilidad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ocultarBotonHabilidades();
+				usarHabilidadHeroe(1);
 			}
 		});
 	
 		boton3Habilidad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ocultarBotonHabilidades();
+				usarHabilidadHeroe(2);
 			}
 		});
 		
@@ -259,21 +258,21 @@ public class Lucha extends Paneles{
 		boton1Objeto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ocultarBotonObjetos();
+				usarObjetosHeroe(0);
 			}
 		});
 		
 		boton2Objeto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ocultarBotonObjetos();
+				usarObjetosHeroe(1);
 			}
 		});
 		
 		boton3Objeto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ocultarBotonObjetos();
+				usarObjetosHeroe(2);
 			}
 		});
 		
@@ -299,10 +298,11 @@ public class Lucha extends Paneles{
 			}
 		});
 		
-	}
+}
 		
 		/**
 		 * Funcion que nos permite mostrar los botones asignados a las habilidades.
+		 * Anotacion: Puedo hacer paneles con estos botones pero quizas juego con ellos mas adelante por separado.
 		 */
 		public void mostrarBotonHabilidades() {
 			botonAtacar.setVisible(false);
@@ -353,6 +353,9 @@ public class Lucha extends Paneles{
 			botonObjetos.setVisible(true);
 		}
 		
+		/**
+		 * Funcion que oculta todos los botones
+		 */
 		public void ocultarTodo() {
 			boton1Objeto.setVisible(false);
 			boton2Objeto.setVisible(false);
@@ -364,7 +367,7 @@ public class Lucha extends Paneles{
 		}
 		
 		/**
-		 * Funcion que reescribe los valores dentro de la barra de progreso indicando la salud restante.
+		 * Funcion que reescribe los valores dentro de la barra de progreso indicando la salud restante del heroe.
 		 */
 		public void vidaHeroe() {
 			vidaHeroe.setValue(ventana.heroe.getSalud());
@@ -372,7 +375,7 @@ public class Lucha extends Paneles{
 		}
 		
 		/**
-		 * Funcion que reescribe los valores dentro de la barra de progreso indicando la salud restante.
+		 * Funcion que reescribe los valores dentro de la barra de progreso indicando la salud restante del enemigo.
 		 */
 		public void vidaEnemigo() {
 			vidaEnemigo.setValue(ventana.enemigosArray.get(0).getSalud());
@@ -380,7 +383,7 @@ public class Lucha extends Paneles{
 		}
 		
 		/**
-		 * Conjunto de instrucciones asociados al boton de defensa.
+		 * Conjunto de instrucciones asociados al boton de defensa
 		 */
 		public void usarDefensa() {
 			iconoDefensaHeroe.setVisible(true);
@@ -392,6 +395,46 @@ public class Lucha extends Paneles{
 			ataqueEnemigo();
 		}
 		
+		/**
+		 * Conjunto de funciones para el uso de habilidades
+		 * @param numero Indica la habilidad a usar
+		 */
+		public void usarHabilidadHeroe(int numero) {
+			if(numero==2) {
+				ocultarBotonHabilidades();
+				ventana.heroe.usarHabilidades(numero, ventana.enemigosArray.get(0), registroBatallaHeroe);
+				vidaEnemigo();
+				general.Musica.sonidosBoton(curacionSonido);
+				ataqueEnemigo();	
+			}else {
+				ocultarBotonHabilidades();
+				ventana.heroe.usarHabilidades(numero, ventana.enemigosArray.get(0), registroBatallaHeroe);
+				vidaEnemigo();
+				general.Musica.sonidosBoton(habilidadesObjetosSonido);
+				ataqueEnemigo();
+			}
+		}
+			
+		/**
+		 * Conjunto de funciones para el uso de objetos
+		 * @param numero Indica el objeto a usar
+		 */
+		public void usarObjetosHeroe(int numero) {
+			if(numero==2) {
+				ocultarBotonObjetos();
+				ventana.heroe.usarObjetos(numero, ventana.enemigosArray.get(0), registroBatallaHeroe);
+				general.Musica.sonidosBoton(curacionSonido);
+				vidaEnemigo();
+				ataqueEnemigo();
+			}else {
+				ocultarBotonObjetos();
+				ventana.heroe.usarObjetos(numero, ventana.enemigosArray.get(0), registroBatallaHeroe);
+				general.Musica.sonidosBoton(habilidadesObjetosSonido);
+				vidaEnemigo();
+				ataqueEnemigo();
+			}
+		}
+
 		/**
 		 * Funcion que recoge todas las acciones del enemigo y las condiciones de victoria o derrota.
 		 */
@@ -532,124 +575,3 @@ public class Lucha extends Paneles{
 	     }
 }
 
-
-
-/*
- * public static void batalla(Heroe heroe, Enemigo enemigo, JLabel iconoDefensaHeroe, JLabel IconoDefensaEnemigo, J){
-
-        //Sonidos Combate
-        String rutaCancionVictoria = "./sonidos/Victoria.wav";
-        String rutaSonidoFisicoAliado = "./sonidos/Atacar.wav";
-        String rutaSonidoFisicoEnemigo = "./sonidos/FisicoEnemigo.wav";
-        String rutaSonidoHabilidadesObjetos = "./sonidos/HabilidadesObjetos.wav";
-        String rutaSonidoDefensa = "./sonidos/Defensa.wav";
-        String rutaSonidoCuraciones = "./sonidos/Curaciones.wav";
-
-        Scanner sc=new Scanner(System.in);
-
-        int aleatorio;
-        boolean Victoria=false;
-        boolean defensaHeroe=false;
-        boolean defensaEnemigo=false;
-
-
-        do{
-            //TURNO ALIADO
-            //Comprobacion de que el heroe tiene mas de 0 puntos de salud.
-            if(heroe.getSalud()>0){
-            	if(defensaHeroe==true){
-                    heroe.BloqueoOff(heroe);
-                    iconoDefensaHeroe.setVisible(false);
-                    
-                    defensaHeroe=false;
-                }
-                try {
-                    int opcion=Integer.parseInt(sc.nextLine());
-
-                    switch(opcion){
-                        case 1:
-                            heroe.atacar(heroe, enemigo);
-                            Musica.iniciarSonidos(rutaSonidoFisicoAliado);
-                            Thread.sleep(350);
-                            break;
-                        case 2:
-                            System.out.println("- La defensa natural se multiplica por 2 durante un turno.\n");
-                            heroe.Bloqueo(heroe);
-                            defensaHeroe=true;
-                            Musica.iniciarSonidos(rutaSonidoDefensa);
-                            Thread.sleep(350);
-                            break;
-                        case 3:
-                            heroe.mostrarHabilidades();
-                            heroe.usarHabilidades(enemigo);
-                            Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
-                            Thread.sleep(350);
-                            break;
-                        case 4:
-                            heroe.mostrarObjetos();
-                            heroe.usarObjetos(enemigo);
-                            Musica.iniciarSonidos(rutaSonidoCuraciones);
-                            Thread.sleep(350);
-                            break;
-                    }
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Combate.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }else{
-                System.out.println("\n\tDERROTA - Juega mejor la proxima vez ^_^\n");
-                System.exit(0);
-            }
-            //TURNO ENEMIGO
-            //Comprobacion de que el heroe tiene mas de 0 puntos de salud.
-            if(enemigo.getSalud()>0){
-                //Comprobacion de que el enemigo tiene activada la mejora de defensa, si es true la disminuye ya que ha pasado un turno.
-                if(defensaEnemigo==true){
-                        enemigo.BloqueoOff(enemigo);
-                        IconoDefensaEnemigo.setVisible(false);
-                        defensaEnemigo=false;
-                    }
-                try {
-                    aleatorio = NumeroAleatorio(0, 6);
-                    if(aleatorio<=3){
-                        System.out.println("\tDecide atacar!\n");
-                        enemigo.atacar(enemigo, heroe);
-                        Musica.iniciarSonidos(rutaSonidoFisicoEnemigo);
-                        Thread.sleep(150);
-                    }else if(aleatorio==4){
-                        System.out.println("\tDecide usar bloqueo!\n");
-                        System.out.println("- Su defensa natural se multiplica por 2 durante un turno.");
-                        enemigo.Bloqueo(enemigo);
-                        defensaEnemigo=true;
-                        Musica.iniciarSonidos(rutaSonidoDefensa);
-                        Thread.sleep(150);
-                    }else{
-                        System.out.println("\tDecide usar una habilidad!\n");
-                        enemigo.usarHabilidadesEnemigos(heroe);
-                        Musica.iniciarSonidos(rutaSonidoHabilidadesObjetos);
-                        Thread.sleep(150);
-                    }
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Combate.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                }else{
-                    Victoria=true;
-                    System.out.println("\n\t!!!"+enemigo.getNombre()+" Derrotado!!!"
-                            +" Recibes "+enemigo.getDinero()+" Monedas de oro y "
-                            + enemigo.getExperiencia()+" puntos de experiencia.");
-                    heroe.subirNivel(enemigo.getExperiencia());
-                    heroe.setDinero(heroe.getDinero()+enemigo.getDinero());
-                    if(defensaEnemigo==true){
-                        enemigo.BloqueoOff(enemigo);
-                        defensaEnemigo=false;
-                    }
-                    Musica.iniciarMusica(rutaCancionVictoria);
-                }
-        }while(!Victoria);
-        enemigo.restablecerEnemigo();
-    }
-
-    public static int NumeroAleatorio(int minimo,int maximo){
-       int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));
-       return num;
-    }
- */

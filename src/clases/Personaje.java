@@ -1,9 +1,6 @@
 package clases;
 
-import static general.Combate.NumeroAleatorio;
 import java.util.ArrayList;
-
-import componentes.LabelTexto;
 
 /**
  *

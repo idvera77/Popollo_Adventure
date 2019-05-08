@@ -29,6 +29,22 @@ public class Objeto extends ElementoIdentificador{
         this.precio = precio;
     }
 
+    public int getPoder() {
+        return poder;
+    }
+
+    public void setPoder(int poder) {
+        this.poder = poder;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
     public enum tipoObjeto{
         OFENSIVO,
         CURATIVO
@@ -49,22 +65,6 @@ public class Objeto extends ElementoIdentificador{
            default:
                throw new InvalidTipoException(tipo+" no es valido. Solo puede ser 'ofensivo' o 'curativo'");
        }
-    }
-
-    public int getPoder() {
-        return poder;
-    }
-
-    public void setPoder(int poder) {
-        this.poder = poder;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
     }
 
     public int getPrecio() {
