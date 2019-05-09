@@ -1,6 +1,5 @@
 package clases;
 
-import static general.Combate.NumeroAleatorio;
 import java.util.ArrayList;
 
 import componentes.LabelTexto;
@@ -70,4 +69,12 @@ public class Enemigo extends Personaje{
 	        	registro.setText("<html><center><b>"+getNombre()+" falla al intentar utilizar una habilidad!</b></center></html>");
 	        }
     }    
+    
+    /*
+	 * Funcion que nos ayuda a generar numeros aleatorios necesarios para calculos de daño.
+	 */
+    public static int NumeroAleatorio(int minimo,int maximo){
+        int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));
+        return num;
+    }
 }

@@ -1,28 +1,23 @@
-package interfaces;
+package pantallas;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
-import javax.swing.border.LineBorder;
-
 import clases.Enemigo;
 import clases.Habilidad;
 import clases.Heroe;
 import clases.Npc;
 import clases.Objeto;
-import exceptions.InvalidMoralException;
-import exceptions.InvalidTipoException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Ventana extends JFrame{
 	private Inicio pantallaInicio;	
@@ -32,16 +27,16 @@ public class Ventana extends JFrame{
 	private Descanso pantallaDescanso;
 	private Lucha pantallaLucha;
 	private Evento pantallaEvento;
-	JProgressBar barraExploracion;
-
-	Connection connect;
-	Heroe heroe;
-	ArrayList<Enemigo> enemigosArray;
-	ArrayList<Npc> npcsArray;
+	private Cargar pantallaCarga;
+	public JProgressBar barraExploracion;
+	public Connection connect;
+	public Heroe heroe;
+	public ArrayList<Enemigo> enemigosArray;
+	public ArrayList<Npc> npcsArray;
 	
 	public Ventana() {
 		super();
-		this.setTitle("Popollo Adventure");
+		setTitle("Popollo Adventure");
 		pantallaInicio=new Inicio(this);
 		setSize(1024,576);
 		setVisible(true);
@@ -51,6 +46,26 @@ public class Ventana extends JFrame{
 		//Barra de progreso que se usa en varios sitios
 		this.barraExploracion = new JProgressBar(0,20);
 		this.barraExploracion.setString("Comienza tu aventura");
+			
+		//Nos aseguramos de cerrar el programa correctamente junto a la conexion si existe.
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				int exit = JOptionPane.showConfirmDialog(null, "¿Estas seguro?" , "Cerrar Programa", 
+						JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if (exit == JOptionPane.YES_OPTION){
+					if(getConnect()!=null) {
+						try {
+							connect.close();
+						} catch (SQLException e1) {
+						//No importa el error que pueda transmitir en este caso.
+						}
+					}	
+				    System.exit(0);
+				}	
+			}
+		});
 	}
 	
 	public Connection getConnect() {
@@ -71,9 +86,9 @@ public class Ventana extends JFrame{
 	//Funcion que conecta con la base de base de datos para cargar partida y nos devuelve una conexion si no ocurre ningun error.
 	public Connection cargarPartida() {
 		try {
-			setConnect(DriverManager.getConnection("jdbc:mysql://localhost:3306/popollo_adventure","root","admin"));
+			 setConnect(DriverManager.getConnection("jdbc:mysql://localhost:3306/popollo_adventure","root","admin"));
 			 System.out.println("Conexion establecida");
-			 cargarPantallaPrincipal();
+			 cargarPantallaCarga();
 			 return connect;	 
 		} catch (SQLException ex) {
 		    System.err.println("La conexion a bd ha fallado");
@@ -130,14 +145,28 @@ public class Ventana extends JFrame{
 	
 	//Movimiento entre paneles
 	/**
-	 * De pantalla de inicio a pantalla principal
+	 * De pantalla de inicio a pantalla de carga
+	 */
+	public void cargarPantallaCarga() {
+		if(this.pantallaCarga==null) {
+			this.pantallaCarga=new Cargar(this);
+		}
+		this.setTitle("Principal");
+		this.pantallaInicio.setVisible(false);
+		this.setContentPane(this.pantallaCarga);
+		this.pantallaCarga.setVisible(true);
+		
+	}
+	
+	/**
+	 * De carga a principal
 	 */
 	public void cargarPantallaPrincipal() {
 		if(this.pantallaPrincipal==null) {
 			this.pantallaPrincipal=new Principal(this);
 		}
 		this.setTitle("Principal");
-		this.pantallaInicio.setVisible(false);
+		this.pantallaCarga.setVisible(false);
 		this.setContentPane(this.pantallaPrincipal);
 		this.pantallaPrincipal.setVisible(true);
 	}
@@ -237,3 +266,50 @@ public class Ventana extends JFrame{
 		this.pantallaPrincipal.setVisible(true);
 	}
 }
+/*
+ * package pantallas;
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import javax.swing.Timer;
+
+import componentes.Paneles;
+
+
+public class Cargar extends Paneles{
+	private JProgressBar bar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+    private JLabel label = new JLabel("", JLabel.CENTER);
+    private Timer timer = new Timer(100, new ActionListener() {
+
+        private int counter = 1;
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            label.setText(String.valueOf(counter));
+            bar.setValue(++counter);
+            if (counter > 100) {
+                timer.stop();
+            }
+        }
+    });
+
+    Cargar() {
+        super.setLayout(new GridLayout(0, 1));
+        bar.setValue(0);
+        timer.start();
+        this.add(bar);
+        this.add(label);
+        JOptionPane.showMessageDialog(null, this);
+    }
+
+
+    public void run() {
+               Cargar cdpb = new Cargar();
+    }
+}
+*/

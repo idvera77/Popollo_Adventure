@@ -1,4 +1,4 @@
-package interfaces;
+package pantallas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.border.LineBorder;
 
 import clases.Enemigo;
@@ -28,13 +29,15 @@ import java.awt.Font;
 public class Principal extends Paneles {
 	private Ventana ventana;
 	private LabelTexto mostrarAtributos, mostrarHabilidades;
+	private JProgressBar barraExploracion;
 	
 	public Principal(Ventana v) {
 		super();
 		this.ventana=v;
+		this.barraExploracion=ventana.barraExploracion;
 		
 		//Sonido
-		String rutaSonido = "./sonidos/Guardar.wav";
+		String rutaSonido = "./recursos/sonidos/Guardar.wav";
 		
 		//CARGANDO DATOS DEL JUEGO
 		//Si detecta una conexion entra en la base de datos y recupera los datos del heroe junto sus habilidades de lo contrario no hace nada (evitando un error).
@@ -101,7 +104,7 @@ public class Principal extends Paneles {
 			        objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 100 puntos de daño.", 100, 1, "ofensivo", 500));
 			        objetosHeroe.add(new Objeto("Pocion", "Restablece 50 puntos de salud.", 50, 5, "curativo", 250));
 		        
-			        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 10000, 10000, 20, 5, 10, 10, habilidadesHeroe, objetosHeroe, 50000, 0, 0, 1, 0));
+			        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 80, 80, 20, 5, 10, 10, habilidadesHeroe, objetosHeroe, 50000, 0, 0, 1, 0));
 		     } catch (InvalidTipoException e1) {
 					e1.printStackTrace();
 			 }
@@ -154,14 +157,13 @@ public class Principal extends Paneles {
            }	
 		
 		//Barra progreso, se mueve dependiendo del valor Explorar del heroe.
-		ventana.barraExploracion.setString("Comienza tu aventura");
-		ventana.barraExploracion.setValue(ventana.heroe.getExplorar());
-		ventana.barraExploracion.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
-		ventana.barraExploracion.setStringPainted(true);
-		ventana.barraExploracion.setForeground(new Color(88, 164, 146));
-		ventana.barraExploracion.setFont(new Font("Bahnschrift", Font.BOLD, 15));
-		ventana.barraExploracion.setBounds(271, 31, 400, 67);
-		add(ventana.barraExploracion);
+		barraExploracion.setValue(ventana.heroe.getExplorar());
+		barraExploracion.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
+		barraExploracion.setStringPainted(true);
+		barraExploracion.setForeground(new Color(88, 164, 146));
+		barraExploracion.setFont(new Font("Bahnschrift", Font.BOLD, 15));
+		barraExploracion.setBounds(271, 31, 400, 67);
+		add(barraExploracion);
 		
 		//Eventos	
 		
@@ -270,8 +272,6 @@ public class Principal extends Paneles {
 			}
 		});
 		
-
-		
 		mostrarAtributos = new LabelTexto();
 		ventana.heroe.pantallaGeneralEstadisticas(mostrarAtributos);
 		mostrarAtributos.setBounds(10, 370, 130, 155);
@@ -297,7 +297,7 @@ public class Principal extends Paneles {
 		//Imagen de fondo
 		JLabel imagenDescanso = new JLabel("");
 		imagenDescanso.setBounds(0, 0, 1008, 536);
-		imagenDescanso.setIcon(new ImageIcon("./imagenes/mapa.jpg"));
+		imagenDescanso.setIcon(new ImageIcon("./recursos/imagenes/principal.jpg"));
 		add(imagenDescanso);	        
 	}	
 	

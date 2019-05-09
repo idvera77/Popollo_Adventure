@@ -1,4 +1,4 @@
-package interfaces;
+package pantallas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,22 +11,27 @@ import componentes.LabelTexto;
 import componentes.Paneles;
 import componentes.PanelTexto;
 import javax.swing.border.LineBorder;
+
+import clases.Heroe;
+
 import java.awt.Color;
 import java.awt.Font;
 
 public class Descanso extends Paneles{
 	private Ventana ventana;
+	private Heroe heroe;
 	
 	public Descanso(Ventana v) {
 		super();
 		this.ventana=v;
+		this.heroe=ventana.heroe;
 		
 		//Sonido
-		String rutaSonido = "./sonidos/Curaciones.wav";
+		String rutaSonido = "./recursos/sonidos/Curaciones.wav";
 		
 		LabelTexto mostrarDinero = new LabelTexto();
 		mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
-		mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(ventana.heroe.getDinero())
+		mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(heroe.getDinero())
 				+"</b></center></html>");
 		mostrarDinero.setBounds(10, 29, 109, 40);
 		add(mostrarDinero);
@@ -51,7 +56,7 @@ public class Descanso extends Paneles{
 		//Imagen de fondo
 		JLabel imagenDescanso = new JLabel("");
 		imagenDescanso.setBounds(0, 0, 1008, 536);
-		imagenDescanso.setIcon(new ImageIcon("./imagenes/descanso.jpg"));
+		imagenDescanso.setIcon(new ImageIcon("./recursos/imagenes/descanso.jpg"));
 		add(imagenDescanso);	
 	
 		
@@ -59,24 +64,24 @@ public class Descanso extends Paneles{
 		botonCuracion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.puntoDescanso(0, rutaSonido);
-				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
+				heroe.puntoDescanso(0, rutaSonido);
+				mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
 			}
 		});
 		
 		botonRecargaHabilidades.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.puntoDescanso(1,rutaSonido);
-				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
+				heroe.puntoDescanso(1,rutaSonido);
+				mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
 			}
 		});
 		
 		botonRecuperacionCompleta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.heroe.puntoDescanso(2,rutaSonido);
-				mostrarDinero.setText(" Oro: "+Integer.toString(ventana.heroe.getDinero()));
+				heroe.puntoDescanso(2,rutaSonido);
+				mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
 			}
 		});
 		

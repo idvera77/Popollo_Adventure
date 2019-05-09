@@ -1,4 +1,4 @@
-package interfaces;
+package pantallas;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -17,10 +17,10 @@ public class Galeria extends Paneles{
 		this.ventana=v;
 		
 		ImageIcon[] imagenes = new ImageIcon[4];
-		imagenes[0] = new ImageIcon(".\\imagenes\\popollo.png");
-		imagenes[1] = new ImageIcon(".\\imagenes\\Morrigan.png");
-		imagenes[2] = new ImageIcon(".\\imagenes\\dancer low.png");	
-		imagenes[3] = new ImageIcon(".\\imagenes\\poring.png");
+		imagenes[0] = new ImageIcon("./recursos/imagenes/galeria/popollo.png");
+		imagenes[1] = new ImageIcon("./recursos/imagenes/galeria/morrigan.png");
+		imagenes[2] = new ImageIcon("./recursos/imagenes/galeria/dancer low.png");	
+		imagenes[3] = new ImageIcon("./recursos/imagenes/galeria/poring.png");
 		
 		//Añadiendo Botones
 		Botones botonPopollo = new Botones("Popollo");

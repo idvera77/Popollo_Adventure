@@ -1,11 +1,11 @@
 package main;
 
-import interfaces.Ventana;
+import pantallas.Ventana;
 
 public class Main {
 
 	public static void main(String[] args) {
-		interfaces.Ventana v=new Ventana();
+		pantallas.Ventana v=new Ventana();
 	}
 
 }

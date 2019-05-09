@@ -1,4 +1,4 @@
-package interfaces;
+package pantallas;
 
 import componentes.Paneles;
 

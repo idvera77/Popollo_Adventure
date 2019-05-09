@@ -2,6 +2,8 @@ package clases;
 
 import java.util.ArrayList;
 
+import componentes.LabelTexto;
+
 /**
  *
  * @author Mystra77
@@ -121,7 +123,7 @@ public class Personaje extends ElementoIdentificador{
     //FUNCIONES
     
     /**
-     * Funcion para determinar el daño causado al personajeX, su defensa - el daño enemigo.
+     * Funcion para determinar el daño causado al personajeX, su defensa - el daño enemigo
      * @param personajeX Personaje que recibe daño en su salud
      * @param daño Parametro externo que indica el daño que recibe el personajeX
      */
@@ -136,7 +138,7 @@ public class Personaje extends ElementoIdentificador{
    
     /**
      * Funcion que multiplica en 2 su atributo defensivo.
-     * @param personajeX Personaje que utilizada la funcion de bloqueo.
+     * @param personajeX Personaje que utilizada la funcion de bloqueo
      */
     public void Bloqueo (Personaje personajeX){
         this.defensa= defensa*2;
@@ -144,9 +146,22 @@ public class Personaje extends ElementoIdentificador{
     
     /**
      * Funcion que divide en 2 su atributo defensivo.
-     * @param personajeX Personaje que utilizada la funcion de bloqueoOff.
+     * @param personajeX Personaje que utilizada la funcion de bloqueoOff
      */
     public void BloqueoOff (Personaje personajeX){
         this.defensa = defensa/2;
     }   
+    
+    /**
+     * Muestra las estadisticas principales en combate
+     * @param personajeX Personaje que muestra sus estadisticas
+     */
+    public void mostrarAtributosCombate(LabelTexto registro) {
+    	registro.setText("<html><center><b>"
+    			+"Fuerza: "+getFuerza()
+    			+"<br/> Magia: "+getMagia()
+    			+"<br/> Defensa: "+getDefensa()
+    			+"<br/> Agilidad: "+getAgilidad()
+    			+"</b></center></html>"); 
+    }
 }
