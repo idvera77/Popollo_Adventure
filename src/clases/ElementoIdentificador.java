@@ -4,7 +4,7 @@ package clases;
  * 
  * @author Ivan Diaz Vera
  */
-public class ElementoIdentificador {
+public abstract class ElementoIdentificador {
     private String nombre;
     private String descripcion;
 

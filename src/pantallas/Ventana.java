@@ -5,8 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -28,8 +26,8 @@ public class Ventana extends JFrame{
 	private Lucha pantallaLucha;
 	private Evento pantallaEvento;
 	private Cargar pantallaCarga;
+	private Connection connect;
 	public JProgressBar barraExploracion;
-	public Connection connect;
 	public Heroe heroe;
 	public ArrayList<Enemigo> enemigosArray;
 	public ArrayList<Npc> npcsArray;
@@ -55,7 +53,7 @@ public class Ventana extends JFrame{
 				int exit = JOptionPane.showConfirmDialog(null, "¿Estas seguro?" , "Cerrar Programa", 
 						JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				if (exit == JOptionPane.YES_OPTION){
-					if(getConnect()!=null) {
+					if(connect!=null) {
 						try {
 							connect.close();
 						} catch (SQLException e1) {
@@ -86,12 +84,11 @@ public class Ventana extends JFrame{
 	//Funcion que conecta con la base de base de datos para cargar partida y nos devuelve una conexion si no ocurre ningun error.
 	public Connection cargarPartida() {
 		try {
-			 setConnect(DriverManager.getConnection("jdbc:mysql://localhost:3306/popollo_adventure","root","admin"));
-			 System.out.println("Conexion establecida");
-			 cargarPantallaCarga();
+			connect = DriverManager.getConnection(
+					 "jdbc:mysql://localhost:3306/popollo_adventure"
+					 + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
 			 return connect;	 
 		} catch (SQLException ex) {
-		    System.err.println("La conexion a bd ha fallado");
 		    ex.printStackTrace();
 		    return null;
 		}
@@ -99,8 +96,9 @@ public class Ventana extends JFrame{
 	
 	public void guardarPartida(ArrayList<Habilidad> habilidadesHeroe, ArrayList<Objeto> objetosHeroe) {
 		try {
-			Connection connect=(DriverManager.getConnection(
-	                "jdbc:mysql://localhost:3306/popollo_adventure","root","admin"));
+			connect = DriverManager.getConnection(
+					 "jdbc:mysql://localhost:3306/popollo_adventure"
+					 + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
 		    
 		    //Guardando parametros del heroe
 		    PreparedStatement smt = connect.prepareStatement("UPDATE heroe "
@@ -134,12 +132,11 @@ public class Ventana extends JFrame{
 	            smt = connect.prepareStatement("UPDATE objeto "
 	            + "SET cantidad = ? WHERE ID = "+(i+1)+"");
 	            smt.setInt(1, heroe.getObjetosArray().get(i).getCantidad());  
-	            smt.executeUpdate();
+	            smt.executeUpdate();  
 	        }
+	        smt.close();
 	        } catch (SQLException ex) {
-	            Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
 	            ex.getStackTrace();
-	            System.err.println("\n!!!Error al conectarse con la base de datos!!!");
 	        }      
 	} 
 	
@@ -155,7 +152,6 @@ public class Ventana extends JFrame{
 		this.pantallaInicio.setVisible(false);
 		this.setContentPane(this.pantallaCarga);
 		this.pantallaCarga.setVisible(true);
-		
 	}
 	
 	/**
@@ -222,8 +218,8 @@ public class Ventana extends JFrame{
 	/**
 	 * De pantalla principal a pantalla evento
 	 */
-	public void cargarPantallaEvento() {
-		this.pantallaEvento=new Evento(this);
+	public void cargarPantallaEvento(int evento) {
+		this.pantallaEvento=new Evento(this, evento);
 		this.setTitle("Evento");
 		this.pantallaPrincipal.setVisible(false);
 		this.setContentPane(this.pantallaEvento);
@@ -266,50 +262,3 @@ public class Ventana extends JFrame{
 		this.pantallaPrincipal.setVisible(true);
 	}
 }
-/*
- * package pantallas;
-
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
-import javax.swing.Timer;
-
-import componentes.Paneles;
-
-
-public class Cargar extends Paneles{
-	private JProgressBar bar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
-    private JLabel label = new JLabel("", JLabel.CENTER);
-    private Timer timer = new Timer(100, new ActionListener() {
-
-        private int counter = 1;
-
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            label.setText(String.valueOf(counter));
-            bar.setValue(++counter);
-            if (counter > 100) {
-                timer.stop();
-            }
-        }
-    });
-
-    Cargar() {
-        super.setLayout(new GridLayout(0, 1));
-        bar.setValue(0);
-        timer.start();
-        this.add(bar);
-        this.add(label);
-        JOptionPane.showMessageDialog(null, this);
-    }
-
-
-    public void run() {
-               Cargar cdpb = new Cargar();
-    }
-}
-*/

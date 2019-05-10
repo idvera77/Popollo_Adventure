@@ -60,6 +60,7 @@ public class Inicio extends Paneles {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.cargarPartida();
+				ventana.cargarPantallaCarga();
 				general.Musica.sonidosBoton(rutaSonido);
 			}
 		});
@@ -76,7 +77,7 @@ public class Inicio extends Paneles {
 			public void mouseClicked(MouseEvent e) {
 				if(ventana.getConnect()!=null) {
 					try {
-						ventana.connect.close();
+						ventana.getConnect().close();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

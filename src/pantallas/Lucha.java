@@ -12,7 +12,6 @@ import javax.swing.border.LineBorder;
 
 import clases.Enemigo;
 import clases.Heroe;
-import clases.Personaje;
 import componentes.Botones;
 import componentes.BotonesCombate;
 import componentes.LabelTexto;
@@ -44,7 +43,6 @@ public class Lucha extends Paneles{
 		this.adversario=adversario;
 		this.heroe=ventana.heroe;
 		this.enemigoArray=ventana.enemigosArray;
-	
 		
 		//Imagenes
 		ImageIcon[] imagenEnemigoBatalla = new ImageIcon[4];
@@ -69,14 +67,12 @@ public class Lucha extends Paneles{
 		
 		mostrarAtributos = new LabelTexto();
 		heroe.mostrarAtributosCombate(mostrarAtributos);
-		//heroe.mostrarEstadisticasCombate(mostrarAtributos);
 		mostrarAtributos.setVisible(false);
 		mostrarAtributos.setBounds(80, 347, 120, 115);
 		add(mostrarAtributos);
 		
 		mostrarAtributosEnemigo = new LabelTexto();
 		enemigoArray.get(adversario).mostrarAtributosCombate(mostrarAtributosEnemigo);
-		//heroe.mostrarEstadisticasCombate(mostrarAtributos);
 		mostrarAtributosEnemigo.setVisible(false);
 		mostrarAtributosEnemigo.setBounds(807, 347, 120, 115);
 		add(mostrarAtributosEnemigo);
@@ -191,14 +187,14 @@ public class Lucha extends Paneles{
 		Versus.setBounds(281, 49, 446, 58);
 		add(Versus);
 		
-		//JLabel donde se muestra las imagenes de la galeria
+		//JLabel donde se muestra las imagenes del heroe
 		JLabel imagenHeroe = new JLabel("");
 		imagenHeroe.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		imagenHeroe.setBounds(10, 36, 261, 300);
 		imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/combate/popollo.gif"));
 		add(imagenHeroe);
 		
-		//JLabel donde se muestra las imagenes de la galeria
+		//JLabel donde se muestra las imagenes del enemigo
 		imagenEnemigo = new JLabel("");
 		imagenEnemigo.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		imagenEnemigo.setBounds(737, 36, 261, 300);
@@ -325,13 +321,12 @@ public class Lucha extends Paneles{
 			}
 		});
 		
-		
 		botonSalir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(ventana.getConnect()!=null) {
 					try {
-						ventana.connect.close();
+						ventana.getConnect().close();
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
@@ -427,10 +422,11 @@ public class Lucha extends Paneles{
 	 * Conjunto de instrucciones asociadas al boton de ataque
 	 */
 	public void usarAtaque(){
-		atacar(ventana.getHeroe(), enemigoArray.get(adversario), registroBatallaHeroe);
+		heroe.atacar(enemigoArray.get(adversario),registroBatallaHeroe);
 		general.Musica.sonidosBoton(ataqueHeroeSonido);
 		ataqueEnemigo();
 		iconoDefensaHeroe.setVisible(false);
+		vidaEnemigo();
 	}
 	
 	/**
@@ -482,9 +478,9 @@ public class Lucha extends Paneles{
             }
             //Tirada aleatoria para sacar la accion del enemigo (ataque, defender o uso de habilidades)
             //ATAQUE BASICO
-            aleatorio = NumeroAleatorio(0, 6);
+            aleatorio = clases.Personaje.numeroAleatorio(0, 6);
             if(aleatorio<=3){
-                atacar(enemigoArray.get(adversario), heroe, registroBatallaEnemigo);
+            	enemigoArray.get(adversario).atacar(heroe, registroBatallaEnemigo);
             //DEFENSA
             }else if(aleatorio==4){
             	registroBatallaEnemigo.setText("<html><center><b>"+enemigoArray.get(adversario).getNombre()
@@ -540,62 +536,7 @@ public class Lucha extends Paneles{
 	            botonSalir.setVisible(true);
 			}	
 	}
-
-    /**
-     * Funcion para golpear con ataques fisicos. Dependiendo de la agilidad de ambos cambian los resultados.
-     * @param personajeX Es el personaje que ataca y hace daño.
-     * @param personajeY Es el personaje que recibe el daño.
-     * @param registro Guarda la informacion para mostrarla en un JLabelText
-     */
-    public void atacar(Personaje personajeX, Personaje personajeY, LabelTexto registro){
-        int dañar;
-        int aleatorio, aleatorio1;
-        if(personajeX.getAgilidad()>personajeY.getAgilidad()){
-        	aleatorio = NumeroAleatorio(0, 3);
-            if(aleatorio==0){
-                dañar = personajeX.getFuerza()*2;
-                personajeY.daño(personajeY,dañar);
-                registro.setText("<html><center><b>!!GOLPE CRITICO!!<br>"+personajeX.getNombre()
-					+" inflige "+personajeX.getFuerza()*2+" puntos de daño.<br>"
-					+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
-					+"</center></b></html>");
-            }else{
-                dañar = personajeX.getFuerza();
-                personajeY.daño(personajeY,dañar);
-                registro.setText("<html><center><b>"+personajeX.getNombre()
-					+" inflige "+personajeX.getFuerza()+" puntos de daño.<br>"
-					+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
-					+"</center></b></html>");
-            }
-        }else if(personajeX.getAgilidad()==personajeY.getAgilidad()){
-            dañar = personajeX.getFuerza();
-            personajeY.daño(personajeY,dañar);
-            registro.setText("<html><center><b>"+personajeX.getNombre()
-				+" inflige "+personajeX.getFuerza()+" puntos de daño.<br>"
-				+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
-				+"</center></b></html>");
-        }else{
-        	aleatorio1 = NumeroAleatorio(0, 3);
-            if(aleatorio1==0){
-            	registro.setText("<html><center><b>Ataque Fallado!!!</center></b></html>");
-            }else{
-                dañar = personajeX.getFuerza();
-                personajeY.daño(personajeY,dañar);
-                registro.setText("<html><center><b>"+personajeX.getNombre()
-				+" inflige "+personajeX.getFuerza()+" puntos de daño.<br>"
-				+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
-				+"</center></b></html>");
-            }
-        }
-        vidaEnemigo();
-    }
-
-	/*
-	 * Funcion que nos ayuda a generar numeros aleatorios necesarios para calculos de daño.
-	 */
-    public static int NumeroAleatorio(int minimo,int maximo){
-        int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));
-        return num;
-    }
 }
+
+
 

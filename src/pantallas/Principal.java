@@ -208,7 +208,6 @@ public class Principal extends Paneles {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.cargarPantallaLucha(0);
-				//general.Combate.batalla(ventana.heroe, ventana.enemigosArray.get(0));	
 				avanzarBarraProgreso();
 			}
 		});
@@ -216,7 +215,9 @@ public class Principal extends Paneles {
 		eventoPrueba.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.cargarPantallaLucha(1);
+				//ventana.cargarPantallaLucha(1);
+				ventana.cargarPantallaCarga();
+				general.Musica.sonidosBoton(rutaSonido);
 
 			}
 		});	
@@ -224,7 +225,7 @@ public class Principal extends Paneles {
 		pruebaAfinidad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.cargarPantallaDescanso();
+				ventana.cargarPantallaEvento(2);
 			}
 		});	
 		
@@ -239,14 +240,14 @@ public class Principal extends Paneles {
 		botonTienda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.cargarPantallaTienda();
+				ventana.cargarPantallaTienda();
 			}
 		});	
 		
 		botonDescanso.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.cargarPantallaDescanso();
+				ventana.cargarPantallaDescanso();
 			}
 		});	
 		
@@ -262,7 +263,7 @@ public class Principal extends Paneles {
 			public void mouseClicked(MouseEvent e) {
 				if(ventana.getConnect()!=null) {
 					try {
-						ventana.connect.close();
+						ventana.getConnect().close();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

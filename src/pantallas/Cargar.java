@@ -1,7 +1,5 @@
 package pantallas;
 
-
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,6 +12,7 @@ import componentes.Paneles;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 import java.awt.Font;
 import java.awt.SystemColor;
 
@@ -43,19 +42,23 @@ public class Cargar extends Paneles{
         barraCarga.setBounds(10, 318, 988, 63);
         add(barraCarga);
        
+        Random r = new Random();
+        String [] consejoFrase = {"Intenta descansar cada 45 minutos de juego", "Trata bien al pequeño Popollo"};
+        consejos.setText(consejoFrase[r.nextInt(consejoFrase.length)]);
+        
+        //Esta preparado por si quiero usar mas pantallas de carga mas adelante.
         ActionListener updateBarraCargar = new ActionListener() {
           public void actionPerformed(ActionEvent actionEvent) {
-            barraCarga.setValue((barraCarga.getValue()+2));  
+            barraCarga.setValue((barraCarga.getValue()+4));  
             if(barraCarga.getValue()==100) {
             	ventana.cargarPantallaPrincipal();
             	timer.stop();
+            	barraCarga.setValue(0);
+            	consejos.setText(consejoFrase[r.nextInt(consejoFrase.length)]);
             }
           }  
         };
         
-        
-        
-      
         timer = new Timer(50, updateBarraCargar);
         addMouseListener(new MouseAdapter() {
 			@Override
@@ -66,11 +69,7 @@ public class Cargar extends Paneles{
         	public void mouseExited(MouseEvent arg0) {
         		timer.start();
         	}
-        });   
-        
-        String [] consejoFrase = {"Miguel es el Mal en Persona"};
-        
-        consejos.setText(consejoFrase[0]);
-	
+        });  
+	}
 }
-}
+
