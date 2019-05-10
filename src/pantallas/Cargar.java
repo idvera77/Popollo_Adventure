@@ -3,7 +3,6 @@ package pantallas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
 
@@ -20,7 +19,6 @@ public class Cargar extends Paneles{
 	private Ventana ventana;
 	private JProgressBar barraCarga;
 	private LabelTexto consejos;
-    private JLabel imagenFondo = new JLabel("", JLabel.CENTER);
     private Timer timer;
     
 	public Cargar(Ventana v) {

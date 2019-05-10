@@ -4,22 +4,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import clases.Heroe;
-import componentes.Botones;
+import componentes.BotonesDialogo;
 import componentes.LabelTexto;
-import componentes.PanelTexto;
 import componentes.Paneles;
 import java.awt.Font;
-import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.SwingConstants;
 
 public class Evento extends Paneles{
 	private Ventana ventana;
 	public LabelTexto eventoTexto, eventoInicio;
-	public Botones opcion1, opcion2, opcion3, botonAtras;
+	public BotonesDialogo opcion1, opcion2, opcion3, botonAtras;
 	private Heroe heroe;
-	private int opcion, evento;
+	private int opcion;
 	
 	public Evento(Ventana v, int evento) {
 		super();
@@ -27,19 +24,19 @@ public class Evento extends Paneles{
 		this.heroe=ventana.heroe;
 		
 		//Añadir Botones
-		opcion1 = new Botones("");
+		opcion1 = new BotonesDialogo("");
 		opcion1.setBounds(244, 294, 520, 30);
 		add(opcion1);
 		
-		opcion2 = new Botones("");
+		opcion2 = new BotonesDialogo("");
 		opcion2.setBounds(244, 333, 520, 30);
 		add(opcion2);
 		
-		opcion3 = new Botones("");
+		opcion3 = new BotonesDialogo("");
 		opcion3.setBounds(244, 372, 520, 30);
 		add(opcion3);
 		
-		botonAtras = new Botones("Volver");
+		botonAtras = new BotonesDialogo("Volver");
 		botonAtras.setVisible(false);
 		botonAtras.setBounds(709, 428, 215, 23);
 		add(botonAtras);

@@ -3,7 +3,7 @@ package pantallas;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
-import componentes.Botones;
+import componentes.BotonesTienda;
 import componentes.LabelTexto;
 import componentes.PanelTexto;
 import componentes.Paneles;
@@ -14,7 +14,6 @@ import javax.swing.border.LineBorder;
 import clases.Heroe;
 
 import java.awt.Font;
-
 
 public class Tienda extends Paneles{
 	private Ventana ventana;
@@ -146,45 +145,45 @@ public class Tienda extends Paneles{
 		mostrarDinero.setBounds(10, 29, 109, 40);
 		add(mostrarDinero);
 		
-		//Añadiendo botones
-		Botones comprarBombaP = new Botones("Bomba Pequeña");
+		//Añadiendo BotonesTienda
+		BotonesTienda comprarBombaP = new BotonesTienda("Bomba Pequeña");
 		comprarBombaP.setBounds(131, 130, 159, 25);
 		add(comprarBombaP);
 		
-		Botones comprarBombaG = new Botones("Bomba Grande");
+		BotonesTienda comprarBombaG = new BotonesTienda("Bomba Grande");
 		comprarBombaG.setBounds(131, 160, 159, 25);
 		add(comprarBombaG);
 		
-		Botones comprarPocion = new Botones("Pocion");
+		BotonesTienda comprarPocion = new BotonesTienda("Pocion");
 		comprarPocion.setBounds(131, 190, 159, 25);
 		add(comprarPocion);
 		
-		Botones mejorarSalud = new Botones("Salud maxima +20");
+		BotonesTienda mejorarSalud = new BotonesTienda("Salud maxima +20");
 		mejorarSalud.setBounds(131, 290, 159, 25);
 		add(mejorarSalud);
 		
-		Botones mejorarFuerza = new Botones("Fuerza +5");
+		BotonesTienda mejorarFuerza = new BotonesTienda("Fuerza +5");
 		mejorarFuerza.setBounds(131, 322, 159, 25);
 		add(mejorarFuerza);
 		
-		Botones mejorarMagia = new Botones("Magia +1");
+		BotonesTienda mejorarMagia = new BotonesTienda("Magia +1");
 		mejorarMagia.setBounds(131, 354, 159, 25);
 		add(mejorarMagia);
 		
-		Botones mejorarAgilidad = new Botones("Agilidad +2");
+		BotonesTienda mejorarAgilidad = new BotonesTienda("Agilidad +2");
 		mejorarAgilidad.setBounds(131, 417, 159, 25);
 		add(mejorarAgilidad);
 		
-		Botones mejorarDefensa = new Botones("Defensa +2");
+		BotonesTienda mejorarDefensa = new BotonesTienda("Defensa +2");
 		mejorarDefensa.setBounds(131, 386, 159, 25);
 		add(mejorarDefensa);
 		
 		
-		Botones botonAtras = new Botones("Volver al mapa");
+		BotonesTienda botonAtras = new BotonesTienda("Volver al mapa");
 		botonAtras.setBounds(709, 428, 215, 23);
 		add(botonAtras);
 			
-		//Eventos de botones
+		//Eventos de BotonesTienda
 		comprarBombaP.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

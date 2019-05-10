@@ -43,7 +43,7 @@ public class Lucha extends Paneles{
 		this.adversario=adversario;
 		this.heroe=ventana.heroe;
 		this.enemigoArray=ventana.enemigosArray;
-		
+
 		//Imagenes
 		ImageIcon[] imagenEnemigoBatalla = new ImageIcon[4];
 		imagenEnemigoBatalla[0] = new ImageIcon("./recursos/imagenes/combate/poi.gif");

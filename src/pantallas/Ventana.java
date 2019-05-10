@@ -14,6 +14,11 @@ import clases.Habilidad;
 import clases.Heroe;
 import clases.Npc;
 import clases.Objeto;
+
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -40,6 +45,13 @@ public class Ventana extends JFrame{
 		setVisible(true);
 		setContentPane(pantallaInicio);
 		setLocationRelativeTo(null);
+		
+		//Cursor Personalizado
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image img = toolkit.getImage("./recursos/normal.png");
+		Point point = new Point(0, 0);
+		Cursor cursor = toolkit.createCustomCursor(img, point, "./recursos/normal.png");
+		setCursor(cursor);
 		
 		//Barra de progreso que se usa en varios sitios
 		this.barraExploracion = new JProgressBar(0,20);
@@ -86,7 +98,7 @@ public class Ventana extends JFrame{
 		try {
 			connect = DriverManager.getConnection(
 					 "jdbc:mysql://localhost:3306/popollo_adventure"
-					 + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
+					 + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","admin");
 			 return connect;	 
 		} catch (SQLException ex) {
 		    ex.printStackTrace();
@@ -98,7 +110,7 @@ public class Ventana extends JFrame{
 		try {
 			connect = DriverManager.getConnection(
 					 "jdbc:mysql://localhost:3306/popollo_adventure"
-					 + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
+					 + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","admin");
 		    
 		    //Guardando parametros del heroe
 		    PreparedStatement smt = connect.prepareStatement("UPDATE heroe "
@@ -133,6 +145,7 @@ public class Ventana extends JFrame{
 	            + "SET cantidad = ? WHERE ID = "+(i+1)+"");
 	            smt.setInt(1, heroe.getObjetosArray().get(i).getCantidad());  
 	            smt.executeUpdate();  
+	            smt.close();
 	        }
 	        smt.close();
 	        } catch (SQLException ex) {

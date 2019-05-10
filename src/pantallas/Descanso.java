@@ -9,12 +9,9 @@ import javax.swing.JLabel;
 import componentes.Botones;
 import componentes.LabelTexto;
 import componentes.Paneles;
-import componentes.PanelTexto;
-import javax.swing.border.LineBorder;
 
 import clases.Heroe;
 
-import java.awt.Color;
 import java.awt.Font;
 
 public class Descanso extends Paneles{

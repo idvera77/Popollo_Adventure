@@ -11,21 +11,21 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
-public class Botones extends JButton {
-	public Botones(String txt) {
+public class BotonesTienda extends JButton {
+	public BotonesTienda(String txt) {
 		super(txt);
 		
 		//cursor para botones
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Image img = toolkit.getImage("./recursos/normal.png");
+		Image img = toolkit.getImage("./recursos/monedas.png");
 		Point point = new Point(0, 0);
 		Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-		cursor = toolkit.createCustomCursor(img, point, "./recursos/normal.png");
+		cursor = toolkit.createCustomCursor(img, point, "./recursos/monedas.png");
 		setCursor(cursor);
 		
 		setFont(new Font("Bahnschrift", Font.PLAIN, 16));	
 		setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		
+
 		addMouseListener(new MouseAdapter(){
 			@Override
 			public void mouseEntered(MouseEvent e) {
