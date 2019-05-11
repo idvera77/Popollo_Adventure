@@ -26,12 +26,14 @@ import exceptions.InvalidTipoException;
 
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JDesktopPane;
 
 public class Principal extends Paneles {
 	private Ventana ventana;
 	private LabelTexto mostrarAtributos;
 	private JProgressBar barraExploracion;
-	private JLabel marcadorMapa;
+	private JLabel posicion0Mapa, posicion1Mapa, posicion2Mapa, posicion3Mapa, posicion4Mapa, posicion5Mapa, posicion6Mapa, posicion7Mapa, posicion8Mapa, posicion9Mapa, posicion10Mapa, 
+		posicion11Mapa, posicion12Mapa, posicion13Mapa, posicion14Mapa,posicion15Mapa, posicion16Mapa, posicion17Mapa, posicion18Mapa, posicion19Mapa;
 	
 	public Principal(Ventana ventana) {
 		super();
@@ -168,12 +170,138 @@ public class Principal extends Paneles {
 		barraExploracion.setBounds(271, 31, 400, 67);
 		add(barraExploracion);
 		
-		marcadorMapa = new JLabel("");
-		//marcadorMapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
-		marcadorMapa.setIcon(new ImageIcon("./recursos/1.png"));
-		add(marcadorMapa);
+		posicion1Mapa = new JLabel("");
+		//posicion1Mapa.setBounds(30, 194, 60, 60);
+		//posicion1Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion1Mapa.setBounds(39, 182, 60, 60);
+		posicion1Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion1Mapa);
 		
-		//Eventos	
+		posicion2Mapa = new JLabel("");
+		//posicion2Mapa.setBounds(112, 134, 60, 60);
+		//posicion2Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion2Mapa.setBounds(114, 118, 60, 60);
+		posicion2Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion2Mapa);
+		
+		posicion3Mapa = new JLabel("");
+		//posicion3Mapa.setBounds(184, 86, 60, 60);
+		//posicion3Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion3Mapa.setBounds(190, 67, 60, 60);
+		posicion3Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion3Mapa);
+		
+		posicion4Mapa = new JLabel("");
+		//posicion4Mapa.setBounds(275, 48, 60, 60);
+		//posicion4Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion4Mapa.setBounds(280, 29, 60, 60);
+		posicion4Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion4Mapa);
+		
+		posicion5Mapa = new JLabel("");
+		//posicion5Mapa.setBounds(354, 85, 60, 60);
+		//posicion5Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion5Mapa.setBounds(362, 67, 60, 60);
+		posicion5Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion5Mapa);
+		
+		posicion6Mapa = new JLabel("");
+		//posicion6Mapa.setBounds(352, 182, 60, 60);
+		//posicion6Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion6Mapa.setBounds(358, 150, 60, 60);
+		posicion6Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion6Mapa);
+		
+		posicion7Mapa = new JLabel("");
+		//posicion7Mapa.setBounds(314, 260, 60, 60);
+		//posicion7Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion7Mapa.setBounds(319, 234, 60, 60);
+		posicion7Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion7Mapa);
+		
+		posicion8Mapa = new JLabel("");
+		//posicion8Mapa.setBounds(334, 344, 60, 60);
+		//posicion8Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion8Mapa.setBounds(340, 314, 60, 60);
+		posicion8Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion8Mapa);
+		
+		posicion9Mapa = new JLabel("");
+		//posicion9Mapa.setBounds(412, 351, 60, 60);
+		//posicion9Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion9Mapa.setBounds(419, 329, 60, 60);
+		posicion9Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion9Mapa);
+		
+		posicion10Mapa = new JLabel("");
+		//posicion10Mapa.setBounds(477, 283, 60, 60);
+		//posicion10Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion10Mapa.setBounds(483, 253, 60, 60);
+		posicion10Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion10Mapa);
+		
+		posicion11Mapa = new JLabel("");
+		//posicion11Mapa.setBounds(537, 209, 60, 60);
+		//posicion11Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion11Mapa.setBounds(540, 182, 60, 60);
+		posicion11Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion11Mapa);
+		
+		posicion12Mapa = new JLabel("");
+		//posicion12Mapa.setBounds(592, 133, 60, 60);
+		//posicion12Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion12Mapa.setBounds(596, 111, 60, 60);
+		posicion12Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion12Mapa);
+		
+		posicion13Mapa = new JLabel("");
+		//posicion13Mapa.setBounds(677, 104, 60, 60);
+		//posicion13Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion13Mapa.setBounds(680, 67, 60, 60);
+		posicion13Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion13Mapa);
+		
+		posicion14Mapa = new JLabel("");
+		//posicion14Mapa.setBounds(728, 179, 60, 60);
+		//posicion14Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion14Mapa.setBounds(732, 150, 60, 60);
+		posicion14Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion14Mapa);
+		
+		posicion15Mapa = new JLabel("");
+		//posicion15Mapa.setBounds(728, 265, 60, 60);
+		//posicion15Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion15Mapa.setBounds(743, 234, 60, 60);
+		posicion15Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion15Mapa);
+		
+		posicion16Mapa = new JLabel("");
+		//posicion17Mapa.setBounds(813, 290, 60, 60);
+		//posicion17Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion16Mapa.setBounds(814, 267, 60, 60);
+		posicion16Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion16Mapa);
+		
+		posicion17Mapa = new JLabel("");
+		//posicion18Mapa.setBounds(865, 223, 60, 60);
+		//posicion18Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion17Mapa.setBounds(870, 196, 60, 60);
+		posicion17Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion17Mapa);
+		
+		posicion18Mapa = new JLabel("");
+		//posicion19Mapa.setBounds(880, 145, 60, 60);
+		//posicion19Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion18Mapa.setBounds(889, 118, 60, 60);
+		posicion18Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion18Mapa);
+		
+		posicion19Mapa = new JLabel("");
+		//posicion20Mapa.setBounds(900, 38, 60, 60);
+		//posicion20Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
+		posicion19Mapa.setBounds(909, 11, 60, 60);
+		posicion19Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		add(posicion19Mapa);
 		
 	
         //Añadiendo botones
@@ -324,42 +452,13 @@ public class Principal extends Paneles {
 		ventana.barraExploracion.setValue(ventana.barraExploracion.getValue()+1);
 		ventana.heroe.setExplorar(ventana.barraExploracion.getValue());
 		if(ventana.barraExploracion.getValue()==0) {
-			ventana.barraExploracion.setString("Comienza tu aventura");
+			//posicion0Mapa.setVisible(false);
 		}
-		else if(ventana.barraExploracion.getValue()==1) {
-			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
-			marcadorMapa.setBounds(30, 194, 66, 73);
-		}
-		else if(ventana.barraExploracion.getValue()==2) {
-			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
-			marcadorMapa.setBounds(112, 134, 58, 68);
-		}
-		else if(ventana.barraExploracion.getValue()==3) {
-			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
-			marcadorMapa.setBounds(184, 86, 56, 62);
-		}
-		else if(ventana.barraExploracion.getValue()==4) {
-			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
-			marcadorMapa.setBounds(275, 48, 55, 64);
-		}
-		else if(ventana.barraExploracion.getValue()==5) {
-			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
-			marcadorMapa.setBounds(354, 85, 61, 67);
-		}
-		else if(ventana.barraExploracion.getValue()==6) {
-			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
-			marcadorMapa.setBounds(352, 182, 54, 57);
-		}
-		else if(ventana.barraExploracion.getValue()==7) {
-			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
-			marcadorMapa.setBounds(314, 260, 56, 63);
-		}
-		else if(ventana.barraExploracion.getValue()==8) {
-			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
-			marcadorMapa.setBounds(334, 344, 54, 59);
-		}
+	}
+	
+	public void posicionEnMapa() {
 		
-		
+		ventana.heroe.getExplorar();
 	}
 }
 	
