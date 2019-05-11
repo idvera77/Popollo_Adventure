@@ -18,9 +18,9 @@ public class Descanso extends Paneles{
 	private Ventana ventana;
 	private Heroe heroe;
 	
-	public Descanso(Ventana v) {
+	public Descanso(Ventana ventana) {
 		super();
-		this.ventana=v;
+		this.ventana=ventana;
 		this.heroe=ventana.heroe;
 		
 		//Sonido
@@ -47,7 +47,7 @@ public class Descanso extends Paneles{
 		add(botonRecuperacionCompleta);
 		
 		Botones botonAtras = new Botones("Volver al mapa");
-		botonAtras.setBounds(709, 428, 215, 23);
+		botonAtras.setBounds(767, 487, 215, 23);
 		add(botonAtras);
 		
 		//Imagen de fondo
@@ -85,7 +85,7 @@ public class Descanso extends Paneles{
 		botonAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.volverPantallaPrincipal("Descanso");
+				ventana.origenADestino(ventana, "descanso", "principal", 0);
 			}
 		});		
 	}

@@ -12,9 +12,9 @@ import componentes.Paneles;
 public class Inicio extends Paneles {
 	private Ventana ventana;
 	
-	public Inicio(Ventana v) {
+	public Inicio(Ventana ventana) {
 		super();
-		this.ventana=v;
+		this.ventana=ventana;
 		
 		//Sonido
 		String rutaSonido = "./recursos/sonidos/Login.wav";
@@ -61,9 +61,10 @@ public class Inicio extends Paneles {
 		});
 		
 		botonGaleria.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("static-access")
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.cargarPantallaGaleria();
+				ventana.origenADestino(ventana, "inicio", "galeria", 0);
 			}
 		});
 		

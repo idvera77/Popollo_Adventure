@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.border.LineBorder;
 
@@ -30,10 +31,11 @@ public class Principal extends Paneles {
 	private Ventana ventana;
 	private LabelTexto mostrarAtributos;
 	private JProgressBar barraExploracion;
+	private JLabel marcadorMapa;
 	
-	public Principal(Ventana v) {
+	public Principal(Ventana ventana) {
 		super();
-		this.ventana=v;
+		this.ventana=ventana;
 		this.barraExploracion=ventana.barraExploracion;
 		
 		//Sonido
@@ -158,6 +160,7 @@ public class Principal extends Paneles {
 		
 		//Barra progreso, se mueve dependiendo del valor Explorar del heroe.
 		barraExploracion.setValue(ventana.heroe.getExplorar());
+		barraExploracion.setVisible(false);
 		barraExploracion.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
 		barraExploracion.setStringPainted(true);
 		barraExploracion.setForeground(new Color(88, 164, 146));
@@ -165,41 +168,46 @@ public class Principal extends Paneles {
 		barraExploracion.setBounds(271, 31, 400, 67);
 		add(barraExploracion);
 		
+		marcadorMapa = new JLabel("");
+		//marcadorMapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
+		marcadorMapa.setIcon(new ImageIcon("./recursos/1.png"));
+		add(marcadorMapa);
+		
 		//Eventos	
 		
 	
         //Añadiendo botones
 		
 		Botones combatePrueba = new Botones("Combate Prueba");
-		combatePrueba.setBounds(709, 200, 218, 23);
+		combatePrueba.setBounds(518, 419, 218, 23);
 		add(combatePrueba);
 		
 		Botones eventoPrueba = new Botones("Evento Prueba");
-		eventoPrueba.setBounds(709, 234, 218, 23);
+		eventoPrueba.setBounds(518, 453, 218, 23);
 		add(eventoPrueba);
 		
 		Botones pruebaAfinidad = new Botones("Afinidad");
-		pruebaAfinidad.setBounds(709, 268, 218, 23);
+		pruebaAfinidad.setBounds(518, 487, 218, 23);
 		add(pruebaAfinidad);
         
 		Botones botonGuardarPartida = new Botones("Guardar Partida");
-		botonGuardarPartida.setBounds(759, 98, 165, 23);
+		botonGuardarPartida.setBounds(767, 436, 215, 23);
 		add(botonGuardarPartida);
 		
 		Botones botonTienda = new Botones("Tienda");
-		botonTienda.setBounds(759, 132, 165, 23);
+		botonTienda.setBounds(551, 351, 165, 23);
 		add(botonTienda);
 		
 		Botones botonDescanso = new Botones("Punto de descanso");
-		botonDescanso.setBounds(759, 166, 165, 23);
+		botonDescanso.setBounds(551, 385, 165, 23);
 		add(botonDescanso);
 		
 		Botones botoAvanzar = new Botones("Avanzar");
 		botoAvanzar.setBounds(371, 95, 200, 23);
 		add(botoAvanzar);
 		
-		Botones botonSalir = new Botones("Salir");
-		botonSalir.setBounds(709, 428, 215, 23);
+		Botones botonSalir = new Botones("Salir del Juego");
+		botonSalir.setBounds(767, 487, 215, 23);
 		add(botonSalir);
 
 		//Eventos de botones
@@ -207,7 +215,7 @@ public class Principal extends Paneles {
 		combatePrueba.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.cargarPantallaLucha(0);
+				ventana.origenADestino(ventana,"principal", "lucha", 0);
 				avanzarBarraProgreso();
 			}
 		});
@@ -225,29 +233,33 @@ public class Principal extends Paneles {
 		pruebaAfinidad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.cargarPantallaEvento(2);
+				ventana.origenADestino(ventana, "principal", "evento", 2);
 			}
 		});	
 		
 		botonGuardarPartida.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.guardarPartida(ventana.heroe.getHabilidadesArray(), ventana.heroe.getObjetosArray()); 
-				general.Musica.sonidosBoton(rutaSonido);
+				int guardar = JOptionPane.showConfirmDialog(null, "¿Estas seguro?" , " Guardar Partida", 
+						JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if (guardar == JOptionPane.YES_OPTION){
+					ventana.guardarPartida(ventana.heroe.getHabilidadesArray(), ventana.heroe.getObjetosArray()); 
+					general.Musica.sonidosBoton(rutaSonido);
+				}	
 			}
 		});
 		
 		botonTienda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.cargarPantallaTienda();
+				ventana.origenADestino(ventana,"principal", "tienda", 0);
 			}
 		});	
 		
 		botonDescanso.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.cargarPantallaDescanso();
+				ventana.origenADestino(ventana,"principal", "descanso", 0);
 			}
 		});	
 		
@@ -261,15 +273,18 @@ public class Principal extends Paneles {
 		botonSalir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(ventana.getConnect()!=null) {
-					try {
-						ventana.getConnect().close();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+				int exit = JOptionPane.showConfirmDialog(null, "¿Estas seguro?" , " Cerrar Programa", 
+						JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+				if (exit == JOptionPane.YES_OPTION){
+					if(ventana.getConnect()!=null) {
+						try {
+							ventana.getConnect().close();
+						} catch (SQLException e1) {
+						//No importa el error que pueda transmitir en este caso.
+						}
+					}	
+				    System.exit(0);
 				}	
-					System.exit(0);  
 			}
 		});
 		
@@ -298,7 +313,7 @@ public class Principal extends Paneles {
 		//Imagen de fondo
 		JLabel imagenDescanso = new JLabel("");
 		imagenDescanso.setBounds(0, 0, 1008, 536);
-		imagenDescanso.setIcon(new ImageIcon("./recursos/imagenes/principal.jpg"));
+		imagenDescanso.setIcon(new ImageIcon("./recursos/imagenes/mapa.png"));
 		add(imagenDescanso);	        
 	}	
 	
@@ -312,28 +327,39 @@ public class Principal extends Paneles {
 			ventana.barraExploracion.setString("Comienza tu aventura");
 		}
 		else if(ventana.barraExploracion.getValue()==1) {
-			ventana.barraExploracion.setString("Un pequeño paso para un gran Popollo.");			
+			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
+			marcadorMapa.setBounds(30, 194, 66, 73);
 		}
-		else if(ventana.barraExploracion.getValue()>=2&&ventana.barraExploracion.getValue()<=5) {
-			ventana.barraExploracion.setString("Es duro pero solo tu puedes conseguirlo!!!");			
+		else if(ventana.barraExploracion.getValue()==2) {
+			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
+			marcadorMapa.setBounds(112, 134, 58, 68);
 		}
-		else if(ventana.barraExploracion.getValue()>=6&&ventana.barraExploracion.getValue()<=9) {
-			ventana.barraExploracion.setString("Eres un gran heroe Popollo.");			
+		else if(ventana.barraExploracion.getValue()==3) {
+			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
+			marcadorMapa.setBounds(184, 86, 56, 62);
 		}
-		else if(ventana.barraExploracion.getValue()==10) {
-			ventana.barraExploracion.setString("Acabas de llegar a la mitad de tu recorrido!!!");			
+		else if(ventana.barraExploracion.getValue()==4) {
+			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
+			marcadorMapa.setBounds(275, 48, 55, 64);
 		}
-		else if(ventana.barraExploracion.getValue()>=11&&ventana.barraExploracion.getValue()<=14) {
-			ventana.barraExploracion.setString("Todo el mundo empieza a conocerte.");			
+		else if(ventana.barraExploracion.getValue()==5) {
+			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
+			marcadorMapa.setBounds(354, 85, 61, 67);
 		}
-		else if(ventana.barraExploracion.getValue()>=15&&ventana.barraExploracion.getValue()<=19) {
-			ventana.barraExploracion.setString("Estamos en la recta final, esfuerzate al maximo.");			
+		else if(ventana.barraExploracion.getValue()==6) {
+			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
+			marcadorMapa.setBounds(352, 182, 54, 57);
 		}
-		else {
-			ventana.barraExploracion.setString("Solo tu puedes derrotar al temible Pulpoi.");			
+		else if(ventana.barraExploracion.getValue()==7) {
+			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
+			marcadorMapa.setBounds(314, 260, 56, 63);
 		}
-		ventana.barraExploracion.getString();
+		else if(ventana.barraExploracion.getValue()==8) {
+			//ventana.origenADestino(ventana,"principal", "lucha", 0);		
+			marcadorMapa.setBounds(334, 344, 54, 59);
+		}
+		
+		
 	}
-	
 }
 	

@@ -23,13 +23,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Ventana extends JFrame{
-	private Inicio pantallaInicio;	
-	private Galeria pantallaGaleria;
-	private Principal pantallaPrincipal;
-	private Tienda pantallaTienda;
-	private Descanso pantallaDescanso;
-	private Lucha pantallaLucha;
-	private Evento pantallaEvento;
+	private static Inicio pantallaInicio;	
+	private static Galeria pantallaGaleria;
+	private static Principal pantallaPrincipal;
+	private static Tienda pantallaTienda;
+	private static Descanso pantallaDescanso;
+	private static Lucha pantallaLucha;
+	private static Evento pantallaEvento;
 	private Cargar pantallaCarga;
 	private Connection connect;
 	public JProgressBar barraExploracion;
@@ -62,7 +62,7 @@ public class Ventana extends JFrame{
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				int exit = JOptionPane.showConfirmDialog(null, "¿Estas seguro?" , "Cerrar Programa", 
+				int exit = JOptionPane.showConfirmDialog(null, "¿Estas seguro?" , " Cerrar Programa", 
 						JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				if (exit == JOptionPane.YES_OPTION){
 					if(connect!=null) {
@@ -162,7 +162,7 @@ public class Ventana extends JFrame{
 			this.pantallaCarga=new Cargar(this);
 		}
 		this.setTitle("Principal");
-		this.pantallaInicio.setVisible(false);
+		Ventana.pantallaInicio.setVisible(false);
 		this.setContentPane(this.pantallaCarga);
 		this.pantallaCarga.setVisible(true);
 	}
@@ -171,107 +171,85 @@ public class Ventana extends JFrame{
 	 * De carga a principal
 	 */
 	public void cargarPantallaPrincipal() {
-		if(this.pantallaPrincipal==null) {
-			this.pantallaPrincipal=new Principal(this);
+		if(Ventana.pantallaPrincipal==null) {
+			Ventana.pantallaPrincipal=new Principal(this);
 		}
 		this.setTitle("Principal");
 		this.pantallaCarga.setVisible(false);
-		this.setContentPane(this.pantallaPrincipal);
-		this.pantallaPrincipal.setVisible(true);
+		this.setContentPane(Ventana.pantallaPrincipal);
+		Ventana.pantallaPrincipal.setVisible(true);
 	}
 	
 	/**
-	 * De pantalla de inicio a pantalla galeria
+	 * Funcion para ir de pantalla origen a pantalla destino
+	 * @param origen Indica la pantalla actual
+	 * @param destino Indica la pantalla siguiente
+	 * @param Variable de tipo entero que nos ayuda a indicar el numero de evento o combate
 	 */
-	public void cargarPantallaGaleria() {
-		if(this.pantallaGaleria==null) {
-			this.pantallaGaleria=new Galeria(this);
-		}
-		this.setTitle("Galeria");
-		this.pantallaInicio.setVisible(false);
-		this.setContentPane(this.pantallaGaleria);
-		this.pantallaGaleria.setVisible(true);
-	}
-	
-	/**
-	 * De pantalla galeria a pantalla de inicio
-	 */
-	public void volverPantallaInicio() {
-		if(this.pantallaInicio==null) {
-			this.pantallaInicio=new Inicio(this);
-		}
-		this.setTitle("Popollo Adventure");
-		this.pantallaGaleria.setVisible(false);
-		this.setContentPane(this.pantallaInicio);
-		this.pantallaInicio.setVisible(true);
-	}
-	
-	/**
-	 * De pantalla principal a pantalla tienda
-	 */
-	public void cargarPantallaTienda() {
-		this.pantallaTienda=new Tienda(this);
-		this.setTitle("Tienda");
-		this.pantallaPrincipal.setVisible(false);
-		this.setContentPane(this.pantallaTienda);
-		this.pantallaTienda.setVisible(true);
-	}
-	
-	/**
-	 * De pantalla principal a pantalla descanso
-	 */
-	public void cargarPantallaDescanso() {
-		this.pantallaDescanso=new Descanso(this);
-		this.setTitle("Descanso");
-		this.pantallaPrincipal.setVisible(false);
-		this.setContentPane(this.pantallaDescanso);
-		this.pantallaDescanso.setVisible(true);
-	}
-	
-	/**
-	 * De pantalla principal a pantalla evento
-	 */
-	public void cargarPantallaEvento(int evento) {
-		this.pantallaEvento=new Evento(this, evento);
-		this.setTitle("Evento");
-		this.pantallaPrincipal.setVisible(false);
-		this.setContentPane(this.pantallaEvento);
-		this.pantallaEvento.setVisible(true);
-	}
-	
-	/**
-	 * De pantalla principal a pantalla combate
-	 * @param adversario Entero el indicaremos la posicion del enemigo guardado en un arrayList
-	 */
-	public void cargarPantallaLucha(int adversario) {
-		this.pantallaLucha=new Lucha(this, adversario);
-		this.setTitle("Combate");
-		this.pantallaPrincipal.setVisible(false);
-		this.setContentPane(this.pantallaLucha);
-		this.pantallaLucha.setVisible(true);
-	}
-	
-	/**
-	 * Volver de cualquier lugar a la pantalla principal
-	 */
-	public void volverPantallaPrincipal(String cadena) {
-		switch(cadena) {
-			case "Tienda":
-				this.pantallaTienda.setVisible(false);	
+	public static void origenADestino(Ventana v, String origen, String destino, int numero) {
+		switch(destino) {
+			case "inicio":
+				Ventana.pantallaInicio=new Inicio(v);
+				v.setTitle("Popollo Adventure");
+				v.setContentPane(pantallaInicio);
+				Ventana.pantallaInicio.setVisible(true);	
 				break;
-			case "Descanso":
-				this.pantallaDescanso.setVisible(false);
+			case "tienda":
+				Ventana.pantallaTienda=new Tienda(v);
+				v.setTitle("Tienda");
+				v.setContentPane(Ventana.pantallaTienda);
+				Ventana.pantallaTienda.setVisible(true);	
 				break;
-			case "Evento":
-				this.pantallaEvento.setVisible(false);
+			case "descanso":
+				Ventana.pantallaDescanso=new Descanso(v);
+				v.setTitle("Descanso");
+				v.setContentPane(Ventana.pantallaDescanso);
+				Ventana.pantallaDescanso.setVisible(true);	
 				break;
-			case "Lucha":
-				this.pantallaLucha.setVisible(false);
+			case "evento":
+				Ventana.pantallaEvento=new Evento(v, numero);
+				v.setTitle("Evento");
+				v.setContentPane(Ventana.pantallaEvento);
+				Ventana.pantallaEvento.setVisible(true);
+				break;
+			case "lucha":
+				Ventana.pantallaLucha=new Lucha(v, numero);
+				v.setTitle("Lucha");
+				v.setContentPane(Ventana.pantallaLucha);
+				Ventana.pantallaLucha.setVisible(true);
+				break;
+			case "principal":
+				Ventana.pantallaPrincipal=new Principal(v);
+				v.setTitle("Principal");
+				v.setContentPane(Ventana.pantallaPrincipal);
+				Ventana.pantallaPrincipal.setVisible(true);
 				break;		
+			case "galeria":
+				Ventana.pantallaGaleria=new Galeria(v);
+				v.setTitle("Galeria");
+				v.setContentPane(Ventana.pantallaGaleria);
+				Ventana.pantallaGaleria.setVisible(true);
+				break;
 		}
-		this.pantallaPrincipal=new Principal(this);
-		this.setTitle("Principal");
-		this.setContentPane(this.pantallaPrincipal);
-		this.pantallaPrincipal.setVisible(true);
+		switch(origen) {
+			case "inicio":
+				Ventana.pantallaInicio.setVisible(false);
+			break;
+			case "tienda":
+				Ventana.pantallaTienda.setVisible(false);
+				break;
+			case "descanso":
+				Ventana.pantallaDescanso.setVisible(false);
+				break;
+			case "evento":
+				Ventana.pantallaEvento.setVisible(false);
+				break;
+			case "lucha":
+				Ventana.pantallaLucha.setVisible(false);
+				break;
+			case "principal":
+				Ventana.pantallaPrincipal.setVisible(false);
+			break;		
+		}
 	}
 }

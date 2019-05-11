@@ -20,10 +20,10 @@ public class Cargar extends Paneles{
 	private JProgressBar barraCarga;
 	private LabelTexto consejos;
     private Timer timer;
-    
-	public Cargar(Ventana v) {
+
+	public Cargar(Ventana ventana) {
 		super();
-		this.ventana=v;
+		this.ventana=ventana;
 
 		setBackground(Color.BLACK);
 		consejos = new LabelTexto();

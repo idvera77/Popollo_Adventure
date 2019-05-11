@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import clases.Enemigo;
@@ -22,7 +23,7 @@ import javax.swing.JProgressBar;
 import java.awt.Font;
 
 public class Lucha extends Paneles{
-	public Ventana ventana;
+	private Ventana ventana;
 	public int adversario;
 	private Heroe heroe;
 	private ArrayList<Enemigo> enemigoArray;
@@ -37,9 +38,9 @@ public class Lucha extends Paneles{
     private boolean defensaHeroe=false;
     private boolean defensaEnemigo=false;
     
-	public Lucha(Ventana v, int adversario) {
+	public Lucha(Ventana ventana, int adversario) {
 		super();
-		this.ventana=v;
+		this.ventana=ventana;
 		this.adversario=adversario;
 		this.heroe=ventana.heroe;
 		this.enemigoArray=ventana.enemigosArray;
@@ -105,6 +106,13 @@ public class Lucha extends Paneles{
 		add(botonSalir);
 		
 		botonAtras = new Botones("Volver al mapa");
+		botonAtras.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventana.origenADestino(ventana, "lucha", "principal", 0);
+				JOptionPane.showMessageDialog(null, "Logro desbloqueado");
+			}
+		});
 		botonAtras.setBounds(395, 277, 215, 23);
 		botonAtras.setVisible(false);
 		add(botonAtras);
@@ -263,14 +271,7 @@ public class Lucha extends Paneles{
 				usarHabilidadHeroe(2);
 			}
 		});
-		
-		botonAtras.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				v.volverPantallaPrincipal("Batalla");
-			}
-		});
-		
+			
 		boton1Objeto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -291,13 +292,7 @@ public class Lucha extends Paneles{
 				usarObjetosHeroe(2);
 			}
 		});
-		
-		botonAtras.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				v.volverPantallaPrincipal("Batalla");
-			}
-		});
+
 		
 		imagenHeroe.addMouseListener(new MouseAdapter() {
 			@Override
@@ -517,6 +512,8 @@ public class Lucha extends Paneles{
             	 	
             	Musica.sonidosBoton(cancionVictoria);
             	heroe.subirNivel(enemigoArray.get(adversario).getExperiencia());
+            	ventana.barraExploracion.setValue(5);
+            	ventana.barraExploracion.getValue();
             	botonAtras.setVisible(true);
             }
 			//Al final de cada turno quitamos al heroe la defensa aumentada.

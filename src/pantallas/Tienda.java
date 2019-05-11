@@ -3,6 +3,8 @@ package pantallas;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+
+import componentes.Botones;
 import componentes.BotonesTienda;
 import componentes.LabelTexto;
 import componentes.PanelTexto;
@@ -179,8 +181,8 @@ public class Tienda extends Paneles{
 		add(mejorarDefensa);
 		
 		
-		BotonesTienda botonAtras = new BotonesTienda("Volver al mapa");
-		botonAtras.setBounds(709, 428, 215, 23);
+		Botones botonAtras = new Botones("Volver al mapa");
+		botonAtras.setBounds(767, 487, 215, 23);
 		add(botonAtras);
 			
 		//Eventos de BotonesTienda
@@ -260,7 +262,7 @@ public class Tienda extends Paneles{
 		botonAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				v.volverPantallaPrincipal("Tienda");
+				ventana.origenADestino(v, "tienda", "principal", 0);
 			}
 		});
 		

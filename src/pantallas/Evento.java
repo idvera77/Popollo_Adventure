@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import clases.Heroe;
+import componentes.Botones;
 import componentes.BotonesDialogo;
 import componentes.LabelTexto;
 import componentes.Paneles;
@@ -14,13 +15,14 @@ import java.awt.event.MouseEvent;
 public class Evento extends Paneles{
 	private Ventana ventana;
 	public LabelTexto eventoTexto, eventoInicio;
-	public BotonesDialogo opcion1, opcion2, opcion3, botonAtras;
+	public Botones botonAtras;
+	public BotonesDialogo opcion1, opcion2, opcion3;
 	private Heroe heroe;
 	private int opcion;
 	
-	public Evento(Ventana v, int evento) {
+	public Evento(Ventana ventana, int evento) {
 		super();
-		this.ventana=v;
+		this.ventana=ventana;
 		this.heroe=ventana.heroe;
 		
 		//Añadir Botones
@@ -36,7 +38,7 @@ public class Evento extends Paneles{
 		opcion3.setBounds(244, 372, 520, 30);
 		add(opcion3);
 		
-		botonAtras = new BotonesDialogo("Volver");
+		botonAtras = new Botones ("Volver");
 		botonAtras.setVisible(false);
 		botonAtras.setBounds(709, 428, 215, 23);
 		add(botonAtras);
@@ -86,7 +88,7 @@ public class Evento extends Paneles{
 		botonAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.volverPantallaPrincipal("evento");
+				ventana.origenADestino(ventana, "evento", "principal", 0);
 			}
 		});
 	}
@@ -101,10 +103,10 @@ public class Evento extends Paneles{
 	public void elegirEvento(int evento, int opcion) {
 		switch(evento) {
 			case 1:
-				general.Eventos.vagabundo(ventana.heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
+				general.Eventos.vagabundo(ventana, ventana.heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
 				break;
 			case 2:
-				general.Eventos.rescateAldeanos(heroe, null, eventoTexto, opcion1, opcion2, opcion3, opcion);
+				general.Eventos.rescateAldeanos(ventana, heroe, null, eventoTexto, opcion1, opcion2, opcion3, opcion);
 				break;
 		}
 	}

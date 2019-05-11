@@ -12,9 +12,9 @@ import java.awt.event.MouseEvent;
 public class Galeria extends Paneles{
 	private Ventana ventana;
 	
-	public Galeria(Ventana v) {
+	public Galeria(Ventana ventana) {
 		super();
-		this.ventana=v;
+		this.ventana=ventana;
 		
 		ImageIcon[] imagenes = new ImageIcon[4];
 		imagenes[0] = new ImageIcon("./recursos/imagenes/galeria/popollo.png");
@@ -147,7 +147,7 @@ public class Galeria extends Paneles{
 		botonAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.volverPantallaInicio();
+				ventana.origenADestino(ventana,"galeria", "inicio", 0);
 			}
 		});
 	}		
