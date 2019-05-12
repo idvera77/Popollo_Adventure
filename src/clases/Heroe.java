@@ -170,13 +170,13 @@ public class Heroe extends Personaje{
      */
     public void mostrarHabilidadesCombate (LabelTexto registro){
         String listaHabilidades="";
-        listaHabilidades +="<html><center><b>";
+        listaHabilidades +="<html><b>";
             for (int i = 0; i < getHabilidadesArray().size(); i++) {
                 listaHabilidades +="("+(i+1)+") "+getHabilidadesArray().get(i).getNombre()
                         +" | Usos:\n "+getHabilidadesArray().get(i).getUsosRestantes()
                         +"/"+getHabilidadesArray().get(i).getUsosMaximos()+"<br>";
             }     
-            listaHabilidades+="</b></center></html>";
+            listaHabilidades+="</b></html>";
             registro.setText(listaHabilidades);   
     }
     
@@ -202,12 +202,12 @@ public class Heroe extends Personaje{
      */
     public void mostrarObjetosCombate (LabelTexto registro){
         String listaObjetos="";
-        listaObjetos+="<html><center><b>";
+        listaObjetos+="<html><b>";
             for (int i = 0; i < getObjetosArray().size(); i++) {
-                listaObjetos +=" ("+(i+1)+")"+getObjetosArray().get(i).getNombre()
+                listaObjetos +=" ("+(i+1)+") "+getObjetosArray().get(i).getNombre()
                         +" | Cantidad: "+getObjetosArray().get(i).getCantidad()+"<br>";
             }     
-            listaObjetos+="</b></center></html>";
+            listaObjetos+="</b></html>";
             registro.setText(listaObjetos);
     }
     

@@ -56,7 +56,7 @@ public class Enemigo extends Personaje{
      * @param heroe Personaje que recibe el daño de una habilidad.
      */
     public void usarHabilidadesEnemigos(Heroe heroe, LabelTexto registro){
-        int aleatorio = NumeroAleatorio(0, 1);  
+        int aleatorio = numeroAleatorio(0, 1);  
         String resultadoUso="<html><center><b>"+getNombre()+" utiliza una habilidad!<br>";
 	        if(getHabilidadesArray().get(aleatorio).getUsosRestantes()>0){
 	        	resultadoUso+=(getHabilidadesArray().get(aleatorio).getNombre()+" inflige "
@@ -73,7 +73,7 @@ public class Enemigo extends Personaje{
     /*
 	 * Funcion que nos ayuda a generar numeros aleatorios necesarios para calculos de daño.
 	 */
-    public static int NumeroAleatorio(int minimo,int maximo){
+    public static int numeroAleatorio(int minimo,int maximo){
         int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));
         return num;
     }

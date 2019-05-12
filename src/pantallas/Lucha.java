@@ -21,6 +21,7 @@ import general.Musica;
 
 import javax.swing.JProgressBar;
 import java.awt.Font;
+import javax.swing.JButton;
 
 public class Lucha extends Paneles{
 	private Ventana ventana;
@@ -30,9 +31,9 @@ public class Lucha extends Paneles{
 	private ImageIcon[] imagenEnemigoDerrota;
 	public JProgressBar vidaHeroe, vidaEnemigo;
 	public LabelTexto registroBatallaHeroe, registroBatallaEnemigo, registroVictoriaDerrota, mostrarAtributos, mostrarAtributosEnemigo;
-	private Botones botonSalir, botonAtras;
+	private Botones botonSalir, botonAtras, quitarSeleccion;
 	private BotonesCombate botonAtacar, botonDefender, botonHabilidades, botonObjetos, boton1Habilidad, boton2Habilidad, boton3Habilidad, boton1Objeto, boton2Objeto, boton3Objeto;
-	public JLabel iconoDefensaHeroe, iconoDefensaEnemigo, imagenEnemigo;
+	public JLabel iconoDefensaHeroe, iconoDefensaEnemigo, imagenEnemigo, imagenHeroe;
 	private String cancionVictoria, ataqueHeroeSonido, habilidadesObjetosSonido, defensaSonido, curacionSonido;
 	private int aleatorio;
     private boolean defensaHeroe=false;
@@ -110,7 +111,6 @@ public class Lucha extends Paneles{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.origenADestino(ventana, "lucha", "principal", 0);
-				JOptionPane.showMessageDialog(null, "Logro desbloqueado");
 			}
 		});
 		botonAtras.setBounds(395, 277, 215, 23);
@@ -139,6 +139,7 @@ public class Lucha extends Paneles{
 		
 		boton1Habilidad = new BotonesCombate("1");
 		boton1Habilidad.setVisible(false);
+		boton1Habilidad.setIcon(new ImageIcon("./recursos/imagenes/botones/botonChispa.png"));
 		boton1Habilidad.setBounds(317, 347, 115, 115);
 		add(boton1Habilidad);
 		
@@ -150,23 +151,32 @@ public class Lucha extends Paneles{
 		
 		boton3Habilidad = new BotonesCombate("3");
 		boton3Habilidad.setVisible(false);
+		boton3Habilidad.setIcon(new ImageIcon("./recursos/imagenes/botones/botonHeal.png"));
 		boton3Habilidad.setBounds(577, 347, 115, 115);
 		add(boton3Habilidad);
 		
 		boton1Objeto = new BotonesCombate("1");
 		boton1Objeto.setVisible(false);
+		boton1Objeto.setIcon(new ImageIcon("./recursos/imagenes/botones/botonBombaP.png"));
 		boton1Objeto.setBounds(317, 347, 115, 115);
 		add(boton1Objeto);
 		
 		boton2Objeto = new BotonesCombate("2");
 		boton2Objeto.setVisible(false);
+		boton2Objeto.setIcon(new ImageIcon("./recursos/imagenes/botones/botonBombaG.png"));
 		boton2Objeto.setBounds(446, 347, 115, 115);
 		add(boton2Objeto);
 		
 		boton3Objeto = new BotonesCombate("3");
 		boton3Objeto.setVisible(false);
+		boton3Objeto.setIcon(new ImageIcon("./recursos/imagenes/botones/botonPocion.png"));
 		boton3Objeto.setBounds(577, 347, 115, 115);
 		add(boton3Objeto);
+		
+		quitarSeleccion = new Botones("Atras");
+		quitarSeleccion.setVisible(false);
+		quitarSeleccion.setBounds(446, 473, 115, 23);
+		add(quitarSeleccion);
 		
 		//Imagenes
 		iconoDefensaHeroe = new JLabel("");
@@ -196,7 +206,7 @@ public class Lucha extends Paneles{
 		add(Versus);
 		
 		//JLabel donde se muestra las imagenes del heroe
-		JLabel imagenHeroe = new JLabel("");
+		imagenHeroe = new JLabel("");
 		imagenHeroe.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		imagenHeroe.setBounds(10, 36, 261, 300);
 		imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/combate/popollo.gif"));
@@ -292,6 +302,13 @@ public class Lucha extends Paneles{
 				usarObjetosHeroe(2);
 			}
 		});
+		
+		quitarSeleccion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				atrasCombate();
+			}
+		});
 
 		
 		imagenHeroe.addMouseListener(new MouseAdapter() {
@@ -343,6 +360,7 @@ public class Lucha extends Paneles{
 		boton1Habilidad.setVisible(true);
 		boton2Habilidad.setVisible(true);
 		boton3Habilidad.setVisible(true);
+		quitarSeleccion.setVisible(true);
 	}
 	
 	/**
@@ -356,6 +374,7 @@ public class Lucha extends Paneles{
 		botonDefender.setVisible(true);
 		botonHabilidades.setVisible(true);
 		botonObjetos.setVisible(true);
+		quitarSeleccion.setVisible(false);
 	}
 	
 	/**
@@ -369,6 +388,7 @@ public class Lucha extends Paneles{
 		boton1Objeto.setVisible(true);
 		boton2Objeto.setVisible(true);
 		boton3Objeto.setVisible(true);
+		quitarSeleccion.setVisible(true);
 	}
 	
 	/**
@@ -382,6 +402,23 @@ public class Lucha extends Paneles{
 		botonDefender.setVisible(true);
 		botonHabilidades.setVisible(true);
 		botonObjetos.setVisible(true);
+		quitarSeleccion.setVisible(false);
+	}
+	
+	public void atrasCombate() {
+		boton1Habilidad.setVisible(false);
+		boton2Habilidad.setVisible(false);
+		boton3Habilidad.setVisible(false);
+		botonAtacar.setVisible(true);
+		boton1Objeto.setVisible(false);
+		boton2Objeto.setVisible(false);
+		boton3Objeto.setVisible(false);
+		quitarSeleccion.setVisible(false);
+		botonAtacar.setVisible(true);
+		botonDefender.setVisible(true);
+		botonHabilidades.setVisible(true);
+		botonObjetos.setVisible(true);
+		registroBatallaHeroe.setText("<html><b>Piensate mejor las cosas!!!</b></html>");
 	}
 	
 	/**
@@ -395,6 +432,7 @@ public class Lucha extends Paneles{
 		botonDefender.setVisible(false);
 		botonHabilidades.setVisible(false);
 		botonObjetos.setVisible(false);
+		quitarSeleccion.setVisible(false);
 	}
 	
 	/**
@@ -507,14 +545,14 @@ public class Lucha extends Paneles{
      					+"</center></b></html>");
             	registroVictoriaDerrota.setOpaque(true);
             	heroe.setDinero(heroe.getDinero()+enemigoArray.get(adversario).getDinero());
-            	enemigoArray.get(adversario).restablecerEnemigo();
             	ocultarTodo();
             	 	
             	Musica.sonidosBoton(cancionVictoria);
             	heroe.subirNivel(enemigoArray.get(adversario).getExperiencia());
-            	ventana.barraExploracion.setValue(5);
-            	ventana.barraExploracion.getValue();
             	botonAtras.setVisible(true);
+            	vidaEnemigo.setVisible(false);
+            	enemigoArray.get(adversario).restablecerEnemigo();
+            	
             }
 			//Al final de cada turno quitamos al heroe la defensa aumentada.
 			vidaHeroe();
@@ -525,7 +563,8 @@ public class Lucha extends Paneles{
 			//Al final del turno enemigo comprobamos si el heroe no tiene la suficiente vida para mostrar un GameOver.
 			
 			if(heroe.getSalud()<=0) {
-				//imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/combate/popolloD.gif"));
+				vidaHeroe.setVisible(false);
+				imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/combate/popolloD.png"));
 				registroVictoriaDerrota.setText("<html><center><b>!!!DERROTA!!!<br><br> Esfuerzate mas la proxima vez."
 	 					+"</center></b></html>");
 				ocultarTodo();

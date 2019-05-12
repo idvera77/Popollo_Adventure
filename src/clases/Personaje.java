@@ -203,9 +203,9 @@ public abstract class Personaje extends ElementoIdentificador{
             if(aleatorio1==0){
             	registro.setText("<html><center><b>Ataque Fallado!!!</center></b></html>");
             }else{
-                dañar = getFuerza();
-                personajeY.daño(personajeY,dañar);
-                registro.setText("<html><center><b>"+getNombre()
+	            dañar = getFuerza();
+	            personajeY.daño(personajeY,dañar);
+	            registro.setText("<html><center><b>"+getNombre()
 				+" inflige "+getFuerza()+" puntos de daño.<br>"
 				+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
 				+"</center></b></html>");

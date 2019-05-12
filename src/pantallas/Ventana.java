@@ -32,7 +32,6 @@ public class Ventana extends JFrame{
 	private static Evento pantallaEvento;
 	private Cargar pantallaCarga;
 	private Connection connect;
-	public JProgressBar barraExploracion;
 	public Heroe heroe;
 	public ArrayList<Enemigo> enemigosArray;
 	public ArrayList<Npc> npcsArray;
@@ -53,10 +52,6 @@ public class Ventana extends JFrame{
 		Cursor cursor = toolkit.createCustomCursor(img, point, "./recursos/normal.png");
 		setCursor(cursor);
 		
-		//Barra de progreso que se usa en varios sitios
-		this.barraExploracion = new JProgressBar(0,20);
-		this.barraExploracion.setString("Comienza tu aventura");
-			
 		//Nos aseguramos de cerrar el programa correctamente junto a la conexion si existe.
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {

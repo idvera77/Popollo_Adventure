@@ -102,10 +102,10 @@ public class Evento extends Paneles{
 	
 	public void elegirEvento(int evento, int opcion) {
 		switch(evento) {
-			case 1:
+			case 0:
 				general.Eventos.vagabundo(ventana, ventana.heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
 				break;
-			case 2:
+			case 1:
 				general.Eventos.rescateAldeanos(ventana, heroe, null, eventoTexto, opcion1, opcion2, opcion3, opcion);
 				break;
 		}

@@ -34,7 +34,7 @@ public class Eventos {
 	        	heroe.subirReputacion(10);
 	        	break;
 	        case 3:
-	        	eventoTexto.setText("<html><center>Buscas en los bolsillos mientras intenta defenderse aunque no tiene fuerzas para ello.<br>"
+	        	eventoTexto.setText("<html><center>Buscas en sus bolsillos mientras intenta defenderse aunque no tiene fuerzas para ello.<br>"
 	        			+ "Obtienes 100 monedas de oro.</center></html>");
 	        	heroe.setDinero(heroe.getDinero()+100);  
                 heroe.subirReputacion(-10);
