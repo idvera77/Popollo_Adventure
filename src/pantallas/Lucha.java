@@ -15,7 +15,8 @@ import clases.Enemigo;
 import clases.Heroe;
 import componentes.Botones;
 import componentes.BotonesCombate;
-import componentes.LabelTexto;
+import componentes.LabelTextoOtros;
+import componentes.LabelTextoPrincipal;
 import componentes.Paneles;
 import general.Musica;
 
@@ -30,7 +31,7 @@ public class Lucha extends Paneles{
 	private ArrayList<Enemigo> enemigoArray;
 	private ImageIcon[] imagenEnemigoDerrota;
 	public JProgressBar vidaHeroe, vidaEnemigo;
-	public LabelTexto registroBatallaHeroe, registroBatallaEnemigo, registroVictoriaDerrota, mostrarAtributos, mostrarAtributosEnemigo;
+	public LabelTextoOtros registroBatallaHeroe, registroBatallaEnemigo, registroVictoriaDerrota, mostrarAtributos, mostrarAtributosEnemigo, Versus;
 	private Botones botonSalir, botonAtras, quitarSeleccion;
 	private BotonesCombate botonAtacar, botonDefender, botonHabilidades, botonObjetos, boton1Habilidad, boton2Habilidad, boton3Habilidad, boton1Objeto, boton2Objeto, boton3Objeto;
 	public JLabel iconoDefensaHeroe, iconoDefensaEnemigo, imagenEnemigo, imagenHeroe;
@@ -47,10 +48,10 @@ public class Lucha extends Paneles{
 		this.enemigoArray=ventana.enemigosArray;
 
 		//Imagenes
-		ImageIcon[] imagenEnemigoBatalla = new ImageIcon[4];
+		ImageIcon[] imagenEnemigoBatalla = new ImageIcon[5];
 		imagenEnemigoBatalla[0] = new ImageIcon("./recursos/imagenes/combate/poi.gif");
 		
-		imagenEnemigoDerrota = new ImageIcon[4];
+		imagenEnemigoDerrota = new ImageIcon[5];
 		imagenEnemigoDerrota[0] = new ImageIcon("./recursos/imagenes/combate/poiD.png");
 		//imagenEnemigoDerrota[1] = new ImageIcon(".\\recursos\\imagenes\\combate\\");
 		
@@ -62,18 +63,18 @@ public class Lucha extends Paneles{
         curacionSonido = "./recursos/sonidos/Curaciones.wav";
 		
 		//Paneles Texto
-		registroVictoriaDerrota = new LabelTexto();
+		registroVictoriaDerrota = new LabelTextoOtros();
 		registroVictoriaDerrota.setOpaque(false);
 		registroVictoriaDerrota .setBounds(281, 120, 446, 204);
 		add(registroVictoriaDerrota );
 		
-		mostrarAtributos = new LabelTexto();
+		mostrarAtributos = new LabelTextoOtros();
 		heroe.mostrarAtributosCombate(mostrarAtributos);
 		mostrarAtributos.setVisible(false);
 		mostrarAtributos.setBounds(80, 347, 120, 115);
 		add(mostrarAtributos);
 		
-		mostrarAtributosEnemigo = new LabelTexto();
+		mostrarAtributosEnemigo = new LabelTextoOtros();
 		enemigoArray.get(adversario).mostrarAtributosCombate(mostrarAtributosEnemigo);
 		mostrarAtributosEnemigo.setVisible(false);
 		mostrarAtributosEnemigo.setBounds(807, 347, 120, 115);
@@ -191,15 +192,15 @@ public class Lucha extends Paneles{
 		iconoDefensaEnemigo.setVisible(false);
 		add(iconoDefensaEnemigo);
 		
-		registroBatallaHeroe = new LabelTexto();
+		registroBatallaHeroe = new LabelTextoOtros();
 		registroBatallaHeroe.setBounds(281, 120, 446, 103);
 		add(registroBatallaHeroe);
 		
-		registroBatallaEnemigo = new LabelTexto();
+		registroBatallaEnemigo = new LabelTextoOtros();
 		registroBatallaEnemigo.setBounds(281, 221, 446, 103);
 		add(registroBatallaEnemigo);
 		
-		LabelTexto Versus = new LabelTexto();
+		Versus = new LabelTextoOtros();
 		Versus.setFont(new Font("Bahnschrift", Font.BOLD, 25));
 		Versus.setText("<html><center>"+heroe.getNombre()+" Versus "+enemigoArray.get(adversario).getNombre()+"</b></center></html>");
 		Versus.setBounds(281, 49, 446, 58);

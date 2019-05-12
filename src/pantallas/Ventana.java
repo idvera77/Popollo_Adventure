@@ -30,6 +30,7 @@ public class Ventana extends JFrame{
 	private static Descanso pantallaDescanso;
 	private static Lucha pantallaLucha;
 	private static Evento pantallaEvento;
+	private static Creditos pantallaCreditos;
 	private Cargar pantallaCarga;
 	private Connection connect;
 	public Heroe heroe;
@@ -225,6 +226,12 @@ public class Ventana extends JFrame{
 				v.setContentPane(Ventana.pantallaGaleria);
 				Ventana.pantallaGaleria.setVisible(true);
 				break;
+			case "creditos":
+				Ventana.pantallaCreditos=new Creditos(v);
+				v.setTitle("Creditos");
+				v.setContentPane(Ventana.pantallaCreditos);
+				Ventana.pantallaCreditos.setVisible(true);
+				break;
 		}
 		switch(origen) {
 			case "inicio":
@@ -245,6 +252,9 @@ public class Ventana extends JFrame{
 			case "principal":
 				Ventana.pantallaPrincipal.setVisible(false);
 			break;		
+			case "creditos":
+				Ventana.pantallaCreditos.setVisible(false);
+			break;	
 		}
 	}
 }

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import componentes.LabelTexto;
+import componentes.LabelTextoOtros;
+import componentes.LabelTextoPrincipal;
 
 /**
  *
@@ -84,7 +85,7 @@ public class Heroe extends Personaje{
      * Muestra todas las estadisticas.
      * @param registro JLabelText que guarda la informacion y la muestra.
      */
-    public void pantallaGeneralEstadisticas(LabelTexto registro){
+    public void pantallaGeneralEstadisticas(LabelTextoPrincipal registro){
     	registro.setText("<html><center><b>Nivel: "+getNivel()+"</b></center>"
     			+" Salud: "+getSalud()+" / "+getSaludMaxima()
     			+"<br/> Fuerza: "+getFuerza()
@@ -152,7 +153,7 @@ public class Heroe extends Personaje{
      * Muestra un listado de las habilidades.
      * @param registro JLabelText que guarda la informacion y la muestra.
      */
-    public void mostrarHabilidades(LabelTexto registro){
+    public void mostrarHabilidades(LabelTextoPrincipal registro){
         String listaHabilidades="";
         listaHabilidades +="<html><center><b>Habilidades</b></center>";
             for (int i = 0; i < getHabilidadesArray().size(); i++) {
@@ -168,7 +169,7 @@ public class Heroe extends Personaje{
      * Muestra un listado de las habilidades en Combate
      * @param registro JLabelText que guarda la informacion y la muestra.
      */
-    public void mostrarHabilidadesCombate (LabelTexto registro){
+    public void mostrarHabilidadesCombate (LabelTextoOtros registro){
         String listaHabilidades="";
         listaHabilidades +="<html><b>";
             for (int i = 0; i < getHabilidadesArray().size(); i++) {
@@ -185,7 +186,7 @@ public class Heroe extends Personaje{
      * Muestra un listado de los objetos
      * @param registro JLabelText que guarda la informacion y la muestra.
      */
-	public void mostrarObjetos (LabelTexto registro){
+	public void mostrarObjetos (LabelTextoPrincipal registro){
 		String listaObjetos="";
 		listaObjetos+="<html><center><b>Objetos</b></center>";
 		for (int i = 0; i < getObjetosArray().size(); i++) {
@@ -200,7 +201,7 @@ public class Heroe extends Personaje{
      * Muestra un listado de los objetos en Combate
      * @param registro JLabelText que guarda la informacion y la muestra.
      */
-    public void mostrarObjetosCombate (LabelTexto registro){
+    public void mostrarObjetosCombate (LabelTextoOtros registro){
         String listaObjetos="";
         listaObjetos+="<html><b>";
             for (int i = 0; i < getObjetosArray().size(); i++) {
@@ -238,7 +239,7 @@ public class Heroe extends Personaje{
      * Funcion que permite utilizar una habilidad del heroe gastando usos restantes de esta, el enemigo recibe el daño de dicha habilidad.
      * @param enemigo Personaje que recibe el daño de una habilidad.
      */
-    public void usarHabilidades(int numero, Enemigo enemigo, LabelTexto registro, String rutaSonido1, String rutaSonido2){
+    public void usarHabilidades(int numero, Enemigo enemigo, LabelTextoOtros registro, String rutaSonido1, String rutaSonido2){
         if(getHabilidadesArray().get(numero).getUsosRestantes()>0){
             String tipo = String.valueOf(getHabilidadesArray().get(numero).getTipo());
             if(tipo.equals("OFENSIVO")){
@@ -289,7 +290,7 @@ public class Heroe extends Personaje{
      * Funcion que permite utilizar un objeto del heroe restando -1 a la cantidad maxima de este, el enemigo recibe el daño de dicho objeto.
      * @param enemigo Personaje que recibe el daño de un objeto.
      */
-    public void usarObjetos (int numero, Enemigo enemigo, LabelTexto registro, String rutaSonido1, String rutaSonido2){
+    public void usarObjetos (int numero, Enemigo enemigo, LabelTextoOtros registro, String rutaSonido1, String rutaSonido2){
         if(getObjetosArray().get(numero).getCantidad()>0){
             String tipo = String.valueOf(getObjetosArray().get(numero).getTipo());
             if(tipo.equals("OFENSIVO")){

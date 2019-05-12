@@ -3,10 +3,13 @@ package general;
 import clases.*;
 import pantallas.*;
 import componentes.BotonesDialogo;
-import componentes.LabelTexto;
+import componentes.LabelTextoOtros;
+import componentes.LabelTextoPrincipal;
 
 
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 /**
  *
  * @author Ivan Diaz Vera
@@ -17,7 +20,7 @@ public class Eventos {
      * Funcion que simila un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
      * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
      */
-    public static void vagabundo(Ventana ventana, Heroe heroe, LabelTexto eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion){
+    public static void vagabundo(Ventana ventana, Heroe heroe, LabelTextoOtros eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion){
     	
     	eventoTexto.setText("<html><center>Encuentras un hombre tirado en los caminos.<br>¿Que decides hacer?</center></html>");
     	opcion1.setText("Pasar de largo.");
@@ -47,7 +50,7 @@ public class Eventos {
      * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
      * @param enemigo Indica el enemigo que luchara contra el heroe.
      */   
-    public static void rescateAldeanos(Ventana v, Heroe heroe, Enemigo enemigo, LabelTexto eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion){
+    public static void rescateAldeanos(Ventana v, Heroe heroe, Enemigo enemigo, LabelTextoOtros eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion){
     	eventoTexto.setText("<html><center>Escuchas a lo lejos el sonido de una multitud gritando, puedes observar como un enorme monstruo se acerca a ellos.<br>¿Que decides hacer?</center></html>");
     	opcion1.setText("Pasar de largo.");
     	opcion2.setText("Atacar al monstruo.");

@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 
 import componentes.Botones;
 import componentes.BotonesTienda;
-import componentes.LabelTexto;
+import componentes.LabelTextoPrincipal;
 import componentes.PanelTexto;
 import componentes.Paneles;
 import java.awt.Color;
@@ -139,7 +139,7 @@ public class Tienda extends Paneles{
 		agilidadActual.setBounds(81, 417, 41, 23);
 		add(agilidadActual);
 		
-		LabelTexto mostrarDinero = new LabelTexto();
+		LabelTextoPrincipal mostrarDinero = new LabelTextoPrincipal();
 		mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
 		mostrarDinero.setBackground(new Color(204, 204, 204));
 		mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(heroe.getDinero())

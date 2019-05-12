@@ -2,7 +2,8 @@ package clases;
 
 import java.util.ArrayList;
 
-import componentes.LabelTexto;
+import componentes.LabelTextoOtros;
+import componentes.LabelTextoPrincipal;
 
 /**
  *
@@ -55,7 +56,7 @@ public class Enemigo extends Personaje{
      * Funcion que permite utilizar una habilidad del enemigo gastando usos restantes de esta, el heroe recibe el daño de dicha habilidad.
      * @param heroe Personaje que recibe el daño de una habilidad.
      */
-    public void usarHabilidadesEnemigos(Heroe heroe, LabelTexto registro){
+    public void usarHabilidadesEnemigos(Heroe heroe, LabelTextoOtros registro){
         int aleatorio = numeroAleatorio(0, 1);  
         String resultadoUso="<html><center><b>"+getNombre()+" utiliza una habilidad!<br>";
 	        if(getHabilidadesArray().get(aleatorio).getUsosRestantes()>0){

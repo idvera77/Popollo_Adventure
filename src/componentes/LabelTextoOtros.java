@@ -7,8 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-public class LabelTexto extends JLabel{
-	public LabelTexto(){
+public class LabelTextoOtros extends JLabel {
+	public LabelTextoOtros(){
 		setHorizontalAlignment(SwingConstants.CENTER);
 		setFont(new Font("Bahnschrift", Font.PLAIN, 15));
 		setBackground(new Color(208, 232, 226));

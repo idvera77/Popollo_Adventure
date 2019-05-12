@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import componentes.Botones;
-import componentes.LabelTexto;
+import componentes.LabelTextoPrincipal;
 import componentes.Paneles;
 
 import clases.Heroe;
@@ -26,7 +26,7 @@ public class Descanso extends Paneles{
 		//Sonido
 		String rutaSonido = "./recursos/sonidos/Curaciones.wav";
 		
-		LabelTexto mostrarDinero = new LabelTexto();
+		LabelTextoPrincipal mostrarDinero = new LabelTextoPrincipal();
 		mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
 		mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(heroe.getDinero())
 				+"</b></center></html>");

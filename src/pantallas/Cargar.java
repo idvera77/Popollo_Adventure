@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
 
-import componentes.LabelTexto;
+import componentes.LabelTextoPrincipal;
 import componentes.Paneles;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -18,7 +18,7 @@ import java.awt.SystemColor;
 public class Cargar extends Paneles{
 	private Ventana ventana;
 	private JProgressBar barraCarga;
-	private LabelTexto consejos;
+	private LabelTextoPrincipal consejos;
     private Timer timer;
 
 	public Cargar(Ventana ventana) {
@@ -26,7 +26,7 @@ public class Cargar extends Paneles{
 		this.ventana=ventana;
 
 		setBackground(Color.BLACK);
-		consejos = new LabelTexto();
+		consejos = new LabelTextoPrincipal();
 		consejos.setBackground(SystemColor.controlHighlight);
 		consejos.setFont(new Font("Bahnschrift", Font.BOLD, 18));
         consejos.setBounds(10, 217, 988, 63);

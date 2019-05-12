@@ -6,7 +6,8 @@ import javax.swing.JLabel;
 import clases.Heroe;
 import componentes.Botones;
 import componentes.BotonesDialogo;
-import componentes.LabelTexto;
+import componentes.LabelTextoOtros;
+import componentes.LabelTextoPrincipal;
 import componentes.Paneles;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -14,7 +15,7 @@ import java.awt.event.MouseEvent;
 
 public class Evento extends Paneles{
 	private Ventana ventana;
-	public LabelTexto eventoTexto, eventoInicio;
+	public LabelTextoOtros eventoTexto, eventoInicio;
 	public Botones botonAtras;
 	public BotonesDialogo opcion1, opcion2, opcion3;
 	private Heroe heroe;
@@ -44,7 +45,7 @@ public class Evento extends Paneles{
 		add(botonAtras);
 	
 		//Paneles Texto
-		eventoTexto = new LabelTexto();
+		eventoTexto = new LabelTextoOtros();
 		eventoTexto.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
 		eventoTexto.setBounds(10, 132, 988, 151);
 		add(eventoTexto);

@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
-import javax.swing.border.LineBorder;
 
 import clases.Enemigo;
 import clases.Habilidad;
@@ -19,25 +17,18 @@ import clases.Heroe;
 import clases.Npc;
 import clases.Objeto;
 import componentes.Botones;
-import componentes.LabelTexto;
+import componentes.LabelPosicion;
+import componentes.LabelTextoPrincipal;
 import componentes.Paneles;
 import exceptions.InvalidMoralException;
 import exceptions.InvalidTipoException;
 
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JDesktopPane;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.JButton;
-
 public class Principal extends Paneles {
 	private Ventana ventana;
-	private LabelTexto mostrarAtributos, mensajeBienvenida;
-	private JLabel posicion0Mapa, posicion1Mapa, posicion2Mapa, posicion3Mapa, posicion4Mapa, posicion5Mapa, posicion6Mapa, posicion7Mapa, posicion8Mapa, posicion9Mapa, posicion10Mapa, 
+	private LabelTextoPrincipal mostrarAtributos, mensajeBienvenida;
+	private LabelPosicion posicion0Mapa, posicion1Mapa, posicion2Mapa, posicion3Mapa, posicion4Mapa, posicion5Mapa, posicion6Mapa, posicion7Mapa, posicion8Mapa, posicion9Mapa, posicion10Mapa, 
 		posicion11Mapa, posicion12Mapa, posicion13Mapa, posicion14Mapa,posicion15Mapa, posicion16Mapa, posicion17Mapa, posicion18Mapa, marcaMapa;
-	private ArrayList posiciones;
-	private JButton comenzar;
+	private Botones comenzar, finDelJuego, botonCombateAleatorio, botonGuardarPartida, botonDescanso;
 	
 	public Principal(Ventana ventana) {
 		super();
@@ -162,167 +153,109 @@ public class Principal extends Paneles {
            ex.printStackTrace();
            System.err.println(ex.getMessage());
            }	
+
+		//Mensaje inicial/final, botones de empezar y finalizar juego completo.
+		comenzar = new Botones("Continua tu aventura");
+		comenzar.setVisible(false);
+		comenzar.setBounds(275, 310, 443, 48);
+		add(comenzar);
+		
+		finDelJuego = new Botones("Felicidades!!!");
+		finDelJuego.setVisible(false);
+		finDelJuego.setBounds(275, 310, 443, 48);
+		add(finDelJuego);
+		
+
+		mensajeBienvenida = new LabelTextoPrincipal();
+		mensajeBienvenida.setVisible(false);
+		mensajeBienvenida.setBounds(150, 104, 705, 208);
+		add(mensajeBienvenida);
 		
 		//Movimiento se mueve dependiendo del valor Explorar del heroe.
 		//Tiene documentado las posiciones del cursor para ser mas faciles futuras modificaciones.
-		posicion0Mapa = new JLabel("");
-		posicion0Mapa.setVisible(false);
+		
+		posicion0Mapa = new LabelPosicion();
 		posicion0Mapa.setBounds(30, 194, 60, 60);
-		posicion0Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion0Mapa.setBounds(39, 182, 60, 60);
-		//posicion0Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion0Mapa);
 		
-		posicion1Mapa = new JLabel("");
-		posicion1Mapa.setVisible(false);
+		posicion1Mapa = new LabelPosicion();
 		posicion1Mapa.setBounds(112, 134, 60, 60);
-		posicion1Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion1Mapa.setBounds(114, 118, 60, 60);
-		//posicion1Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion1Mapa);
 		
-		posicion2Mapa = new JLabel("");
-		posicion2Mapa.setVisible(false);
+		posicion2Mapa = new LabelPosicion();
 		posicion2Mapa.setBounds(184, 86, 60, 60);
-		posicion2Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion2Mapa.setBounds(190, 67, 60, 60);
-		//posicion2Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion2Mapa);
 		
-		posicion3Mapa = new JLabel("");
-		posicion3Mapa.setVisible(false);
+		posicion3Mapa = new LabelPosicion();
 		posicion3Mapa.setBounds(275, 48, 60, 60);
-		posicion3Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion3Mapa.setBounds(280, 29, 60, 60);
-		//posicion3Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion3Mapa);
 		
-		posicion4Mapa = new JLabel("");
-		posicion4Mapa.setVisible(false);
+		posicion4Mapa = new LabelPosicion();
 		posicion4Mapa.setBounds(354, 85, 60, 60);
-		posicion4Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion4Mapa.setBounds(362, 67, 60, 60);
-		//posicion4Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion4Mapa);
 		
-		posicion5Mapa = new JLabel("");
-		posicion5Mapa.setVisible(false);
+		posicion5Mapa = new LabelPosicion();
 		posicion5Mapa.setBounds(352, 182, 60, 60);
-		posicion5Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion5Mapa.setBounds(358, 150, 60, 60);
-		//posicion5Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion5Mapa);
 		
-		posicion6Mapa = new JLabel("");
-		posicion6Mapa.setVisible(false);
+		posicion6Mapa = new LabelPosicion();
 		posicion6Mapa.setBounds(314, 260, 60, 60);
-		posicion6Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion6Mapa.setBounds(319, 234, 60, 60);
-		//posicion6Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion6Mapa);
 		
-		posicion7Mapa = new JLabel("");
-		posicion7Mapa.setVisible(false);
+		posicion7Mapa = new LabelPosicion();
 		posicion7Mapa.setBounds(334, 344, 60, 60);
-		posicion7Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion7Mapa.setBounds(340, 314, 60, 60);
-		//posicion7Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion7Mapa);
 		
-		posicion8Mapa = new JLabel("");
-		posicion8Mapa.setVisible(false);
+		posicion8Mapa = new LabelPosicion();
 		posicion8Mapa.setBounds(412, 351, 60, 60);
-		posicion8Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion8Mapa.setBounds(419, 329, 60, 60);
-		//posicion8Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion8Mapa);
 		
-		posicion9Mapa = new JLabel("");
-		posicion9Mapa.setVisible(false);
+		posicion9Mapa = new LabelPosicion();
 		posicion9Mapa.setBounds(477, 283, 60, 60);
-		posicion9Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion9Mapa.setBounds(483, 253, 60, 60);
-		//posicion9Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion9Mapa);
 		
-		posicion10Mapa = new JLabel("");
-		posicion10Mapa.setVisible(false);
+		posicion10Mapa = new LabelPosicion();
 		posicion10Mapa.setBounds(537, 209, 60, 60);
-		posicion10Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion10Mapa.setBounds(540, 182, 60, 60);
-		//posicion10Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion10Mapa);
 		
-		posicion11Mapa = new JLabel("");
-		posicion11Mapa.setVisible(false);
+		posicion11Mapa = new LabelPosicion();
 		posicion11Mapa.setBounds(592, 133, 60, 60);
-		posicion11Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion11Mapa.setBounds(596, 111, 60, 60);
-		//posicion11Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion11Mapa);
 		
-		posicion12Mapa = new JLabel("");
-		posicion12Mapa.setVisible(false);
+		posicion12Mapa = new LabelPosicion();
 		posicion12Mapa.setBounds(677, 104, 60, 60);
-		posicion12Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion12Mapa.setBounds(680, 67, 60, 60);
-		//posicion12Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion12Mapa);
 		
-		posicion13Mapa = new JLabel("");
-		posicion13Mapa.setVisible(false);
+		posicion13Mapa = new LabelPosicion();
 		posicion13Mapa.setBounds(728, 179, 60, 60);
-		posicion13Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion13Mapa.setBounds(732, 150, 60, 60);
-		//posicion13Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion13Mapa);
 		
-		posicion14Mapa = new JLabel("");
-		posicion14Mapa.setVisible(false);
+		posicion14Mapa = new LabelPosicion();
 		posicion14Mapa.setBounds(728, 265, 60, 60);
-		posicion14Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion14Mapa.setBounds(743, 234, 60, 60);
-		//posicion14Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion14Mapa);
 		
-		posicion15Mapa = new JLabel("");
-		posicion15Mapa.setVisible(false);
+		posicion15Mapa = new LabelPosicion();
 		posicion15Mapa.setBounds(813, 290, 60, 60);
-		posicion15Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion15Mapa.setBounds(814, 267, 60, 60);
-		//posicion15Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion15Mapa);
 		
-		posicion16Mapa = new JLabel("");
-		posicion16Mapa.setVisible(false);
+		posicion16Mapa = new LabelPosicion();
 		posicion16Mapa.setBounds(865, 223, 60, 60);
-		posicion16Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion16Mapa.setBounds(870, 196, 60, 60);
-		//posicion16Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion16Mapa);
 		
-		posicion17Mapa = new JLabel("");
-		posicion17Mapa.setVisible(false);
+		posicion17Mapa = new LabelPosicion();
 		posicion17Mapa.setBounds(880, 145, 60, 60);
-		posicion17Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion17Mapa.setBounds(889, 118, 60, 60);
-		//posicion17Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion17Mapa);
 		
-		posicion18Mapa = new JLabel("");
-		posicion18Mapa.setVisible(false);
+		posicion18Mapa = new LabelPosicion();
 		posicion18Mapa.setBounds(900, 38, 60, 60);
-		posicion18Mapa.setIcon(new ImageIcon("./recursos/completado.png"));
-		//posicion18Mapa.setBounds(909, 11, 60, 60);
-		//posicion18Mapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(posicion18Mapa);
 		
-		marcaMapa = new JLabel("");
+		marcaMapa = new LabelPosicion();
 		marcaMapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
 		add(marcaMapa);
 		
 		movimientoMapa();
-		
+
         //Añadiendo botones
 		
 		Botones pruebaAfinidad = new Botones("Afinidad");
@@ -330,7 +263,7 @@ public class Principal extends Paneles {
 		pruebaAfinidad.setBounds(255, 33, 218, 23);
 		add(pruebaAfinidad);
         
-		Botones botonGuardarPartida = new Botones("Guardar Partida");
+		botonGuardarPartida = new Botones("Guardar Partida");
 		botonGuardarPartida.setBounds(767, 436, 215, 23);
 		add(botonGuardarPartida);
 		
@@ -339,34 +272,29 @@ public class Principal extends Paneles {
 		botonTienda.setBounds(496, 33, 165, 23);
 		add(botonTienda);
 		
-		Botones botonDescanso = new Botones("Punto de descanso");
+		botonDescanso = new Botones("Punto de descanso");
 		botonDescanso.setBounds(522, 487, 215, 23);
 		add(botonDescanso);
 		
-		Botones combateAleatorio = new Botones("Avanzar");
-		combateAleatorio.setEnabled(false);
-		combateAleatorio.setText("Combate aleatorio");
+		botonCombateAleatorio = new Botones("Avanzar");
+		botonCombateAleatorio.setEnabled(false);
+		botonCombateAleatorio.setText("Combate aleatorio");
 		if(ventana.heroe.getExplorar()>=2) {
-			combateAleatorio.setEnabled(true);
+			botonCombateAleatorio.setEnabled(true);
 		}
-		combateAleatorio.setBounds(522, 436, 215, 23);
-		add(combateAleatorio);
+		botonCombateAleatorio.setBounds(522, 436, 215, 23);
+		add(botonCombateAleatorio);
 		
 		Botones botonSalir = new Botones("Salir del Juego");
 		botonSalir.setBounds(767, 487, 215, 23);
 		add(botonSalir);
 		
-		comenzar = new Botones("Continua tu aventura");
-		comenzar.setVisible(false);
-		comenzar.setBounds(394, 297, 218, 23);
-		add(comenzar);
-
 		//Eventos de botones
 		
 		pruebaAfinidad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.origenADestino(ventana, "principal", "evento", 2);
+				Ventana.origenADestino(ventana, "principal", "evento", 2);
 			}
 		});	
 		
@@ -385,18 +313,18 @@ public class Principal extends Paneles {
 		botonTienda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.origenADestino(ventana,"principal", "tienda", 0);
+				Ventana.origenADestino(ventana,"principal", "tienda", 0);
 			}
 		});	
 		
 		botonDescanso.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.origenADestino(ventana,"principal", "descanso", 0);
+				Ventana.origenADestino(ventana,"principal", "descanso", 0);
 			}
 		});	
 		
-		combateAleatorio.addMouseListener(new MouseAdapter() {
+		botonCombateAleatorio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				combateAleatorio();
@@ -421,6 +349,13 @@ public class Principal extends Paneles {
 			}
 		});
 		
+		finDelJuego.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Ventana.origenADestino(ventana, "principal", "creditos", 0);
+			}
+		});
+		
 		marcaMapa.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -437,46 +372,55 @@ public class Principal extends Paneles {
 			}
 		});
 		
-		mostrarAtributos = new LabelTexto();
+	
+
+		mostrarAtributos = new LabelTextoPrincipal();
 		ventana.heroe.pantallaGeneralEstadisticas(mostrarAtributos);
 		mostrarAtributos.setBounds(10, 370, 130, 155);
 		add(mostrarAtributos);
 		
-		LabelTexto mostrarHabilidades = new LabelTexto();
+		LabelTextoPrincipal mostrarHabilidades = new LabelTextoPrincipal();
 		ventana.heroe.mostrarHabilidades(mostrarHabilidades);
 		mostrarHabilidades.setBounds(150, 436, 174, 89);
 		add(mostrarHabilidades);
 
-		LabelTexto mostrarObjetos = new LabelTexto();
+		LabelTextoPrincipal mostrarObjetos = new LabelTextoPrincipal();
 		ventana.heroe.mostrarObjetos(mostrarObjetos);
 		mostrarObjetos.setBounds(334, 436, 174, 89);
 		add(mostrarObjetos);
 		
-		LabelTexto mostrarDineroReputacion = new LabelTexto();
+		LabelTextoPrincipal mostrarDineroReputacion = new LabelTextoPrincipal();
 		mostrarDineroReputacion.setText("<html><b>Oro: "+Integer.toString(ventana.heroe.getDinero())
 				+"<br/>Reputacion: "+Integer.toString(ventana.heroe.getReputacion())	
 				+"</b></html>");
 		mostrarDineroReputacion.setBounds(10, 29, 130, 51);
 		add(mostrarDineroReputacion);
 		
-		mensajeBienvenida = new LabelTexto();
-		mensajeBienvenida.setVisible(false);
-		mensajeBienvenida.setBounds(150, 104, 705, 229);
-		add(mensajeBienvenida);
-		
 		//Imagen de fondo
 		JLabel imagenDescanso = new JLabel("");
 		imagenDescanso.setBounds(0, 0, 1008, 536);
 		imagenDescanso.setIcon(new ImageIcon("./recursos/imagenes/mapa.png"));
-		add(imagenDescanso);	       
+		add(imagenDescanso);	    
 		
+		//Mensaje Inicial o final
 		if(ventana.getHeroe().getExplorar()==0) {
-			mensajeBienvenida.setText("<html><b>Consigue que el pequeño Popollo pueda derrotar al malvado Pulpoi ^_^<br><br> "
-					+ "Recuerda que debes pulsar en la flecha para ir al siguiente destino.<br><br>"
-					+ "Te aconsejo que guardes la partida frecuentemente y uses la tienda sabiamente. </b></html>");
-			mensajeBienvenida.setVisible(true);
 			comenzar.setVisible(true);
+			mensajeBienvenida.setText("<html><b><center>Una malvada criatura esta robando toda la comida.<br><br> "
+					+ "Un voraz pollo de granja se alza entre todos los habitantes del reino para hacer frente al vil enemigo que le priva de sus chuletitas.</center><br> "
+					+ " - Recuerda que debes pulsar en la flecha para ir al siguiente destino.<br>"
+					+ " - Te aconsejo que guardes la partida frecuentemente y uses la tienda sabiamente. </b></html>");
+			mensajeBienvenida.setVisible(true);
 		}
+		if(ventana.getHeroe().getExplorar()==20) {
+			finDelJuego.setVisible(true);
+			mensajeBienvenida.setText("<html><center><b>¡Popollo ha conseguido derrotar al infame Pulpoi!</center><br><br> Todos en el reino recordarán la hazaña y cantarán odas en tu honor, "
+					+ "pero ahora lo más importante es... Que a Popollo le ruge el estómago. </b></html>");
+			mensajeBienvenida.setVisible(true);
+			botonCombateAleatorio.setVisible(false);
+			botonDescanso.setVisible(false);
+			botonGuardarPartida.setVisible(false);
+		}
+		
 	}	
 	
 	/**
@@ -488,22 +432,59 @@ public class Principal extends Paneles {
 			JOptionPane.showMessageDialog(null, "Has dado tu primer paso, ahora empieza lo divertido.", "Animo ^_^", 1);
 		}
 		if(ventana.heroe.getExplorar()==2) {
-			ventana.origenADestino(ventana,"principal", "lucha", 0);
+			Ventana.origenADestino(ventana,"principal", "lucha", 0);
 		}
 		if(ventana.heroe.getExplorar()==3) {
-			ventana.origenADestino(ventana, "principal", "evento", 0);
+			Ventana.origenADestino(ventana, "principal", "evento", 0);
 		}
 		if(ventana.heroe.getExplorar()==4) {
-			ventana.origenADestino(ventana, "principal", "tienda", 0);
+			Ventana.origenADestino(ventana, "principal", "tienda", 0);
 		}
 		if(ventana.heroe.getExplorar()==5) {
-			ventana.origenADestino(ventana, "principal", "lucha", 1);
+			Ventana.origenADestino(ventana, "principal", "lucha", 1);
 		}
 		if(ventana.heroe.getExplorar()==6) {
-			ventana.origenADestino(ventana, "principal", "evento", 1);
+			Ventana.origenADestino(ventana, "principal", "evento", 1);
 		}
 		if(ventana.heroe.getExplorar()==7) {
-			ventana.origenADestino(ventana, "principal", "tienda", 0);
+			Ventana.origenADestino(ventana, "principal", "tienda", 0);
+		}
+		if(ventana.heroe.getExplorar()==8) {
+			//Evento Afinidad
+		}
+		if(ventana.heroe.getExplorar()==9) {
+			Ventana.origenADestino(ventana,"principal", "lucha", 2);
+		}
+		if(ventana.heroe.getExplorar()==10) {
+			//ventana.origenADestino(ventana, "principal", "evento", 2);
+		}
+		if(ventana.heroe.getExplorar()==11) {
+			Ventana.origenADestino(ventana, "principal", "tienda", 0);
+		}
+		if(ventana.heroe.getExplorar()==12) {
+			Ventana.origenADestino(ventana, "principal", "lucha", 3);
+		}
+		if(ventana.heroe.getExplorar()==13) {
+			//ventana.origenADestino(ventana, "principal", "evento", 3);
+		}
+		if(ventana.heroe.getExplorar()==14) {
+			Ventana.origenADestino(ventana, "principal", "tienda", 0);
+		}
+		if(ventana.heroe.getExplorar()==15) {
+			//Evento Afinidad
+		}
+		if(ventana.heroe.getExplorar()==16) {
+			Ventana.origenADestino(ventana, "principal", "lucha", 4);
+		}
+		if(ventana.heroe.getExplorar()==17) {
+			//ventana.origenADestino(ventana, "principal", "evento", 4);
+		}
+		if(ventana.heroe.getExplorar()==18) {
+			Ventana.origenADestino(ventana, "principal", "tienda", 0);
+		}
+		if(ventana.heroe.getExplorar()==19) {
+			Ventana.origenADestino(ventana, "principal", "lucha", 4);
+			ventana.heroe.setExplorar(20);
 		}
 	}
 	
@@ -598,13 +579,24 @@ public class Principal extends Paneles {
 	public void combateAleatorio() {
 		int aleatorio;
 		if(ventana.heroe.getExplorar()>=2&&ventana.heroe.getExplorar()<5) {
-			ventana.origenADestino(ventana,"principal", "lucha", 0);
+			Ventana.origenADestino(ventana,"principal", "lucha", 0);
 		}
-		else if(ventana.heroe.getExplorar()>=5&&ventana.heroe.getExplorar()<=10) {
+		else if(ventana.heroe.getExplorar()>=5&&ventana.heroe.getExplorar()<9) {
 			aleatorio= numeroAleatorio(0,1);
-			ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
+			Ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
 		}
-		
+		else if(ventana.heroe.getExplorar()>=9&&ventana.heroe.getExplorar()<12) {
+			aleatorio= numeroAleatorio(0,2);
+			Ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
+		}
+		else if(ventana.heroe.getExplorar()>=12&&ventana.heroe.getExplorar()<16) {
+			aleatorio= numeroAleatorio(0,3);
+			Ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
+		}
+		else if(ventana.heroe.getExplorar()>=16&&ventana.heroe.getExplorar()<19) {
+			aleatorio= numeroAleatorio(0,4);
+			Ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
+		}
 	}
 	
 	public static int numeroAleatorio(int minimo,int maximo){
