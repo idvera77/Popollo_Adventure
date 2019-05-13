@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import clases.Enemigo;
@@ -16,13 +15,9 @@ import clases.Heroe;
 import componentes.Botones;
 import componentes.BotonesCombate;
 import componentes.LabelTextoOtros;
-import componentes.LabelTextoPrincipal;
 import componentes.Paneles;
-import general.Musica;
-
 import javax.swing.JProgressBar;
 import java.awt.Font;
-import javax.swing.JButton;
 
 public class Lucha extends Paneles{
 	private Ventana ventana;
@@ -48,13 +43,16 @@ public class Lucha extends Paneles{
 		this.enemigoArray=ventana.enemigosArray;
 
 		//Imagenes
-		ImageIcon[] imagenEnemigoBatalla = new ImageIcon[5];
+		ImageIcon[] imagenEnemigoBatalla = new ImageIcon[6];
 		imagenEnemigoBatalla[0] = new ImageIcon("./recursos/imagenes/combate/poi.gif");
-		
-		imagenEnemigoDerrota = new ImageIcon[5];
+		imagenEnemigoBatalla[1] = new ImageIcon("./recursos/imagenes/combate/nigromante.gif");
+		imagenEnemigoBatalla[4] = new ImageIcon("./recursos/imagenes/combate/deviling.gif");
+
+		imagenEnemigoDerrota = new ImageIcon[6];
 		imagenEnemigoDerrota[0] = new ImageIcon("./recursos/imagenes/combate/poiD.png");
-		//imagenEnemigoDerrota[1] = new ImageIcon(".\\recursos\\imagenes\\combate\\");
-		
+		imagenEnemigoDerrota[1] = new ImageIcon("./recursos/imagenes/combate/nigromanteD.png");
+		imagenEnemigoDerrota[4] = new ImageIcon("./recursos/imagenes/combate/devilingD.png");
+
 		//sonidos
 		cancionVictoria = "./recursos/sonidos/Victoria.wav";
         ataqueHeroeSonido = "./recursos/sonidos/Atacar.wav";
@@ -111,6 +109,7 @@ public class Lucha extends Paneles{
 		botonAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ventana.stop();
 				ventana.origenADestino(ventana, "lucha", "principal", 0);
 			}
 		});
@@ -548,7 +547,9 @@ public class Lucha extends Paneles{
             	heroe.setDinero(heroe.getDinero()+enemigoArray.get(adversario).getDinero());
             	ocultarTodo();
             	 	
-            	Musica.sonidosBoton(cancionVictoria);
+            	//TODO
+            	Ventana.sonidosBoton(cancionVictoria);
+            	//Musica.sonidosBoton(cancionVictoria);
             	heroe.subirNivel(enemigoArray.get(adversario).getExperiencia());
             	botonAtras.setVisible(true);
             	vidaEnemigo.setVisible(false);
@@ -566,7 +567,7 @@ public class Lucha extends Paneles{
 			if(heroe.getSalud()<=0) {
 				vidaHeroe.setVisible(false);
 				imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/combate/popolloD.png"));
-				registroVictoriaDerrota.setText("<html><center><b>!!!DERROTA!!!<br><br> Esfuerzate mas la proxima vez."
+				registroVictoriaDerrota.setText("<html><center><b>!!!DERROTA!!!<br><br> Esfuérzate más la próxima vez."
 	 					+"</center></b></html>");
 				ocultarTodo();
 	            registroVictoriaDerrota.setOpaque(true);

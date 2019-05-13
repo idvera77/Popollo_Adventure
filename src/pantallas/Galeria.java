@@ -16,11 +16,14 @@ public class Galeria extends Paneles{
 		super();
 		this.ventana=ventana;
 		
-		ImageIcon[] imagenes = new ImageIcon[4];
+		ImageIcon[] imagenes = new ImageIcon[8];
 		imagenes[0] = new ImageIcon("./recursos/imagenes/galeria/popollo.png");
 		imagenes[1] = new ImageIcon("./recursos/imagenes/galeria/morrigan.png");
 		imagenes[2] = new ImageIcon("./recursos/imagenes/galeria/dancer low.png");	
 		imagenes[3] = new ImageIcon("./recursos/imagenes/galeria/poring.png");
+		imagenes[4] = new ImageIcon("./recursos/imagenes/galeria/deviling.png");
+		imagenes[5] = new ImageIcon("./recursos/imagenes/galeria/poring.png");
+		imagenes[6] = new ImageIcon("./recursos/imagenes/galeria/nigromante.png");
 		
 		//Añadiendo Botones
 		Botones botonPopollo = new Botones("Popollo");
@@ -39,9 +42,10 @@ public class Galeria extends Paneles{
 		botonTomberi.setBounds(548, 329, 165, 23);
 		add(botonTomberi);
 		
-		Botones botonPuntoDescanso = new Botones("Punto Descanso");
-		botonPuntoDescanso.setBounds(548, 400, 165, 23);
-		add(botonPuntoDescanso);
+		Botones botonDeviling = new Botones("Punto Descanso");
+		botonDeviling.setText("Deviling");
+		botonDeviling.setBounds(548, 400, 165, 23);
+		add(botonDeviling);
 		
 		Botones botonPoring = new Botones("Poring");
 		botonPoring.setBounds(759, 100, 165, 23);
@@ -110,9 +114,10 @@ public class Galeria extends Paneles{
 			}
 		});
 		
-		botonPuntoDescanso.addMouseListener(new MouseAdapter() {
+		botonDeviling.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				imagenGaleria.setIcon(imagenes[4]);
 			}
 		});
 		
@@ -126,7 +131,7 @@ public class Galeria extends Paneles{
 		botonNigromante.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				imagenGaleria.setIcon(imagenes[1]);
+				imagenGaleria.setIcon(imagenes[6]);
 			}
 		});
 		

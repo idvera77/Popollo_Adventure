@@ -22,6 +22,10 @@ import componentes.LabelTextoPrincipal;
 import componentes.Paneles;
 import exceptions.InvalidMoralException;
 import exceptions.InvalidTipoException;
+import javax.swing.JProgressBar;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
+import java.awt.Font;
 
 public class Principal extends Paneles {
 	private Ventana ventana;
@@ -29,7 +33,7 @@ public class Principal extends Paneles {
 	private LabelPosicion posicion0Mapa, posicion1Mapa, posicion2Mapa, posicion3Mapa, posicion4Mapa, posicion5Mapa, posicion6Mapa, posicion7Mapa, posicion8Mapa, posicion9Mapa, posicion10Mapa, 
 		posicion11Mapa, posicion12Mapa, posicion13Mapa, posicion14Mapa,posicion15Mapa, posicion16Mapa, posicion17Mapa, posicion18Mapa, marcaMapa;
 	private Botones comenzar, finDelJuego, botonCombateAleatorio, botonGuardarPartida, botonDescanso;
-	
+	private JProgressBar barraExperiencia;
 	public Principal(Ventana ventana) {
 		super();
 		this.ventana=ventana;
@@ -138,7 +142,9 @@ public class Principal extends Paneles {
 					ventana.enemigosArray.add(new Enemigo("Nigromante", "Da grima verlo", 80, 80, 20, 5, 15, 15, habilidadesNigromante, 1000, 50));
 					ventana.enemigosArray.add(new Enemigo("Golem", "Un muro enorme de piedra.", 150, 150, 30, 5, 15, 25, habilidadesGolem, 1500, 60));
 					ventana.enemigosArray.add(new Enemigo("Goblin", "Es muy rapido", 120, 120, 20, 3, 30, 10, habilidadesGoblin, 1500, 60));
+					ventana.enemigosArray.add(new Enemigo("Deviling", "Un poring malvado", 200, 200, 40, 5, 20, 20, habilidadesPoring, 2000, 75));
 					ventana.enemigosArray.add(new Enemigo("Pulpoi", "Pulpo pervertido.", 300, 300, 40, 5, 20, 30, habilidadesPulpoi, 2500, 100));	
+					
 		       }
 	       
 				//Creacion de npcs, se comprueba si estan creados para no repetir el proceso.
@@ -259,7 +265,6 @@ public class Principal extends Paneles {
         //Añadiendo botones
 		
 		Botones pruebaAfinidad = new Botones("Afinidad");
-		pruebaAfinidad.setVisible(false);
 		pruebaAfinidad.setBounds(255, 33, 218, 23);
 		add(pruebaAfinidad);
         
@@ -294,14 +299,15 @@ public class Principal extends Paneles {
 		pruebaAfinidad.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Ventana.origenADestino(ventana, "principal", "evento", 2);
+				//Ventana.origenADestino(ventana, "principal", "evento", 2);
+				Ventana.origenADestino(ventana, "principal", "creditos", 0);
 			}
 		});	
 		
 		botonGuardarPartida.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int guardar = JOptionPane.showConfirmDialog(null, "¿Estas seguro?" , " Guardar Partida", 
+				int guardar = JOptionPane.showConfirmDialog(null, "¿Estás seguro?" , " Guardar Partida", 
 						JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				if (guardar == JOptionPane.YES_OPTION){
 					ventana.guardarPartida(ventana.heroe.getHabilidadesArray(), ventana.heroe.getObjetosArray()); 
@@ -334,7 +340,7 @@ public class Principal extends Paneles {
 		botonSalir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int exit = JOptionPane.showConfirmDialog(null, "¿Estas seguro?" , " Cerrar Programa", 
+				int exit = JOptionPane.showConfirmDialog(null, "¿Estás seguro?" , " Cerrar Programa", 
 						JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				if (exit == JOptionPane.YES_OPTION){
 					if(ventana.getConnect()!=null) {
@@ -372,6 +378,15 @@ public class Principal extends Paneles {
 			}
 		});
 		
+		
+		barraExperiencia = new JProgressBar(0, 100);
+		barraExperiencia.setFont(new Font("Bahnschrift", Font.BOLD, 15));
+		barraExperiencia.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		barraExperiencia.setStringPainted(true);
+		barraExperiencia.setString(ventana.heroe.getExperiencia()+"/"+100);
+		barraExperiencia.setValue(ventana.heroe.getExperiencia());
+		barraExperiencia.setBounds(10, 344, 130, 31);
+		add(barraExperiencia);
 	
 
 		mostrarAtributos = new LabelTextoPrincipal();
@@ -405,7 +420,7 @@ public class Principal extends Paneles {
 		//Mensaje Inicial o final
 		if(ventana.getHeroe().getExplorar()==0) {
 			comenzar.setVisible(true);
-			mensajeBienvenida.setText("<html><b><center>Una malvada criatura esta robando toda la comida.<br><br> "
+			mensajeBienvenida.setText("<html><b><center>Una malvada criatura está robando toda la comida.<br><br> "
 					+ "Un voraz pollo de granja se alza entre todos los habitantes del reino para hacer frente al vil enemigo que le priva de sus chuletitas.</center><br> "
 					+ " - Recuerda que debes pulsar en la flecha para ir al siguiente destino.<br>"
 					+ " - Te aconsejo que guardes la partida frecuentemente y uses la tienda sabiamente. </b></html>");
@@ -424,7 +439,7 @@ public class Principal extends Paneles {
 	}	
 	
 	/**
-	 * Pulsando en el boton asignado aumentamos un punto
+	 * Pulsando en el boton asignado aumentamos un punto. Ademas si no tenemos el nivel suficiente no podemos continuar la partida.
 	 */
 	public void avanzarCasilla() {
 		ventana.heroe.setExplorar(ventana.heroe.getExplorar()+1);
@@ -437,32 +452,57 @@ public class Principal extends Paneles {
 		if(ventana.heroe.getExplorar()==3) {
 			Ventana.origenADestino(ventana, "principal", "evento", 0);
 		}
+		
 		if(ventana.heroe.getExplorar()==4) {
-			Ventana.origenADestino(ventana, "principal", "tienda", 0);
+			int entrar = JOptionPane.showConfirmDialog(null, "¿Quieres comprar algo?" , " Entrar en Tienda", 
+					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			if (entrar == JOptionPane.YES_OPTION){
+				Ventana.origenADestino(ventana, "principal", "tienda", 0);
+			}
 		}
 		if(ventana.heroe.getExplorar()==5) {
-			Ventana.origenADestino(ventana, "principal", "lucha", 1);
+			if(ventana.heroe.getNivel()>=2) {
+				Ventana.origenADestino(ventana, "principal", "lucha", 1);
+			}else {
+				JOptionPane.showMessageDialog(null, "Retirada, necesitas mínimo nivel 2 para continuar.", "Blandengue", 1);
+				ventana.heroe.setExplorar(ventana.heroe.getExplorar()-2);	
+				posicion3Mapa.setVisible(false);			
+			}
 		}
 		if(ventana.heroe.getExplorar()==6) {
 			Ventana.origenADestino(ventana, "principal", "evento", 1);
 		}
 		if(ventana.heroe.getExplorar()==7) {
-			Ventana.origenADestino(ventana, "principal", "tienda", 0);
+			int entrar = JOptionPane.showConfirmDialog(null, "¿Quieres comprar algo?" , " Entrar en Tienda", 
+					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			if (entrar == JOptionPane.YES_OPTION){
+				Ventana.origenADestino(ventana, "principal", "tienda", 0);
+			}
 		}
 		if(ventana.heroe.getExplorar()==8) {
 			//Evento Afinidad
 		}
 		if(ventana.heroe.getExplorar()==9) {
-			Ventana.origenADestino(ventana,"principal", "lucha", 2);
+			Ventana.origenADestino(ventana, "principal", "lucha", 2);
 		}
 		if(ventana.heroe.getExplorar()==10) {
 			//ventana.origenADestino(ventana, "principal", "evento", 2);
 		}
 		if(ventana.heroe.getExplorar()==11) {
-			Ventana.origenADestino(ventana, "principal", "tienda", 0);
+			int entrar = JOptionPane.showConfirmDialog(null, "¿Quieres comprar algo?" , " Entrar en Tienda", 
+					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			if (entrar == JOptionPane.YES_OPTION){
+				Ventana.origenADestino(ventana, "principal", "tienda", 0);
+			}
 		}
 		if(ventana.heroe.getExplorar()==12) {
-			Ventana.origenADestino(ventana, "principal", "lucha", 3);
+			if(ventana.heroe.getNivel()>=4) {
+				Ventana.origenADestino(ventana, "principal", "lucha", 3);
+			}else {
+				JOptionPane.showMessageDialog(null, "Retirada, necesitas mínimo nivel 4 para continuar.", "Blandengue", 1);
+				ventana.heroe.setExplorar(ventana.heroe.getExplorar()-2);	
+				posicion10Mapa.setVisible(false);
+			}
 		}
 		if(ventana.heroe.getExplorar()==13) {
 			//ventana.origenADestino(ventana, "principal", "evento", 3);
@@ -480,11 +520,21 @@ public class Principal extends Paneles {
 			//ventana.origenADestino(ventana, "principal", "evento", 4);
 		}
 		if(ventana.heroe.getExplorar()==18) {
-			Ventana.origenADestino(ventana, "principal", "tienda", 0);
+			int entrar = JOptionPane.showConfirmDialog(null, "¿Quieres comprar algo?" , " Entrar en Tienda", 
+					JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			if (entrar == JOptionPane.YES_OPTION){
+				Ventana.origenADestino(ventana, "principal", "tienda", 0);
+			}
 		}
 		if(ventana.heroe.getExplorar()==19) {
-			Ventana.origenADestino(ventana, "principal", "lucha", 4);
-			ventana.heroe.setExplorar(20);
+			if(ventana.heroe.getNivel()>=6) {
+				Ventana.origenADestino(ventana, "principal", "lucha", 5);
+				ventana.heroe.setExplorar(20);
+			}else {
+				JOptionPane.showMessageDialog(null, "Retirada, necesitas mínimo nivel 6 para continuar.", "Blandengue", 1);
+				ventana.heroe.setExplorar(ventana.heroe.getExplorar()-2);	
+				posicion17Mapa.setVisible(false);
+			}
 		}
 	}
 	
@@ -605,3 +655,4 @@ public class Principal extends Paneles {
 	}
 }
 	
+

@@ -63,7 +63,6 @@ public class Evento extends Paneles{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				elegirEvento(evento, 1);
-				//general.Eventos.vagabundo(ventana.heroe, eventoTexto, opcion1, opcion2, opcion3, 1);
 				ocultarBotones();
 			}
 		});
@@ -72,7 +71,6 @@ public class Evento extends Paneles{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				elegirEvento(evento, 2);
-				//general.Eventos.vagabundo(ventana.heroe, eventoTexto, opcion1, opcion2, opcion3, 2);
 				ocultarBotones();
 			}
 		});
@@ -81,7 +79,6 @@ public class Evento extends Paneles{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				elegirEvento(evento, 3);
-				//general.Eventos.vagabundo(ventana.heroe, eventoTexto, opcion1, opcion2, opcion3, 3);
 				ocultarBotones();
 			}
 		});	
@@ -107,7 +104,14 @@ public class Evento extends Paneles{
 				general.Eventos.vagabundo(ventana, ventana.heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
 				break;
 			case 1:
-				general.Eventos.rescateAldeanos(ventana, heroe, null, eventoTexto, opcion1, opcion2, opcion3, opcion);
+				general.Eventos.rescateAldeanos(ventana, heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
+				break;
+			case 2:
+				general.Eventos.criasPoring(ventana, heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
+				break;
+			case 3:
+				break;
+			case 4:
 				break;
 		}
 	}

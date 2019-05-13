@@ -6,9 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.UIManager;
+
 import clases.Enemigo;
 import clases.Habilidad;
 import clases.Heroe;
@@ -16,11 +21,13 @@ import clases.Npc;
 import clases.Objeto;
 
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 public class Ventana extends JFrame{
 	private static Inicio pantallaInicio;	
@@ -36,6 +43,7 @@ public class Ventana extends JFrame{
 	public Heroe heroe;
 	public ArrayList<Enemigo> enemigosArray;
 	public ArrayList<Npc> npcsArray;
+	public static Clip clip;
 	
 	public Ventana() {
 		super();
@@ -45,6 +53,8 @@ public class Ventana extends JFrame{
 		setVisible(true);
 		setContentPane(pantallaInicio);
 		setLocationRelativeTo(null);
+		
+		UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 14));
 		
 		//Cursor Personalizado
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -257,4 +267,29 @@ public class Ventana extends JFrame{
 			break;	
 		}
 	}
+	
+	public static void sonidosBoton(String rutaSonido){
+        try{
+            File rutaMusica = new File(rutaSonido);
+
+            if(rutaMusica.exists())
+            {
+                AudioInputStream audioInputSonido = AudioSystem.getAudioInputStream(rutaMusica);
+                clip = AudioSystem.getClip();
+                clip.open(audioInputSonido);
+                clip.start();
+            }
+            else
+            {
+                System.out.println("No pudo encontrarse el archivo");
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+	
+	public void stop() {
+		  clip.stop();
+		}
 }

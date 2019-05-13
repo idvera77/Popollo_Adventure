@@ -156,11 +156,11 @@ public class Tienda extends Paneles{
 		comprarBombaG.setBounds(131, 160, 159, 25);
 		add(comprarBombaG);
 		
-		BotonesTienda comprarPocion = new BotonesTienda("Pocion");
+		BotonesTienda comprarPocion = new BotonesTienda("Poción");
 		comprarPocion.setBounds(131, 190, 159, 25);
 		add(comprarPocion);
 		
-		BotonesTienda mejorarSalud = new BotonesTienda("Salud maxima +20");
+		BotonesTienda mejorarSalud = new BotonesTienda("Salud máxima +20");
 		mejorarSalud.setBounds(131, 290, 159, 25);
 		add(mejorarSalud);
 		
@@ -179,8 +179,7 @@ public class Tienda extends Paneles{
 		BotonesTienda mejorarDefensa = new BotonesTienda("Defensa +2");
 		mejorarDefensa.setBounds(131, 386, 159, 25);
 		add(mejorarDefensa);
-		
-		
+
 		Botones botonAtras = new Botones("Volver al mapa");
 		botonAtras.setBounds(767, 487, 215, 23);
 		add(botonAtras);

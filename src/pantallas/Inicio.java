@@ -28,7 +28,7 @@ public class Inicio extends Paneles {
 		botonCargar.setBounds(397, 360, 215, 23);
 		add(botonCargar);
 			
-		Botones botonGaleria = new Botones("Galeria");
+		Botones botonGaleria = new Botones("Galería");
 		botonGaleria.setBounds(397, 395, 215, 23);
 		add(botonGaleria);
 		

@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import componentes.LabelTextoOtros;
 import componentes.LabelTextoPrincipal;
+import pantallas.Ventana;
 
 /**
  *
@@ -249,7 +250,7 @@ public class Heroe extends Personaje{
             	registro.setText(resultadoUso);
                 getHabilidadesArray().get(numero).setUsosRestantes(getHabilidadesArray().get(numero).getUsosRestantes()-1);                     
                 dañoHabilidadesHeroe(enemigo, numero);
-                general.Musica.sonidosBoton(rutaSonido1);
+                Ventana.sonidosBoton(rutaSonido1);
             }else if(tipo.equals("CURATIVO")){
             	String resultadoUso="<html><center><b>"+getHabilidadesArray().get(numero).getNombre()
                         +" restablece "+getMagia()*getHabilidadesArray().get(numero).getEspecial()
@@ -257,7 +258,7 @@ public class Heroe extends Personaje{
                 	registro.setText(resultadoUso);
                 getHabilidadesArray().get(numero).setUsosRestantes(getHabilidadesArray().get(numero).getUsosRestantes()-1);                     
                 curacionHabilidades(numero);
-                general.Musica.sonidosBoton(rutaSonido2);
+                Ventana.sonidosBoton(rutaSonido2);
             }    
         }else{
         	registro.setText("<html><center><b>No tienes suficiente energia.</b></center></html>");  
@@ -300,7 +301,7 @@ public class Heroe extends Personaje{
             	registro.setText(resultadoUso);
                 getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()-1);  
                 dañoObjetos(enemigo, numero);
-                general.Musica.sonidosBoton(rutaSonido1);
+                Ventana.sonidosBoton(rutaSonido1);
             }else if(tipo.equals("CURATIVO")){
             	String resultadoUso="<html><center><b>"+getObjetosArray().get(numero).getNombre()
             			+" restablece "+getObjetosArray().get(numero).getPoder()
@@ -308,7 +309,7 @@ public class Heroe extends Personaje{
             	registro.setText(resultadoUso);
                 getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()-1);
                 curacionObjetos(numero);       
-                general.Musica.sonidosBoton(rutaSonido2);
+                Ventana.sonidosBoton(rutaSonido2);
             }    
         }else{    
         	registro.setText("<html><center><b>No tienes suficientes objetos.</b></center></html>");
@@ -353,7 +354,7 @@ public class Heroe extends Personaje{
                 if (getDinero()>=300) {
                     setDinero(getDinero()-300); 
                     regenerarSalud();
-                    general.Musica.sonidosBoton(rutaSonido);
+                    Ventana.sonidosBoton(rutaSonido);
                     break;
                 }
                 break;
@@ -361,14 +362,14 @@ public class Heroe extends Personaje{
                 if (getDinero()>=750) {
                     setDinero(getDinero()-750);
                     regenerarHabilidades();
-                    general.Musica.sonidosBoton(rutaSonido);
+                    Ventana.sonidosBoton(rutaSonido);
                 }
                  break;
             case 2:
                 if (getDinero()>=1000) {
                 setDinero(getDinero()-1000);
                 regenerarSaludHabilidades();
-                general.Musica.sonidosBoton(rutaSonido);
+                Ventana.sonidosBoton(rutaSonido);
                 }
                 break;         
         }    
@@ -382,7 +383,7 @@ public class Heroe extends Personaje{
         if (getDinero()>=getObjetosArray().get(numero).getPrecio()) {
             setDinero(getDinero()-getObjetosArray().get(numero).getPrecio());
             getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()+1); 
-            general.Musica.sonidosBoton(rutaSonido);
+            Ventana.sonidosBoton(rutaSonido);
         }  
     }
     
@@ -397,35 +398,35 @@ public class Heroe extends Personaje{
                     setDinero(getDinero()-750);
                     setSaludMaxima(getSaludMaxima()+20);
                     setSalud(getSalud()+20);
-                    general.Musica.sonidosBoton(rutaSonido);
+                    Ventana.sonidosBoton(rutaSonido);
             	}
                 break;
             case 1:
             	if(getDinero()>=1000){
                     setDinero(getDinero()-1000);
                     setFuerza(getFuerza()+5);
-                    general.Musica.sonidosBoton(rutaSonido);
+                    Ventana.sonidosBoton(rutaSonido);
                 }
                 break;
             case 2:
             	if(getDinero()>=1500){
                     setDinero(getDinero()-1500);
                     setMagia(getMagia()+1); 
-                    general.Musica.sonidosBoton(rutaSonido);
+                    Ventana.sonidosBoton(rutaSonido);
                 }
                 break;
             case 3:
             	if(getDinero()>=1000){
                     setDinero(getDinero()-1000);
                     setDefensa(getDefensa()+2); 
-                    general.Musica.sonidosBoton(rutaSonido);
+                    Ventana.sonidosBoton(rutaSonido);
             	}
                 break;
             case 4:
             	if(getDinero()>=1000){
                     setDinero(getDinero()-1000);
                     setAgilidad(getAgilidad()+2);  
-                    general.Musica.sonidosBoton(rutaSonido);
+                    Ventana.sonidosBoton(rutaSonido);
                 }
                 break;
         }    
