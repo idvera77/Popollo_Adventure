@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import componentes.Botones;
-import componentes.LabelTextoPrincipal;
+import componentes.LabelPrincipal;
 import componentes.Paneles;
 import clases.Heroe;
 import java.awt.Font;
@@ -19,14 +19,14 @@ public class Descanso extends Paneles{
         this.ventana=ventana;
         this.heroe=ventana.heroe;
 
-        //Sonido
+        //Archivos de sonido
         String sonidoCuracion = "./recursos/sonidos/Curaciones.wav";
         String sonidoNoMoney = "./recursos/sonidos/NoMoney.wav";
 
-        LabelTextoPrincipal mostrarDinero = new LabelTextoPrincipal();
+        LabelPrincipal mostrarDinero = new LabelPrincipal();
         mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
         mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(heroe.getDinero())
-                        +"</b></center></html>");
+            +"</b></center></html>");
         mostrarDinero.setBounds(10, 29, 109, 40);
         add(mostrarDinero);
 
@@ -46,15 +46,8 @@ public class Descanso extends Paneles{
         Botones botonAtras = new Botones("Volver al mapa");
         botonAtras.setBounds(767, 487, 215, 23);
         add(botonAtras);
-
-        //Imagen de fondo
-        JLabel imagenDescanso = new JLabel("");
-        imagenDescanso.setBounds(0, 0, 1008, 536);
-        imagenDescanso.setIcon(new ImageIcon("./recursos/imagenes/descanso.jpg"));
-        add(imagenDescanso);	
-	
 		
-        //Eventos de botones
+        //Eventos de boton. Llaman a la funcion puntoDescanso de la clase Heroe y una vez realizada vuelve a mostrar el dinero restante.
         botonCuracion.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -78,12 +71,19 @@ public class Descanso extends Paneles{
                 mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
             }
         });
-
+        
+        //Nos permite ir hacia la pantalla principal.
         botonAtras.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ventana.origenADestino(ventana, "descanso", "principal", 0);
             }
-        });		
+        });
+        
+        //Imagen de fondo
+        JLabel imagenDescanso = new JLabel("");
+        imagenDescanso.setBounds(0, 0, 1008, 536);
+        imagenDescanso.setIcon(new ImageIcon("./recursos/imagenes/descanso.jpg"));
+        add(imagenDescanso);
     }
 }

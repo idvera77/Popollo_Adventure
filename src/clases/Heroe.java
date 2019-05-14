@@ -2,15 +2,15 @@ package clases;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import componentes.LabelTextoOtros;
-import componentes.LabelTextoPrincipal;
+import componentes.LabelCombateEvento;
+import componentes.LabelPrincipal;
 import pantallas.Ventana;
 
 /**
  *
  * @author Ivan Diaz Vera
  */
-public class Heroe extends Personaje{
+public final class Heroe extends Personaje{
     private ArrayList<Objeto> objetosArray;
     private int reputacion;
     private int nivel;
@@ -83,7 +83,7 @@ public class Heroe extends Personaje{
      * Muestra todas las estadisticas.
      * @param registro JLabelText que guarda la informacion y la muestra.
      */
-    public void pantallaGeneralEstadisticas(LabelTextoPrincipal registro){
+    public void pantallaGeneralEstadisticas(LabelPrincipal registro){
     	registro.setText("<html><center><b>Nivel: "+getNivel()+"</b></center>"
             +" Salud: "+getSalud()+" / "+getSaludMaxima()
             +"<br/> Fuerza: "+getFuerza()
@@ -149,7 +149,7 @@ public class Heroe extends Personaje{
      * Muestra un listado de las habilidades.
      * @param registro JLabel que guarda la informacion y la muestra.
      */
-    public void mostrarHabilidades(LabelTextoPrincipal registro){
+    public void mostrarHabilidades(LabelPrincipal registro){
         String listaHabilidades="";
         listaHabilidades +="<html><center><b>Habilidades</b></center>";
         for (int i = 0; i < getHabilidadesArray().size(); i++) {
@@ -165,7 +165,7 @@ public class Heroe extends Personaje{
      * Muestra un listado de las habilidades en Combate
      * @param registro JLabel que guarda la informacion y la muestra.
      */
-    public void mostrarHabilidadesCombate (LabelTextoOtros registro){
+    public void mostrarHabilidadesCombate (LabelCombateEvento registro){
         String listaHabilidades="";
         listaHabilidades +="<html><b>";
         for (int i = 0; i < getHabilidadesArray().size(); i++) {
@@ -202,11 +202,11 @@ public class Heroe extends Personaje{
     /**
      * Funcion que permite utilizar una habilidad del heroe gastando usos restantes de esta, el enemigo recibe el daño de dicha habilidad.
      * @param enemigo Personaje que recibe el daño de una habilidad.
-     * @param registro
-     * @param rutaSonido1
-     * @param rutaSonido2
+     * @param registro JLabel encargado de mostrar el texto en la pantalla de Lucha.
+     * @param rutaSonido1 String con la ruta del archivo de sonido 1.
+     * @param rutaSonido2 String con la ruta del archivo de sonido 2.
      */
-    public void usarHabilidades(int numero, Enemigo enemigo, LabelTextoOtros registro, String rutaSonido1, String rutaSonido2){
+    public void usarHabilidades(int numero, Enemigo enemigo, LabelCombateEvento registro, String rutaSonido1, String rutaSonido2){
         if(getHabilidadesArray().get(numero).getUsosRestantes()>0){
             String tipo = String.valueOf(getHabilidadesArray().get(numero).getTipo());
             if(tipo.equals("OFENSIVO")){
@@ -236,7 +236,7 @@ public class Heroe extends Personaje{
      * Muestra un listado de los objetos
      * @param registro JLabelText que guarda la informacion y la muestra.
      */
-    public void mostrarObjetos (LabelTextoPrincipal registro){
+    public void mostrarObjetos (LabelPrincipal registro){
         String listaObjetos="";
         listaObjetos+="<html><center><b>Objetos</b></center>";
         for (int i = 0; i < getObjetosArray().size(); i++) {
@@ -247,13 +247,11 @@ public class Heroe extends Personaje{
         registro.setText(listaObjetos);
     }
 		
-		
-
     /**
      * Muestra un listado de los objetos en Combate
      * @param registro JLabelText que guarda la informacion y la muestra.
      */
-    public void mostrarObjetosCombate (LabelTextoOtros registro){
+    public void mostrarObjetosCombate (LabelCombateEvento registro){
     String listaObjetos="";
     listaObjetos+="<html><b>";
     for (int i = 0; i < getObjetosArray().size(); i++) {
@@ -264,7 +262,6 @@ public class Heroe extends Personaje{
     registro.setText(listaObjetos);
     }
     
-    //FUNCIONES PARA LUCHAR
     /**
      * Funcion para calcular el daño realizado por un objeto.
      * @param enemigo Indica el enemigo que recibira el daño causado por el objeto
@@ -290,8 +287,11 @@ public class Heroe extends Personaje{
     /**
      * Funcion que permite utilizar un objeto del heroe restando -1 a la cantidad maxima de este, el enemigo recibe el daño de dicho objeto.
      * @param enemigo Personaje que recibe el daño de un objeto.
+     * @param registro JLabel encargado de mostrar el texto en la pantalla de Lucha.
+     * @param rutaSonido1 String con la ruta del archivo de sonido 1.
+     * @param rutaSonido2 String con la ruta del archivo de sonido 2.
      */
-    public void usarObjetos (int numero, Enemigo enemigo, LabelTextoOtros registro, String rutaSonido1, String rutaSonido2){
+    public void usarObjetos (int numero, Enemigo enemigo, LabelCombateEvento registro, String rutaSonido1, String rutaSonido2){
         if(getObjetosArray().get(numero).getCantidad()>0){
             String tipo = String.valueOf(getObjetosArray().get(numero).getTipo());
             if(tipo.equals("OFENSIVO")){
@@ -316,7 +316,7 @@ public class Heroe extends Personaje{
         } 
     }
      
-    //Funciones DESCANSO y TIENDAS 
+    //FUNCIONES DESCANSO y TIENDA
     /**
      * La salud se iguala con la saludMaxima, es decir realiza una curacion completa.
      */
@@ -345,6 +345,9 @@ public class Heroe extends Personaje{
     
     /**
      * Funcion que reune todas las de regenerar salud o restablecimiento de habilidades a cambio de dinero.
+     * @param numero Variable de tipo entero que indica la opcion seleccionada.
+     * @param rutaSonido1 String con la ruta del archivo de sonido 1.
+     * @param rutaSonido2 String con la ruta del archivo de sonido 2.
      */
     public void puntoDescanso(int numero, String rutaSonido, String rutaSonido2){
         switch(numero){ 
@@ -382,6 +385,8 @@ public class Heroe extends Personaje{
     /**
      * Funcion que nos aumenta la cantidad de objetos si tenemos el dinero necesario.
      * @param numero Nos indica el objeto de la tienda.
+     * @param rutaSonido1 String con la ruta del archivo de sonido 1.
+     * @param rutaSonido2 String con la ruta del archivo de sonido 2.
      */
     public void comprarObjetos(int numero, String rutaSonido, String rutaSonido2){
         if (getDinero()>=getObjetosArray().get(numero).getPrecio()) {
@@ -394,8 +399,10 @@ public class Heroe extends Personaje{
     }
     
     /**
-     *  Funcion que nos aumenta los atributos del heroe si tenemos el dinero necesario.
-     *  * @param numero Nos indica el atributo.
+     * Funcion que nos aumenta los atributos del heroe si tenemos el dinero necesario.
+     * @param numero Nos indica el atributo.
+     * @param rutaSonido1 String con la ruta del archivo de sonido 1.
+     * @param rutaSonido2 String con la ruta del archivo de sonido 2.
      */
     public void mejorarEstadisticas(int numero, String rutaSonido, String rutaSonido2){
         switch(numero){

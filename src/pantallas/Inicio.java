@@ -16,7 +16,7 @@ public class Inicio extends Paneles {
         super();
         this.ventana=ventana;
 		
-        //Sonido
+        //Archivo de sonido
         String sonidoLogin = "./recursos/sonidos/Login.wav";
 
         //Añadiendo Botones
@@ -42,7 +42,9 @@ public class Inicio extends Paneles {
         imagenPortada.setIcon(new ImageIcon("./recursos/imagenes/pantallaInicio.png"));
         add(imagenPortada);	
 
-        //Eventos de botones
+        //Eventos de botones. 
+        
+        //Nos lleva al panel cargar y luego al principal.
         botonIniciar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -50,7 +52,8 @@ public class Inicio extends Paneles {
                 Ventana.comenzarSonido(sonidoLogin);
             }
         });
-
+        
+        //Realiza la funcion cargar partida antes de llevarnos al panel de carga.
         botonCargar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -59,15 +62,16 @@ public class Inicio extends Paneles {
                 Ventana.comenzarSonido(sonidoLogin);
             }
         });
-
+        
+        //Nos lleva a la galeria.
         botonGaleria.addMouseListener(new MouseAdapter() {
-            @SuppressWarnings("static-access")
             @Override
             public void mouseClicked(MouseEvent e) {
                 Ventana.origenADestino(ventana, "inicio", "galeria", 0);
             }
         });
-
+        
+        //Nos permite salir del juego.
         botonSalir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

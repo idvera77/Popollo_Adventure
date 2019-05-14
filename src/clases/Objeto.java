@@ -13,7 +13,7 @@ public final class Objeto extends ElementoIdentificador{
     private int precio;
 
     /**
-     * Constructor de Npc
+     * Constructor de Objeto
      * @param nombre Variable de tipo String para indicar un nombre.
      * @param poder Variable de tipo entero que indica el poder del objeto actual.
      * @param cantidad Variable de tipo entero que indica la cantidad disponible del objeo.

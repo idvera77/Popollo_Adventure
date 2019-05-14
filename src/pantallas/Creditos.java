@@ -26,25 +26,25 @@ public class Creditos extends Paneles{
         setBackground(Color.BLACK);
         this.ventana=ventana;
 
-        //Sonido
+        //Archivo de sonido.
         String sonidoCreditos = "./recursos/sonidos/Katz.wav";
         Ventana.comenzarSonido(sonidoCreditos);
-				
+		
         mensajeStaff = new JLabel();
         mensajeStaff.setFont(new Font("Bahnschrift", Font.PLAIN, 50));
         mensajeStaff.setHorizontalAlignment(SwingConstants.CENTER);
         mensajeStaff.setForeground(Color.WHITE);
         mensajeStaff.setBounds(101, 121, 790, 104);
         add(mensajeStaff);
-
+        
         mensajeNombre = new JLabel();
         mensajeNombre.setFont(new Font("Bahnschrift", Font.PLAIN, 30));
         mensajeNombre.setHorizontalAlignment(SwingConstants.CENTER);
         mensajeNombre.setForeground(Color.WHITE);
         mensajeNombre.setBounds(101, 190, 790, 127);
         add(mensajeNombre);
-
-        JButton  botonSalir = new JButton ("Salir del Juego");
+        
+        JButton botonSalir = new JButton ("Salir del Juego");
         botonSalir.setBounds(767, 487, 215, 23);
         botonSalir.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
         add(botonSalir);
@@ -52,7 +52,7 @@ public class Creditos extends Paneles{
         barraCarga = new JProgressBar();
         add(barraCarga);
        
-        //Esta preparado por si quiero usar mas pantallas de carga.
+        //Dependiendo del % mostrara u ocultara los siguientes mensajes.
         ActionListener updateBarraCargar = new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 barraCarga.setValue((barraCarga.getValue()+1));  
@@ -108,10 +108,10 @@ public class Creditos extends Paneles{
                     mensajeNombre.setVisible(true);
                     mensajeNombre.setText("<html>Ningún pollo fue herido durante el desarrollo de este juego.</html>");
                 }
-                if(barraCarga.getValue()==60) {
+                if(barraCarga.getValue()==61) {
                     mensajeNombre.setVisible(false);
                 }
-                if(barraCarga.getValue()==64) {
+                if(barraCarga.getValue()==65) {
                     mensajeNombre.setVisible(true);
                     mensajeNombre.setText("<html><center>Muchas gracias por jugar.</center><br>Nos vemos en el siguiente juego ^_^</html>");
                 }
@@ -125,6 +125,7 @@ public class Creditos extends Paneles{
         timer = new Timer(500, updateBarraCargar);
         timer.start(); 
 		
+        //Esta funcion de boton nos permite salir del programa pero antes nos preguntara si deseamos salir.
         botonSalir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

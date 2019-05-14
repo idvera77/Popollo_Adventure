@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import clases.Heroe;
 import componentes.Botones;
 import componentes.BotonesDialogo;
-import componentes.LabelTextoOtros;
+import componentes.LabelCombateEvento;
 import componentes.Paneles;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 
 public class Evento extends Paneles{
     private Ventana ventana;
-    public LabelTextoOtros eventoTexto, eventoInicio;
+    public LabelCombateEvento eventoTexto, eventoInicio;
     public Botones botonAtras;
     public BotonesDialogo opcion1, opcion2, opcion3;
     private Heroe heroe;
@@ -47,7 +47,7 @@ public class Evento extends Paneles{
         add(botonAtras);
 
         //Paneles Texto
-        eventoTexto = new LabelTextoOtros();
+        eventoTexto = new LabelCombateEvento();
         eventoTexto.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
         eventoTexto.setBounds(10, 132, 988, 151);
         add(eventoTexto);
@@ -112,11 +112,12 @@ public class Evento extends Paneles{
                 clases.Eventos.rescateAldeanos(ventana, heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
                 break;
             case 2:
-                clases.Eventos.criasPoring(ventana, heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
+                clases.Eventos.golemCofre(ventana, heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
                 break;
             case 3:
                 break;
             case 4:
+            	clases.Eventos.criasPoring(ventana, heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
                 break;
         }
     }

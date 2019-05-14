@@ -1,7 +1,7 @@
 package clases;
 
 import java.util.ArrayList;
-import componentes.LabelTextoOtros;
+import componentes.LabelCombateEvento;
 
 /**
  *
@@ -153,8 +153,9 @@ public abstract class Personaje extends ElementoIdentificador{
     /**
      * Muestra las estadisticas principales en combate
      * @param personajeX Personaje que muestra sus estadisticas
+     * @param registro JLabel que guarda y muestra la informacion.
      */
-    public void mostrarAtributosCombate(LabelTextoOtros registro) {
+    public void mostrarAtributosCombate(LabelCombateEvento registro) {
     	registro.setText("<html><center><b>"
             +"Fuerza: "+getFuerza()
             +"<br/> Magia: "+getMagia()
@@ -169,7 +170,7 @@ public abstract class Personaje extends ElementoIdentificador{
      * @param personajeY Es el personaje que recibe el daño.
      * @param registro Guarda la informacion para mostrarla en un JLabelText
      */
-    public void atacar(Personaje personajeY, LabelTextoOtros registro){
+    public void atacar(Personaje personajeY, LabelCombateEvento registro){
         int dañar;
         int aleatorio, aleatorio1;
         if(getAgilidad()>personajeY.getAgilidad()){

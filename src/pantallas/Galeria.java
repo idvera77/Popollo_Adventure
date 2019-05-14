@@ -15,7 +15,8 @@ public class Galeria extends Paneles{
     public Galeria(Ventana ventana) {
         super();
         this.ventana=ventana;
-
+        
+        //Array de imagenes para mostrar, se puede hacer igualmente con un ArrayList.
         ImageIcon[] imagenes = new ImageIcon[8];
         imagenes[0] = new ImageIcon("./recursos/imagenes/galeria/popollo.png");
         imagenes[1] = new ImageIcon("./recursos/imagenes/galeria/morrigan.png");
@@ -78,7 +79,7 @@ public class Galeria extends Paneles{
         imagenGaleria.setIcon(imagenes[0]);
         add(imagenGaleria);
 
-        //Eventos de boton
+        //Eventos de boton. Cambian la imagen que esta dentro del JLabel imagenGaleria.
         botonPopollo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -148,7 +149,8 @@ public class Galeria extends Paneles{
                 imagenGaleria.setIcon(imagenes[1]);
             }
         });
-
+        
+        //Nos permite ir hacia la pantalla de inicio.
         botonAtras.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

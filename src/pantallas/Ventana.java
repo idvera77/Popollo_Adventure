@@ -33,6 +33,7 @@ public class Ventana extends JFrame{
     private static Descanso pantallaDescanso;
     private static Lucha pantallaLucha;
     private static Evento pantallaEvento;
+    private static Afinidad pantallaAfinidad;
     private static Creditos pantallaCreditos;
     private Cargar pantallaCarga;
     private Connection connect;
@@ -43,6 +44,8 @@ public class Ventana extends JFrame{
 
     public Ventana() {
         super();
+        
+        //Configuracion de la pantalla inicial.
         setTitle("Popollo Adventure");
         pantallaInicio=new Inicio(this);
         setSize(1014,566);
@@ -50,10 +53,11 @@ public class Ventana extends JFrame{
         setVisible(true);
         setContentPane(pantallaInicio);
         setLocationRelativeTo(null);
+        
+        //Esto nos permite modificar los JOptionPane para cambiar de fuente, tamaño, etc
+        UIManager.put("OptionPane.messageFont", new Font("Bahnschrift", Font.BOLD, 14));
 
-        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 14));
-
-        //Cursor Personalizado
+        //Usando Toolkit cambiamos el cursor por defecto cuando pulsamos dentro de estos Botones.
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image img = toolkit.getImage("./recursos/normal.png");
         Point point = new Point(0, 0);
@@ -81,6 +85,7 @@ public class Ventana extends JFrame{
         });
     }
 	
+    //Getters y Setters
     public Connection getConnect() {
         return connect;
     }
@@ -96,7 +101,10 @@ public class Ventana extends JFrame{
         this.heroe = heroe;
     }
 
-    //Funcion que conecta con la base de base de datos para cargar partida y nos devuelve una conexion si no ocurre ningun error.
+    /**
+     * Funcion que conecta con la base de base de datos para cargar partida y nos devuelve una conexion si no ocurre ningun error.
+     * @return devuelve la conexion o valor null si falla.
+     */
     public Connection cargarPartida() {
         try {
             connect = DriverManager.getConnection(
@@ -109,6 +117,11 @@ public class Ventana extends JFrame{
         }
     }
 	
+    /**
+     * Funcion que conecta con la base de datos y modifica los valores para dejar un registro de nuestra partida actual.
+     * @param habilidadesHeroe Es necesario pasar el array de Habilidades del heroe para modificar sus valores.
+     * @param objetosHeroe Es necesario pasar el array de objetos del heroe para modificar sus valores.
+     */
     public void guardarPartida(ArrayList<Habilidad> habilidadesHeroe, ArrayList<Objeto> objetosHeroe) {
         try {
             connect = DriverManager.getConnection(
@@ -239,6 +252,12 @@ public class Ventana extends JFrame{
                 v.setContentPane(Ventana.pantallaCreditos);
                 Ventana.pantallaCreditos.setVisible(true);
                 break;
+            case "afinidad":
+                Ventana.pantallaAfinidad=new Afinidad(v);
+                v.setTitle("Afinidad");
+                v.setContentPane(Ventana.pantallaAfinidad);
+                Ventana.pantallaAfinidad.setVisible(true);
+                break;
         }
         switch(origen) {
             case "inicio":
@@ -262,9 +281,16 @@ public class Ventana extends JFrame{
             case "creditos":
                     Ventana.pantallaCreditos.setVisible(false);
                 break;	
+            case "afinidad":
+                Ventana.pantallaAfinidad.setVisible(false);
+            break;	
         }
     }
 	
+    /**
+     * Funcion que nos permite iniciar sonidos.
+     * @param rutaSonido Variable de tipo string que indica la ruta del archivo de sonido.
+     */
     public static void comenzarSonido(String rutaSonido){
         try{
             File rutaMusica = new File(rutaSonido);
@@ -282,7 +308,10 @@ public class Ventana extends JFrame{
             ex.printStackTrace();
         }
     }
-	
+    
+	/**
+	 * Funcion que nos permite parar un sonido.
+	 */
     public static void pararSonido() {
         clip.stop();
     }

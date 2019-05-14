@@ -14,7 +14,7 @@ import clases.Enemigo;
 import clases.Heroe;
 import componentes.Botones;
 import componentes.BotonesCombate;
-import componentes.LabelTextoOtros;
+import componentes.LabelCombateEvento;
 import componentes.Paneles;
 import javax.swing.JProgressBar;
 import java.awt.Font;
@@ -26,7 +26,7 @@ public class Lucha extends Paneles{
     private ArrayList<Enemigo> enemigoArray;
     private ImageIcon[] imagenEnemigoDerrota;
     public JProgressBar vidaHeroe, vidaEnemigo;
-    public LabelTextoOtros registroBatallaHeroe, registroBatallaEnemigo, registroVictoriaDerrota, mostrarAtributos, mostrarAtributosEnemigo, Versus;
+    public LabelCombateEvento registroBatallaHeroe, registroBatallaEnemigo, registroVictoriaDerrota, mostrarAtributos, mostrarAtributosEnemigo, Versus;
     private Botones botonSalir, botonAtras, quitarSeleccion;
     private BotonesCombate botonAtacar, botonDefender, botonHabilidades, botonObjetos, boton1Habilidad, boton2Habilidad, boton3Habilidad, boton1Objeto, boton2Objeto, boton3Objeto;
     public JLabel iconoDefensaHeroe, iconoDefensaEnemigo, imagenEnemigo, imagenHeroe;
@@ -35,14 +35,23 @@ public class Lucha extends Paneles{
     private boolean defensaHeroe=false;
     private boolean defensaEnemigo=false;
     
+    //Dependiendo del numero indicando llamaremos a un enemigo guardado en un ArrayList en la ventana principal.
     public Lucha(Ventana ventana, int adversario) {
         super();
         this.ventana=ventana;
         this.adversario=adversario;
         this.heroe=ventana.heroe;
         this.enemigoArray=ventana.enemigosArray;
+        
+        //Archivos de Sonido
+        sonidoVictoria = "./recursos/sonidos/Victoria.wav";
+        sonidoAtaque = "./recursos/sonidos/Atacar.wav";
+        sonidoExplosion = "./recursos/sonidos/Explosion.wav";
+        sonidoDefensa= "./recursos/sonidos/Defensa.wav";
+        sonidoCuracion = "./recursos/sonidos/Curaciones.wav";
+        sonidoDerrota = "./recursos/sonidos/Derrota.wav";
 
-        //Imagenes
+        //Imagenes de los enemigos.
         ImageIcon[] imagenEnemigoBatalla = new ImageIcon[6];
         imagenEnemigoBatalla[0] = new ImageIcon("./recursos/imagenes/combate/poi.gif");
         imagenEnemigoBatalla[1] = new ImageIcon("./recursos/imagenes/combate/nigromante.gif");
@@ -52,34 +61,27 @@ public class Lucha extends Paneles{
         imagenEnemigoDerrota[0] = new ImageIcon("./recursos/imagenes/combate/poiD.png");
         imagenEnemigoDerrota[1] = new ImageIcon("./recursos/imagenes/combate/nigromanteD.png");
         imagenEnemigoDerrota[4] = new ImageIcon("./recursos/imagenes/combate/devilingD.png");
-
-        //sonidos
-        sonidoVictoria = "./recursos/sonidos/Victoria.wav";
-        sonidoAtaque = "./recursos/sonidos/Atacar.wav";
-        sonidoExplosion = "./recursos/sonidos/Explosion.wav";
-        sonidoDefensa= "./recursos/sonidos/Defensa.wav";
-        sonidoCuracion = "./recursos/sonidos/Curaciones.wav";
-        sonidoDerrota = "./recursos/sonidos/Derrota.wav";
 		
         //Paneles Texto
-        registroVictoriaDerrota = new LabelTextoOtros();
+        registroVictoriaDerrota = new LabelCombateEvento();
         registroVictoriaDerrota.setOpaque(false);
         registroVictoriaDerrota .setBounds(281, 120, 446, 204);
         add(registroVictoriaDerrota );
-
-        mostrarAtributos = new LabelTextoOtros();
+        
+        //Estos atributos permanecen ocultos hasta que pasemos el raton por encima de la imagen del heroe o del enemigo.
+        mostrarAtributos = new LabelCombateEvento();
         heroe.mostrarAtributosCombate(mostrarAtributos);
         mostrarAtributos.setVisible(false);
         mostrarAtributos.setBounds(80, 347, 120, 115);
         add(mostrarAtributos);
 
-        mostrarAtributosEnemigo = new LabelTextoOtros();
+        mostrarAtributosEnemigo = new LabelCombateEvento();
         enemigoArray.get(adversario).mostrarAtributosCombate(mostrarAtributosEnemigo);
         mostrarAtributosEnemigo.setVisible(false);
         mostrarAtributosEnemigo.setBounds(807, 347, 120, 115);
         add(mostrarAtributosEnemigo);
 		
-        //Barras de salud
+        //Barras de salud del heroe y del enemigo, gracias a unas funciones mas abajo aumentaran o disminuiran.
         this.vidaHeroe = new JProgressBar(0, heroe.getSaludMaxima());
         vidaHeroe.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
         vidaHeroe.setStringPainted(true);
@@ -107,14 +109,6 @@ public class Lucha extends Paneles{
         add(botonSalir);
 
         botonAtras = new Botones("Volver al mapa");
-        botonAtras.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Ventana.pararSonido();
-                Ventana.origenADestino(ventana, "lucha", "principal", 0);
-            }
-        });
-        
         botonAtras.setBounds(395, 277, 215, 23);
         botonAtras.setVisible(false);
         add(botonAtras);
@@ -180,41 +174,39 @@ public class Lucha extends Paneles{
         quitarSeleccion.setBounds(446, 473, 115, 23);
         add(quitarSeleccion);
 
-        //Imagenes
+        //Mas JLabel que nos sirven para sacar la imagen del boton defensa, los textos de combate y las imagenes de los luchadores.
         iconoDefensaHeroe = new JLabel("");
-        iconoDefensaHeroe.setBounds(152, 166, 158, 170);
+        iconoDefensaHeroe.setBounds(213, 231, 48, 48);
         iconoDefensaHeroe.setIcon(new ImageIcon("./recursos/imagenes/combate/miniEscudo.png"));
         iconoDefensaHeroe.setVisible(false);
         add(iconoDefensaHeroe);
 
         iconoDefensaEnemigo = new JLabel("");
-        iconoDefensaEnemigo.setBounds(688, 166, 158, 170);
+        iconoDefensaEnemigo.setBounds(747, 231, 48, 48);
         iconoDefensaEnemigo.setIcon(new ImageIcon("./recursos/imagenes/combate/miniEscudo.png"));
         iconoDefensaEnemigo.setVisible(false);
         add(iconoDefensaEnemigo);
 
-        registroBatallaHeroe = new LabelTextoOtros();
+        registroBatallaHeroe = new LabelCombateEvento();
         registroBatallaHeroe.setBounds(281, 120, 446, 103);
         add(registroBatallaHeroe);
 
-        registroBatallaEnemigo = new LabelTextoOtros();
+        registroBatallaEnemigo = new LabelCombateEvento();
         registroBatallaEnemigo.setBounds(281, 221, 446, 103);
         add(registroBatallaEnemigo);
 
-        Versus = new LabelTextoOtros();
+        Versus = new LabelCombateEvento();
         Versus.setFont(new Font("Bahnschrift", Font.BOLD, 25));
         Versus.setText("<html><center>"+heroe.getNombre()+" Versus "+enemigoArray.get(adversario).getNombre()+"</b></center></html>");
         Versus.setBounds(281, 49, 446, 58);
         add(Versus);
 
-        //JLabel donde se muestra las imagenes del heroe
         imagenHeroe = new JLabel("");
         imagenHeroe.setBorder(new LineBorder(new Color(0, 0, 0), 3));
         imagenHeroe.setBounds(10, 36, 261, 300);
         imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/combate/popollo.gif"));
         add(imagenHeroe);
 
-        //JLabel donde se muestra las imagenes del enemigo
         imagenEnemigo = new JLabel("");
         imagenEnemigo.setBorder(new LineBorder(new Color(0, 0, 0), 3));
         imagenEnemigo.setBounds(737, 36, 261, 300);
@@ -347,8 +339,17 @@ public class Lucha extends Paneles{
                 System.exit(0);  
             }
         });	
+        
+        botonAtras.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Ventana.pararSonido();
+                Ventana.origenADestino(ventana, "lucha", "principal", 0);
+            }
+        });
     }
-
+    
+    //FUNCIONES
     /**
      * Funcion que nos permite mostrar los botones asignados a las habilidades.
      * Anotacion: Puedo hacer paneles con estos botones pero quizas juego con ellos mas adelante por separado.
@@ -500,6 +501,9 @@ public class Lucha extends Paneles{
 
     /**
      * Funcion que recoge todas las acciones del enemigo y las condiciones de victoria o derrota.
+     * Modifica las imagenes en funcion de conseguir una victoria o una derrota.
+     * Cambia los Jpanel para mostrar mensajes dependiendo de la accion.
+     * Cambia las imagenes de la bonificacion por defensa del boton defender.
      */
     public void ataqueEnemigo() {
         //Comprobacion de que el enemigo tiene la salud suficiente para continuar el combate, de lo contrario ocurre la victoria.

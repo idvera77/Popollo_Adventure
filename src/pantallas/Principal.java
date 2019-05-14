@@ -16,7 +16,7 @@ import clases.Npc;
 import clases.Objeto;
 import componentes.Botones;
 import componentes.LabelPosicion;
-import componentes.LabelTextoPrincipal;
+import componentes.LabelPrincipal;
 import componentes.Paneles;
 import exceptions.InvalidMoralException;
 import exceptions.InvalidTipoException;
@@ -27,7 +27,7 @@ import java.awt.Font;
 
 public class Principal extends Paneles {
     private Ventana ventana;
-    private LabelTextoPrincipal mostrarAtributos, mensajeBienvenida;
+    private LabelPrincipal mostrarAtributos, mensajeBienvenida;
     private LabelPosicion posicion0Mapa, posicion1Mapa, posicion2Mapa, posicion3Mapa, posicion4Mapa, posicion5Mapa, posicion6Mapa, posicion7Mapa, posicion8Mapa, posicion9Mapa, posicion10Mapa, 
             posicion11Mapa, posicion12Mapa, posicion13Mapa, posicion14Mapa,posicion15Mapa, posicion16Mapa, posicion17Mapa, posicion18Mapa, marcaMapa;
     private Botones comenzar, finDelJuego, botonCombateAleatorio, botonGuardarPartida, botonDescanso;
@@ -94,7 +94,7 @@ public class Principal extends Paneles {
                 System.err.println(ex.getMessage());
             }	
             
-            //Comprobamos si existe un heroe creado (cargar) y si no existe empieza desde una base guardada en el programa.	
+        //Comprobamos si existe un heroe creado (cargar) y si no existe empieza desde una base guardada en el programa.	
         }else if(ventana.getHeroe()==null){
             try {
                 ArrayList<Habilidad> habilidadesHeroe=new ArrayList<Habilidad>();
@@ -171,15 +171,12 @@ public class Principal extends Paneles {
         finDelJuego.setBounds(275, 310, 443, 48);
         add(finDelJuego);
 
-
-        mensajeBienvenida = new LabelTextoPrincipal();
+        mensajeBienvenida = new LabelPrincipal();
         mensajeBienvenida.setVisible(false);
         mensajeBienvenida.setBounds(150, 104, 705, 208);
         add(mensajeBienvenida);
 
-        //Movimiento se mueve dependiendo del valor Explorar del heroe.
-        //Tiene documentado las posiciones del cursor para ser mas faciles futuras modificaciones.
-
+        //Dependiendo del atributo explorar del heroe estaremos en una casilla o en otro.
         posicion0Mapa = new LabelPosicion();
         posicion0Mapa.setBounds(30, 194, 60, 60);
         add(posicion0Mapa);
@@ -255,17 +252,18 @@ public class Principal extends Paneles {
         posicion18Mapa = new LabelPosicion();
         posicion18Mapa.setBounds(900, 38, 60, 60);
         add(posicion18Mapa);
-
+        
+        //JLabel que nos permitira movernos por el mapa, este Label se movera de posicion una vez pulsemos sobre el.
         marcaMapa = new LabelPosicion();
         marcaMapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
         add(marcaMapa);
-
+        
+        //Llamando a la funcion, explicacion de esta abajo.
         movimientoMapa();
 
         //Añadiendo botones
-
         Botones pruebaAfinidad = new Botones("Afinidad");
-        pruebaAfinidad.setBounds(255, 33, 218, 23);
+        pruebaAfinidad.setBounds(713, 402, 77, 23);
         add(pruebaAfinidad);
 
         botonGuardarPartida = new Botones("Guardar Partida");
@@ -273,8 +271,7 @@ public class Principal extends Paneles {
         add(botonGuardarPartida);
 
         Botones botonTienda = new Botones("Tienda");
-        botonTienda.setVisible(false);
-        botonTienda.setBounds(496, 33, 165, 23);
+        botonTienda.setBounds(795, 402, 60, 23);
         add(botonTienda);
 
         botonDescanso = new Botones("Punto de descanso");
@@ -295,7 +292,6 @@ public class Principal extends Paneles {
         add(botonSalir);
 
         //Eventos de botones
-
         pruebaAfinidad.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -303,7 +299,8 @@ public class Principal extends Paneles {
             Ventana.origenADestino(ventana, "principal", "creditos", 0);
             }
         });	
-
+        
+        //Boton que nos permite usar la funcion de guardar partida pero antes se abrira un JOptionPane para confirmar la orden.
         botonGuardarPartida.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -315,28 +312,32 @@ public class Principal extends Paneles {
                 }	
             }
         });
-
+        
+        //Nos llevara a la tienda.
         botonTienda.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Ventana.origenADestino(ventana,"principal", "tienda", 0);
+                Ventana.origenADestino(ventana,"principal", "afinidad", 0);
             }
         });	
-
+        
+        //Nos llevara a la sala de descanso.
         botonDescanso.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 Ventana.origenADestino(ventana,"principal", "descanso", 0);
             }
         });	
-
+        
+        //Llama a la funcion que nos permite luchar aleatoriamente.
         botonCombateAleatorio.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 combateAleatorio();
             }
         });
-
+        
+        //Boton que nos permite salir del juego pero antes se abrira un JOptionPane para confirmar la orden, ademas cerrara las conexiones si detecta alguna.
         botonSalir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -354,7 +355,8 @@ public class Principal extends Paneles {
                 }	
             }
         });
-
+        
+        //Nos lleva a la pantalla de creditos.
         finDelJuego.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
@@ -362,6 +364,7 @@ public class Principal extends Paneles {
             }
         });
 
+        //Usa dos funciones relacionadas con el movimiento en el mapa, explicacion en ellas.
         marcaMapa.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -369,7 +372,8 @@ public class Principal extends Paneles {
                 movimientoMapa();
             }
         });
-
+        
+        //Quita el mensaje de bienvenida y empieza el juego.
         comenzar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -377,7 +381,8 @@ public class Principal extends Paneles {
                 comenzar.setVisible(false);
             }
         });
-
+        
+        //Nos muestra la experiencia total de nuestro heroe.
         barraExperiencia = new JProgressBar(0, 100);
         barraExperiencia.setFont(new Font("Bahnschrift", Font.BOLD, 15));
         barraExperiencia.setBorder(new LineBorder(new Color(0, 0, 0), 3));
@@ -386,23 +391,27 @@ public class Principal extends Paneles {
         barraExperiencia.setValue(ventana.heroe.getExperiencia());
         barraExperiencia.setBounds(10, 344, 130, 31);
         add(barraExperiencia);
-
-        mostrarAtributos = new LabelTextoPrincipal();
+        
+        //Nos muestra todos los atributos del heroe.
+        mostrarAtributos = new LabelPrincipal();
         ventana.heroe.pantallaGeneralEstadisticas(mostrarAtributos);
         mostrarAtributos.setBounds(10, 370, 130, 155);
         add(mostrarAtributos);
-
-        LabelTextoPrincipal mostrarHabilidades = new LabelTextoPrincipal();
+        
+        //Nos muestra todos los usos de las habilidades.
+        LabelPrincipal mostrarHabilidades = new LabelPrincipal();
         ventana.heroe.mostrarHabilidades(mostrarHabilidades);
         mostrarHabilidades.setBounds(150, 436, 174, 89);
         add(mostrarHabilidades);
-
-        LabelTextoPrincipal mostrarObjetos = new LabelTextoPrincipal();
+        
+        //Nos muestra la cantidad de objetos restantes.
+        LabelPrincipal mostrarObjetos = new LabelPrincipal();
         ventana.heroe.mostrarObjetos(mostrarObjetos);
         mostrarObjetos.setBounds(334, 436, 174, 89);
         add(mostrarObjetos);
-
-        LabelTextoPrincipal mostrarDineroReputacion = new LabelTextoPrincipal();
+        
+        //Muestra el dinero y la reputacion obtenida.
+        LabelPrincipal mostrarDineroReputacion = new LabelPrincipal();
         mostrarDineroReputacion.setText("<html><b>Oro: "+Integer.toString(ventana.heroe.getDinero())
             +"<br/>Reputacion: "+Integer.toString(ventana.heroe.getReputacion())	
             +"</b></html>");
@@ -415,7 +424,7 @@ public class Principal extends Paneles {
         imagenMapa.setIcon(new ImageIcon("./recursos/imagenes/mapa.png"));
         add(imagenMapa);	    
 
-        //Mensaje Inicial o final
+        //Mensaje de inicio o de final del juego dependiendo de la posicion donde nos encontremos.
         if(ventana.getHeroe().getExplorar()==0) {
             comenzar.setVisible(true);
             mensajeBienvenida.setText("<html><b><center>Una malvada criatura está robando toda la comida.<br><br> "
@@ -436,7 +445,9 @@ public class Principal extends Paneles {
     }	
 
     /**
-     * Pulsando en el boton asignado aumentamos un punto. Ademas si no tenemos el nivel suficiente no podemos continuar la partida.
+     * Funcion que suma un +1 a explorar y dependiendo del valor de este
+     * entraremos en algun tipo de evento (representado con un dibujo en el mapa).
+     * Algunas casillas son especiales y si no tenemos el suficiente nivel no nos dejaran entrar.
      */
     public void avanzarCasilla() {
         ventana.heroe.setExplorar(ventana.heroe.getExplorar()+1);
@@ -449,7 +460,6 @@ public class Principal extends Paneles {
         if(ventana.heroe.getExplorar()==3) {
             Ventana.origenADestino(ventana, "principal", "evento", 0);
         }
-
         if(ventana.heroe.getExplorar()==4) {
             int entrar = JOptionPane.showConfirmDialog(null, "¿Quieres comprar algo?" , " Entrar en Tienda", 
                 JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -484,7 +494,7 @@ public class Principal extends Paneles {
             Ventana.origenADestino(ventana, "principal", "lucha", 2);
         }
         if(ventana.heroe.getExplorar()==10) {
-            //ventana.origenADestino(ventana, "principal", "evento", 2);
+            ventana.origenADestino(ventana, "principal", "evento", 2);
         }
         if(ventana.heroe.getExplorar()==11) {
             int entrar = JOptionPane.showConfirmDialog(null, "¿Quieres comprar algo?" , " Entrar en Tienda", 
@@ -515,7 +525,7 @@ public class Principal extends Paneles {
             Ventana.origenADestino(ventana, "principal", "lucha", 4);
         }
         if(ventana.heroe.getExplorar()==17) {
-            //ventana.origenADestino(ventana, "principal", "evento", 4);
+            ventana.origenADestino(ventana, "principal", "evento", 4);
         }
         if(ventana.heroe.getExplorar()==18) {
             int entrar = JOptionPane.showConfirmDialog(null, "¿Quieres comprar algo?" , " Entrar en Tienda", 
@@ -537,7 +547,8 @@ public class Principal extends Paneles {
     }
 
     /**
-     * Funcion que nos permite avanzar en la barra de progreso paso a paso, aumenta el valor explorar del heroe para saber el punto exacto de la partida.
+     * Funcion que nos permite avanzar paso a paso mirando el valor explorar. Cada paso mueve el JLabel que nos permite avanzar al siguiente destino.
+     * Igualmente cada paso marca la zona anterior con una X roja.
      */
     public void movimientoMapa() {
         ventana.heroe.getExplorar();
@@ -623,7 +634,11 @@ public class Principal extends Paneles {
             posicion18Mapa.setVisible(true);
         }
     }
-
+    
+    /**
+     * Funcion que nos permite realizar combates aleatorios contra enemigos para subir de nivel.
+     * Los enemigos se desbloquean en funcion de nuestra posicion en el mapa.
+     */
     public void combateAleatorio() {
         int aleatorio;
         if(ventana.heroe.getExplorar()>=2&&ventana.heroe.getExplorar()<5) {

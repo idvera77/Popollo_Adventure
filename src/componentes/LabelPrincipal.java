@@ -7,8 +7,10 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-public class LabelTextoPrincipal extends JLabel{
-    public LabelTextoPrincipal(){
+public class LabelPrincipal extends JLabel{
+    public LabelPrincipal(){
+    	
+    	//Configuracion de los JLabel que uso en la pantalla del mapa (tipo de letra, tamaño, borde, color, etc).
         setHorizontalAlignment(SwingConstants.CENTER);
         setFont(new Font("Bahnschrift", Font.PLAIN, 15));
         setBackground(SystemColor.menu);

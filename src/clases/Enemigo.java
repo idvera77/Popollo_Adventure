@@ -1,13 +1,13 @@
 package clases;
 
 import java.util.ArrayList;
-import componentes.LabelTextoOtros;
+import componentes.LabelCombateEvento;
 
 /**
  *
  * @author Ivan Diaz Vera
  */
-public class Enemigo extends Personaje{ 
+public final class Enemigo extends Personaje{ 
     
     /**
      * Constructor de Enemigo
@@ -55,7 +55,7 @@ public class Enemigo extends Personaje{
      * @param heroe Personaje que recibe el daño de una habilidad.
      * @registro JLabel encargado de mostrar el texto en la pantalla de Lucha.
      */
-    public void usarHabilidadesEnemigos(Heroe heroe, LabelTextoOtros registro){
+    public void usarHabilidadesEnemigos(Heroe heroe, LabelCombateEvento registro){
         int aleatorio = numeroAleatorio(0, 1);  
         String resultadoUso="<html><center><b>"+getNombre()+" utiliza una habilidad!<br>";
         if(getHabilidadesArray().get(aleatorio).getUsosRestantes()>0){

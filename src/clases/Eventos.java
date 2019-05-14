@@ -2,7 +2,7 @@ package clases;
 
 import pantallas.*;
 import componentes.BotonesDialogo;
-import componentes.LabelTextoOtros;
+import componentes.LabelCombateEvento;
 
 /**
  *
@@ -10,12 +10,17 @@ import componentes.LabelTextoOtros;
  */
 public final class Eventos {
     
-    /**
-     * Funcion que simila un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
+	/**
+	 * Funcion que simula un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
      * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
-     */
-    public static void vagabundo(Ventana ventana, Heroe heroe, LabelTextoOtros eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion){
-    	eventoTexto.setText("<html><center>Encuentras un hombre tirado en los caminos.<br>¿Que decides hacer?</center></html>");
+	 * @param eventoTexto JLabel que guarda y muestra los dialogos del evento.
+	 * @param opcion1 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion2 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion3 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion Variable de tipo entero que nos permite indicar la opcion a realizar.
+	 */
+    public static void vagabundo(Ventana ventana, Heroe heroe, LabelCombateEvento eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion){
+    	eventoTexto.setText("<html><center>Encuentras un hombre tirado en el camino y por su aspecto no parece que este gozando de buena salud.<br>¿Que decides hacer?</center></html>");
     	opcion1.setText("Pasar de largo.");
     	opcion2.setText("Ayudarle");
     	opcion3.setText("Robar sus pocas pertenencias.");
@@ -42,11 +47,15 @@ public final class Eventos {
     }
     
     /**
-     * Funcion que simila un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
+	 * Funcion que simula un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
      * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
-     * @param enemigo Indica el enemigo que luchara contra el heroe.
-     */   
-    public static void rescateAldeanos(Ventana v, Heroe heroe, LabelTextoOtros eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion){
+	 * @param eventoTexto JLabel que guarda y muestra los dialogos del evento.
+	 * @param opcion1 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion2 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion3 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion Variable de tipo entero que nos permite indicar la opcion a realizar.
+	 */  
+    public static void rescateAldeanos(Ventana v, Heroe heroe, LabelCombateEvento eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion){
     	eventoTexto.setText("<html><center>Escuchas a lo lejos el sonido de una multitud gritando, puedes observar como un enorme monstruo se acerca a ellos.</center></html>");
     	opcion1.setText("Pasar de largo.");
     	opcion2.setText("Atacar al monstruo.");
@@ -73,40 +82,48 @@ public final class Eventos {
     }
     
     /**
-     * Funcion que simila un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
-     */   
-    public static void revistaX(Ventana v, Heroe heroe, LabelTextoOtros eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion) {
-        eventoTexto.setText("<html><center>Encuentras una madriguera de crías Poring llena de gemas.<br> Un pequeño poring te mira con entusiasmo.</center></html>");
+	 * Funcion que simula un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
+     * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
+	 * @param eventoTexto JLabel que guarda y muestra los dialogos del evento.
+	 * @param opcion1 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion2 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion3 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion Variable de tipo entero que nos permite indicar la opcion a realizar.
+	 */   
+    public static void golemCofre(Ventana v, Heroe heroe, LabelCombateEvento eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion) {
+        eventoTexto.setText("<html>Cerca de unas ruinas encuentras un Golem persiguiendo a una jovenzuela.<center>Al lado de ambos puedes ver un cofre que llama mucho tu atencion.<br></center></html>");
      	opcion1.setText("Pasar de largo.");
-     	opcion2.setText("Te paras y lo acaricias.");
-     	opcion3.setText("Saquear el nido.");
+     	opcion2.setText("Te enfrentas al Golem para salvar a la joven.");
+     	opcion3.setText("Aprovechas para abrir el cofre y largarte de alli.");
    
          switch(opcion) {
             case 1:
-                eventoTexto.setText("<html><center>Sigues tu camino dejando atras la madriguera.</center></html>");
+                eventoTexto.setText("<html><center>Sigues tu camino dejando atras a la pobre muchacha.</center></html>");
                 break;
             case 2:
-                eventoTexto.setText("<html><center>El pequeño poring empieza a darte mimitos y notas una gran calidez en tu corazón.<br><br>"
-                    + "* El atributo magia aumenta en 2 puntos *</center></html>");
-                heroe.setMagia(heroe.getMagia()+2);
+            	Ventana.origenADestino(v, "evento", "lucha", 2);
+                heroe.setDinero(heroe.getDinero()+1500);  
                 heroe.subirReputacion(20);
-                break;
             case 3:
-                Ventana.origenADestino(v, "evento", "lucha", 4);
-                heroe.setDinero(heroe.getDinero()+2500);  
+            	eventoTexto.setText("<html><center>Abres el cofre y encuentras una gran cantidad de monedas de oro.<br><br>"
+                    + "* Obtienes 3000 monedas de oro*</center></html>");
+            	heroe.setDinero(heroe.getDinero()+3000); 
                 heroe.subirReputacion(-20);
-                break;  	
+                break;
          }  
     }
-     
-     
-     
+      
     /**
-     * Funcion que simila un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
+	 * Funcion que simula un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
      * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
-     */   
-    public static void criasPopollo(Ventana v, Heroe heroe, LabelTextoOtros eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion) {
-        eventoTexto.setText("<html><center>Encuentras una madriguera de crías Poring llena de gemas.<br> Un pequeño poring te mira con entusiasmo.</center></html>");
+	 * @param eventoTexto JLabel que guarda y muestra los dialogos del evento.
+	 * @param opcion1 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion2 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion3 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion Variable de tipo entero que nos permite indicar la opcion a realizar.
+	 */      
+    public static void chuletitas(Ventana v, Heroe heroe, LabelCombateEvento eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion) {
+        eventoTexto.setText("<html><center><br></center></html>");
       	opcion1.setText("Pasar de largo.");
       	opcion2.setText("Te paras y lo acaricias.");
       	opcion3.setText("Saquear el nido.");
@@ -130,11 +147,15 @@ public final class Eventos {
     }
  
     /**
-    * Funcion que simila un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
-    * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
-
-    */   
-    public static void criasPoring(Ventana v, Heroe heroe, LabelTextoOtros eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion) {
+	 * Funcion que simula un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
+     * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
+	 * @param eventoTexto JLabel que guarda y muestra los dialogos del evento.
+	 * @param opcion1 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion2 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion3 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+	 * @param opcion Variable de tipo entero que nos permite indicar la opcion a realizar.
+	 */     
+    public static void criasPoring(Ventana v, Heroe heroe, LabelCombateEvento eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion) {
        	eventoTexto.setText("<html><center>Encuentras una madriguera de crías Poring llena de gemas.<br> Un pequeño poring te mira con entusiasmo.</center></html>");
     	opcion1.setText("Pasar de largo.");
     	opcion2.setText("Te paras y lo acaricias.");
