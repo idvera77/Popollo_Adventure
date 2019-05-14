@@ -6,7 +6,7 @@ import exceptions.InvalidTipoException;
  *
  * @author Ivan Diaz Vera
  */
-public class Habilidad extends ElementoIdentificador{
+public final class Habilidad extends ElementoIdentificador{
     private int especial;
     private int usosMaximos;
     private int usosRestantes;

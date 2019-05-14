@@ -1,15 +1,13 @@
 package clases;
 
 import java.util.ArrayList;
-
 import componentes.LabelTextoOtros;
-import componentes.LabelTextoPrincipal;
 
 /**
  *
  * @author Ivan Diaz Vera
  */
-public class Enemigo extends Personaje{
+public class Enemigo extends Personaje{ 
     
     /**
      * Constructor de Enemigo
@@ -31,9 +29,9 @@ public class Enemigo extends Personaje{
     }
     
     //FUNCIONES
-    
     /**
      * La salud se iguala con la saludMaxima, es decir realiza una curacion completa y tambien se restablecen todos los usos de las habilidades.
+     * Esta funcion la utilizo porque se puede combatir muchas veces contra un mismo enemigo.
      */
     public void restablecerEnemigo(){
         setSalud(getSaludMaxima());
@@ -55,25 +53,26 @@ public class Enemigo extends Personaje{
     /**
      * Funcion que permite utilizar una habilidad del enemigo gastando usos restantes de esta, el heroe recibe el daño de dicha habilidad.
      * @param heroe Personaje que recibe el daño de una habilidad.
+     * @registro JLabel encargado de mostrar el texto en la pantalla de Lucha.
      */
     public void usarHabilidadesEnemigos(Heroe heroe, LabelTextoOtros registro){
         int aleatorio = numeroAleatorio(0, 1);  
         String resultadoUso="<html><center><b>"+getNombre()+" utiliza una habilidad!<br>";
-	        if(getHabilidadesArray().get(aleatorio).getUsosRestantes()>0){
-	        	resultadoUso+=(getHabilidadesArray().get(aleatorio).getNombre()+" inflige "
-	        			+getMagia()*getHabilidadesArray().get(aleatorio).getEspecial() +" puntos de daño.");
-	        	resultadoUso+="</b></center></html>";
-	        	registro.setText(resultadoUso);
-	            getHabilidadesArray().get(aleatorio).setUsosRestantes(getHabilidadesArray().get(aleatorio).getUsosRestantes()-1);                     
-	            dañoHabilidadesEnemigo(heroe, aleatorio); 
-	        }else{    
-	        	registro.setText("<html><center><b>"+getNombre()+" falla al intentar utilizar una habilidad!</b></center></html>");
-	        }
+        if(getHabilidadesArray().get(aleatorio).getUsosRestantes()>0){
+            resultadoUso+=(getHabilidadesArray().get(aleatorio).getNombre()+" inflige "
+                +getMagia()*getHabilidadesArray().get(aleatorio).getEspecial() +" puntos de daño.");
+            resultadoUso+="</b></center></html>";
+            registro.setText(resultadoUso);
+            getHabilidadesArray().get(aleatorio).setUsosRestantes(getHabilidadesArray().get(aleatorio).getUsosRestantes()-1);                     
+            dañoHabilidadesEnemigo(heroe, aleatorio); 
+        }else{    
+            registro.setText("<html><center><b>"+getNombre()+" falla al intentar utilizar una habilidad!</b></center></html>");
+        }
     }    
     
-    /*
-	 * Funcion que nos ayuda a generar numeros aleatorios necesarios para calculos de daño.
-	 */
+    /**
+     * Funcion que nos ayuda a generar numeros aleatorios necesarios para calculos de daño.
+     */
     public static int numeroAleatorio(int minimo,int maximo){
         int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));
         return num;

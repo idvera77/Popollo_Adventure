@@ -7,7 +7,7 @@ package clases;
 public abstract class ElementoIdentificador {
     private String nombre;
     private String descripcion;
-
+    
     /**
      * Constructor de ElementoIdenfiticador
      * @param nombre Variable de tipo String para indicar un nombre.
@@ -18,6 +18,7 @@ public abstract class ElementoIdentificador {
         this.descripcion = descripcion;
     }
     
+    //Getters y Setters
     public String getNombre() {
         return nombre;
     }

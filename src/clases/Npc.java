@@ -7,7 +7,7 @@ import java.util.Scanner;
  *
  * @author Ivan Diaz Vera
  */
-public class Npc extends ElementoIdentificador{
+public final class Npc extends ElementoIdentificador{
     private tipoMoral moral;
     
     /**

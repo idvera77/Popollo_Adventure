@@ -1,9 +1,7 @@
 package clases;
 
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
 import componentes.LabelTextoOtros;
 import componentes.LabelTextoPrincipal;
 import pantallas.Ventana;
@@ -73,33 +71,31 @@ public class Heroe extends Personaje{
     
     
     public int getExplorar() {
-		return explorar;
-	}
+        return explorar;
+    }
 
-	public void setExplorar(int explorar) {
-		this.explorar = explorar;
-	}
+    public void setExplorar(int explorar) {
+        this.explorar = explorar;
+    }
 
     //FUNCIONES
-    
-	 /**
+    /**
      * Muestra todas las estadisticas.
      * @param registro JLabelText que guarda la informacion y la muestra.
      */
     public void pantallaGeneralEstadisticas(LabelTextoPrincipal registro){
     	registro.setText("<html><center><b>Nivel: "+getNivel()+"</b></center>"
-    			+" Salud: "+getSalud()+" / "+getSaludMaxima()
-    			+"<br/> Fuerza: "+getFuerza()
-    			+"<br/> Magia: "+getMagia()
-    			+"<br/> Defensa: "+getDefensa()
-    			+"<br/> Agilidad: "+getAgilidad()
-    			+"</html>"); 
+            +" Salud: "+getSalud()+" / "+getSaludMaxima()
+            +"<br/> Fuerza: "+getFuerza()
+            +"<br/> Magia: "+getMagia()
+            +"<br/> Defensa: "+getDefensa()
+            +"<br/> Agilidad: "+getAgilidad()
+            +"</html>"); 
     }  
 	
-	//Subir de nivel
     /**
-     * Funcion que nos permite subir el nivel del heroe si llega a 100 puntos de experiencia.
-     * @param numero Numero que subira la experiencia del heroe
+     * Funcion que nos permite subir el nivel del heroe si llega a 100 puntos de experiencia y muestra todo el texto en un JOptionPane.
+     * @param numero Variable de tipo entero que aumenta la experiencia del heroe
      */
     public void subirNivel(int numero){
         setExperiencia(getExperiencia()+numero);
@@ -107,21 +103,21 @@ public class Heroe extends Personaje{
             setExperiencia(getExperiencia()-100);    
             if(nivel % 2 == 0){
             	String subirNivel="<html><center><b>!!!Subes de nivel!!!<br>"
-            			+getNivel()+" >>> "+(getNivel()+1)+"<br>"
-            			+"Tus atributos aumentan ^_^<br>"
-                        +"Magia + 1 punto<br>"
-                        +"Agilidad + 1 puntos</b></center></html>";
+                    +getNivel()+" >>> "+(getNivel()+1)+"<br>"
+                    +"Tus atributos aumentan ^_^<br>"
+                    +"Magia + 1 punto<br>"
+                    +"Agilidad + 1 puntos</b></center></html>";
             	JOptionPane.showMessageDialog(null, subirNivel); 
                 setMagia(getMagia()+1);
                 setAgilidad(getAgilidad()+1);
                 setNivel(getNivel()+1);
             }else{
             	String subirNivel="<html><center><b>!!!Subes de nivel!!!<br>"
-            			+getNivel()+" >>> "+(getNivel()+1)+"<br>"
-            			+ "Tus atributos aumentan ^_^<br>"
-                        +"Salud + 20 puntos<br>"
-                        +"Agilidad + 1 punto<br>"
-                        +"Defensa + 2 puntos</b></center></html>";
+                    +getNivel()+" >>> "+(getNivel()+1)+"<br>"
+                    + "Tus atributos aumentan ^_^<br>"
+                    +"Salud + 20 puntos<br>"
+                    +"Agilidad + 1 punto<br>"
+                    +"Defensa + 2 puntos</b></center></html>";
             	JOptionPane.showMessageDialog(null, subirNivel);  
                 setSaludMaxima(getSaludMaxima()+20);
                 setSalud(getSalud()+20);
@@ -132,7 +128,6 @@ public class Heroe extends Personaje{
         }
     }
     
-    //Reputacion
     /**
      * Funcion que nos permite aumentar la reputacion del heroe.
      * @param numero Numero que subira la reputacion del heroe.
@@ -149,71 +144,39 @@ public class Heroe extends Personaje{
         this.reputacion -= numero;
     }
     
-    //Funciones de Habilidades
+    //Funciones de HABILIDADES
     /**
      * Muestra un listado de las habilidades.
-     * @param registro JLabelText que guarda la informacion y la muestra.
+     * @param registro JLabel que guarda la informacion y la muestra.
      */
     public void mostrarHabilidades(LabelTextoPrincipal registro){
         String listaHabilidades="";
         listaHabilidades +="<html><center><b>Habilidades</b></center>";
-            for (int i = 0; i < getHabilidadesArray().size(); i++) {
-                listaHabilidades +=getHabilidadesArray().get(i).getNombre()+" "
-                        +getHabilidadesArray().get(i).getUsosRestantes()
-                        +"/"+getHabilidadesArray().get(i).getUsosMaximos()+"<br>";
-            }     
-            listaHabilidades+="</html>";
-            registro.setText(listaHabilidades);   
+        for (int i = 0; i < getHabilidadesArray().size(); i++) {
+            listaHabilidades +=getHabilidadesArray().get(i).getNombre()+" "
+                +getHabilidadesArray().get(i).getUsosRestantes()
+                +"/"+getHabilidadesArray().get(i).getUsosMaximos()+"<br>";
+        }     
+        listaHabilidades+="</html>";
+        registro.setText(listaHabilidades);   
     }
     
     /**
      * Muestra un listado de las habilidades en Combate
-     * @param registro JLabelText que guarda la informacion y la muestra.
+     * @param registro JLabel que guarda la informacion y la muestra.
      */
     public void mostrarHabilidadesCombate (LabelTextoOtros registro){
         String listaHabilidades="";
         listaHabilidades +="<html><b>";
-            for (int i = 0; i < getHabilidadesArray().size(); i++) {
-                listaHabilidades +="("+(i+1)+") "+getHabilidadesArray().get(i).getNombre()
-                        +" | Usos:\n "+getHabilidadesArray().get(i).getUsosRestantes()
-                        +"/"+getHabilidadesArray().get(i).getUsosMaximos()+"<br>";
-            }     
-            listaHabilidades+="</b></html>";
-            registro.setText(listaHabilidades);   
+        for (int i = 0; i < getHabilidadesArray().size(); i++) {
+            listaHabilidades +="("+(i+1)+") "+getHabilidadesArray().get(i).getNombre()
+                +" | Usos:\n "+getHabilidadesArray().get(i).getUsosRestantes()
+                +"/"+getHabilidadesArray().get(i).getUsosMaximos()+"<br>";
+        }     
+        listaHabilidades+="</b></html>";
+        registro.setText(listaHabilidades);   
     }
     
-    
-    /**
-     * Muestra un listado de los objetos
-     * @param registro JLabelText que guarda la informacion y la muestra.
-     */
-	public void mostrarObjetos (LabelTextoPrincipal registro){
-		String listaObjetos="";
-		listaObjetos+="<html><center><b>Objetos</b></center>";
-		for (int i = 0; i < getObjetosArray().size(); i++) {
-		   listaObjetos +=getObjetosArray().get(i).getNombre()+" "
-		   +getObjetosArray().get(i).getCantidad()+"<br>";
-		   }     
-		   listaObjetos+="</html>";
-		   registro.setText(listaObjetos);
-	}
-   
-	/**
-     * Muestra un listado de los objetos en Combate
-     * @param registro JLabelText que guarda la informacion y la muestra.
-     */
-    public void mostrarObjetosCombate (LabelTextoOtros registro){
-        String listaObjetos="";
-        listaObjetos+="<html><b>";
-            for (int i = 0; i < getObjetosArray().size(); i++) {
-                listaObjetos +=" ("+(i+1)+") "+getObjetosArray().get(i).getNombre()
-                        +" | Cantidad: "+getObjetosArray().get(i).getCantidad()+"<br>";
-            }     
-            listaObjetos+="</b></html>";
-            registro.setText(listaObjetos);
-    }
-    
-    //FUNCIONES PARA LUCHAR
     /**
      * Funcion para calcular el daño realizado por una habilidad, se multiplica el valor de magia por el valor Especial de una habilidad.
      * @param enemigo Indica el enemigo que recibe el daño.
@@ -239,6 +202,9 @@ public class Heroe extends Personaje{
     /**
      * Funcion que permite utilizar una habilidad del heroe gastando usos restantes de esta, el enemigo recibe el daño de dicha habilidad.
      * @param enemigo Personaje que recibe el daño de una habilidad.
+     * @param registro
+     * @param rutaSonido1
+     * @param rutaSonido2
      */
     public void usarHabilidades(int numero, Enemigo enemigo, LabelTextoOtros registro, String rutaSonido1, String rutaSonido2){
         if(getHabilidadesArray().get(numero).getUsosRestantes()>0){
@@ -250,21 +216,55 @@ public class Heroe extends Personaje{
             	registro.setText(resultadoUso);
                 getHabilidadesArray().get(numero).setUsosRestantes(getHabilidadesArray().get(numero).getUsosRestantes()-1);                     
                 dañoHabilidadesHeroe(enemigo, numero);
-                Ventana.sonidosBoton(rutaSonido1);
+                Ventana.comenzarSonido(rutaSonido1);
             }else if(tipo.equals("CURATIVO")){
             	String resultadoUso="<html><center><b>"+getHabilidadesArray().get(numero).getNombre()
-                        +" restablece "+getMagia()*getHabilidadesArray().get(numero).getEspecial()
-                        +" puntos de salud.</b></center></html>";
-                	registro.setText(resultadoUso);
+                    +" restablece "+getMagia()*getHabilidadesArray().get(numero).getEspecial()
+                    +" puntos de salud.</b></center></html>";
+                    registro.setText(resultadoUso);
                 getHabilidadesArray().get(numero).setUsosRestantes(getHabilidadesArray().get(numero).getUsosRestantes()-1);                     
                 curacionHabilidades(numero);
-                Ventana.sonidosBoton(rutaSonido2);
+                Ventana.comenzarSonido(rutaSonido2);
             }    
         }else{
-        	registro.setText("<html><center><b>No tienes suficiente energia.</b></center></html>");  
+            registro.setText("<html><center><b>No tienes suficiente energia.</b></center></html>");  
         }
     }
- 
+	    
+    //Funciones de OBJETOS
+    /**
+     * Muestra un listado de los objetos
+     * @param registro JLabelText que guarda la informacion y la muestra.
+     */
+    public void mostrarObjetos (LabelTextoPrincipal registro){
+        String listaObjetos="";
+        listaObjetos+="<html><center><b>Objetos</b></center>";
+        for (int i = 0; i < getObjetosArray().size(); i++) {
+            listaObjetos +=getObjetosArray().get(i).getNombre()+" "
+            +getObjetosArray().get(i).getCantidad()+"<br>";
+        }     
+        listaObjetos+="</html>";
+        registro.setText(listaObjetos);
+    }
+		
+		
+
+    /**
+     * Muestra un listado de los objetos en Combate
+     * @param registro JLabelText que guarda la informacion y la muestra.
+     */
+    public void mostrarObjetosCombate (LabelTextoOtros registro){
+    String listaObjetos="";
+    listaObjetos+="<html><b>";
+    for (int i = 0; i < getObjetosArray().size(); i++) {
+        listaObjetos +=" ("+(i+1)+") "+getObjetosArray().get(i).getNombre()
+            +" | Cantidad: "+getObjetosArray().get(i).getCantidad()+"<br>";
+    }     
+    listaObjetos+="</b></html>";
+    registro.setText(listaObjetos);
+    }
+    
+    //FUNCIONES PARA LUCHAR
     /**
      * Funcion para calcular el daño realizado por un objeto.
      * @param enemigo Indica el enemigo que recibira el daño causado por el objeto
@@ -296,29 +296,27 @@ public class Heroe extends Personaje{
             String tipo = String.valueOf(getObjetosArray().get(numero).getTipo());
             if(tipo.equals("OFENSIVO")){
             	String resultadoUso="<html><center><b>"+getObjetosArray().get(numero).getNombre()
-            			+" inflige "+getObjetosArray().get(numero).getPoder()
-                        +" puntos de daño.</b></center></html>";
+                    +" inflige "+getObjetosArray().get(numero).getPoder()
+                    +" puntos de daño.</b></center></html>";
             	registro.setText(resultadoUso);
                 getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()-1);  
                 dañoObjetos(enemigo, numero);
-                Ventana.sonidosBoton(rutaSonido1);
+                Ventana.comenzarSonido(rutaSonido1);
             }else if(tipo.equals("CURATIVO")){
             	String resultadoUso="<html><center><b>"+getObjetosArray().get(numero).getNombre()
-            			+" restablece "+getObjetosArray().get(numero).getPoder()
-                        +" puntos de salud.</b></center></html>";
+                    +" restablece "+getObjetosArray().get(numero).getPoder()
+                    +" puntos de salud.</b></center></html>";
             	registro.setText(resultadoUso);
                 getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()-1);
                 curacionObjetos(numero);       
-                Ventana.sonidosBoton(rutaSonido2);
+                Ventana.comenzarSonido(rutaSonido2);
             }    
         }else{    
-        	registro.setText("<html><center><b>No tienes suficientes objetos.</b></center></html>");
+            registro.setText("<html><center><b>No tienes suficientes objetos.</b></center></html>");
         } 
     }
-    
-    
-    //Funciones DESCANSO y TIENDAS
-    
+     
+    //Funciones DESCANSO y TIENDAS 
     /**
      * La salud se iguala con la saludMaxima, es decir realiza una curacion completa.
      */
@@ -348,28 +346,34 @@ public class Heroe extends Personaje{
     /**
      * Funcion que reune todas las de regenerar salud o restablecimiento de habilidades a cambio de dinero.
      */
-    public void puntoDescanso(int numero, String rutaSonido){
+    public void puntoDescanso(int numero, String rutaSonido, String rutaSonido2){
         switch(numero){ 
             case 0:
                 if (getDinero()>=300) {
                     setDinero(getDinero()-300); 
                     regenerarSalud();
-                    Ventana.sonidosBoton(rutaSonido);
+                    Ventana.comenzarSonido(rutaSonido);
                     break;
+                }else {
+                    Ventana.comenzarSonido(rutaSonido2);
                 }
                 break;
             case 1:
                 if (getDinero()>=750) {
                     setDinero(getDinero()-750);
                     regenerarHabilidades();
-                    Ventana.sonidosBoton(rutaSonido);
+                    Ventana.comenzarSonido(rutaSonido);
+                }else {
+                    Ventana.comenzarSonido(rutaSonido2);
                 }
-                 break;
+                break;
             case 2:
                 if (getDinero()>=1000) {
-                setDinero(getDinero()-1000);
-                regenerarSaludHabilidades();
-                Ventana.sonidosBoton(rutaSonido);
+                    setDinero(getDinero()-1000);
+                    regenerarSaludHabilidades();
+                    Ventana.comenzarSonido(rutaSonido);
+                }else {
+                    Ventana.comenzarSonido(rutaSonido2);
                 }
                 break;         
         }    
@@ -379,11 +383,13 @@ public class Heroe extends Personaje{
      * Funcion que nos aumenta la cantidad de objetos si tenemos el dinero necesario.
      * @param numero Nos indica el objeto de la tienda.
      */
-    public void comprarObjetos(int numero, String rutaSonido){
+    public void comprarObjetos(int numero, String rutaSonido, String rutaSonido2){
         if (getDinero()>=getObjetosArray().get(numero).getPrecio()) {
             setDinero(getDinero()-getObjetosArray().get(numero).getPrecio());
             getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()+1); 
-            Ventana.sonidosBoton(rutaSonido);
+            Ventana.comenzarSonido(rutaSonido);
+        }else {
+            Ventana.comenzarSonido(rutaSonido2);
         }  
     }
     
@@ -391,42 +397,52 @@ public class Heroe extends Personaje{
      *  Funcion que nos aumenta los atributos del heroe si tenemos el dinero necesario.
      *  * @param numero Nos indica el atributo.
      */
-    public void mejorarEstadisticas(int numero, String rutaSonido){
+    public void mejorarEstadisticas(int numero, String rutaSonido, String rutaSonido2){
         switch(numero){
             case 0:
             	if(getDinero()>=750){
                     setDinero(getDinero()-750);
                     setSaludMaxima(getSaludMaxima()+20);
                     setSalud(getSalud()+20);
-                    Ventana.sonidosBoton(rutaSonido);
-            	}
+                    Ventana.comenzarSonido(rutaSonido);
+            	}else {
+                    Ventana.comenzarSonido(rutaSonido2);
+                }
                 break;
             case 1:
             	if(getDinero()>=1000){
                     setDinero(getDinero()-1000);
                     setFuerza(getFuerza()+5);
-                    Ventana.sonidosBoton(rutaSonido);
+                    Ventana.comenzarSonido(rutaSonido);
+                }else {
+                    Ventana.comenzarSonido(rutaSonido2);
                 }
                 break;
             case 2:
             	if(getDinero()>=1500){
                     setDinero(getDinero()-1500);
                     setMagia(getMagia()+1); 
-                    Ventana.sonidosBoton(rutaSonido);
+                    Ventana.comenzarSonido(rutaSonido);
+                }else {
+                    Ventana.comenzarSonido(rutaSonido2);
                 }
                 break;
             case 3:
             	if(getDinero()>=1000){
                     setDinero(getDinero()-1000);
                     setDefensa(getDefensa()+2); 
-                    Ventana.sonidosBoton(rutaSonido);
-            	}
+                    Ventana.comenzarSonido(rutaSonido);
+            	}else {
+                    Ventana.comenzarSonido(rutaSonido2);
+                }
                 break;
             case 4:
             	if(getDinero()>=1000){
                     setDinero(getDinero()-1000);
                     setAgilidad(getAgilidad()+2);  
-                    Ventana.sonidosBoton(rutaSonido);
+                    Ventana.comenzarSonido(rutaSonido);
+                }else {
+                    Ventana.comenzarSonido(rutaSonido2);
                 }
                 break;
         }    

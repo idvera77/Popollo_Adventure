@@ -6,7 +6,7 @@ import exceptions.InvalidTipoException;
  *
  * @author Ivan Diaz Vera
  */
-public class Objeto extends ElementoIdentificador{
+public final class Objeto extends ElementoIdentificador{
     private int poder;
     private int cantidad;
     private tipoObjeto tipo;
@@ -55,15 +55,15 @@ public class Objeto extends ElementoIdentificador{
     }
 
     public void setTipo(String tipo) throws InvalidTipoException{
-           switch(tipo.toLowerCase()){
-           case "ofensivo":
-               this.tipo=tipoObjeto.OFENSIVO;
-               break;
-           case "curativo":
-               this.tipo=tipoObjeto.CURATIVO;
-               break;
-           default:
-               throw new InvalidTipoException(tipo+" no es valido. Solo puede ser 'ofensivo' o 'curativo'");
+        switch(tipo.toLowerCase()){
+        case "ofensivo":
+            this.tipo=tipoObjeto.OFENSIVO;
+            break;
+        case "curativo":
+            this.tipo=tipoObjeto.CURATIVO;
+            break;
+        default:
+            throw new InvalidTipoException(tipo+" no es valido. Solo puede ser 'ofensivo' o 'curativo'");
        }
     }
 

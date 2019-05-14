@@ -1,9 +1,7 @@
 package clases;
 
 import java.util.ArrayList;
-
 import componentes.LabelTextoOtros;
-import componentes.LabelTextoPrincipal;
 
 /**
  *
@@ -122,7 +120,6 @@ public abstract class Personaje extends ElementoIdentificador{
     }
     
     //FUNCIONES
-    
     /**
      * Funcion para determinar el daño causado al personajeX, su defensa - el daño enemigo
      * @param personajeX Personaje que recibe daño en su salud
@@ -134,7 +131,7 @@ public abstract class Personaje extends ElementoIdentificador{
                 this.salud -= -inflige;
             }else{
                 this.salud -= 0;
-        }
+            }
     }
    
     /**
@@ -159,11 +156,11 @@ public abstract class Personaje extends ElementoIdentificador{
      */
     public void mostrarAtributosCombate(LabelTextoOtros registro) {
     	registro.setText("<html><center><b>"
-    			+"Fuerza: "+getFuerza()
-    			+"<br/> Magia: "+getMagia()
-    			+"<br/> Defensa: "+getDefensa()
-    			+"<br/> Agilidad: "+getAgilidad()
-    			+"</b></center></html>"); 
+            +"Fuerza: "+getFuerza()
+            +"<br/> Magia: "+getMagia()
+            +"<br/> Defensa: "+getDefensa()
+            +"<br/> Agilidad: "+getAgilidad()
+            +"</b></center></html>"); 
     }
     
     /**
@@ -176,50 +173,49 @@ public abstract class Personaje extends ElementoIdentificador{
         int dañar;
         int aleatorio, aleatorio1;
         if(getAgilidad()>personajeY.getAgilidad()){
-        	aleatorio = numeroAleatorio(0, 3);
+            aleatorio = numeroAleatorio(0, 3);
             if(aleatorio==0){
                 dañar = getFuerza()*2;
                 personajeY.daño(personajeY,dañar);
                 registro.setText("<html><center><b>!!GOLPE CRITICO!!<br>"+getNombre()
-					+" inflige "+getFuerza()*2+" puntos de daño.<br>"
-					+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
-					+"</center></b></html>");
+                    +" inflige "+getFuerza()*2+" puntos de daño.<br>"
+                    +personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
+                    +"</center></b></html>");
             }else{
                 dañar = getFuerza();
                 personajeY.daño(personajeY,dañar);
                 registro.setText("<html><center><b>"+getNombre()
-					+" inflige "+getFuerza()+" puntos de daño.<br>"
-					+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
-					+"</center></b></html>");
+                    +" inflige "+getFuerza()+" puntos de daño.<br>"
+                    +personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
+                    +"</center></b></html>");
             }
         }else if(getAgilidad()==personajeY.getAgilidad()){
             dañar = getFuerza();
             personajeY.daño(personajeY,dañar);
             registro.setText("<html><center><b>"+getNombre()
-				+" inflige "+getFuerza()+" puntos de daño.<br>"
-				+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
-				+"</center></b></html>");
+                +" inflige "+getFuerza()+" puntos de daño.<br>"
+                +personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
+                +"</center></b></html>");
         }else{
-        	aleatorio1 = numeroAleatorio(0, 3);
+            aleatorio1 = numeroAleatorio(0, 3);
             if(aleatorio1==0){
             	registro.setText("<html><center><b>Ataque Fallado!!!</center></b></html>");
             }else{
-	            dañar = getFuerza();
-	            personajeY.daño(personajeY,dañar);
-	            registro.setText("<html><center><b>"+getNombre()
-				+" inflige "+getFuerza()+" puntos de daño.<br>"
-				+personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
-				+"</center></b></html>");
+                dañar = getFuerza();
+                personajeY.daño(personajeY,dañar);
+                registro.setText("<html><center><b>"+getNombre()
+                    +" inflige "+getFuerza()+" puntos de daño.<br>"
+                    +personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
+                    +"</center></b></html>");
             }
         }
     }
     
     /*
-	 * Funcion que nos ayuda a generar numeros aleatorios necesarios para calculos de daño. La incluyo aqui ya que la usan ambos personajes
-	 */
+     * Funcion que nos ayuda a generar numeros aleatorios necesarios para calculos de daño. La incluyo aqui ya que la usan ambos personajes
+     */
     public static int numeroAleatorio(int minimo,int maximo){
         int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));
         return num;
     }
-
 }
