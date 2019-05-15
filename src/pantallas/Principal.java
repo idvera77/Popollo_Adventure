@@ -101,7 +101,7 @@ public class Principal extends Paneles {
                     habilidadesHeroe.add(new Habilidad("Proyectil Magico", "Disparas chispas magicas de tus manos.", 7, 5, 5, "ofensivo"));
                     habilidadesHeroe.add(new Habilidad("Flecha Helada", "Lanzas una flecha que congela todo a su paso.", 12, 3, 3, "ofensivo"));
                     habilidadesHeroe.add(new Habilidad("Curar Heridas", "Sana las heridas superficiales.", 8, 3, 3, "curativo"));
-
+                    
                 ArrayList<Objeto> objetosHeroe=new ArrayList<Objeto>();
                     objetosHeroe.add(new Objeto("Bomba Pequeña", "Inflige 30 puntos de daño.", 30, 3, "ofensivo", 100));
                     objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 100 puntos de daño.", 100, 1, "ofensivo", 500));
@@ -170,7 +170,7 @@ public class Principal extends Paneles {
         finDelJuego.setVisible(false);
         finDelJuego.setBounds(275, 310, 443, 48);
         add(finDelJuego);
-
+        
         mensajeBienvenida = new LabelPrincipal();
         mensajeBienvenida.setVisible(false);
         mensajeBienvenida.setBounds(150, 104, 705, 208);
@@ -429,8 +429,8 @@ public class Principal extends Paneles {
             comenzar.setVisible(true);
             mensajeBienvenida.setText("<html><b><center>Una malvada criatura está robando toda la comida.<br><br> "
                 + "Un voraz pollo de granja se alza entre todos los habitantes del reino para hacer frente al vil enemigo que le priva de sus chuletitas.</center><br> "
-                + " - Recuerda que debes pulsar en la flecha para ir al siguiente destino.<br>"
-                + " - Te aconsejo que guardes la partida frecuentemente y uses la tienda sabiamente. </b></html>");
+                + " &nbsp; - Recuerda que debes pulsar en la flecha para ir al siguiente destino.<br>"
+                + " &nbsp; - Te aconsejo que guardes la partida frecuentemente y uses la tienda sabiamente. </b></html>");
             mensajeBienvenida.setVisible(true);
         }
         if(ventana.getHeroe().getExplorar()==20) {

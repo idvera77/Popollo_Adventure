@@ -25,7 +25,7 @@ public class BotonesCombate extends JButton {
         setCursor(cursor);
         
         //Indicando la fuente y el borde de los botones.
-        setBackground(new Color(240,240,240));
+        setBackground(new Color(208, 232, 226));
         setBorder(new LineBorder(new Color(0, 0, 0), 3));	
         
         //Cuando entramos en un boton debe cambiar de color, engordar el borde y al salir debe volver a su estado original.
@@ -39,6 +39,7 @@ public class BotonesCombate extends JButton {
             @Override
             public void mouseExited(MouseEvent e) {		
                 setBackground(null);
+                setBackground(new Color(208, 232, 226));
                 setBorder(new LineBorder(new Color(0, 0, 0), 3));
             }
         });	

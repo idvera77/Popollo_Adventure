@@ -91,14 +91,14 @@ public final class Eventos {
 	 * @param opcion Variable de tipo entero que nos permite indicar la opcion a realizar.
 	 */   
     public static void golemCofre(Ventana v, Heroe heroe, LabelCombateEvento eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion) {
-        eventoTexto.setText("<html>Cerca de unas ruinas encuentras un Golem persiguiendo a una jovenzuela.<center>Al lado de ambos puedes ver un cofre que llama mucho tu atencion.<br></center></html>");
+        eventoTexto.setText("<html>Cerca de unas ruinas encuentras un Golem persiguiendo a una jovenzuela.<center>Al lado de ambos puedes ver un cofre que llama mucho tu atención.<br></center></html>");
      	opcion1.setText("Pasar de largo.");
      	opcion2.setText("Te enfrentas al Golem para salvar a la joven.");
-     	opcion3.setText("Aprovechas para abrir el cofre y largarte de alli.");
+     	opcion3.setText("Aprovechas para abrir el cofre y largarte de allí.");
    
          switch(opcion) {
             case 1:
-                eventoTexto.setText("<html><center>Sigues tu camino dejando atras a la pobre muchacha.</center></html>");
+                eventoTexto.setText("<html><center>Sigues tu camino dejando atrás a la pobre muchacha.</center></html>");
                 break;
             case 2:
             	Ventana.origenADestino(v, "evento", "lucha", 2);

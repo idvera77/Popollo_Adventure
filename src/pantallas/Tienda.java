@@ -46,7 +46,7 @@ public class Tienda extends Paneles{
 
         TextoTienda cantidadBombaP = new TextoTienda();
         cantidadBombaP.setText(Integer.toString(heroe.getObjetosArray().get(0).getCantidad()));
-        cantidadBombaP.setBounds(81, 130, 41, 25);
+        cantidadBombaP.setBounds(81, 130, 41, 23);
         add(cantidadBombaP);
 
         TextoTienda cantidadBombaG = new TextoTienda();
