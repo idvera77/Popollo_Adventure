@@ -8,6 +8,7 @@ import componentes.Botones;
 import componentes.Paneles;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class Galeria extends Paneles{
     private Ventana ventana;
@@ -17,14 +18,17 @@ public class Galeria extends Paneles{
         this.ventana=ventana;
         
         //Array de imagenes para mostrar, se puede hacer igualmente con un ArrayList.
-        ImageIcon[] imagenes = new ImageIcon[8];
-        imagenes[0] = new ImageIcon("./recursos/imagenes/galeria/popollo.png");
-        imagenes[1] = new ImageIcon("./recursos/imagenes/galeria/morrigan.png");
-        imagenes[2] = new ImageIcon("./recursos/imagenes/galeria/dancer low.png");	
-        imagenes[3] = new ImageIcon("./recursos/imagenes/galeria/poring.png");
-        imagenes[4] = new ImageIcon("./recursos/imagenes/galeria/deviling.png");
-        imagenes[5] = new ImageIcon("./recursos/imagenes/galeria/poring.png");
-        imagenes[6] = new ImageIcon("./recursos/imagenes/galeria/nigromante.png");
+        ArrayList<ImageIcon> imagenes = new ArrayList<ImageIcon>();
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/deviling.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/poring.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/nigromante.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
 
         //Añadiendo Botones
         Botones botonPopollo = new Botones("Popollo");
@@ -76,77 +80,77 @@ public class Galeria extends Paneles{
         JLabel imagenGaleria = new JLabel("");
         imagenGaleria.setBorder(new LineBorder(new Color(0, 0, 0), 3));
         imagenGaleria.setBounds(69, 33, 406, 466);
-        imagenGaleria.setIcon(imagenes[0]);
+        imagenGaleria.setIcon(imagenes.get(0));
         add(imagenGaleria);
 
         //Eventos de boton. Cambian la imagen que esta dentro del JLabel imagenGaleria.
         botonPopollo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                imagenGaleria.setIcon(imagenes[0]);
-            }
-        });
-
-        botonPulpoi.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                imagenGaleria.setIcon(imagenes[1]);
+                imagenGaleria.setIcon(imagenes.get(0));
             }
         });
 
         botonMystra.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                imagenGaleria.setIcon(imagenes[1]);
+            	imagenGaleria.setIcon(imagenes.get(1));
             }
         });
 
         botonNarcyl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                imagenGaleria.setIcon(imagenes[2]);
+            	imagenGaleria.setIcon(imagenes.get(2));
             }
         });
 
         botonTomberi.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                imagenGaleria.setIcon(imagenes[1]);
+            	imagenGaleria.setIcon(imagenes.get(3));
             }
         });
 
         botonDeviling.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                imagenGaleria.setIcon(imagenes[4]);
+            	imagenGaleria.setIcon(imagenes.get(4));
             }
         });
 
         botonPoring.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                imagenGaleria.setIcon(imagenes[3]);
+            	imagenGaleria.setIcon(imagenes.get(5));
             }
         });
 
         botonNigromante.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                imagenGaleria.setIcon(imagenes[6]);
+            	imagenGaleria.setIcon(imagenes.get(6));
             }
         });
 
         botonGolem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                imagenGaleria.setIcon(imagenes[1]);
+            	imagenGaleria.setIcon(imagenes.get(7));
             }
         });
 
         botonGoblin.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                imagenGaleria.setIcon(imagenes[1]);
+            	imagenGaleria.setIcon(imagenes.get(8));
+            }
+        });
+        
+        botonPulpoi.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	imagenGaleria.setIcon(imagenes.get(8));
             }
         });
         

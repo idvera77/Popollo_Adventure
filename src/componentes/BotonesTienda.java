@@ -20,7 +20,7 @@ public class BotonesTienda extends JButton {
         Image img = toolkit.getImage("./recursos/monedas.png");
         Point point = new Point(0, 0);
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        cursor = toolkit.createCustomCursor(img, point, "./recursos/monedas.png");
+        cursor = toolkit.createCustomCursor(img, point, null);
         setCursor(cursor);
         
         //Indicando la fuente y el borde de los botones.

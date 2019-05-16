@@ -61,7 +61,7 @@ public class Ventana extends JFrame{
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image img = toolkit.getImage("./recursos/normal.png");
         Point point = new Point(0, 0);
-        Cursor cursor = toolkit.createCustomCursor(img, point, "./recursos/normal.png");
+        Cursor cursor = toolkit.createCustomCursor(img, point, null);
         setCursor(cursor);
 		
         //Nos aseguramos de cerrar el programa correctamente junto a la conexion si existe.
