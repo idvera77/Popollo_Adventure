@@ -130,30 +130,24 @@ public class Ventana extends JFrame{
 
             //Guardando parametros del heroe
             PreparedStatement smt = connect.prepareStatement("UPDATE heroe "
-                + "SET nombre = ?, descripcion = ?, saludMaxima = ?, salud = ?, fuerza = ?, magia = ?, agilidad = ?"
+                + "SET nombre = ?, descripcion = ?, saludMaxima = ?, salud = ?, manaMaximo = ?, mana = ?, fuerza = ?, magia = ?, agilidad = ?"
                 + ", defensa = ?, dinero = ?, reputacion = ?, experiencia = ?, nivel = ?, explorar = ? WHERE ID = 1");
             smt.setString(1, heroe.getNombre());
             smt.setString(2, heroe.getDescripcion());
             smt.setInt(3, heroe.getSaludMaxima());
             smt.setInt(4, heroe.getSalud());
-            smt.setInt(5, heroe.getFuerza());
-            smt.setInt(6, heroe.getMagia());
-            smt.setInt(7, heroe.getAgilidad());
-            smt.setInt(8, heroe.getDefensa());
-            smt.setInt(9, heroe.getDinero());
-            smt.setInt(10, heroe.getReputacion());
-            smt.setInt(11, heroe.getExperiencia());
-            smt.setInt(12, heroe.getNivel());  
-            smt.setInt(13, heroe.getExplorar());
+            smt.setInt(5, heroe.getManaMaximo());
+            smt.setInt(6, heroe.getMana());
+            smt.setInt(7, heroe.getFuerza());
+            smt.setInt(8, heroe.getMagia());
+            smt.setInt(9, heroe.getAgilidad());
+            smt.setInt(10, heroe.getDefensa());
+            smt.setInt(11, heroe.getDinero());
+            smt.setInt(12, heroe.getReputacion());
+            smt.setInt(13, heroe.getExperiencia());
+            smt.setInt(14, heroe.getNivel());  
+            smt.setInt(15, heroe.getExplorar());
             smt.executeUpdate();
-
-            //Solo modificamos la variable que realmente cambia, en este caso los usos restantes
-            for (int i = 0; i < habilidadesHeroe.size(); i++) {
-                smt = connect.prepareStatement("UPDATE habilidad "
-                + "SET usosRestantes = ? WHERE ID = "+(i+1)+"");
-                smt.setInt(1, heroe.getHabilidadesArray().get(i).getUsosRestantes());  
-                smt.executeUpdate();
-            } 
 
             //Solo modificamos la variable que realmente cambia, en este caso la cantidad
             for (int i = 0; i < objetosHeroe.size(); i++) {
@@ -287,6 +281,7 @@ public class Ventana extends JFrame{
         }
     }
 	
+    //Anotacion, puedo poner la musica guardada en ventana y llamarla por parametro pero he decididio dejarla cada una en su pantalla.
     /**
      * Funcion que nos permite iniciar sonidos.
      * @param rutaSonido Variable de tipo string que indica la ruta del archivo de sonido.

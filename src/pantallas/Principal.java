@@ -54,7 +54,7 @@ public class Principal extends Paneles {
                 ArrayList<Habilidad> habilidadesHeroe=new ArrayList<Habilidad>();
                 while(rs.next()){
                     habilidadesHeroe.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
-                        rs.getInt("usosMaximos"),rs.getInt("usosRestantes"), rs.getString("tipo")));
+                        rs.getInt("manaUtilizado"), rs.getString("tipo")));
                 }
 
                 //Objetos
@@ -72,6 +72,8 @@ public class Principal extends Paneles {
                 String descripcionHeroe=rs.getString("descripcion");
                 int saludMaxHeroe=rs.getInt("saludMaxima");
                 int saludHeroe=rs.getInt("salud");
+                int manaMaximoHeroe=rs.getInt("manaMaximo");
+                int manaHeroe=rs.getInt("mana");
                 int fuerzaHeroe=rs.getInt("fuerza");
                 int magiaHeroe=rs.getInt("magia");
                 int agilidadHeroe=rs.getInt("agilidad");
@@ -84,7 +86,7 @@ public class Principal extends Paneles {
 
                 //Constructor del Heroe
                 if(ventana.getHeroe()==null) {
-                    ventana.setHeroe(new Heroe(nombreHeroe, descripcionHeroe, saludMaxHeroe, saludHeroe, fuerzaHeroe, magiaHeroe, agilidadHeroe,
+                    ventana.setHeroe(new Heroe(nombreHeroe, descripcionHeroe, saludMaxHeroe, saludHeroe, manaMaximoHeroe, manaHeroe,fuerzaHeroe, magiaHeroe, agilidadHeroe,
                         defensaHeroe, habilidadesHeroe, objetosHeroe, dineroHeroe, reputacionHeroe, experienciaHeroe, nivelHeroe, explorar));
                 }
             } catch (SQLException ex) {
@@ -98,16 +100,16 @@ public class Principal extends Paneles {
         }else if(ventana.getHeroe()==null){
             try {
                 ArrayList<Habilidad> habilidadesHeroe=new ArrayList<Habilidad>();
-                    habilidadesHeroe.add(new Habilidad("Proyectil Magico", "Disparas chispas magicas de tus manos.", 7, 5, 5, "ofensivo"));
-                    habilidadesHeroe.add(new Habilidad("Flecha Helada", "Lanzas una flecha que congela todo a su paso.", 12, 3, 3, "ofensivo"));
-                    habilidadesHeroe.add(new Habilidad("Curar Heridas", "Sana las heridas superficiales.", 8, 3, 3, "curativo"));
+                    habilidadesHeroe.add(new Habilidad("Proyectil Magico", "Disparas chispas magicas de tus manos.", 7, 4, "ofensivo"));
+                    habilidadesHeroe.add(new Habilidad("Flecha Helada", "Lanzas una flecha que congela todo a su paso.", 12, 10, "ofensivo"));
+                    habilidadesHeroe.add(new Habilidad("Curar Heridas", "Sana las heridas superficiales.", 8, 10, "curativo"));
                     
                 ArrayList<Objeto> objetosHeroe=new ArrayList<Objeto>();
                     objetosHeroe.add(new Objeto("Bomba Pequeña", "Inflige 30 puntos de daño.", 30, 3, "ofensivo", 100));
                     objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 100 puntos de daño.", 100, 1, "ofensivo", 500));
-                    objetosHeroe.add(new Objeto("Pocion", "Restablece 50 puntos de salud.", 50, 5, "curativo", 250));
+                    objetosHeroe.add(new Objeto("Pocion de Mana", "Restablece 50 puntos de salud.", 50, 5, "curativo", 250));
 
-                ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 80, 80, 20, 5, 10, 10, habilidadesHeroe, objetosHeroe, 50000, 0, 0, 1, 0));
+                ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 80, 80, 40, 40, 20, 5, 10, 10, habilidadesHeroe, objetosHeroe, 50000, 0, 0, 1, 0));
             } catch (InvalidTipoException e1) {
                 e1.printStackTrace();
             }
@@ -118,33 +120,33 @@ public class Principal extends Paneles {
             //Creacion de enemigos y sus habilidades, se comprueba si estan creados para no repetir el proceso.
             if(ventana.enemigosArray==null) {
                 ArrayList<Habilidad> habilidadesPoring=new ArrayList<Habilidad>();
-                    habilidadesPoring.add(new Habilidad("Pedo magico", "Flatulencia rosada.", 7, 5, 5, "ofensivo"));
-                    habilidadesPoring.add(new Habilidad("Tirar jellopy", "Mejor no digo de donde sale.", 10, 3, 3, "ofensivo"));           
+                    habilidadesPoring.add(new Habilidad("Pedo magico", "Flatulencia rosada.", 7, 4, "ofensivo"));
+                    habilidadesPoring.add(new Habilidad("Tirar jellopy", "Mejor no digo de donde sale.", 10, 10, "ofensivo"));           
 
                 ArrayList<Habilidad> habilidadesNigromante=new ArrayList<Habilidad>();
-                    habilidadesNigromante.add(new Habilidad("Lanzar maldicion", "Dolor intenso en las entrañas.", 5, 5, 5, "ofensivo"));
-                    habilidadesNigromante.add(new Habilidad("Flecha acida", "Derrite armaduras y quema la carne.", 10, 3, 3, "ofensivo"));          
+                    habilidadesNigromante.add(new Habilidad("Lanzar maldicion", "Dolor intenso en las entrañas.", 5, 4, "ofensivo"));
+                    habilidadesNigromante.add(new Habilidad("Flecha acida", "Derrite armaduras y quema la carne.", 10, 10, "ofensivo"));          
 
                 ArrayList<Habilidad> habilidadesGolem=new ArrayList<Habilidad>();
-                    habilidadesGolem.add(new Habilidad("Mina magica", "El suelo a tu alrededor explota.", 5, 5, 5, "ofensivo"));
-                    habilidadesGolem.add(new Habilidad("Llamarada", "Quema el aire a su alrededor.", 7, 3, 3, "ofensivo"));     
+                    habilidadesGolem.add(new Habilidad("Mina magica", "El suelo a tu alrededor explota.", 5, 4, "ofensivo"));
+                    habilidadesGolem.add(new Habilidad("Llamarada", "Quema el aire a su alrededor.", 7, 10, "ofensivo"));     
 
                 ArrayList<Habilidad> habilidadesGoblin=new ArrayList<Habilidad>();
-                    habilidadesGoblin.add(new Habilidad("Lanza envenenada", "La punta de lanza brilla con un color extraña.", 10, 5, 5, "ofensivo"));
-                    habilidadesGoblin.add(new Habilidad("Flecha venenosa", "Es mejor que no te alcance.", 15, 3, 3, "ofensivo"));     
+                    habilidadesGoblin.add(new Habilidad("Lanza envenenada", "La punta de lanza brilla con un color extraña.", 10, 4, "ofensivo"));
+                    habilidadesGoblin.add(new Habilidad("Flecha venenosa", "Es mejor que no te alcance.", 15, 10, "ofensivo"));     
 
                 ArrayList<Habilidad> habilidadesPulpoi=new ArrayList<Habilidad>();
-                    habilidadesPulpoi.add(new Habilidad("Cosquillas", "Flatulencia rosada.", 10, 5, 5, "ofensivo"));
-                    habilidadesPulpoi.add(new Habilidad("Mirada viciosa", "Te desnuda con la mirada.", 15, 3, 3, "ofensivo"));               
+                    habilidadesPulpoi.add(new Habilidad("Cosquillas", "Flatulencia rosada.", 10, 10, "ofensivo"));
+                    habilidadesPulpoi.add(new Habilidad("Mirada viciosa", "Te desnuda con la mirada.", 15, 4, "ofensivo"));               
 
                 //Guardo los enemigos en un ArrayList por comodidad.
                 ventana.enemigosArray = new ArrayList<Enemigo>();
-                    ventana.enemigosArray.add(new Enemigo("Poring", "Una pequeña bola rosita", 60, 60, 15, 3, 10, 5, habilidadesPoring, 500, 25));
-                    ventana.enemigosArray.add(new Enemigo("Nigromante", "Da grima verlo", 80, 80, 20, 5, 15, 15, habilidadesNigromante, 1000, 50));
-                    ventana.enemigosArray.add(new Enemigo("Golem", "Un muro enorme de piedra.", 150, 150, 30, 5, 15, 25, habilidadesGolem, 1500, 60));
-                    ventana.enemigosArray.add(new Enemigo("Goblin", "Es muy rapido", 120, 120, 20, 3, 30, 10, habilidadesGoblin, 1500, 60));
-                    ventana.enemigosArray.add(new Enemigo("Deviling", "Un poring malvado", 200, 200, 40, 5, 20, 20, habilidadesPoring, 2000, 75));
-                    ventana.enemigosArray.add(new Enemigo("Pulpoi", "Pulpo pervertido.", 300, 300, 40, 5, 20, 30, habilidadesPulpoi, 2500, 100));	
+                    ventana.enemigosArray.add(new Enemigo("Poring", "Una pequeña bola rosita", 60, 60, 40, 40, 15, 3, 10, 5, habilidadesPoring, 500, 25));
+                    ventana.enemigosArray.add(new Enemigo("Nigromante", "Da grima verlo", 80, 80, 40, 40, 20, 5, 15, 15, habilidadesNigromante, 1000, 50));
+                    ventana.enemigosArray.add(new Enemigo("Golem", "Un muro enorme de piedra.", 150, 150, 40, 40, 30, 5, 15, 25, habilidadesGolem, 1500, 60));
+                    ventana.enemigosArray.add(new Enemigo("Goblin", "Es muy rapido", 120, 120, 40, 40, 20, 3, 30, 10, habilidadesGoblin, 1500, 60));
+                    ventana.enemigosArray.add(new Enemigo("Deviling", "Un poring malvado", 200, 200, 40, 40, 40, 5, 20, 20, habilidadesPoring, 2000, 75));
+                    ventana.enemigosArray.add(new Enemigo("Pulpoi", "Pulpo pervertido.", 300, 300, 40, 40, 40, 5, 20, 30, habilidadesPulpoi, 2500, 100));	
             }
 
             //Creacion de npcs, se comprueba si estan creados para no repetir el proceso.
@@ -428,7 +430,7 @@ public class Principal extends Paneles {
         if(ventana.getHeroe().getExplorar()==0) {
             comenzar.setVisible(true);
             mensajeBienvenida.setText("<html><b><center>Una malvada criatura está robando toda la comida.<br><br> "
-                + "Un voraz pollo de granja se alza entre todos los habitantes del reino para hacer frente al vil enemigo que le priva de sus chuletitas.</center><br> "
+                + "&nbsp;Un voraz pollo de granja se alza entre todos los habitantes del reino para hacer frente al vil enemigo que le priva de sus chuletitas.</center><br> "
                 + " &nbsp; - Recuerda que debes pulsar en la flecha para ir al siguiente destino.<br>"
                 + " &nbsp; - Te aconsejo que guardes la partida frecuentemente y uses la tienda sabiamente. </b></html>");
             mensajeBienvenida.setVisible(true);

@@ -5,11 +5,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
-
 import clases.Enemigo;
 import clases.Heroe;
 import componentes.Botones;
@@ -24,8 +22,8 @@ public class Lucha extends Paneles{
     public int adversario;
     private Heroe heroe;
     private ArrayList<Enemigo> enemigoArray;
-    private ImageIcon[] imagenEnemigoDerrota;
-    public JProgressBar vidaHeroe, vidaEnemigo;
+    private ArrayList<ImageIcon> imagenEnemigoBatalla, imagenEnemigoDerrota;
+    public JProgressBar vidaHeroe, vidaEnemigo, manaHeroe, manaEnemigo;
     public LabelCombateEvento registroBatallaHeroe, registroBatallaEnemigo, registroVictoriaDerrota, mostrarAtributos, mostrarAtributosEnemigo, Versus;
     private Botones botonSalir, botonAtras, quitarSeleccion;
     private BotonesCombate botonAtacar, botonDefender, botonHabilidades, botonObjetos, boton1Habilidad, boton2Habilidad, boton3Habilidad, boton1Objeto, boton2Objeto, boton3Objeto;
@@ -52,15 +50,21 @@ public class Lucha extends Paneles{
         sonidoDerrota = "./recursos/sonidos/Derrota.wav";
 
         //Imagenes de los enemigos.
-        ImageIcon[] imagenEnemigoBatalla = new ImageIcon[6];
-        imagenEnemigoBatalla[0] = new ImageIcon("./recursos/imagenes/combate/poi.gif");
-        imagenEnemigoBatalla[1] = new ImageIcon("./recursos/imagenes/combate/nigromante.gif");
-        imagenEnemigoBatalla[4] = new ImageIcon("./recursos/imagenes/combate/deviling.gif");
-
-        imagenEnemigoDerrota = new ImageIcon[6];
-        imagenEnemigoDerrota[0] = new ImageIcon("./recursos/imagenes/combate/poiD.png");
-        imagenEnemigoDerrota[1] = new ImageIcon("./recursos/imagenes/combate/nigromanteD.png");
-        imagenEnemigoDerrota[4] = new ImageIcon("./recursos/imagenes/combate/devilingD.png");
+        imagenEnemigoBatalla = new ArrayList<ImageIcon>();
+	        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/poi.gif"));
+	        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/nigromante.gif"));
+		    imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
+		    imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/poi.gif"));
+	        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/nigromante.gif"));
+		    imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
+	        
+	    imagenEnemigoDerrota = new ArrayList<ImageIcon>();
+	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/poiD.png"));
+	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/nigromanteD.png"));
+	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/devilingD.png"));
+	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/poiD.png"));
+	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/nigromanteD.png"));
+	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/devilingD.png"));
 		
         //Paneles Texto
         registroVictoriaDerrota = new LabelCombateEvento();
@@ -81,26 +85,46 @@ public class Lucha extends Paneles{
         mostrarAtributosEnemigo.setBounds(807, 347, 120, 115);
         add(mostrarAtributosEnemigo);
 		
-        //Barras de salud del heroe y del enemigo, gracias a unas funciones mas abajo aumentaran o disminuiran.
-        this.vidaHeroe = new JProgressBar(0, heroe.getSaludMaxima());
+        //Barras de salud/mana del heroe y del enemigo, gracias a unas funciones mas abajo aumentaran o disminuiran.
+        vidaHeroe = new JProgressBar(0, heroe.getSaludMaxima());
         vidaHeroe.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
         vidaHeroe.setStringPainted(true);
         vidaHeroe.setString(Integer.toString(heroe.getSalud()));
         vidaHeroe.setForeground(Color.RED);
         vidaHeroe.setFont(new Font("Bahnschrift", Font.BOLD, 15));
-        vidaHeroe.setBounds(20, 290, 241, 34);
+        vidaHeroe.setBounds(10, 282, 261, 28);
         vidaHeroe.setValue(heroe.getSalud());
         add(vidaHeroe);
+        
+        manaHeroe = new JProgressBar(0, heroe.getManaMaximo());
+        manaHeroe.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
+        manaHeroe.setStringPainted(true);
+        manaHeroe.setString(Integer.toString(heroe.getMana()));
+        manaHeroe.setForeground(new Color(0, 191, 255));
+        manaHeroe.setFont(new Font("Bahnschrift", Font.BOLD, 15));
+        manaHeroe.setBounds(10, 308, 261, 28);
+        manaHeroe.setValue(heroe.getMana());
+        add(manaHeroe);
 
-        this.vidaEnemigo = new JProgressBar(0, enemigoArray.get(adversario).getSaludMaxima());
+        vidaEnemigo = new JProgressBar(0, enemigoArray.get(adversario).getSaludMaxima());
         vidaEnemigo.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
         vidaEnemigo.setStringPainted(true);
         vidaEnemigo.setString(Integer.toString(enemigoArray.get(adversario).getSalud()));
         vidaEnemigo.setForeground(Color.RED);
         vidaEnemigo.setFont(new Font("Bahnschrift", Font.BOLD, 15));
-        vidaEnemigo.setBounds(747, 290, 241, 34);
+        vidaEnemigo.setBounds(737, 282, 261, 28);
         vidaEnemigo.setValue(enemigoArray.get(adversario).getSalud());
         add(vidaEnemigo);
+        
+        manaEnemigo = new JProgressBar(0, enemigoArray.get(adversario).getManaMaximo());
+        manaEnemigo.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
+        manaEnemigo.setStringPainted(true);
+        manaEnemigo.setString(Integer.toString(enemigoArray.get(adversario).getMana()));
+        manaEnemigo.setForeground(new Color(0, 191, 255));
+        manaEnemigo.setFont(new Font("Bahnschrift", Font.BOLD, 15));
+        manaEnemigo.setBounds(737, 308, 261, 28);
+        manaEnemigo.setValue(enemigoArray.get(adversario).getMana());
+        add(manaEnemigo);
 
         //Botones
         botonSalir = new Botones("Salir del juego");
@@ -210,7 +234,7 @@ public class Lucha extends Paneles{
         imagenEnemigo = new JLabel("");
         imagenEnemigo.setBorder(new LineBorder(new Color(0, 0, 0), 3));
         imagenEnemigo.setBounds(737, 36, 261, 300);
-        imagenEnemigo.setIcon(imagenEnemigoBatalla[adversario]);
+        imagenEnemigo.setIcon(imagenEnemigoBatalla.get(adversario));
         add(imagenEnemigo);
 
         //Imagen de fondo
@@ -231,8 +255,7 @@ public class Lucha extends Paneles{
         botonDefender.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                usarDefensa();
-                Ventana.comenzarSonido(sonidoDefensa);
+                usarDefensa();       
             }
         });
 
@@ -420,7 +443,7 @@ public class Lucha extends Paneles{
         botonDefender.setVisible(true);
         botonHabilidades.setVisible(true);
         botonObjetos.setVisible(true);
-        registroBatallaHeroe.setText("<html><b>Piensate mejor las cosas!!!</b></html>");
+        registroBatallaHeroe.setText("<html><b>Piensa mejor las cosas!!!</b></html>");
     }
 	
     /**
@@ -444,6 +467,11 @@ public class Lucha extends Paneles{
         vidaHeroe.setValue(heroe.getSalud());
         vidaHeroe.setString(Integer.toString(heroe.getSalud()));
     }
+    
+    public void manaHeroe() {
+        manaHeroe.setValue(heroe.getMana());
+        manaHeroe.setString(Integer.toString(heroe.getMana()));
+    }
 
     /**
      * Funcion que reescribe los valores dentro de la barra de progreso indicando la salud restante del enemigo.
@@ -452,29 +480,34 @@ public class Lucha extends Paneles{
         vidaEnemigo.setValue(enemigoArray.get(adversario).getSalud());
         vidaEnemigo.setString(Integer.toString(enemigoArray.get(adversario).getSalud()));
     }
+    
+    public void manaEnemigo() {
+    	manaEnemigo.setValue(enemigoArray.get(adversario).getMana());
+    	manaEnemigo.setString(Integer.toString(enemigoArray.get(adversario).getMana()));
+    }
 
     /**
      * Conjunto de instrucciones asociadas al boton de ataque
      */
     public void usarAtaque(){
+    	Ventana.comenzarSonido(sonidoAtaque);
         heroe.atacar(enemigoArray.get(adversario),registroBatallaHeroe);
-        Ventana.comenzarSonido(sonidoAtaque);
-        ataqueEnemigo();
         iconoDefensaHeroe.setVisible(false);
-        vidaEnemigo();
+        turnoEnemigo();
     }
 
     /**
      * Conjunto de instrucciones asociados al boton de defensa
      */
     public void usarDefensa() {
+    	Ventana.comenzarSonido(sonidoDefensa);
         iconoDefensaHeroe.setVisible(true);
         defensaHeroe=true;
         registroBatallaHeroe.setText("<html><center><b>"+heroe.getNombre()
             +" BLOQUEO!<br> Tu defensa natural se multiplica por 2 durante este turno."
             +"</center></b></html>");
-        heroe.Bloqueo(heroe);
-        ataqueEnemigo();
+        heroe.Bloqueo();
+        turnoEnemigo();
     }
 
     /**
@@ -484,8 +517,7 @@ public class Lucha extends Paneles{
     public void usarHabilidadHeroe(int numero) {
         ocultarBotonHabilidades();
         heroe.usarHabilidades(numero, enemigoArray.get(adversario), registroBatallaHeroe, sonidoExplosion, sonidoCuracion);
-        vidaEnemigo();
-        ataqueEnemigo();	
+        turnoEnemigo();	
     }
 
     /**
@@ -495,8 +527,7 @@ public class Lucha extends Paneles{
     public void usarObjetosHeroe(int numero) {
         ocultarBotonObjetos();
         heroe.usarObjetos(numero, enemigoArray.get(adversario), registroBatallaHeroe, sonidoExplosion, sonidoCuracion);
-        vidaEnemigo();
-        ataqueEnemigo();
+        turnoEnemigo();
     }
 
     /**
@@ -505,12 +536,14 @@ public class Lucha extends Paneles{
      * Cambia los Jpanel para mostrar mensajes dependiendo de la accion.
      * Cambia las imagenes de la bonificacion por defensa del boton defender.
      */
-    public void ataqueEnemigo() {
+    public void turnoEnemigo() {
+    	manaHeroe();
+    	vidaEnemigo();
         //Comprobacion de que el enemigo tiene la salud suficiente para continuar el combate, de lo contrario ocurre la victoria.
         if(enemigoArray.get(adversario).getSalud()>0){
             //Comprobacion de que el enemigo tiene activada la mejora de defensa, si es true la disminuye ya que ha pasado un turno.
             if(defensaEnemigo==true){
-                enemigoArray.get(adversario).BloqueoOff(enemigoArray.get(adversario));
+                enemigoArray.get(adversario).BloqueoOff();
                iconoDefensaEnemigo.setVisible(false);
                defensaEnemigo=false;
             }
@@ -525,26 +558,28 @@ public class Lucha extends Paneles{
                     +" decide usar bloqueo!<br> Su defensa natural se multiplica por 2 durante un turno."
                     +"</center></b></html>");
                 iconoDefensaEnemigo.setVisible(true);
-                enemigoArray.get(adversario).Bloqueo(enemigoArray.get(adversario));
-                defensaEnemigo=true;
+                enemigoArray.get(adversario).Bloqueo();
+                defensaEnemigo=true; 
             //HABILIDADES    
             }else{
                 enemigoArray.get(adversario).usarHabilidadesEnemigos(heroe, registroBatallaEnemigo);
+                manaEnemigo();
             }
         }else{
             //Si ganamos el combate debemos comprobar si tenemos la defensa activa del hereoe y el enemigo para desactivarla 
             //de lo contrario al inicio del siguiente combate el parametro defensa estara aumentado *2
             if(defensaEnemigo==true){
-                enemigoArray.get(adversario).BloqueoOff(enemigoArray.get(adversario));
+                enemigoArray.get(adversario).BloqueoOff();
                 iconoDefensaEnemigo.setVisible(false);
                 defensaEnemigo=false;   
             }
             if(defensaHeroe==true){
-                heroe.BloqueoOff(heroe);
+                heroe.BloqueoOff();
                 iconoDefensaHeroe.setVisible(false);
                 defensaHeroe=false;   
             }
-            imagenEnemigo.setIcon(imagenEnemigoDerrota[adversario]);
+            
+            imagenEnemigo.setIcon(imagenEnemigoDerrota.get(adversario));
             registroVictoriaDerrota.setText("<html><center><b>!!!VICTORIA!!!<br><br> Recibes "+enemigoArray.get(adversario).getDinero()+" Monedas de oro y "
                 + enemigoArray.get(adversario).getExperiencia()+" puntos de experiencia."
                 +"</center></b></html>");
@@ -556,18 +591,21 @@ public class Lucha extends Paneles{
             heroe.subirNivel(enemigoArray.get(adversario).getExperiencia());
             botonAtras.setVisible(true);
             vidaEnemigo.setVisible(false);
-            enemigoArray.get(adversario).restablecerEnemigo();
+            manaEnemigo.setVisible(false);
+            enemigoArray.get(adversario).restablecerCompleto();
         }
         //Al final de cada turno quitamos al heroe la defensa aumentada.
         vidaHeroe();
+        manaHeroe();
         if(defensaHeroe==true){
-            heroe.BloqueoOff(heroe);
-             defensaHeroe=false;   
+            heroe.BloqueoOff();
+            defensaHeroe=false;   
         }
         //Al final del turno enemigo comprobamos si el heroe no tiene la suficiente vida para mostrar un GameOver.
         if(heroe.getSalud()<=0) {
             Ventana.comenzarSonido(sonidoDerrota);
             vidaHeroe.setVisible(false);
+            manaHeroe.setVisible(false);
             imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/combate/popolloD.png"));
             registroVictoriaDerrota.setText("<html><center><b>!!!DERROTA!!!<br><br> Esfuérzate más la próxima vez."
                 +"</center></b></html>");

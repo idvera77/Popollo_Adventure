@@ -22,6 +22,8 @@ public final class Heroe extends Personaje{
      * @param descripcion Variable de tipo String para escribir una descripcion.
      * @param saludMaxima Variable de tipo entero que indica la salud maxima.
      * @param salud Variable de tipo entero que indica la salud actual.
+     * @param mana Variable de tipo entero que indica el mana actual.
+     * @param manaMaximo Variable de tipo entero que indica el mana maximo.
      * @param fuerza Variable de tipo entero que indica la fuerza actual.
      * @param magia Variable de tipo entero que indica la magia actual.
      * @param agilidad Variable de tipo entero que indica la agilidad actual.
@@ -34,10 +36,10 @@ public final class Heroe extends Personaje{
      * @param nivel Variable de tipo entero que indica el nivel actual.
      * @param explorar Variable de tipo entero que indica en que posicion se encuentra popollo.
      */
-    public Heroe(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, int magia, int agilidad, 
+    public Heroe(String nombre, String descripcion, int saludMaxima, int salud, int manaMaximo, int mana, int fuerza, int magia, int agilidad, 
         int defensa, ArrayList<Habilidad> habilidadesArray, ArrayList<Objeto> objetosArray, int dinero, 
         int reputacion, int experiencia, int nivel, int explorar) {
-        super(nombre, descripcion, saludMaxima, salud, fuerza, magia, agilidad, defensa, habilidadesArray, dinero, experiencia);
+        super(nombre, descripcion, saludMaxima, salud, manaMaximo, mana, fuerza, magia, agilidad, defensa, habilidadesArray, dinero, experiencia);
         this.objetosArray = objetosArray;
         this.reputacion = reputacion;
         this.nivel = nivel;
@@ -69,7 +71,6 @@ public final class Heroe extends Personaje{
         this.nivel = nivel;
     }
     
-    
     public int getExplorar() {
         return explorar;
     }
@@ -85,11 +86,12 @@ public final class Heroe extends Personaje{
      */
     public void pantallaGeneralEstadisticas(LabelPrincipal registro){
     	registro.setText("<html><center><b>Nivel: "+getNivel()+"</b></center>"
-            +" Salud: "+getSalud()+" / "+getSaludMaxima()
-            +"<br/> Fuerza: "+getFuerza()
-            +"<br/> Magia: "+getMagia()
-            +"<br/> Defensa: "+getDefensa()
-            +"<br/> Agilidad: "+getAgilidad()
+            +"&nbsp;Salud: "+getSalud()+" / "+getSaludMaxima()
+            +"<br>&nbsp;Mana: "+getMana()+" / "+getManaMaximo()
+            +"<br>&nbsp;Fuerza: "+getFuerza()
+            +"<br>&nbsp;Magia: "+getMagia()
+            +"<br>&nbsp;Defensa: "+getDefensa()
+            +"<br>&nbsp;Agilidad: "+getAgilidad()
             +"</html>"); 
     }  
 	
@@ -105,9 +107,12 @@ public final class Heroe extends Personaje{
             	String subirNivel="<html><center><b>!!!Subes de nivel!!!<br>"
                     +getNivel()+" >>> "+(getNivel()+1)+"<br>"
                     +"Tus atributos aumentan ^_^<br>"
+                    +"Mana + 5 puntos<br>"
                     +"Magia + 1 punto<br>"
                     +"Agilidad + 1 puntos</b></center></html>";
             	JOptionPane.showMessageDialog(null, subirNivel); 
+            	setManaMaximo(getManaMaximo()+5);
+            	setMana(getMana()+5);
                 setMagia(getMagia()+1);
                 setAgilidad(getAgilidad()+1);
                 setNivel(getNivel()+1);
@@ -153,9 +158,8 @@ public final class Heroe extends Personaje{
         String listaHabilidades="";
         listaHabilidades +="<html><center><b>Habilidades</b></center>";
         for (int i = 0; i < getHabilidadesArray().size(); i++) {
-            listaHabilidades +=getHabilidadesArray().get(i).getNombre()+" "
-                +getHabilidadesArray().get(i).getUsosRestantes()
-                +"/"+getHabilidadesArray().get(i).getUsosMaximos()+"<br>";
+            listaHabilidades +="&nbsp;"+getHabilidadesArray().get(i).getNombre()+"&nbsp;&nbsp;&nbsp;"
+                +getHabilidadesArray().get(i).getManaUtilizado()+"&nbsp;PM<br>";
         }     
         listaHabilidades+="</html>";
         registro.setText(listaHabilidades);   
@@ -169,24 +173,13 @@ public final class Heroe extends Personaje{
         String listaHabilidades="";
         listaHabilidades +="<html><b>";
         for (int i = 0; i < getHabilidadesArray().size(); i++) {
-            listaHabilidades +="("+(i+1)+") "+getHabilidadesArray().get(i).getNombre()
-                +" | Usos:\n "+getHabilidadesArray().get(i).getUsosRestantes()
-                +"/"+getHabilidadesArray().get(i).getUsosMaximos()+"<br>";
+            listaHabilidades +=getHabilidadesArray().get(i).getNombre()
+                +" | "+getHabilidadesArray().get(i).getManaUtilizado()+" PM<br>";
         }     
         listaHabilidades+="</b></html>";
         registro.setText(listaHabilidades);   
     }
-    
-    /**
-     * Funcion para calcular el daño realizado por una habilidad, se multiplica el valor de magia por el valor Especial de una habilidad.
-     * @param enemigo Indica el enemigo que recibe el daño.
-     * @param numero Indica la habilidad seleccionada.
-     */
-    public void dañoHabilidadesHeroe (Enemigo enemigo, int numero){
-        int dañoHabilidad = getMagia()*getHabilidadesArray().get(numero).getEspecial();
-        enemigo.setSalud(enemigo.getSalud()-dañoHabilidad);
-    }
-    
+      
     /**
      * Funcion para calcular la curacion realizada por una habilidad, se multiplica el valor de magia por el valor Especial de una habilidad.
      * @param numero Indica la habilidad seleccionada
@@ -200,37 +193,36 @@ public final class Heroe extends Personaje{
     }
     
     /**
-     * Funcion que permite utilizar una habilidad del heroe gastando usos restantes de esta, el enemigo recibe el daño de dicha habilidad.
+     * Funcion que permite utilizar una habilidad del heroe gastando mana, el enemigo recibe el daño de dicha habilidad.
      * @param enemigo Personaje que recibe el daño de una habilidad.
      * @param registro JLabel encargado de mostrar el texto en la pantalla de Lucha.
      * @param rutaSonido1 String con la ruta del archivo de sonido 1.
      * @param rutaSonido2 String con la ruta del archivo de sonido 2.
      */
     public void usarHabilidades(int numero, Enemigo enemigo, LabelCombateEvento registro, String rutaSonido1, String rutaSonido2){
-        if(getHabilidadesArray().get(numero).getUsosRestantes()>0){
+        if(getMana() >= getHabilidadesArray().get(numero).getManaUtilizado()){
+        	setMana(getMana()-getHabilidadesArray().get(numero).getManaUtilizado());
             String tipo = String.valueOf(getHabilidadesArray().get(numero).getTipo());
             if(tipo.equals("OFENSIVO")){
             	String resultadoUso="<html><center><b>"+getHabilidadesArray().get(numero).getNombre()
                     +" inflige "+getMagia()*getHabilidadesArray().get(numero).getEspecial()
                     +" puntos de daño.</b></center></html>";
-            	registro.setText(resultadoUso);
-                getHabilidadesArray().get(numero).setUsosRestantes(getHabilidadesArray().get(numero).getUsosRestantes()-1);                     
-                dañoHabilidadesHeroe(enemigo, numero);
+            	registro.setText(resultadoUso);                   
+                dañoHabilidades(enemigo, numero);
                 Ventana.comenzarSonido(rutaSonido1);
             }else if(tipo.equals("CURATIVO")){
             	String resultadoUso="<html><center><b>"+getHabilidadesArray().get(numero).getNombre()
                     +" restablece "+getMagia()*getHabilidadesArray().get(numero).getEspecial()
                     +" puntos de salud.</b></center></html>";
-                    registro.setText(resultadoUso);
-                getHabilidadesArray().get(numero).setUsosRestantes(getHabilidadesArray().get(numero).getUsosRestantes()-1);                     
+                    registro.setText(resultadoUso);                
                 curacionHabilidades(numero);
                 Ventana.comenzarSonido(rutaSonido2);
             }    
         }else{
-            registro.setText("<html><center><b>No tienes suficiente energia.</b></center></html>");  
+            registro.setText("<html><center><b>No tienes suficiente mana!!!</b></center></html>");  
         }
     }
-	    
+
     //Funciones de OBJETOS
     /**
      * Muestra un listado de los objetos
@@ -240,7 +232,7 @@ public final class Heroe extends Personaje{
         String listaObjetos="";
         listaObjetos+="<html><center><b>Objetos</b></center>";
         for (int i = 0; i < getObjetosArray().size(); i++) {
-            listaObjetos +=getObjetosArray().get(i).getNombre()+" "
+            listaObjetos += getObjetosArray().get(i).getNombre()+"&nbsp;&nbsp;"
             +getObjetosArray().get(i).getCantidad()+"<br>";
         }     
         listaObjetos+="</html>";
@@ -255,7 +247,7 @@ public final class Heroe extends Personaje{
     String listaObjetos="";
     listaObjetos+="<html><b>";
     for (int i = 0; i < getObjetosArray().size(); i++) {
-        listaObjetos +=" ("+(i+1)+") "+getObjetosArray().get(i).getNombre()
+        listaObjetos += getObjetosArray().get(i).getNombre()
             +" | Cantidad: "+getObjetosArray().get(i).getCantidad()+"<br>";
     }     
     listaObjetos+="</b></html>";
@@ -276,11 +268,11 @@ public final class Heroe extends Personaje{
      * Funcion para calcular la curacion realizada por un objeto.
      * @param numero Indica el objeto seleccionado.
      */
-    public void curacionObjetos (int numero){
-        int curacionObjeto = getObjetosArray().get(numero).getPoder();
-        setSalud(getSalud()+curacionObjeto);
-        if(getSalud()>getSaludMaxima()){
-           setSalud(getSaludMaxima());
+    public void rellenarMana (int numero){
+        int rellenarMana = getObjetosArray().get(numero).getPoder();
+        setMana(getMana()+rellenarMana);
+        if(getMana()>getManaMaximo()){
+           setMana(getManaMaximo());
         }
     }
     
@@ -305,10 +297,10 @@ public final class Heroe extends Personaje{
             }else if(tipo.equals("CURATIVO")){
             	String resultadoUso="<html><center><b>"+getObjetosArray().get(numero).getNombre()
                     +" restablece "+getObjetosArray().get(numero).getPoder()
-                    +" puntos de salud.</b></center></html>";
+                    +" puntos de mana.</b></center></html>";
             	registro.setText(resultadoUso);
                 getObjetosArray().get(numero).setCantidad(getObjetosArray().get(numero).getCantidad()-1);
-                curacionObjetos(numero);       
+                rellenarMana(numero);       
                 Ventana.comenzarSonido(rutaSonido2);
             }    
         }else{    
@@ -317,32 +309,7 @@ public final class Heroe extends Personaje{
     }
      
     //FUNCIONES DESCANSO y TIENDA
-    /**
-     * La salud se iguala con la saludMaxima, es decir realiza una curacion completa.
-     */
-    public void regenerarSalud(){
-        setSalud(getSaludMaxima());
-    }
-    
-    /**
-     * Las habilidades igualan sus usosRestantes con los usos maximos, es decir se restablecen todos los usos de las habilidades.
-     */
-    public void regenerarHabilidades(){
-        for (int i = 0; i < getHabilidadesArray().size(); i++) {
-            getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());
-        }
-    }    
-    
-    /**
-     * La salud se iguala con la saludMaxima, es decir realiza una curacion completa y tambien se restablecen todos los usos de las habilidades.
-     */
-    public void regenerarSaludHabilidades(){
-        setSalud(getSaludMaxima());
-        for (int i = 0; i < getHabilidadesArray().size(); i++) {
-            getHabilidadesArray().get(i).setUsosRestantes(getHabilidadesArray().get(i).getUsosMaximos());
-        }
-    }  
-    
+
     /**
      * Funcion que reune todas las de regenerar salud o restablecimiento de habilidades a cambio de dinero.
      * @param numero Variable de tipo entero que indica la opcion seleccionada.
@@ -354,7 +321,7 @@ public final class Heroe extends Personaje{
             case 0:
                 if (getDinero()>=300) {
                     setDinero(getDinero()-300); 
-                    regenerarSalud();
+                    restablecerSalud();
                     Ventana.comenzarSonido(rutaSonido);
                     break;
                 }else {
@@ -364,21 +331,11 @@ public final class Heroe extends Personaje{
             case 1:
                 if (getDinero()>=750) {
                     setDinero(getDinero()-750);
-                    regenerarHabilidades();
+                    restablecerCompleto();
                     Ventana.comenzarSonido(rutaSonido);
                 }else {
                     Ventana.comenzarSonido(rutaSonido2);
-                }
-                break;
-            case 2:
-                if (getDinero()>=1000) {
-                    setDinero(getDinero()-1000);
-                    regenerarSaludHabilidades();
-                    Ventana.comenzarSonido(rutaSonido);
-                }else {
-                    Ventana.comenzarSonido(rutaSonido2);
-                }
-                break;         
+                }              
         }    
     } 
     

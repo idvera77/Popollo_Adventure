@@ -32,15 +32,11 @@ public class Descanso extends Paneles{
 
         //Añadiendo botones
         Botones botonCuracion = new Botones("Curar heridas - 350");
-        botonCuracion.setBounds(374, 326, 262, 23);
+        botonCuracion.setBounds(374, 377, 262, 23);
         add(botonCuracion);
 
-        Botones botonRecargaHabilidades = new Botones("Recargar habilidades - 750");
-        botonRecargaHabilidades.setBounds(374, 360, 262, 23);
-        add(botonRecargaHabilidades);
-
-        Botones botonRecuperacionCompleta = new Botones("Recuperación completa - 1000");
-        botonRecuperacionCompleta.setBounds(374, 395, 262, 23);
+        Botones botonRecuperacionCompleta = new Botones("Recuperación completa - 750");
+        botonRecuperacionCompleta.setBounds(374, 411, 262, 23);
         add(botonRecuperacionCompleta);
 
         Botones botonAtras = new Botones("Volver al mapa");
@@ -56,18 +52,10 @@ public class Descanso extends Paneles{
             }
         });
 
-        botonRecargaHabilidades.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                heroe.puntoDescanso(1,sonidoCuracion, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
-            }
-        });
-
         botonRecuperacionCompleta.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                heroe.puntoDescanso(2,sonidoCuracion, sonidoNoMoney);
+            	heroe.puntoDescanso(1,sonidoCuracion, sonidoNoMoney);
                 mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
             }
         });

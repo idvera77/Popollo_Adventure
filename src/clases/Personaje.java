@@ -10,6 +10,8 @@ import componentes.LabelCombateEvento;
 public abstract class Personaje extends ElementoIdentificador{
     private int saludMaxima;
     private int salud;
+    private int manaMaximo; 
+    private int mana;
     private int fuerza;
     private int magia;
     private int agilidad;
@@ -24,6 +26,8 @@ public abstract class Personaje extends ElementoIdentificador{
      * @param descripcion Variable de tipo String para escribir una descripcion.
      * @param saludMaxima Variable de tipo entero que indica la salud maxima.
      * @param salud Variable de tipo entero que indica la salud actual.
+     * @param mana Variable de tipo entero que indica el mana actual.
+     * @param manaMaximo Variable de tipo entero que indica el mana maximo.
      * @param fuerza Variable de tipo entero que indica la fuerza actual.
      * @param magia Variable de tipo entero que indica la magia actual.
      * @param agilidad Variable de tipo entero que indica la agilidad actual.
@@ -32,10 +36,12 @@ public abstract class Personaje extends ElementoIdentificador{
      * @param dinero Variable de tipo entero que indica el dinero actual.
      * @param experiencia Puntos de experiencia.
     */
-    public Personaje(String nombre, String descripcion, int saludMaxima, int salud, int fuerza, int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray, int dinero, int experiencia) {
+    public Personaje(String nombre, String descripcion, int saludMaxima, int salud, int manaMaximo, int mana,int fuerza, int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray, int dinero, int experiencia) {
         super(nombre, descripcion);
         this.saludMaxima = saludMaxima;
         this.salud = salud;
+        this.manaMaximo = manaMaximo;
+        this.mana  = mana;
         this.fuerza = fuerza;
         this.magia = magia;
         this.agilidad = agilidad;
@@ -63,7 +69,23 @@ public abstract class Personaje extends ElementoIdentificador{
         this.salud = salud;
     }
 
-    public int getFuerza() {
+    public int getManaMaximo() {
+		return manaMaximo;
+	}
+
+	public void setManaMaximo(int manaMaximo) {
+		this.manaMaximo = manaMaximo;
+	}
+
+	public int getMana() {
+		return mana;
+	}
+
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+
+	public int getFuerza() {
         return fuerza;
     }
 
@@ -138,7 +160,7 @@ public abstract class Personaje extends ElementoIdentificador{
      * Funcion que multiplica en 2 su atributo defensivo.
      * @param personajeX Personaje que utilizada la funcion de bloqueo
      */
-    public void Bloqueo (Personaje personajeX){
+    public void Bloqueo (){
         this.defensa= defensa*2;
     }
     
@@ -146,7 +168,7 @@ public abstract class Personaje extends ElementoIdentificador{
      * Funcion que divide en 2 su atributo defensivo.
      * @param personajeX Personaje que utilizada la funcion de bloqueoOff
      */
-    public void BloqueoOff (Personaje personajeX){
+    public void BloqueoOff (){
         this.defensa = defensa/2;
     }   
     
@@ -165,37 +187,62 @@ public abstract class Personaje extends ElementoIdentificador{
     }
     
     /**
+     * La salud se iguala con la saludMaxima, es decir realiza una curacion completa.
+     */
+    public void restablecerSalud(){
+        setSalud(getSaludMaxima());
+    } 
+    
+    /**
+     * La salud se iguala con la saludMaxima, es decir realiza una curacion completa y a su vez hace lo mismo con el mana.
+     */
+    public void restablecerCompleto(){
+        setSalud(getSaludMaxima());
+        setMana(getManaMaximo());
+    } 
+
+    /**
+     * Funcion para calcular el daño realizado por una habilidad, se multiplica el valor de magia por el valor Especial de una habilidad.
+     * @param enemigo Indica el enemigo que recibe el daño.
+     * @param numero Indica la habilidad seleccionada.
+     */
+    public void dañoHabilidades (Personaje objetivo, int numero){
+        int dañoHabilidad = getMagia()*getHabilidadesArray().get(numero).getEspecial();
+        objetivo.setSalud(objetivo.getSalud()-dañoHabilidad);
+    }
+    
+    /**
      * Funcion para golpear con ataques fisicos. Dependiendo de la agilidad de ambos cambian los resultados.
      * @param personajeX Es el personaje que ataca y hace daño.
      * @param personajeY Es el personaje que recibe el daño.
      * @param registro Guarda la informacion para mostrarla en un JLabelText
      */
-    public void atacar(Personaje personajeY, LabelCombateEvento registro){
+    public void atacar(Personaje objetivo, LabelCombateEvento registro){
         int dañar;
         int aleatorio, aleatorio1;
-        if(getAgilidad()>personajeY.getAgilidad()){
+        if(getAgilidad()>objetivo.getAgilidad()){
             aleatorio = numeroAleatorio(0, 3);
             if(aleatorio==0){
                 dañar = getFuerza()*2;
-                personajeY.daño(personajeY,dañar);
+                objetivo.daño(objetivo,dañar);
                 registro.setText("<html><center><b>!!GOLPE CRITICO!!<br>"+getNombre()
                     +" inflige "+getFuerza()*2+" puntos de daño.<br>"
-                    +personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
+                    +objetivo.getNombre()+" bloquea "+objetivo.getDefensa()+" puntos de daño."
                     +"</center></b></html>");
             }else{
                 dañar = getFuerza();
-                personajeY.daño(personajeY,dañar);
+                objetivo.daño(objetivo,dañar);
                 registro.setText("<html><center><b>"+getNombre()
                     +" inflige "+getFuerza()+" puntos de daño.<br>"
-                    +personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
+                    +objetivo.getNombre()+" bloquea "+objetivo.getDefensa()+" puntos de daño."
                     +"</center></b></html>");
             }
-        }else if(getAgilidad()==personajeY.getAgilidad()){
+        }else if(getAgilidad()==objetivo.getAgilidad()){
             dañar = getFuerza();
-            personajeY.daño(personajeY,dañar);
+            objetivo.daño(objetivo,dañar);
             registro.setText("<html><center><b>"+getNombre()
                 +" inflige "+getFuerza()+" puntos de daño.<br>"
-                +personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
+                +objetivo.getNombre()+" bloquea "+objetivo.getDefensa()+" puntos de daño."
                 +"</center></b></html>");
         }else{
             aleatorio1 = numeroAleatorio(0, 3);
@@ -203,10 +250,10 @@ public abstract class Personaje extends ElementoIdentificador{
             	registro.setText("<html><center><b>Ataque Fallado!!!</center></b></html>");
             }else{
                 dañar = getFuerza();
-                personajeY.daño(personajeY,dañar);
+                objetivo.daño(objetivo,dañar);
                 registro.setText("<html><center><b>"+getNombre()
                     +" inflige "+getFuerza()+" puntos de daño.<br>"
-                    +personajeY.getNombre()+" bloquea "+personajeY.getDefensa()+" puntos de daño."
+                    +objetivo.getNombre()+" bloquea "+objetivo.getDefensa()+" puntos de daño."
                     +"</center></b></html>");
             }
         }

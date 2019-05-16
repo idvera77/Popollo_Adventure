@@ -156,7 +156,7 @@ public class Tienda extends Paneles{
         comprarBombaG.setBounds(131, 160, 159, 25);
         add(comprarBombaG);
 
-        BotonesTienda comprarPocion = new BotonesTienda("Poción");
+        BotonesTienda comprarPocion = new BotonesTienda("Poción de Mana");
         comprarPocion.setBounds(131, 190, 159, 25);
         add(comprarPocion);
 

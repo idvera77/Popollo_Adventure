@@ -33,7 +33,7 @@ public final class Eventos {
                 eventoTexto.setText("<html><center>Te acercas al hombre y le ayudas a levantarse, te comenta que hace días que no ha podido comer.<br>" 
                     + "Le ofreces un poco de tu comida y habláis amistosamente durante un rato.<br><br>"
                     + "* Restableces todos los puntos de salud *</center></html>");
-                heroe.regenerarSalud();
+                heroe.restablecerSalud();
                 heroe.subirReputacion(20);
                 break;
             case 3:
