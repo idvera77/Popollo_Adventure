@@ -19,7 +19,7 @@ public class Creditos extends Paneles{
     private Ventana ventana;
     private JLabel mensajeStaff, mensajeNombre;
     private Timer timer;
-    JProgressBar barraCarga;
+    private JProgressBar barraCarga;
 
     public Creditos (Ventana ventana) {
         super();

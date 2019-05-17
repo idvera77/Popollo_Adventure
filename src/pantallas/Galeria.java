@@ -20,8 +20,8 @@ public class Galeria extends Paneles{
         //Array de imagenes para mostrar, se puede hacer igualmente con un ArrayList.
         ArrayList<ImageIcon> imagenes = new ArrayList<ImageIcon>();
         imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
-        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
-        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/mystra.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/narcyl.png"));
         imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
         imagenes.add(new ImageIcon("./recursos/imagenes/galeria/deviling.png"));
         imagenes.add(new ImageIcon("./recursos/imagenes/galeria/poring.png"));

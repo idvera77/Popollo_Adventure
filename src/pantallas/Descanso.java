@@ -2,12 +2,18 @@ package pantallas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
+
 import componentes.Botones;
 import componentes.LabelPrincipal;
 import componentes.Paneles;
 import clases.Heroe;
+
+import java.awt.Color;
 import java.awt.Font;
 
 public class Descanso extends Paneles{
@@ -22,6 +28,19 @@ public class Descanso extends Paneles{
         //Archivos de sonido
         String sonidoCuracion = "./recursos/sonidos/Curaciones.wav";
         String sonidoNoMoney = "./recursos/sonidos/NoMoney.wav";
+        
+        Random r = new Random();
+        String [] consejoFrase = {"Intenta descansar cada 45 minutos de juego", "Trata bien al pequeño Popollo"};
+        
+        LabelPrincipal fraseNarcyl = new LabelPrincipal();
+        fraseNarcyl.setText(consejoFrase[r.nextInt(consejoFrase.length)]);
+        fraseNarcyl.setBounds(207, 215, 305, 40);
+        add(fraseNarcyl);
+        
+        JLabel imagenHeroe = new JLabel("");
+        imagenHeroe.setBounds(10, 225, 261, 300);
+        imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/narcylDescanso.png"));
+        add(imagenHeroe);
 
         LabelPrincipal mostrarDinero = new LabelPrincipal();
         mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
