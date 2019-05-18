@@ -15,10 +15,14 @@ import clases.Heroe;
 
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class Descanso extends Paneles{
     private Ventana ventana;
     private Heroe heroe;
+    private JLabel fraseNarcyl;
+    private LabelPrincipal mostrarDinero;
+    
 	
     public Descanso(Ventana ventana) {
         super();
@@ -30,19 +34,18 @@ public class Descanso extends Paneles{
         String sonidoNoMoney = "./recursos/sonidos/NoMoney.wav";
         
         Random r = new Random();
-        String [] consejoFrase = {"Intenta descansar cada 45 minutos de juego", "Trata bien al pequeño Popollo"};
+        String [] consejoFrase = {"Aquí estudie yo", "Diles que vas de mi parte", "Me encanta este sitio"};
         
-        LabelPrincipal fraseNarcyl = new LabelPrincipal();
+        fraseNarcyl = new JLabel();
+        fraseNarcyl.setHorizontalAlignment(SwingConstants.CENTER);
+        fraseNarcyl.setHorizontalTextPosition(SwingConstants.CENTER);
+        fraseNarcyl.setOpaque(false);
+        fraseNarcyl.setFont(new Font("Bahnschrift", Font.BOLD, 18));	
         fraseNarcyl.setText(consejoFrase[r.nextInt(consejoFrase.length)]);
-        fraseNarcyl.setBounds(207, 215, 305, 40);
+        fraseNarcyl.setBounds(231, 114, 238, 40);
         add(fraseNarcyl);
-        
-        JLabel imagenHeroe = new JLabel("");
-        imagenHeroe.setBounds(10, 225, 261, 300);
-        imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/narcylDescanso.png"));
-        add(imagenHeroe);
 
-        LabelPrincipal mostrarDinero = new LabelPrincipal();
+        mostrarDinero = new LabelPrincipal();
         mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
         mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(heroe.getDinero())
             +"</b></center></html>");
@@ -67,7 +70,7 @@ public class Descanso extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {
                 heroe.puntoDescanso(0, sonidoCuracion, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+                pulsarDescanso();
             }
         });
 
@@ -75,7 +78,7 @@ public class Descanso extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {
             	heroe.puntoDescanso(1,sonidoCuracion, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+            	pulsarDescanso();
             }
         });
         
@@ -90,7 +93,12 @@ public class Descanso extends Paneles{
         //Imagen de fondo
         JLabel imagenDescanso = new JLabel("");
         imagenDescanso.setBounds(0, 0, 1008, 536);
-        imagenDescanso.setIcon(new ImageIcon("./recursos/imagenes/descanso.jpg"));
+        imagenDescanso.setIcon(new ImageIcon("./recursos/imagenes/descanso.png"));
         add(imagenDescanso);
+    }
+    
+    public void pulsarDescanso() {
+    	mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+    	fraseNarcyl.setText("Ahora toca continuar ^_^");
     }
 }

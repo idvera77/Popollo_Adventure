@@ -490,13 +490,13 @@ public class Principal extends Paneles {
             }
         }
         if(ventana.heroe.getExplorar()==8) {
-            //Evento Afinidad
+        	Ventana.origenADestino(ventana, "principal", "afinidad", 1);
         }
         if(ventana.heroe.getExplorar()==9) {
             Ventana.origenADestino(ventana, "principal", "lucha", 2);
         }
         if(ventana.heroe.getExplorar()==10) {
-            ventana.origenADestino(ventana, "principal", "evento", 2);
+            Ventana.origenADestino(ventana, "principal", "evento", 2);
         }
         if(ventana.heroe.getExplorar()==11) {
             int entrar = JOptionPane.showConfirmDialog(null, "¿Quieres comprar algo?" , " Entrar en Tienda", 
@@ -521,13 +521,13 @@ public class Principal extends Paneles {
             Ventana.origenADestino(ventana, "principal", "tienda", 0);
         }
         if(ventana.heroe.getExplorar()==15) {
-            //Evento Afinidad
+        	Ventana.origenADestino(ventana, "principal", "afinidad", 1);
         }
         if(ventana.heroe.getExplorar()==16) {
             Ventana.origenADestino(ventana, "principal", "lucha", 4);
         }
         if(ventana.heroe.getExplorar()==17) {
-            ventana.origenADestino(ventana, "principal", "evento", 4);
+            Ventana.origenADestino(ventana, "principal", "evento", 4);
         }
         if(ventana.heroe.getExplorar()==18) {
             int entrar = JOptionPane.showConfirmDialog(null, "¿Quieres comprar algo?" , " Entrar en Tienda", 

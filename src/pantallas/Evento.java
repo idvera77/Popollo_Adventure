@@ -26,8 +26,8 @@ public class Evento extends Paneles{
         this.heroe=ventana.heroe;
 
         //sonido
-        String sonidoEnter = "./recursos/sonidos/Enter.wav";
-
+        Ventana.comenzarFondo("./recursos/sonidos/Afinidad.wav");
+        
         //Añadir Botones
         opcion1 = new BotonesDialogo("");
         opcion1.setBounds(244, 294, 520, 30);
@@ -64,7 +64,6 @@ public class Evento extends Paneles{
         opcion1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent arg0) {
-                Ventana.comenzarSonido(sonidoEnter);
                 elegirEvento(evento, 1);
                 ocultarBotones();
             }
@@ -73,7 +72,6 @@ public class Evento extends Paneles{
         opcion2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Ventana.comenzarSonido(sonidoEnter);
                 elegirEvento(evento, 2);
                 ocultarBotones();
             }
@@ -82,7 +80,6 @@ public class Evento extends Paneles{
         opcion3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Ventana.comenzarSonido(sonidoEnter);
                 elegirEvento(evento, 3);
                 ocultarBotones();
             }
@@ -91,12 +88,14 @@ public class Evento extends Paneles{
         botonAtras.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ventana.origenADestino(ventana, "evento", "principal", 0);
+            	Ventana.pararFondo();
+                Ventana.origenADestino(ventana, "evento", "principal", 0);
             }
         });
     }
 	
     public void ocultarBotones () {
+    	Ventana.comenzarSonido("./recursos/sonidos/Enter.wav");
         opcion1.setVisible(false);
         opcion2.setVisible(false);
         opcion3.setVisible(false);

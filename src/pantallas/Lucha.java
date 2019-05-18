@@ -48,6 +48,8 @@ public class Lucha extends Paneles{
         sonidoDefensa= "./recursos/sonidos/Defensa.wav";
         sonidoCuracion = "./recursos/sonidos/Curaciones.wav";
         sonidoDerrota = "./recursos/sonidos/Derrota.wav";
+        
+        Ventana.comenzarFondo("./recursos/sonidos/Combate.wav");
 
         //Imagenes de los enemigos.
         imagenEnemigoBatalla = new ArrayList<ImageIcon>();
@@ -55,7 +57,7 @@ public class Lucha extends Paneles{
 	        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/nigromante.gif"));
 		    imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
 		    imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/poi.gif"));
-	        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/nigromante.gif"));
+	        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
 		    imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
 	        
 	    imagenEnemigoDerrota = new ArrayList<ImageIcon>();
@@ -63,7 +65,7 @@ public class Lucha extends Paneles{
 	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/nigromanteD.png"));
 	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/devilingD.png"));
 	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/poiD.png"));
-	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/nigromanteD.png"));
+	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/devilingD.png"));
 	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/devilingD.png"));
 		
         //Paneles Texto
@@ -586,7 +588,7 @@ public class Lucha extends Paneles{
             registroVictoriaDerrota.setOpaque(true);
             heroe.setDinero(heroe.getDinero()+enemigoArray.get(adversario).getDinero());
             ocultarTodo();
-
+            Ventana.pararFondo();
             Ventana.comenzarSonido(sonidoVictoria);
             heroe.subirNivel(enemigoArray.get(adversario).getExperiencia());
             botonAtras.setVisible(true);
@@ -603,6 +605,7 @@ public class Lucha extends Paneles{
         }
         //Al final del turno enemigo comprobamos si el heroe no tiene la suficiente vida para mostrar un GameOver.
         if(heroe.getSalud()<=0) {
+        	Ventana.pararFondo();
             Ventana.comenzarSonido(sonidoDerrota);
             vidaHeroe.setVisible(false);
             manaHeroe.setVisible(false);

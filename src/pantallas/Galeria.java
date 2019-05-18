@@ -22,7 +22,7 @@ public class Galeria extends Paneles{
         imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
         imagenes.add(new ImageIcon("./recursos/imagenes/galeria/mystra.png"));
         imagenes.add(new ImageIcon("./recursos/imagenes/galeria/narcyl.png"));
-        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/popollo.png"));
+        imagenes.add(new ImageIcon("./recursos/imagenes/galeria/tomberi.png"));
         imagenes.add(new ImageIcon("./recursos/imagenes/galeria/deviling.png"));
         imagenes.add(new ImageIcon("./recursos/imagenes/galeria/poring.png"));
         imagenes.add(new ImageIcon("./recursos/imagenes/galeria/nigromante.png"));
@@ -158,7 +158,7 @@ public class Galeria extends Paneles{
         botonAtras.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ventana.origenADestino(ventana,"galeria", "inicio", 0);
+                Ventana.origenADestino(ventana,"galeria", "inicio", 0);
             }
         });
     }		

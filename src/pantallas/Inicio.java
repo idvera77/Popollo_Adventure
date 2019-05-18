@@ -17,6 +17,7 @@ public class Inicio extends Paneles {
         this.ventana=ventana;
 		
         //Archivo de sonido
+        Ventana.comenzarFondo("./recursos/sonidos/menu.wav");
         String sonidoLogin = "./recursos/sonidos/Login.wav";
 
         //Añadiendo Botones
@@ -49,6 +50,7 @@ public class Inicio extends Paneles {
             @Override
             public void mouseClicked(MouseEvent e) {
                 ventana.cargarPantallaCarga();
+                Ventana.pararFondo();
                 Ventana.comenzarSonido(sonidoLogin);
             }
         });
@@ -59,6 +61,7 @@ public class Inicio extends Paneles {
             public void mouseClicked(MouseEvent e) {
                 ventana.cargarPartida();
                 ventana.cargarPantallaCarga();
+                Ventana.pararFondo();
                 Ventana.comenzarSonido(sonidoLogin);
             }
         });
@@ -67,6 +70,7 @@ public class Inicio extends Paneles {
         botonGaleria.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+            	Ventana.pararFondo();
                 Ventana.origenADestino(ventana, "inicio", "galeria", 0);
             }
         });

@@ -40,7 +40,7 @@ public class Ventana extends JFrame{
     public Heroe heroe;
     public ArrayList<Enemigo> enemigosArray;
     public ArrayList<Npc> npcsArray;
-    public static Clip clip;
+    public static Clip clip, clip2;
 
     public Ventana() {
         super();
@@ -309,5 +309,35 @@ public class Ventana extends JFrame{
 	 */
     public static void pararSonido() {
         clip.stop();
+    }
+    
+    /**
+     * Funcion que nos permite iniciar musica de Fondo.
+     * @param rutaSonido Variable de tipo string que indica la ruta del archivo de sonido.
+     */
+    public static void comenzarFondo(String rutaSonido){
+        try{
+            File rutaMusica = new File(rutaSonido);
+
+            if(rutaMusica.exists()){
+                AudioInputStream audioInputSonido = AudioSystem.getAudioInputStream(rutaMusica);
+                clip2 = AudioSystem.getClip();
+                clip2.open(audioInputSonido);
+                clip2.start();
+                clip2.loop(5);
+            }
+            else{
+                System.out.println("No pudo encontrarse el archivo");
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
+	/**
+	 * Funcion que nos permite parar la musica de Fondo.
+	 */
+    public static void pararFondo() {
+        clip2.stop();
     }
 }
