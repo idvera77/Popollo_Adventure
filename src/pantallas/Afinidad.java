@@ -1,6 +1,7 @@
 package pantallas;
 
 import componentes.Botones;
+import componentes.LabelCombateEvento;
 import componentes.Paneles;
 
 import javax.swing.ImageIcon;
@@ -22,8 +23,8 @@ public class Afinidad extends Paneles {
 	private Timer timer;
     private JProgressBar barraCarga;
     private Botones botonSalir;
-    private JLabel dialogoNarcyl, dialogoTomberi, dialogoMystra;
-    public JLabel recompensaHeroe;
+    private JLabel dialogoNarcyl, dialogoTomberi, dialogoMystra, estadoNarcyl, estadoTomberi, estadoMystra;
+    public LabelCombateEvento recompensaHeroe;
 	public Afinidad(Ventana ventana) {
 	super();
     this.ventana=ventana;
@@ -44,52 +45,59 @@ public class Afinidad extends Paneles {
     botonSalir.setBounds(396, 283, 215, 23);
     add(botonSalir);
     
-    recompensaHeroe = new JLabel("New label");
-    recompensaHeroe.setBackground(Color.ORANGE);
-    recompensaHeroe.setOpaque(true);
+    recompensaHeroe = new LabelCombateEvento();
+    recompensaHeroe.setFont(new Font("Bahnschrift", Font.BOLD, 20));
     recompensaHeroe.setVisible(false);
-    recompensaHeroe.setFont(new Font("Bahnschrift", Font.BOLD, 18));
-    recompensaHeroe.setHorizontalAlignment(SwingConstants.CENTER);
     recompensaHeroe.setBounds(191, 103, 614, 226);
     add(recompensaHeroe);
+
     
     dialogoNarcyl = new JLabel("New label");
-    dialogoNarcyl.setVisible(false);
-    dialogoNarcyl.setOpaque(true);
+    dialogoNarcyl.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+    dialogoNarcyl.setHorizontalTextPosition(SwingConstants.CENTER);
     dialogoNarcyl.setHorizontalAlignment(SwingConstants.CENTER);
-    dialogoNarcyl.setBounds(181, 60, 625, 75);
+    dialogoNarcyl.setIcon(new ImageIcon("./recursos/imagenes/globo.png"));
+    dialogoNarcyl.setVisible(false);
+    dialogoNarcyl.setBounds(94, 0, 498, 122);
     add(dialogoNarcyl);
     
     dialogoTomberi = new JLabel("New label");
-    dialogoTomberi.setVisible(false);
-    dialogoTomberi.setOpaque(true);
+    dialogoTomberi.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+    dialogoTomberi.setHorizontalTextPosition(SwingConstants.CENTER);
     dialogoTomberi.setHorizontalAlignment(SwingConstants.CENTER);
-    dialogoTomberi.setBounds(181, 146, 625, 75);
+    dialogoTomberi.setIcon(new ImageIcon("./recursos/imagenes/globo.png"));
+    dialogoTomberi.setVisible(false);
+    dialogoTomberi.setBounds(191, 120, 498, 122);
     add(dialogoTomberi);
     
     dialogoMystra = new JLabel("New label");
-    dialogoMystra.setVisible(false);
-    dialogoMystra.setOpaque(true);
+    dialogoMystra.setFont(new Font("Bahnschrift", Font.BOLD, 16));
+    dialogoMystra.setHorizontalTextPosition(SwingConstants.CENTER);
     dialogoMystra.setHorizontalAlignment(SwingConstants.CENTER);
-    dialogoMystra.setBounds(181, 231, 625, 75);
+    dialogoMystra.setIcon(new ImageIcon("./recursos/imagenes/globo.png"));
+    dialogoMystra.setVisible(false);
+    dialogoMystra.setBounds(359, 177, 498, 122);
     add(dialogoMystra);
     
-    JLabel estadoNarcyl = new JLabel("New label");
-    estadoNarcyl.setBounds(94, 60, 77, 75);
+    estadoNarcyl = new JLabel("New label");
+    estadoNarcyl.setVisible(false);
+    estadoNarcyl.setBounds(688, 0, 70, 75);
     add(estadoNarcyl);
     
-    JLabel estadoTomberi = new JLabel("New label");
-    estadoTomberi.setBounds(94, 146, 77, 75);
+    estadoTomberi = new JLabel("New label");
+    estadoTomberi.setVisible(false);
+    estadoTomberi.setBounds(779, 127, 70, 75);
     add(estadoTomberi);
     
-    JLabel estadoMystra = new JLabel("New label");
-    estadoMystra.setBounds(94, 231, 77, 75);
+    estadoMystra = new JLabel("New label");
+    estadoMystra.setVisible(false);
+    estadoMystra.setBounds(928, 146, 70, 75);
     add(estadoMystra);
     
     //Imagen de fondo
     JLabel imagenFondo = new JLabel("");
     imagenFondo.setBounds(0, 0, 1008, 536);
-    imagenFondo.setIcon(new ImageIcon("./recursos/imagenes/batalla.jpg"));
+    imagenFondo.setIcon(new ImageIcon("./recursos/imagenes/afinidad.png"));
     add(imagenFondo);	
     
     barraCarga = new JProgressBar();
@@ -118,7 +126,7 @@ public class Afinidad extends Paneles {
         }  
     };
     
-    timer = new Timer(400, updateBarraCargar);
+    timer = new Timer(200, updateBarraCargar);
     timer.start();  
     
     //Evento Boton
@@ -134,23 +142,31 @@ public class Afinidad extends Paneles {
 	
 	public void eventoCaotico() {
 		if(barraCarga.getValue()==10) {
+			estadoMystra.setVisible(true);
+			estadoMystra.setIcon(new ImageIcon("./recursos/imagenes/corazon.png"));
     		dialogoMystra.setVisible(true);
-        	dialogoMystra.setText("Algo me dice que esto se va a poner interesante.");
+        	dialogoMystra.setText("<html><center>Algo me dice que esto se va a poner interesante.</center></html>");
         }
         if(barraCarga.getValue()==30) {
         	dialogoMystra.setVisible(false);
+        	estadoTomberi.setVisible(true);
+			estadoTomberi.setIcon(new ImageIcon("./recursos/imagenes/neutral.png"));
         	dialogoTomberi.setVisible(true);
-        	dialogoTomberi.setText("Pensaba que a ti solo te importaba la comida, pero parece que también tienes sentimientos. No me gusta.");
+        	dialogoTomberi.setText("<html><center>Pensaba que a ti solo te importaba la comida, "
+        			+ "<br>pero parece que también tienes sentimientos."
+        			+ "<br> No me gusta.</center></html>");
         }
         if(barraCarga.getValue()==50) {
         	dialogoTomberi.setVisible(false);
+        	estadoNarcyl.setVisible(true);
+			estadoNarcyl.setIcon(new ImageIcon("./recursos/imagenes/mosqueo.png"));
         	dialogoNarcyl.setVisible(true);
-        	dialogoNarcyl.setText("Cuando nos conocimos pensaba que eras de otra manera.");
+        	dialogoNarcyl.setText("<html><center>Cuando nos conocimos pensaba que eras <br>de otra manera. Esfuerzate por favor.</center></html>");
         }
         if(barraCarga.getValue()==70) {
         	dialogoNarcyl.setVisible(false);
         	dialogoMystra.setVisible(true);
-        	dialogoMystra.setText("Pasa de estos estúpidos, toma te lo has ganado.");
+        	dialogoMystra.setText("<html><center>Pasa de estos estúpidos, toma te lo has ganado.</center></html>");
         }
         if(barraCarga.getValue()==90) {
         	dialogoMystra.setVisible(false);
@@ -164,23 +180,29 @@ public class Afinidad extends Paneles {
 	}
 	public void eventoCaoticoMas() {
 		if(barraCarga.getValue()==10) {
+			estadoMystra.setVisible(true);
+			estadoMystra.setIcon(new ImageIcon("./recursos/imagenes/corazon.png"));
     		dialogoMystra.setVisible(true);
-        	dialogoMystra.setText("¡Ja,Ja,Ja! Me encanta, te dejare ser mi mascota, pollo de granja.");
+        	dialogoMystra.setText("<html><center>¡Ja,Ja,Ja! Me encanta, te dejare ser <br>mi mascota, pollo de granja.</center></html>");
         }
         if(barraCarga.getValue()==30) {
         	dialogoMystra.setVisible(false);
+        	estadoTomberi.setVisible(true);
+			estadoTomberi.setIcon(new ImageIcon("./recursos/imagenes/neutral.png"));
         	dialogoTomberi.setVisible(true);
-        	dialogoTomberi.setText("Tenias potencial, pero lo has echado todo a perder.");
+        	dialogoTomberi.setText("<html><center>Tenias potencial, pero lo has echado todo a perder.</center></html>");
         }
         if(barraCarga.getValue()==50) {
         	dialogoTomberi.setVisible(false);
+        	estadoNarcyl.setVisible(true);
+			estadoNarcyl.setIcon(new ImageIcon("./recursos/imagenes/mosqueo.png"));
         	dialogoNarcyl.setVisible(true);
-        	dialogoNarcyl.setText("Por favor, no me hagas daño.");
+        	dialogoNarcyl.setText("<html><center>Por favor, no me hagas daño.</center></html>");
         }
         if(barraCarga.getValue()==70) {
         	dialogoNarcyl.setVisible(false);
         	dialogoMystra.setVisible(true);
-        	dialogoMystra.setText("Pasa de estos estúpidos, toma te lo has ganado.");
+        	dialogoMystra.setText("<html><center>Pasa de estos estúpidos, toma te lo has ganado.</center></html>");
         }
         if(barraCarga.getValue()==90) {
         	dialogoMystra.setVisible(false);
@@ -194,23 +216,31 @@ public class Afinidad extends Paneles {
 	}
 	public void eventoNeutral() {
 		if(barraCarga.getValue()==10) {
+			estadoTomberi.setVisible(true);
+			estadoTomberi.setIcon(new ImageIcon("./recursos/imagenes/corazon.png"));
     		dialogoTomberi.setVisible(true);
-        	dialogoTomberi.setText("A mi solo me importa el dinero y a ti solo recuperar la comida. Eres como yo.");
+        	dialogoTomberi.setText("<html><center>A mi solo me importa el dinero y a ti"
+        			+ " solo<br>recuperar la comida. Eres como yo.</center></html>");
         }
         if(barraCarga.getValue()==30) {
         	dialogoTomberi.setVisible(false);
+        	estadoNarcyl.setVisible(true);
+			estadoNarcyl.setIcon(new ImageIcon("./recursos/imagenes/neutral.png"));
         	dialogoNarcyl.setVisible(true);
-        	dialogoNarcyl.setText("Creo que un héroe debería hacer más por ayudar a los demás.");
+        	dialogoNarcyl.setText("<html><center>Creo que un héroe debería hacer <br>más por ayudar a los demás.</center></html>");
         }
         if(barraCarga.getValue()==50) {
         	dialogoNarcyl.setVisible(false);
+        	estadoMystra.setVisible(true);
+			estadoMystra.setIcon(new ImageIcon("./recursos/imagenes/neutral.png"));
         	dialogoMystra.setVisible(true);
-        	dialogoMystra.setText("¿Te vas de viaje y no aprovechas en buscar algo de diversión? Que aburrido.");
+        	dialogoMystra.setText("<html><center>¿Te vas de viaje y no aprovechas en buscar<br> algo de diversión?&nbsp;"
+        			+ "Que aburrido.</center></html>");
         }
         if(barraCarga.getValue()==70) {
         	dialogoMystra.setVisible(false);
         	dialogoTomberi.setVisible(true);
-        	dialogoTomberi.setText("Ni caso, no saben de la vida. Toma esto.");
+        	dialogoTomberi.setText("<html><center>Ni caso, no saben de la vida. Toma esto.</center></html>");
         }
         if(barraCarga.getValue()==90) {
         	dialogoTomberi.setVisible(false);
@@ -224,23 +254,31 @@ public class Afinidad extends Paneles {
 	}
 	public void eventoLegal() {
 		if(barraCarga.getValue()==10) {
+			estadoNarcyl.setVisible(true);
+			estadoNarcyl.setIcon(new ImageIcon("./recursos/imagenes/corazon.png"));
     		dialogoNarcyl.setVisible(true);
-        	dialogoNarcyl.setText("Eres compasivo y leal. Me alegro de haberte seguido.");
+        	dialogoNarcyl.setText("<html><center>Eres compasivo y leal. Me alegro de haberte seguido.</center></html>");
         }
         if(barraCarga.getValue()==30) {
         	dialogoNarcyl.setVisible(false);
+        	estadoTomberi.setVisible(true);
+			estadoTomberi.setIcon(new ImageIcon("./recursos/imagenes/neutral.png"));
         	dialogoTomberi.setVisible(true);
-        	dialogoTomberi.setText("Pensaba que a ti solo te importaba la comida, pero parece que también tienes sentimientos. No me gusta.");
+        	dialogoTomberi.setText("<html><center>Pensaba que a ti solo te importaba la comida, "
+        			+ "<br>pero parece que también tienes sentimientos."
+        			+ "<br> No me gusta.</center></html>");
         }
         if(barraCarga.getValue()==50) {
         	dialogoTomberi.setVisible(false);
+        	estadoMystra.setVisible(true);
+			estadoMystra.setIcon(new ImageIcon("./recursos/imagenes/mosqueo.png"));
         	dialogoMystra.setVisible(true);
-        	dialogoMystra.setText("¿Desde cuándo  un pollo de granja se dedica a salvar humanos? Ellos esclavizan a los tuyos.");
+        	dialogoMystra.setText("<html><center>¿Desde cuándo  un pollo de granja se dedica a <br>salvar humanos? Ellos esclavizan a los tuyos.</center></html>");
         }
         if(barraCarga.getValue()==70) {
         	dialogoMystra.setVisible(false);
         	dialogoNarcyl.setVisible(true);
-        	dialogoNarcyl.setText("No les hagas caso, toma te lo has ganado ^_^");
+        	dialogoNarcyl.setText("<html><center>No les hagas caso, toma te lo has ganado ^_^</center></html>");
         }
         if(barraCarga.getValue()==90) {
         	dialogoNarcyl.setVisible(false);
@@ -255,23 +293,29 @@ public class Afinidad extends Paneles {
 	
 	public void eventoLegalMas() {
 		if(barraCarga.getValue()==10) {
+			estadoNarcyl.setVisible(true);
+			estadoNarcyl.setIcon(new ImageIcon("./recursos/imagenes/corazon.png"));
     		dialogoNarcyl.setVisible(true);
-        	dialogoNarcyl.setText("No sabía que un pollo de granja pudiera ser un héroe. Estoy muy orgullosa.");
+        	dialogoNarcyl.setText("<html><center>No sabía que un pollo de granja pudiera <br>ser un héroe. Estoy muy orgullosa.</center></html>");
         }
         if(barraCarga.getValue()==30) {
         	dialogoNarcyl.setVisible(false);
+        	estadoTomberi.setVisible(true);
+			estadoTomberi.setIcon(new ImageIcon("./recursos/imagenes/neutral.png"));
         	dialogoTomberi.setVisible(true);
-        	dialogoTomberi.setText("Tenias potencial, pero lo has echado todo a perder.");
+        	dialogoTomberi.setText("<html><center>Tenias potencial, pero lo has echado todo a perder.</center></html>");
         }
         if(barraCarga.getValue()==50) {
         	dialogoTomberi.setVisible(false);
+        	estadoMystra.setVisible(true);
+			estadoMystra.setIcon(new ImageIcon("./recursos/imagenes/mosqueo.png"));
         	dialogoMystra.setVisible(true);
-        	dialogoMystra.setText("Tienes el poder necesario para hacer lo que quieras, pero eliges la senda del bien. Decepcionante.");
+        	dialogoMystra.setText("<html><center>Tienes el poder necesario para hacer lo que quieras,<br> pero eliges la senda del bien. Decepcionante.</center></html>");
         }
         if(barraCarga.getValue()==70) {
         	dialogoMystra.setVisible(false);
         	dialogoNarcyl.setVisible(true);
-        	dialogoNarcyl.setText("No les hagas caso, toma te lo has ganado ^_^");
+        	dialogoNarcyl.setText("<html><center>No les hagas caso, toma te lo has ganado ^_^</center></html>");
         }
         if(barraCarga.getValue()==90) {
         	dialogoNarcyl.setVisible(false);

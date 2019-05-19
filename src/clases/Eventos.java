@@ -67,6 +67,7 @@ public final class Eventos {
                 break;
             case 2:
                 eventoTexto.setText("<html><center>Te acercas rápidamente y comienza tu batalla.</center></html>");
+                Ventana.pararFondo();
                 Ventana.origenADestino(ventana, "evento", "lucha", 1);
                 heroe.setSaludMaxima(heroe.getSaludMaxima()+20);
                 heroe.setSalud(heroe.getSalud()+20);
@@ -103,6 +104,7 @@ public final class Eventos {
                 break;
             case 2:
             	heroe.subirReputacion(25);
+                Ventana.pararFondo();
             	Ventana.origenADestino(ventana, "evento", "lucha", 2);
                 heroe.setDinero(heroe.getDinero()+1500);  
                 break;
@@ -141,6 +143,7 @@ public final class Eventos {
                 heroe.subirReputacion(25);
                 break;
             case 3:
+                Ventana.pararFondo();
                 Ventana.origenADestino(ventana, "evento", "lucha", 4);
                 heroe.setDinero(heroe.getDinero()+2500);  
                 heroe.subirReputacion(-25);
@@ -174,6 +177,7 @@ public final class Eventos {
                 heroe.subirReputacion(25);
                 break;
             case 3:
+            	Ventana.pararFondo();
                 Ventana.origenADestino(ventana, "evento", "lucha", 4);
                 heroe.setDinero(heroe.getDinero()+2500);  
                 heroe.subirReputacion(-25);

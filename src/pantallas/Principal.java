@@ -430,14 +430,14 @@ public class Principal extends Paneles {
         if(ventana.getHeroe().getExplorar()==0) {
             comenzar.setVisible(true);
             mensajeBienvenida.setText("<html><b><center>Una malvada criatura está robando toda la comida.<br><br> "
-                + "&nbsp;Un voraz pollo de granja se alza entre todos los habitantes del reino para hacer frente al vil enemigo que le priva de sus chuletitas.</center><br> "
+                + "&nbsp;Un voraz pollo de granja se alza entre todos los habitantes del reino <br>para hacer frente al vil enemigo que le priva de sus chuletitas.</center><br> "
                 + " &nbsp; - Recuerda que debes pulsar en la flecha para ir al siguiente destino.<br>"
                 + " &nbsp; - Te aconsejo que guardes la partida frecuentemente y uses la tienda sabiamente. </b></html>");
             mensajeBienvenida.setVisible(true);
         }
         if(ventana.getHeroe().getExplorar()==20) {
             finDelJuego.setVisible(true);
-            mensajeBienvenida.setText("<html><center><b>¡Popollo ha conseguido derrotar al infame Pulpoi!</center><br><br> Todos en el reino recordarán la hazaña y cantarán odas en tu honor, "
+            mensajeBienvenida.setText("<html><center><b>¡Popollo ha conseguido derrotar al infame Pulpoi!</center><br><br> Todos en el reino recordarán la hazaña y cantarán odas en tu honor, <br>"
                 + "pero ahora lo más importante es... Que a Popollo le ruge el estómago. </b></html>");
             mensajeBienvenida.setVisible(true);
             botonCombateAleatorio.setVisible(false);
