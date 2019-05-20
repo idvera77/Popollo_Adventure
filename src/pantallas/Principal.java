@@ -32,7 +32,7 @@ public class Principal extends Paneles {
             posicion11Mapa, posicion12Mapa, posicion13Mapa, posicion14Mapa,posicion15Mapa, posicion16Mapa, posicion17Mapa, posicion18Mapa, marcaMapa;
     private Botones comenzar, finDelJuego, botonCombateAleatorio, botonGuardarPartida, botonDescanso;
     private JProgressBar barraExperiencia;
-    private String sonidoGuardar, sonidoNoLevel, sonidoEnter;
+    private String sonidoGuardar, sonidoNoLevel, sonidoMover;
 
     public Principal(Ventana ventana) {
         super();
@@ -41,6 +41,7 @@ public class Principal extends Paneles {
         //Sonido
         sonidoGuardar = "./recursos/sonidos/Guardar.wav";
         sonidoNoLevel = "./recursos/sonidos/NoLevel.wav";
+        sonidoMover = "./recursos/sonidos/mover.wav";
 
         //CARGANDO DATOS DEL JUEGO
         //Si detecta una conexion entra en la base de datos y recupera los datos del heroe junto sus habilidades de lo contrario no hace nada (evitando un error).
@@ -263,18 +264,9 @@ public class Principal extends Paneles {
         //Llamando a la funcion, explicacion de esta abajo.
         movimientoMapa();
 
-        //Añadiendo botones
-        Botones pruebaAfinidad = new Botones("Afinidad");
-        pruebaAfinidad.setBounds(713, 402, 77, 23);
-        add(pruebaAfinidad);
-
         botonGuardarPartida = new Botones("Guardar Partida");
         botonGuardarPartida.setBounds(767, 436, 215, 23);
         add(botonGuardarPartida);
-
-        Botones botonTienda = new Botones("Tienda");
-        botonTienda.setBounds(795, 402, 60, 23);
-        add(botonTienda);
 
         botonDescanso = new Botones("Punto de descanso");
         botonDescanso.setBounds(522, 487, 215, 23);
@@ -292,15 +284,6 @@ public class Principal extends Paneles {
         Botones botonSalir = new Botones("Salir del Juego");
         botonSalir.setBounds(767, 487, 215, 23);
         add(botonSalir);
-
-        //Eventos de botones
-        pruebaAfinidad.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //Ventana.origenADestino(ventana, "principal", "evento", 2);
-            Ventana.origenADestino(ventana, "principal", "creditos", 0);
-            }
-        });	
         
         //Boton que nos permite usar la funcion de guardar partida pero antes se abrira un JOptionPane para confirmar la orden.
         botonGuardarPartida.addMouseListener(new MouseAdapter() {
@@ -314,14 +297,6 @@ public class Principal extends Paneles {
                 }	
             }
         });
-        
-        //Nos llevara a la tienda.
-        botonTienda.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Ventana.origenADestino(ventana,"principal", "afinidad", 0);
-            }
-        });	
         
         //Nos llevara a la sala de descanso.
         botonDescanso.addMouseListener(new MouseAdapter() {
@@ -370,6 +345,7 @@ public class Principal extends Paneles {
         marcaMapa.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+            	Ventana.comenzarSonido(sonidoMover);
                 avanzarCasilla();
                 movimientoMapa();
             }
@@ -385,11 +361,11 @@ public class Principal extends Paneles {
         });
         
         //Nos muestra la experiencia total de nuestro heroe.
-        barraExperiencia = new JProgressBar(0, 100);
+        barraExperiencia = new JProgressBar(0, (ventana.heroe.getNivel()*30));
         barraExperiencia.setFont(new Font("Bahnschrift", Font.BOLD, 15));
         barraExperiencia.setBorder(new LineBorder(new Color(0, 0, 0), 3));
         barraExperiencia.setStringPainted(true);
-        barraExperiencia.setString(ventana.heroe.getExperiencia()+"/"+100);
+        barraExperiencia.setString(ventana.heroe.getExperiencia()+"/"+(ventana.heroe.getNivel()*30));
         barraExperiencia.setValue(ventana.heroe.getExperiencia());
         barraExperiencia.setBounds(10, 344, 130, 31);
         add(barraExperiencia);
@@ -430,9 +406,10 @@ public class Principal extends Paneles {
         if(ventana.getHeroe().getExplorar()==0) {
             comenzar.setVisible(true);
             mensajeBienvenida.setText("<html><b><center>Una malvada criatura está robando toda la comida.<br><br> "
-                + "&nbsp;Un voraz pollo de granja se alza entre todos los habitantes del reino <br>para hacer frente al vil enemigo que le priva de sus chuletitas.</center><br> "
-                + " &nbsp; - Recuerda que debes pulsar en la flecha para ir al siguiente destino.<br>"
-                + " &nbsp; - Te aconsejo que guardes la partida frecuentemente y uses la tienda sabiamente. </b></html>");
+                + "&nbsp;Un voraz pollo de granja se alza entre todos los habitantes del reino <br>para hacer frente al vil enemigo que le priva de sus chuletitas.<br><br>"
+                + "&nbsp;Tres aliados le acompañarán por el camino, aunque cada uno tiene una<br> opinión distinta de lo que nuestro héroe debiera hacer. </center><br> "
+                + " &nbsp; - Para avanzar en el juego necesitas pulsar en la flecha de color azul.<br>"
+                + " &nbsp; - Guarda partida siempre que puedas y utiliza la tienda sabiamente. </b></html>");
             mensajeBienvenida.setVisible(true);
         }
         if(ventana.getHeroe().getExplorar()==20) {
@@ -515,7 +492,7 @@ public class Principal extends Paneles {
             }
         }
         if(ventana.heroe.getExplorar()==13) {
-            //ventana.origenADestino(ventana, "principal", "evento", 3);
+            Ventana.origenADestino(ventana, "principal", "evento", 3);
         }
         if(ventana.heroe.getExplorar()==14) {
             Ventana.origenADestino(ventana, "principal", "tienda", 0);
@@ -647,27 +624,22 @@ public class Principal extends Paneles {
             Ventana.origenADestino(ventana,"principal", "lucha", 0);
         }
         else if(ventana.heroe.getExplorar()>=5&&ventana.heroe.getExplorar()<9) {
-            aleatorio= numeroAleatorio(0,1);
+            aleatorio= clases.Personaje.numeroAleatorio(0,1);
             Ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
         }
         else if(ventana.heroe.getExplorar()>=9&&ventana.heroe.getExplorar()<12) {
-            aleatorio= numeroAleatorio(0,2);
+            aleatorio= clases.Personaje.numeroAleatorio(0,2);
             Ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
         }
         else if(ventana.heroe.getExplorar()>=12&&ventana.heroe.getExplorar()<16) {
-            aleatorio= numeroAleatorio(0,3);
+            aleatorio= clases.Personaje.numeroAleatorio(0,3);
             Ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
         }
         else if(ventana.heroe.getExplorar()>=16&&ventana.heroe.getExplorar()<19) {
-            aleatorio= numeroAleatorio(0,4);
+            aleatorio= clases.Personaje.numeroAleatorio(0,4);
             Ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
         }
-    }
-
-    public static int numeroAleatorio(int minimo,int maximo){
-        int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));
-        return num;
-    }
+    } 
 }
 	
 

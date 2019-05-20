@@ -590,11 +590,12 @@ public class Lucha extends Paneles{
             ocultarTodo();
             Ventana.pararFondo();
             Ventana.comenzarSonido(sonidoVictoria);
-            heroe.subirNivel(enemigoArray.get(adversario).getExperiencia());
             botonAtras.setVisible(true);
             vidaEnemigo.setVisible(false);
             manaEnemigo.setVisible(false);
+            heroe.subirNivel(enemigoArray.get(adversario).getExperiencia());
             enemigoArray.get(adversario).restablecerCompleto();
+            
         }
         //Al final de cada turno quitamos al heroe la defensa aumentada.
         vidaHeroe();

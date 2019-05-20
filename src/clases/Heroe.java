@@ -96,13 +96,13 @@ public final class Heroe extends Personaje{
     }  
 	
     /**
-     * Funcion que nos permite subir el nivel del heroe si llega a 100 puntos de experiencia y muestra todo el texto en un JOptionPane.
+     * Funcion que nos permite subir el nivel del heroe si llega a 30 puntos de experiencia * nivel y muestra todo el texto en un JOptionPane.
      * @param numero Variable de tipo entero que aumenta la experiencia del heroe
      */
     public void subirNivel(int numero){
         setExperiencia(getExperiencia()+numero);
-        if(getExperiencia()>=100){
-            setExperiencia(getExperiencia()-100);    
+        if(getExperiencia()>=getNivel()*30){
+            setExperiencia(getExperiencia()-getNivel()*30);    
             if(nivel % 2 == 0){
             	String subirNivel="<html><center><b>!!!Subes de nivel!!!<br>"
                     +getNivel()+" >>> "+(getNivel()+1)+"<br>"

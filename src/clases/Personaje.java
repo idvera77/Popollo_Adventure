@@ -143,12 +143,11 @@ public abstract class Personaje extends ElementoIdentificador{
     
     //FUNCIONES
     /**
-     * Funcion para determinar el daño causado al personajeX, su defensa - el daño enemigo
-     * @param personajeX Personaje que recibe daño en su salud
-     * @param daño Parametro externo que indica el daño que recibe el personajeX
+     * Funcion para determinar el daño causado, defensa - el daño
+     * @param dañoEntrante Parametro externo que indica el daño que recibe el personajeX
      */
-    public void daño(Personaje personajeX, int daño){ 
-        int inflige = defensa-daño;
+    public void daño(int dañoEntrante){ 
+        int inflige = defensa-dañoEntrante;
             if(inflige<=0){
                 this.salud -= -inflige;
             }else{
@@ -158,7 +157,6 @@ public abstract class Personaje extends ElementoIdentificador{
    
     /**
      * Funcion que multiplica en 2 su atributo defensivo.
-     * @param personajeX Personaje que utilizada la funcion de bloqueo
      */
     public void Bloqueo (){
         this.defensa= defensa*2;
@@ -166,7 +164,6 @@ public abstract class Personaje extends ElementoIdentificador{
     
     /**
      * Funcion que divide en 2 su atributo defensivo.
-     * @param personajeX Personaje que utilizada la funcion de bloqueoOff
      */
     public void BloqueoOff (){
         this.defensa = defensa/2;
@@ -174,7 +171,6 @@ public abstract class Personaje extends ElementoIdentificador{
     
     /**
      * Muestra las estadisticas principales en combate
-     * @param personajeX Personaje que muestra sus estadisticas
      * @param registro JLabel que guarda y muestra la informacion.
      */
     public void mostrarAtributosCombate(LabelCombateEvento registro) {
@@ -203,7 +199,7 @@ public abstract class Personaje extends ElementoIdentificador{
 
     /**
      * Funcion para calcular el daño realizado por una habilidad, se multiplica el valor de magia por el valor Especial de una habilidad.
-     * @param enemigo Indica el enemigo que recibe el daño.
+     * @param objetivo Indica el enemigo que recibe el daño.
      * @param numero Indica la habilidad seleccionada.
      */
     public void dañoHabilidades (Personaje objetivo, int numero){
@@ -213,8 +209,7 @@ public abstract class Personaje extends ElementoIdentificador{
     
     /**
      * Funcion para golpear con ataques fisicos. Dependiendo de la agilidad de ambos cambian los resultados.
-     * @param personajeX Es el personaje que ataca y hace daño.
-     * @param personajeY Es el personaje que recibe el daño.
+     * @param objetivo Es el personaje que recibe el daño.
      * @param registro Guarda la informacion para mostrarla en un JLabelText
      */
     public void atacar(Personaje objetivo, LabelCombateEvento registro){
@@ -224,14 +219,14 @@ public abstract class Personaje extends ElementoIdentificador{
             aleatorio = numeroAleatorio(0, 3);
             if(aleatorio==0){
                 dañar = getFuerza()*2;
-                objetivo.daño(objetivo,dañar);
+                objetivo.daño(dañar);
                 registro.setText("<html><center><b>!!GOLPE CRITICO!!<br>"+getNombre()
                     +" inflige "+getFuerza()*2+" puntos de daño.<br>"
                     +objetivo.getNombre()+" bloquea "+objetivo.getDefensa()+" puntos de daño."
                     +"</center></b></html>");
             }else{
                 dañar = getFuerza();
-                objetivo.daño(objetivo,dañar);
+                objetivo.daño(dañar);
                 registro.setText("<html><center><b>"+getNombre()
                     +" inflige "+getFuerza()+" puntos de daño.<br>"
                     +objetivo.getNombre()+" bloquea "+objetivo.getDefensa()+" puntos de daño."
@@ -239,7 +234,7 @@ public abstract class Personaje extends ElementoIdentificador{
             }
         }else if(getAgilidad()==objetivo.getAgilidad()){
             dañar = getFuerza();
-            objetivo.daño(objetivo,dañar);
+            objetivo.daño(dañar);
             registro.setText("<html><center><b>"+getNombre()
                 +" inflige "+getFuerza()+" puntos de daño.<br>"
                 +objetivo.getNombre()+" bloquea "+objetivo.getDefensa()+" puntos de daño."
@@ -250,7 +245,7 @@ public abstract class Personaje extends ElementoIdentificador{
             	registro.setText("<html><center><b>Ataque Fallado!!!</center></b></html>");
             }else{
                 dañar = getFuerza();
-                objetivo.daño(objetivo,dañar);
+                objetivo.daño(dañar);
                 registro.setText("<html><center><b>"+getNombre()
                     +" inflige "+getFuerza()+" puntos de daño.<br>"
                     +objetivo.getNombre()+" bloquea "+objetivo.getDefensa()+" puntos de daño."
@@ -260,7 +255,7 @@ public abstract class Personaje extends ElementoIdentificador{
     }
     
     /*
-     * Funcion que nos ayuda a generar numeros aleatorios necesarios para calculos de daño. La incluyo aqui ya que la usan ambos personajes
+     * Funcion que nos ayuda a generar numeros aleatorios necesarios para calculos de daño. La incluyo aqui ya que la usan ambos personajes aunque tambien la uso en mas ocasiones.
      */
     public static int numeroAleatorio(int minimo,int maximo){
         int num=(int)Math.floor(Math.random()*(maximo-minimo+1)+(minimo));

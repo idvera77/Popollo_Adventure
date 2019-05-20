@@ -116,40 +116,6 @@ public final class Eventos {
                 break;
          }  
     }
-      
-    /**
-	 * Funcion que simula un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
-     * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
-	 * @param eventoTexto JLabel que guarda y muestra los dialogos del evento.
-	 * @param opcion1 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
-	 * @param opcion2 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
-	 * @param opcion3 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
-	 * @param opcion Variable de tipo entero que nos permite indicar la opcion a realizar.
-	 */      
-    public static void chuletitas(Ventana ventana, Heroe heroe, LabelCombateEvento eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion) {
-        eventoTexto.setText("<html><center><br></center></html>");
-      	opcion1.setText("Pasar de largo.");
-      	opcion2.setText("Te paras y lo acaricias.");
-      	opcion3.setText("Saquear el nido.");
-    
-        switch(opcion) {
-            case 1:
-                eventoTexto.setText("<html><center>Sigues tu camino dejando atras la madriguera.</center></html>");
-                break;
-            case 2:
-                eventoTexto.setText("<html><center>El pequeño poring empieza a darte mimitos y notas una gran calidez en tu corazón.<br><br>"
-                    + "* El atributo magia aumenta en 2 puntos *</center></html>");
-                heroe.setMagia(heroe.getMagia()+2);
-                heroe.subirReputacion(25);
-                break;
-            case 3:
-                Ventana.pararFondo();
-                Ventana.origenADestino(ventana, "evento", "lucha", 4);
-                heroe.setDinero(heroe.getDinero()+2500);  
-                heroe.subirReputacion(-25);
-                break;  	
-          }  
-    }
  
     /**
 	 * Funcion que simula un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
@@ -184,4 +150,42 @@ public final class Eventos {
                 break;  	
         }  
     }
+    
+    /**
+   	 * Funcion que simula un evento en el cual mediante opciones de dialogo podemos aumentar o disminuir reputacion, conseguir objetos o dinero, etc.
+     * @param heroe Indica el personaje que modifica sus parametros generales dependiendo de como se resuelva la situacion.
+   	 * @param eventoTexto JLabel que guarda y muestra los dialogos del evento.
+   	 * @param opcion1 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+   	 * @param opcion2 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+   	 * @param opcion3 Botones que nos ayudan a elegir las opciones, se muestra un mensaje en ellos.
+   	 * @param opcion Variable de tipo entero que nos permite indicar la opcion a realizar.
+   	 */      
+       public static void recompensaFinal(Ventana ventana, Heroe heroe, LabelCombateEvento eventoTexto, BotonesDialogo opcion1, BotonesDialogo opcion2, BotonesDialogo opcion3, int opcion) {
+           eventoTexto.setText("<html><center>Decides descansar cerca de un lago antes de adentrarte en los dominios del malvado Pulpoi."
+           		+ "<br><br>Escuchas una voz que proviene del fondo del lago, esta te avisa del reto que te espera<br>"
+           		+ " mas adelante y te ofrece un deseo por el esfuerzo realizado hasta ahora. </center></html>");
+         	opcion1.setText("Aumentar Salud");
+         	opcion2.setText("Aumentar Mana");
+         	opcion3.setText("Aumentar Fuerza");
+       
+           switch(opcion) {
+               case 1:
+        	   eventoTexto.setText("<html><center>Una luz aparece del centro del lago y te impacta directamente en el corazón.<br><br>"
+                       + "* La salud máxima aumenta en 40 puntos *</center></html>");
+               	heroe.setSaludMaxima(heroe.getSaludMaxima()+40);
+                   heroe.setSalud(heroe.getSalud()+40);
+                   break;
+               case 2:
+               	eventoTexto.setText("<html><center>Una luz aparece del centro del lago y te impacta directamente en el corazón.<br><br>"
+                           + "* El mana máximo aumenta en 10 puntos *</center></html>");
+                   heroe.setManaMaximo(heroe.getManaMaximo()+10);
+                   heroe.setMana(heroe.getMana()+10);
+                   break;
+               case 3:
+               	eventoTexto.setText("<html><center>Una luz aparece del centro del lago y te impacta directamente en el corazón.<br><br>"
+                           + "* El atributo Fuerza aumenta en 10 puntos *</center></html>");
+                   heroe.setFuerza(heroe.getFuerza()+10);
+                   break;  	
+             }  
+       }
 }

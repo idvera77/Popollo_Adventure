@@ -126,7 +126,7 @@ public class Afinidad extends Paneles {
         }  
     };
     
-    timer = new Timer(200, updateBarraCargar);
+    timer = new Timer(300, updateBarraCargar);
     timer.start();  
     
     //Evento Boton
@@ -137,7 +137,6 @@ public class Afinidad extends Paneles {
 			Ventana.origenADestino(ventana, "afinidad", "principal", 0);
 		}
 	});
-    
 	}
 	
 	public void eventoCaotico() {

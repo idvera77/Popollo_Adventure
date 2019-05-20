@@ -114,9 +114,10 @@ public class Evento extends Paneles{
                 clases.Eventos.golemCofre(ventana, heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
                 break;
             case 3:
+            	clases.Eventos.criasPoring(ventana, heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
                 break;
             case 4:
-            	clases.Eventos.criasPoring(ventana, heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
+            	clases.Eventos.recompensaFinal(ventana, heroe, eventoTexto, opcion1, opcion2, opcion3, opcion);
                 break;
         }
     }

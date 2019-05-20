@@ -28,6 +28,7 @@ public class Creditos extends Paneles{
 
         //Archivo de sonido.
         String sonidoCreditos = "./recursos/sonidos/Katz.wav";
+        String sonidoPopollo = "./recursos/sonidos/Premio.wav";
         Ventana.comenzarSonido(sonidoCreditos);
 		
         mensajeStaff = new JLabel();
@@ -60,6 +61,7 @@ public class Creditos extends Paneles{
                     mensajeStaff.setText("Director");
                 }
                 if(barraCarga.getValue()==7) {
+                	Ventana.comenzarSonido(sonidoPopollo);
                     mensajeNombre.setText("Iván Díaz Vera");
                 }
                 if(barraCarga.getValue()==12) {
@@ -72,6 +74,7 @@ public class Creditos extends Paneles{
                 }
                 if(barraCarga.getValue()==18) {
                     mensajeNombre.setVisible(true);
+                    Ventana.comenzarSonido(sonidoPopollo);
                     mensajeNombre.setText("Iván Díaz Vera");
                 }
                 if(barraCarga.getValue()==23) {
@@ -84,6 +87,7 @@ public class Creditos extends Paneles{
                 }
                 if(barraCarga.getValue()==29) {
                     mensajeNombre.setVisible(true);
+                    Ventana.comenzarSonido(sonidoPopollo);
                     mensajeNombre.setText("Ana Belén Molina González");
                 }
                 if(barraCarga.getValue()==34) {
@@ -113,6 +117,7 @@ public class Creditos extends Paneles{
                 }
                 if(barraCarga.getValue()==65) {
                     mensajeNombre.setVisible(true);
+                    Ventana.comenzarSonido(sonidoPopollo);
                     mensajeNombre.setText("<html><center>Muchas gracias por jugar.</center><br>Nos vemos en el siguiente juego ^_^</html>");
                 }
                 if(barraCarga.getValue()==100) {
