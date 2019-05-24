@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -48,6 +49,8 @@ public class Ventana extends JFrame{
         //Configuracion de la pantalla inicial.
         setTitle("Popollo Adventure");
         pantallaInicio=new Inicio(this);
+        setIconImage(Toolkit.getDefaultToolkit().
+        	    getImage("./recursos/normal.png"));
         setSize(1014,566);
         setResizable(false);
         setVisible(true);
@@ -56,6 +59,8 @@ public class Ventana extends JFrame{
         
         //Esto nos permite modificar los JOptionPane para cambiar de fuente, tamaño, etc
         UIManager.put("OptionPane.messageFont", new Font("Bahnschrift", Font.BOLD, 14));
+        
+        
 
         //Usando Toolkit cambiamos el cursor por defecto cuando pulsamos dentro de estos Botones.
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -110,9 +115,11 @@ public class Ventana extends JFrame{
             connect = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/popollo_adventure"
                 + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","root","");
+            Ventana.comenzarSonido("./recursos/sonidos/Login.wav");
             return connect;	 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Ventana.comenzarSonido("./recursos/sonidos/NoLevel.wav");
+        	JOptionPane.showMessageDialog(null, "Servidor en mantenimiento.", "Lo sentimos", 1);
             return null;
         }
     }
@@ -158,8 +165,10 @@ public class Ventana extends JFrame{
                 smt.close();
             }
             smt.close();
+            Ventana.comenzarSonido("./recursos/sonidos/Guardar.wav");
         } catch (SQLException ex) {
-                ex.getStackTrace();
+        	Ventana.comenzarSonido("./recursos/sonidos/NoLevel.wav");
+        	JOptionPane.showMessageDialog(null, "Servidor en mantenimiento.", "Lo sentimos", 1);
         }      
     } 
 	

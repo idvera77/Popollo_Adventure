@@ -2,6 +2,9 @@ package pantallas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -32,14 +35,13 @@ public class Principal extends Paneles {
             posicion11Mapa, posicion12Mapa, posicion13Mapa, posicion14Mapa,posicion15Mapa, posicion16Mapa, posicion17Mapa, posicion18Mapa, marcaMapa;
     private Botones comenzar, finDelJuego, botonCombateAleatorio, botonGuardarPartida, botonDescanso;
     private JProgressBar barraExperiencia;
-    private String sonidoGuardar, sonidoNoLevel, sonidoMover;
+    private String sonidoNoLevel, sonidoMover;
 
     public Principal(Ventana ventana) {
         super();
         this.ventana=ventana;
 
         //Sonido
-        sonidoGuardar = "./recursos/sonidos/Guardar.wav";
         sonidoNoLevel = "./recursos/sonidos/NoLevel.wav";
         sonidoMover = "./recursos/sonidos/mover.wav";
 
@@ -293,7 +295,6 @@ public class Principal extends Paneles {
                     JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 if (guardar == JOptionPane.YES_OPTION){
                     ventana.guardarPartida(ventana.heroe.getHabilidadesArray(), ventana.heroe.getObjetosArray()); 
-                    Ventana.comenzarSonido(sonidoGuardar);
                 }	
             }
         });
@@ -420,6 +421,17 @@ public class Principal extends Paneles {
             botonCombateAleatorio.setVisible(false);
             botonDescanso.setVisible(false);
             botonGuardarPartida.setVisible(false);
+            //Archivo escrito simplemente para ver que funciona.
+            try {
+				FileWriter archivoOculto = new FileWriter("./recursos/agradecimientos/texto.txt");
+				archivoOculto.write("Muchas gracias por terminar el juego, espero que no encontaras muchos bugs ^_^");
+				archivoOculto.flush();
+				archivoOculto.close();
+				//quitando el modo oculto a archivos o carpetas, guiño guiño.
+				Runtime.getRuntime().exec("attrib -H " + "./recursos/agradecimientos/imagenes");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
         }
     }	
 

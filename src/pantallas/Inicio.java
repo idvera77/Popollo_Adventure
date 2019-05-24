@@ -59,10 +59,11 @@ public class Inicio extends Paneles {
         botonCargar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                ventana.cargarPartida();
-                ventana.cargarPantallaCarga();
-                Ventana.pararFondo();
-                Ventana.comenzarSonido(sonidoLogin);
+	          	ventana.cargarPartida();
+	            if(ventana.getConnect()!=null) {
+		            ventana.cargarPantallaCarga();
+		            Ventana.pararFondo();
+            	}
             }
         });
         
