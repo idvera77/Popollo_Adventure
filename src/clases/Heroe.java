@@ -107,12 +107,12 @@ public final class Heroe extends Personaje{
             	String subirNivel="<html><center><b>!!!Subes de nivel!!!<br>"
                     +getNivel()+" >>> "+(getNivel()+1)+"<br>"
                     +"Tus atributos aumentan ^_^<br>"
-                    +"Mana + 5 puntos<br>"
-                    +"Magia + 1 punto<br>"
-                    +"Agilidad + 1 puntos</b></center></html>";
+                    +"Mana + 2<br>"
+                    +"Magia + 1<br>"
+                    +"Agilidad + 1</b></center></html>";
             	JOptionPane.showMessageDialog(null, subirNivel); 
-            	setManaMaximo(getManaMaximo()+5);
-            	setMana(getMana()+5);
+            	setManaMaximo(getManaMaximo()+2);
+            	setMana(getMana()+2);
                 setMagia(getMagia()+1);
                 setAgilidad(getAgilidad()+1);
                 setNivel(getNivel()+1);
@@ -120,14 +120,14 @@ public final class Heroe extends Personaje{
             	String subirNivel="<html><center><b>!!!Subes de nivel!!!<br>"
                     +getNivel()+" >>> "+(getNivel()+1)+"<br>"
                     + "Tus atributos aumentan ^_^<br>"
-                    +"Salud + 20 puntos<br>"
-                    +"Agilidad + 1 punto<br>"
-                    +"Defensa + 2 puntos</b></center></html>";
+                    +"Salud + 10<br>"
+                    +"Fuerza + 2<br>"
+                    +"Defensa + 1</b></center></html>";
             	JOptionPane.showMessageDialog(null, subirNivel);  
                 setSaludMaxima(getSaludMaxima()+20);
-                setSalud(getSalud()+20);
+                setSalud(getSalud()+10);
                 setFuerza(getFuerza()+2);
-                setDefensa(getDefensa()+2);
+                setDefensa(getDefensa()+1);
                 setNivel(getNivel()+1);
             }
         }
@@ -319,8 +319,8 @@ public final class Heroe extends Personaje{
     public void puntoDescanso(int numero, String rutaSonido, String rutaSonido2){
         switch(numero){ 
             case 0:
-                if (getDinero()>=300) {
-                    setDinero(getDinero()-300); 
+                if (getDinero()>=250) {
+                    setDinero(getDinero()-250); 
                     restablecerSalud();
                     Ventana.comenzarSonido(rutaSonido);
                     break;
@@ -329,8 +329,8 @@ public final class Heroe extends Personaje{
                 }
                 break;
             case 1:
-                if (getDinero()>=750) {
-                    setDinero(getDinero()-750);
+                if (getDinero()>=500) {
+                    setDinero(getDinero()-500);
                     restablecerCompleto();
                     Ventana.comenzarSonido(rutaSonido);
                 }else {
@@ -366,43 +366,33 @@ public final class Heroe extends Personaje{
             case 0:
             	if(getDinero()>=750){
                     setDinero(getDinero()-750);
-                    setSaludMaxima(getSaludMaxima()+20);
-                    setSalud(getSalud()+20);
-                    Ventana.comenzarSonido(rutaSonido);
-            	}else {
-                    Ventana.comenzarSonido(rutaSonido2);
-                }
-                break;
-            case 1:
-            	if(getDinero()>=1000){
-                    setDinero(getDinero()-1000);
                     setFuerza(getFuerza()+5);
                     Ventana.comenzarSonido(rutaSonido);
                 }else {
                     Ventana.comenzarSonido(rutaSonido2);
                 }
                 break;
-            case 2:
-            	if(getDinero()>=1500){
-                    setDinero(getDinero()-1500);
+            case 1:
+            	if(getDinero()>=1000){
+                    setDinero(getDinero()-1000);
                     setMagia(getMagia()+1); 
                     Ventana.comenzarSonido(rutaSonido);
                 }else {
                     Ventana.comenzarSonido(rutaSonido2);
                 }
                 break;
-            case 3:
-            	if(getDinero()>=1000){
-                    setDinero(getDinero()-1000);
+            case 2:
+            	if(getDinero()>=750){
+                    setDinero(getDinero()-750);
                     setDefensa(getDefensa()+2); 
                     Ventana.comenzarSonido(rutaSonido);
             	}else {
                     Ventana.comenzarSonido(rutaSonido2);
                 }
                 break;
-            case 4:
-            	if(getDinero()>=1000){
-                    setDinero(getDinero()-1000);
+            case 3:
+            	if(getDinero()>=750){
+                    setDinero(getDinero()-750);
                     setAgilidad(getAgilidad()+2);  
                     Ventana.comenzarSonido(rutaSonido);
                 }else {

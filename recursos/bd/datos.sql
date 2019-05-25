@@ -95,15 +95,15 @@ insert into heroe values(
 	1,
 	'Popollo',
     'Un adorable popollito comilon.',
-    80,
-    50,
-    40,
-    40,
+    30,
+    30,
     20,
+    20,
+    10,
     5,
-    10,
-    10,
-    50000,
+    5,
+    5,
+    500,
     0,
     0,
     1,
@@ -115,7 +115,7 @@ insert into habilidad values(
 	1,
 	'Proyectil Magico',
 	'Disparas chispas magicas de tus manos.',
-	7,
+	2,
     4,
     'ofensivo',
     1
@@ -125,8 +125,8 @@ insert into habilidad values(
 	2,
 	'Flecha Helada',
 	'Lanzas una flecha que congela todo a su paso.',
-	12,
-    10,
+	3,
+    6,
     'ofensivo',
     1
 );
@@ -135,8 +135,8 @@ insert into habilidad values(
 	3,
 	'Curar Heridas',
 	'Sana las heridas superficiales.',
-	8,
-    8,
+	5,
+    6,
     'curativo',
     1
 );
@@ -144,22 +144,22 @@ insert into habilidad values(
 insert into objeto values(
 	1,
 	'Bomba Pequeña',
-    'Inflige 30 puntos de daño.',
-	30,
-	3,
+    'Inflige 25 puntos de daño.',
+	25,
+	2,
 	'ofensivo',
-    100,
+    150,
     1
 );
 
 insert into objeto values(
 	2,
 	'Bomba Grande',
-	'Inflige 100 puntos de daño.',
-	100,
+	'Inflige 60 puntos de daño.',
+	60,
 	1,
 	'ofensivo',
-    500,
+    400,
     1
 );
 
@@ -167,8 +167,8 @@ insert into objeto values(
 	3,
 	'Pocion de Mana',
 	'Restablece 50 puntos de mana.',
-	50,
-	5,
+	30,
+	2,
 	'curativo',
 	250,
     1

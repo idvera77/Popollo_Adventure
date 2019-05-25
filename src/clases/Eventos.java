@@ -39,7 +39,6 @@ public final class Eventos {
             case 3:
                 eventoTexto.setText("<html><center>Buscas en sus bolsillos mientras intenta defenderse aunque no tiene fuerzas para ello.<br><br>"
                     + "* Obtienes 500 monedas de oro y el atributo agilidad mejora un punto *</center></html>");
-                heroe.setAgilidad(heroe.getAgilidad()+1);
                 heroe.setDinero(heroe.getDinero()+500);  
                 heroe.subirReputacion(-25);
                 break;  	
@@ -69,15 +68,13 @@ public final class Eventos {
                 eventoTexto.setText("<html><center>Te acercas rápidamente y comienza tu batalla.</center></html>");
                 Ventana.pararFondo();
                 Ventana.origenADestino(ventana, "evento", "lucha", 1);
-                heroe.setSaludMaxima(heroe.getSaludMaxima()+20);
-                heroe.setSalud(heroe.getSalud()+20);
                 heroe.subirReputacion(25);
                 break;
             case 3:
                 eventoTexto.setText("<html><center>Aprovechas el alboroto causado por el ataque del monstruo y saqueas todo lo que puedes.<br><br>"
-                    + "* Obtienes 1000 monedas de oro y el atributo agilidad mejora en 2 puntos *</center></html>");
+                    + "* Obtienes 1000 monedas de oro y el atributo agilidad mejora en 1 punto *</center></html>");
                 heroe.setDinero(heroe.getDinero()+1000);  
-                heroe.setAgilidad(heroe.getAgilidad()+2);
+                heroe.setAgilidad(heroe.getAgilidad()+1);
                 heroe.subirReputacion(-25);
                 break;  	
         }  
@@ -106,12 +103,11 @@ public final class Eventos {
             	heroe.subirReputacion(25);
                 Ventana.pararFondo();
             	Ventana.origenADestino(ventana, "evento", "lucha", 2);
-                heroe.setDinero(heroe.getDinero()+1500);  
                 break;
             case 3:
             	eventoTexto.setText("<html><center>Abres el cofre y encuentras una gran cantidad de monedas de oro.<br><br>"
-                    + "* Obtienes 3000 monedas de oro*</center></html>");
-            	heroe.setDinero(heroe.getDinero()+3000); 
+                    + "* Obtienes 1500 monedas de oro*</center></html>");
+            	heroe.setDinero(heroe.getDinero()+1500); 
                 heroe.subirReputacion(-25);
                 break;
          }  
@@ -138,14 +134,13 @@ public final class Eventos {
                 break;
             case 2:
                 eventoTexto.setText("<html><center>El pequeño poring empieza a darte mimitos y notas una gran calidez en tu corazón.<br><br>"
-                    + "* El atributo magia aumenta en 2 puntos *</center></html>");
+                    + "* El atributo magia aumenta en 1 punto *</center></html>");
                 heroe.setMagia(heroe.getMagia()+2);
                 heroe.subirReputacion(25);
                 break;
             case 3:
             	Ventana.pararFondo();
                 Ventana.origenADestino(ventana, "evento", "lucha", 4);
-                heroe.setDinero(heroe.getDinero()+2500);  
                 heroe.subirReputacion(-25);
                 break;  	
         }  
@@ -171,9 +166,9 @@ public final class Eventos {
            switch(opcion) {
                case 1:
         	   eventoTexto.setText("<html><center>Una luz aparece del centro del lago y te impacta directamente en el corazón.<br><br>"
-                       + "* La salud máxima aumenta en 40 puntos *</center></html>");
-               	heroe.setSaludMaxima(heroe.getSaludMaxima()+40);
-                   heroe.setSalud(heroe.getSalud()+40);
+                       + "* La salud máxima aumenta en 20 puntos *</center></html>");
+               	heroe.setSaludMaxima(heroe.getSaludMaxima()+20);
+                   heroe.setSalud(heroe.getSalud()+20);
                    break;
                case 2:
                	eventoTexto.setText("<html><center>Una luz aparece del centro del lago y te impacta directamente en el corazón.<br><br>"

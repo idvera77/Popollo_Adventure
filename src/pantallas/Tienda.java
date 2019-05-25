@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import clases.Heroe;
 import java.awt.Font;
+import java.awt.Component;
 
 public class Tienda extends Paneles{
     private Ventana ventana;
@@ -76,12 +77,12 @@ public class Tienda extends Paneles{
 
         TextoTienda panelAtributosActual = new TextoTienda();
         panelAtributosActual.setText("Actual");
-        panelAtributosActual.setBounds(65, 255, 59, 23);
+        panelAtributosActual.setBounds(63, 255, 59, 23);
         add(panelAtributosActual);
 
         TextoTienda panelMejorar = new TextoTienda();
         panelMejorar.setText("Mejorar");
-        panelMejorar.setBounds(176, 255, 109, 23);
+        panelMejorar.setBounds(180, 255, 65, 23);
         add(panelMejorar);
 
         TextoTienda panelPrecioAtributo = new TextoTienda();
@@ -89,61 +90,50 @@ public class Tienda extends Paneles{
         panelPrecioAtributo.setBounds(300, 255, 54, 23);
         add(panelPrecioAtributo);
 
-        TextoTienda precioSalud = new TextoTienda();
-        precioSalud.setText("750");
-        precioSalud.setBounds(312, 290, 33, 23);
-        add(precioSalud);
-
         TextoTienda precioFuerza = new TextoTienda();
-        precioFuerza.setText("1000");
-        precioFuerza.setBounds(309, 322, 41, 23);
+        precioFuerza.setText("750");
+        precioFuerza.setBounds(313, 289, 41, 23);
         add(precioFuerza);
 
         TextoTienda precioMagia = new TextoTienda();
-        precioMagia.setText("1500");
-        precioMagia.setBounds(309, 354, 41, 23);
+        precioMagia.setText("1000");
+        precioMagia.setBounds(310, 323, 41, 23);
         add(precioMagia);
 
         TextoTienda precioDefensa = new TextoTienda();
-        precioDefensa.setText("1000");
-        precioDefensa.setBounds(309, 386, 41, 23);
+        precioDefensa.setText("750");
+        precioDefensa.setBounds(313, 357, 41, 23);
         add(precioDefensa);
 
         TextoTienda precioAgilidad = new TextoTienda();
-        precioAgilidad.setText("1000");
-        precioAgilidad.setBounds(309, 417, 41, 23);
+        precioAgilidad.setText("750");
+        precioAgilidad.setBounds(313, 391, 41, 23);
         add(precioAgilidad);
-
-        TextoTienda saludActual = new TextoTienda();
-        saludActual.setText(Integer.toString(heroe.getSaludMaxima()));
-        saludActual.setBounds(81, 290, 41, 23);
-        add(saludActual);
 
         TextoTienda fuerzaActual = new TextoTienda();
         fuerzaActual.setText(Integer.toString(heroe.getFuerza()));
-        fuerzaActual.setBounds(81, 322, 41, 23);
+        fuerzaActual.setBounds(81, 289, 41, 23);
         add(fuerzaActual);
 
         TextoTienda magiaActual = new TextoTienda();
         magiaActual.setText(Integer.toString(heroe.getMagia()));
-        magiaActual.setBounds(81, 354, 41, 23);
+        magiaActual.setBounds(81, 323, 41, 23);
         add(magiaActual);
 
         TextoTienda defensaActual = new TextoTienda();
         defensaActual.setText(Integer.toString(heroe.getDefensa()));
-        defensaActual.setBounds(81, 386, 41, 23);
+        defensaActual.setBounds(81, 357, 41, 23);
         add(defensaActual);
 
         TextoTienda agilidadActual = new TextoTienda();
         agilidadActual.setText(Integer.toString(heroe.getAgilidad()));
-        agilidadActual.setBounds(81, 417, 41, 23);
+        agilidadActual.setBounds(81, 391, 41, 23);
         add(agilidadActual);
 
         LabelPrincipal mostrarDinero = new LabelPrincipal();
         mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
         mostrarDinero.setBackground(new Color(204, 204, 204));
-        mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(heroe.getDinero())
-        	+"</b></center></html>");
+        mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
         mostrarDinero.setBounds(10, 29, 109, 40);
         add(mostrarDinero);
 
@@ -160,24 +150,20 @@ public class Tienda extends Paneles{
         comprarPocion.setBounds(131, 190, 159, 25);
         add(comprarPocion);
 
-        BotonesTienda mejorarSalud = new BotonesTienda("Salud máxima +20");
-        mejorarSalud.setBounds(131, 290, 159, 25);
-        add(mejorarSalud);
-
         BotonesTienda mejorarFuerza = new BotonesTienda("Fuerza +5");
-        mejorarFuerza.setBounds(131, 322, 159, 25);
+        mejorarFuerza.setBounds(132, 289, 159, 25);
         add(mejorarFuerza);
 
         BotonesTienda mejorarMagia = new BotonesTienda("Magia +1");
-        mejorarMagia.setBounds(131, 354, 159, 25);
+        mejorarMagia.setBounds(132, 323, 159, 25);
         add(mejorarMagia);
 
         BotonesTienda mejorarAgilidad = new BotonesTienda("Agilidad +2");
-        mejorarAgilidad.setBounds(131, 417, 159, 25);
+        mejorarAgilidad.setBounds(131, 391, 159, 25);
         add(mejorarAgilidad);
 
         BotonesTienda mejorarDefensa = new BotonesTienda("Defensa +2");
-        mejorarDefensa.setBounds(131, 386, 159, 25);
+        mejorarDefensa.setBounds(132, 357, 159, 25);
         add(mejorarDefensa);
 
         Botones botonAtras = new Botones("Volver al mapa");
@@ -190,7 +176,7 @@ public class Tienda extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {
                 v.heroe.comprarObjetos(0, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
                 cantidadBombaP.setText(Integer.toString(heroe.getObjetosArray().get(0).getCantidad()));	
             }
         });
@@ -199,7 +185,7 @@ public class Tienda extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {	
                 heroe.comprarObjetos(1, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
                 cantidadBombaG.setText(Integer.toString(heroe.getObjetosArray().get(1).getCantidad()));					
             }
         });
@@ -208,25 +194,16 @@ public class Tienda extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {
                 heroe.comprarObjetos(2, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
                 cantidadPocion.setText(Integer.toString(heroe.getObjetosArray().get(2).getCantidad()));	
-            }
-        });
-
-        mejorarSalud.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                heroe.mejorarEstadisticas(0, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
-                saludActual.setText(Integer.toString(heroe.getSaludMaxima()));
             }
         });
 
         mejorarFuerza.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                heroe.mejorarEstadisticas(1, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+                heroe.mejorarEstadisticas(0, sonidoComprar, sonidoNoMoney);
+                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
                 fuerzaActual.setText(Integer.toString(heroe.getFuerza()));
             }
         });
@@ -234,8 +211,8 @@ public class Tienda extends Paneles{
         mejorarMagia.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                heroe.mejorarEstadisticas(2, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+                heroe.mejorarEstadisticas(1, sonidoComprar, sonidoNoMoney);
+                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
                 magiaActual.setText(Integer.toString(heroe.getMagia()));
             }
         });
@@ -243,8 +220,8 @@ public class Tienda extends Paneles{
         mejorarDefensa.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                heroe.mejorarEstadisticas(3, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+                heroe.mejorarEstadisticas(2, sonidoComprar, sonidoNoMoney);
+                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
                 defensaActual.setText(Integer.toString(heroe.getDefensa()));
             }
         });
@@ -252,8 +229,8 @@ public class Tienda extends Paneles{
         mejorarAgilidad.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                heroe.mejorarEstadisticas(4, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+                heroe.mejorarEstadisticas(3, sonidoComprar, sonidoNoMoney);
+                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
                 agilidadActual.setText(Integer.toString(heroe.getAgilidad()));
                 defensaActual.setText(Integer.toString(heroe.getDefensa()));
             }
@@ -270,14 +247,14 @@ public class Tienda extends Paneles{
         cuadro1.setBackground(new Color(204, 204, 204));
         cuadro1.setOpaque(true);
         cuadro1.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-        cuadro1.setBounds(51, 86, 327, 145);
+        cuadro1.setBounds(39, 86, 339, 145);
         add(cuadro1);
 
         JLabel cuadro2 = new JLabel("");
         cuadro2.setBackground(new Color(204, 204, 204));
         cuadro2.setOpaque(true);
         cuadro2.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-        cuadro2.setBounds(51, 242, 327, 221);
+        cuadro2.setBounds(39, 242, 339, 191);
         add(cuadro2);		
 
         //Imagen de fondo

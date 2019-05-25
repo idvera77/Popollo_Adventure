@@ -47,17 +47,16 @@ public class Descanso extends Paneles{
 
         mostrarDinero = new LabelPrincipal();
         mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
-        mostrarDinero.setText("<html><center><b>Oro:&ensp;"+Integer.toString(heroe.getDinero())
-            +"</b></center></html>");
+        mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
         mostrarDinero.setBounds(10, 29, 109, 40);
         add(mostrarDinero);
 
         //Añadiendo botones
-        Botones botonCuracion = new Botones("Curar heridas - 350");
+        Botones botonCuracion = new Botones("Curar heridas - 250");
         botonCuracion.setBounds(374, 377, 262, 23);
         add(botonCuracion);
 
-        Botones botonRecuperacionCompleta = new Botones("Recuperación completa - 750");
+        Botones botonRecuperacionCompleta = new Botones("Recuperación completa - 500");
         botonRecuperacionCompleta.setBounds(374, 411, 262, 23);
         add(botonRecuperacionCompleta);
 
@@ -98,7 +97,7 @@ public class Descanso extends Paneles{
     }
     
     public void pulsarDescanso() {
-    	mostrarDinero.setText(" Oro: "+Integer.toString(heroe.getDinero()));
+    	mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
     	fraseNarcyl.setText("Ahora toca continuar ^_^");
     }
 }
