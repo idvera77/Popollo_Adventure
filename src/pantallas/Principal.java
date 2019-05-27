@@ -4,7 +4,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,78 +43,100 @@ public class Principal extends Paneles {
         //Sonido
         sonidoNoLevel = "./recursos/sonidos/NoLevel.wav";
         sonidoMover = "./recursos/sonidos/mover.wav";
-
-        //CARGANDO DATOS DEL JUEGO
-        //Si detecta una conexion entra en la base de datos y recupera los datos del heroe junto sus habilidades de lo contrario no hace nada (evitando un error).
-        if(ventana.getConnect()!=null) {
-            try {			
-                Statement stm = ventana.getConnect().createStatement();
-                ResultSet rs;    
-
-                //Habilidades
-                rs=stm.executeQuery("SELECT * FROM habilidad ORDER BY ID ASC");
-                ArrayList<Habilidad> habilidadesHeroe=new ArrayList<Habilidad>();
-                while(rs.next()){
-                    habilidadesHeroe.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
-                        rs.getInt("manaUtilizado"), rs.getString("tipo")));
-                }
-
-                //Objetos
-                rs=stm.executeQuery("SELECT * FROM objeto ORDER BY ID ASC");
-                ArrayList<Objeto> objetosHeroe=new ArrayList<>();
-                while(rs.next()){
-                    objetosHeroe.add(new Objeto(rs.getString("nombre"),rs.getString("descripcion"), rs.getInt("poder"), rs.getInt("cantidad"),
-                        rs.getString("tipo"), rs.getInt("precio")));
-                }
-
-                //Creando el heroe
-                rs=stm.executeQuery("SELECT * FROM Heroe");
-                rs.next();
-                String nombreHeroe=rs.getString("nombre");
-                String descripcionHeroe=rs.getString("descripcion");
-                int saludMaxHeroe=rs.getInt("saludMaxima");
-                int saludHeroe=rs.getInt("salud");
-                int manaMaximoHeroe=rs.getInt("manaMaximo");
-                int manaHeroe=rs.getInt("mana");
-                int fuerzaHeroe=rs.getInt("fuerza");
-                int magiaHeroe=rs.getInt("magia");
-                int agilidadHeroe=rs.getInt("agilidad");
-                int defensaHeroe=rs.getInt("defensa");
-                int dineroHeroe=rs.getInt("dinero");
-                int reputacionHeroe=rs.getInt("reputacion");
-                int experienciaHeroe=rs.getInt("experiencia");
-                int nivelHeroe=rs.getInt("nivel");
-                int explorar=rs.getInt("explorar");
-
-                //Constructor del Heroe
-                if(ventana.getHeroe()==null) {
-                    ventana.setHeroe(new Heroe(nombreHeroe, descripcionHeroe, saludMaxHeroe, saludHeroe, manaMaximoHeroe, manaHeroe,fuerzaHeroe, magiaHeroe, agilidadHeroe,
-                        defensaHeroe, habilidadesHeroe, objetosHeroe, dineroHeroe, reputacionHeroe, experienciaHeroe, nivelHeroe, explorar));
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (InvalidTipoException ex) {
-                ex.printStackTrace();
-                System.err.println(ex.getMessage());
-            }	
-            
-        //Comprobamos si existe un heroe creado (cargar) y si no existe empieza desde una base guardada en el programa.	
-        }else if(ventana.getHeroe()==null){
-            try {
-                ArrayList<Habilidad> habilidadesHeroe=new ArrayList<Habilidad>();
-                    habilidadesHeroe.add(new Habilidad("Proyectil Magico", "Disparas chispas magicas de tus manos.", 2, 4, "ofensivo"));
-                    habilidadesHeroe.add(new Habilidad("Flecha Helada", "Lanzas una flecha que congela todo a su paso.", 3, 6, "ofensivo"));
-                    habilidadesHeroe.add(new Habilidad("Curar Heridas", "Sana las heridas superficiales.", 5, 6, "curativo"));
-                    
-                ArrayList<Objeto> objetosHeroe=new ArrayList<Objeto>();
-                    objetosHeroe.add(new Objeto("Bomba Pequeña", "Inflige 25 puntos de daño.", 25, 2, "ofensivo", 150));
-                    objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 60 puntos de daño.", 60, 1, "ofensivo", 400));
-                    objetosHeroe.add(new Objeto("Pocion de Mana", "Restablece 30 puntos de mana.", 30, 2, "curativo", 250));
-                //Para probar el juego lo mejor es aumentar la estadisticas bastante.														
-                ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 30, 30, 20, 20, 10, 5, 5, 5, habilidadesHeroe, objetosHeroe, 500, 0, 0, 1, 0));
-            } catch (InvalidTipoException e1) {
-                e1.printStackTrace();
-            }
+        
+        //Comprobando si existe un heroe.
+        if(ventana.getHeroe()==null){
+		    //CARGANDO DATOS DEL JUEGO
+		    //Si detecta una conexion entra en la base de datos y recupera los datos del heroe junto sus habilidades.
+		    if(ventana.getConnect()!=null) {
+		        try {			
+		            Statement stm = ventana.getConnect().createStatement();
+		            ResultSet rs;    
+		
+		            //Habilidades
+		            rs=stm.executeQuery("SELECT * FROM habilidad ORDER BY ID ASC");
+		            ArrayList<Habilidad> habilidadesHeroe=new ArrayList<Habilidad>();
+		            while(rs.next()){
+		                habilidadesHeroe.add(new Habilidad(rs.getString("nombre"), rs.getString("descripcion"), rs.getInt("especial"),
+		                    rs.getInt("manaUtilizado"), rs.getString("tipo")));
+		            }
+		
+		            //Objetos
+		            rs=stm.executeQuery("SELECT * FROM objeto ORDER BY ID ASC");
+		            ArrayList<Objeto> objetosHeroe=new ArrayList<>();
+		            while(rs.next()){
+		                objetosHeroe.add(new Objeto(rs.getString("nombre"),rs.getString("descripcion"), rs.getInt("poder"), rs.getInt("cantidad"),
+		                    rs.getString("tipo"), rs.getInt("precio")));
+		            }
+		
+		            //Creando el heroe
+		            rs=stm.executeQuery("SELECT * FROM Heroe");
+		            rs.next();
+		            String nombreHeroe=rs.getString("nombre");
+		            String descripcionHeroe=rs.getString("descripcion");
+		            int saludMaxHeroe=rs.getInt("saludMaxima");
+		            int saludHeroe=rs.getInt("salud");
+		            int manaMaximoHeroe=rs.getInt("manaMaximo");
+		            int manaHeroe=rs.getInt("mana");
+		            int fuerzaHeroe=rs.getInt("fuerza");
+		            int magiaHeroe=rs.getInt("magia");
+		            int agilidadHeroe=rs.getInt("agilidad");
+		            int defensaHeroe=rs.getInt("defensa");
+		            int dineroHeroe=rs.getInt("dinero");
+		            int reputacionHeroe=rs.getInt("reputacion");
+		            int experienciaHeroe=rs.getInt("experiencia");
+		            int nivelHeroe=rs.getInt("nivel");
+		            int explorar=rs.getInt("explorar");
+		
+		            //Constructor del Heroe
+		            if(ventana.getHeroe()==null) {
+		                ventana.setHeroe(new Heroe(nombreHeroe, descripcionHeroe, saludMaxHeroe, saludHeroe, manaMaximoHeroe, manaHeroe,fuerzaHeroe, magiaHeroe, agilidadHeroe,
+		                    defensaHeroe, habilidadesHeroe, objetosHeroe, dineroHeroe, reputacionHeroe, experienciaHeroe, nivelHeroe, explorar));
+		            }
+		            stm.close();
+		        } catch (SQLException ex) {
+		            ex.printStackTrace();
+		        } catch (InvalidTipoException ex) {
+		            ex.printStackTrace();
+		            System.err.println(ex.getMessage());
+		        }	
+		        
+		    //Comprobamos si existe un heroe creado (cargar) y si no existe empieza desde una base guardada en el programa.	
+		    }else {
+		    	if(Inicio.getDificultad()==1) {
+			        try {
+			            ArrayList<Habilidad> habilidadesHeroe=new ArrayList<Habilidad>();
+			                habilidadesHeroe.add(new Habilidad("Proyectil Magico", "Disparas chispas magicas de tus manos.", 2, 4, "ofensivo"));
+			                habilidadesHeroe.add(new Habilidad("Flecha Helada", "Lanzas una flecha que congela todo a su paso.", 3, 6, "ofensivo"));
+			                habilidadesHeroe.add(new Habilidad("Curar Heridas", "Sana las heridas superficiales.", 5, 6, "curativo"));
+			                
+			            ArrayList<Objeto> objetosHeroe=new ArrayList<Objeto>();
+			                objetosHeroe.add(new Objeto("Bomba Pequeña", "Inflige 25 puntos de daño.", 25, 2, "ofensivo", 150));
+			                objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 60 puntos de daño.", 60, 1, "ofensivo", 400));
+			                objetosHeroe.add(new Objeto("Pocion de Mana", "Restablece 30 puntos de mana.", 30, 2, "curativo", 250));
+			            //Para probar el juego lo mejor es aumentar la estadisticas bastante.														
+			            ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 30, 30, 20, 20, 10, 5, 5, 5, habilidadesHeroe, objetosHeroe, 500, 0, 0, 1, 0));
+			        } catch (InvalidTipoException e1) {
+			            e1.printStackTrace();
+			        }
+		    	}else if(Inicio.getDificultad()==0){
+		    		try {
+			            ArrayList<Habilidad> habilidadesHeroe=new ArrayList<Habilidad>();
+			                habilidadesHeroe.add(new Habilidad("Proyectil Magico", "Disparas chispas magicas de tus manos.", 2, 4, "ofensivo"));
+			                habilidadesHeroe.add(new Habilidad("Flecha Helada", "Lanzas una flecha que congela todo a su paso.", 3, 6, "ofensivo"));
+			                habilidadesHeroe.add(new Habilidad("Curar Heridas", "Sana las heridas superficiales.", 5, 16, "curativo"));
+			                
+			            ArrayList<Objeto> objetosHeroe=new ArrayList<Objeto>();
+			                objetosHeroe.add(new Objeto("Bomba Pequeña", "Inflige 25 puntos de daño.", 25, 2, "ofensivo", 150));
+			                objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 60 puntos de daño.", 60, 1, "ofensivo", 400));
+			                objetosHeroe.add(new Objeto("Pocion de Mana", "Restablece 30 puntos de mana.", 30, 2, "curativo", 250));
+			            //Para probar el juego lo mejor es aumentar la estadisticas bastante.														
+			            ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 60, 60, 30, 30, 20, 7, 7, 7, habilidadesHeroe, objetosHeroe, 3000, 0, 0, 1, 0));
+			        } catch (InvalidTipoException e1) {
+			            e1.printStackTrace();
+			        }
+		    	}
+		    }
         }
 
         //Insertando el resto de datos, como no se modifican en ningun momento no los guardo en base de datos.
@@ -262,24 +283,20 @@ public class Principal extends Paneles {
         marcaMapa = new LabelPosicion();
         marcaMapa.setIcon(new ImageIcon("./recursos/marcadorMapa.gif"));
         add(marcaMapa);
-        
-        //Llamando a la funcion, explicacion de esta abajo.
-        movimientoMapa();
 
         botonGuardarPartida = new Botones("Guardar Partida");
+        botonGuardarPartida.setVisible(false);
         botonGuardarPartida.setBounds(767, 436, 215, 23);
         add(botonGuardarPartida);
 
         botonDescanso = new Botones("Punto de descanso");
+        botonDescanso.setVisible(false);
         botonDescanso.setBounds(522, 487, 215, 23);
         add(botonDescanso);
 
         botonCombateAleatorio = new Botones("Avanzar");
-        botonCombateAleatorio.setEnabled(false);
+        botonCombateAleatorio.setVisible(false);
         botonCombateAleatorio.setText("Combate aleatorio");
-        if(ventana.heroe.getExplorar()>=2) {
-            botonCombateAleatorio.setEnabled(true);
-        }
         botonCombateAleatorio.setBounds(522, 436, 215, 23);
         add(botonCombateAleatorio);
 
@@ -403,36 +420,9 @@ public class Principal extends Paneles {
         imagenMapa.setIcon(new ImageIcon("./recursos/imagenes/mapa.png"));
         add(imagenMapa);	    
 
-        //Mensaje de inicio o de final del juego dependiendo de la posicion donde nos encontremos.
-        if(ventana.getHeroe().getExplorar()==0) {
-            comenzar.setVisible(true);
-            mensajeBienvenida.setText("<html><b><center>Una malvada criatura está robando toda la comida.<br><br> "
-                + "&nbsp;Un voraz pollo de granja se alza entre todos los habitantes del reino <br>para hacer frente al vil enemigo que le priva de sus chuletitas.<br><br>"
-                + "&nbsp;Tres aliados le acompañarán por el camino, aunque cada uno tiene una<br> opinión distinta de lo que nuestro héroe debiera hacer. </center><br> "
-                + " &nbsp; - Para avanzar en el juego necesitas pulsar en la flecha de color azul.<br>"
-                + " &nbsp; - Guarda partida siempre que puedas y utiliza la tienda sabiamente. </b></html>");
-            mensajeBienvenida.setVisible(true);
-        }
-        if(ventana.getHeroe().getExplorar()==20) {
-            finDelJuego.setVisible(true);
-            mensajeBienvenida.setText("<html><center><b>¡Popollo ha conseguido derrotar al infame Pulpoi!</center><br><br> Todos en el reino recordarán la hazaña y cantarán odas en tu honor, <br>"
-                + "pero ahora lo más importante es... Que a Popollo le ruge el estómago. </b></html>");
-            mensajeBienvenida.setVisible(true);
-            botonCombateAleatorio.setVisible(false);
-            botonDescanso.setVisible(false);
-            botonGuardarPartida.setVisible(false);
-            //Archivo escrito simplemente para ver que funciona.
-            try {
-				FileWriter archivoOculto = new FileWriter("./recursos/agradecimientos/texto.txt");
-				archivoOculto.write("Muchas gracias por terminar el juego, espero que no encontaras muchos bugs ^_^");
-				archivoOculto.flush();
-				archivoOculto.close();
-				//quitando el modo oculto a archivos o carpetas, guiño guiño.
-				Runtime.getRuntime().exec("attrib -H " + "./recursos/agradecimientos/imagenes");
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-        }
+        
+        //Llamando a la funcion, explicacion de esta abajo.
+        movimientoMapa();
     }	
 
     /**
@@ -446,7 +436,7 @@ public class Principal extends Paneles {
             JOptionPane.showMessageDialog(null, "Has dado tu primer paso, ahora empieza lo divertido.", "Animo ^_^", 1);
         }
         if(ventana.heroe.getExplorar()==2) {
-            Ventana.origenADestino(ventana,"principal", "lucha", 0);
+            Ventana.origenADestino(ventana,"principal", "lucha", 0); 
         }
         if(ventana.heroe.getExplorar()==3) {
             Ventana.origenADestino(ventana, "principal", "evento", 0);
@@ -546,15 +536,27 @@ public class Principal extends Paneles {
         if(ventana.heroe.getExplorar()>=0) {
             marcaMapa.setBounds(39, 182, 60, 60);
             marcaMapa.setVisible(true);
+            comenzar.setVisible(true);
+            mensajeBienvenida.setVisible(true);
+            mensajeBienvenida.setText("<html><b><center>Una malvada criatura está robando toda la comida.<br><br> "
+                + "&nbsp;Un voraz pollo de granja se alza entre todos los habitantes del reino <br>para hacer frente al vil enemigo que le priva de sus chuletitas.<br><br>"
+                + "&nbsp;Tres aliados le acompañarán por el camino, aunque cada uno tiene una<br> opinión distinta de lo que nuestro héroe debiera hacer. </center><br> "
+                + " &nbsp; - Para avanzar en el juego necesitas pulsar en la flecha de color azul.<br>"
+                + " &nbsp; - Guarda partida siempre que puedas y utiliza la tienda sabiamente. </b></html>");
         }
         if(ventana.heroe.getExplorar()>=1) {
             marcaMapa.setBounds(114, 118, 60, 60);
             posicion0Mapa.setVisible(true);
             marcaMapa.setVisible(true);
+            botonGuardarPartida.setVisible(true);
+        	botonDescanso.setVisible(true);
+        	comenzar.setVisible(false);
+            mensajeBienvenida.setVisible(false);
         }
         if(ventana.heroe.getExplorar()>=2) {
             marcaMapa.setBounds(190, 67, 60, 60);
             posicion1Mapa.setVisible(true);
+            botonCombateAleatorio.setVisible(true);
         }
         if(ventana.heroe.getExplorar()>=3) {
             marcaMapa.setBounds(280, 29, 60, 60);
@@ -624,6 +626,26 @@ public class Principal extends Paneles {
             marcaMapa.setVisible(false);
             posicion18Mapa.setVisible(true);
         }
+        if (ventana.heroe.getExplorar()>=20){
+        	finDelJuego.setVisible(true);
+            mensajeBienvenida.setText("<html><center><b>¡Popollo ha conseguido derrotar al infame Pulpoi!</center><br><br> Todos en el reino recordarán la hazaña y cantarán odas en tu honor, <br>"
+                + "pero ahora lo más importante es... Que a Popollo le ruge el estómago. </b></html>");
+            mensajeBienvenida.setVisible(true);
+            botonCombateAleatorio.setVisible(false);
+            botonDescanso.setVisible(false);
+            botonGuardarPartida.setVisible(false);
+            //Archivo escrito simplemente para ver que funciona.
+            try {
+				FileWriter archivoOculto = new FileWriter("./recursos/agradecimientos/texto.txt");
+				archivoOculto.write("Muchas gracias por terminar el juego, espero que no encontaras muchos bugs ^_^");
+				archivoOculto.flush();
+				archivoOculto.close();
+				//quitando el modo oculto a archivos o carpetas, guiño guiño.
+				Runtime.getRuntime().exec("attrib -H " + "./recursos/agradecimientos/imagenes");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+        }
     }
     
     /**
@@ -632,7 +654,7 @@ public class Principal extends Paneles {
      */
     public void combateAleatorio() {
         int aleatorio;
-        if(ventana.heroe.getExplorar()>=2&&ventana.heroe.getExplorar()<5) {
+        if(ventana.heroe.getExplorar()<5) {
             Ventana.origenADestino(ventana,"principal", "lucha", 0);
         }
         else if(ventana.heroe.getExplorar()>=5&&ventana.heroe.getExplorar()<9) {
@@ -647,7 +669,7 @@ public class Principal extends Paneles {
             aleatorio= clases.Personaje.numeroAleatorio(0,3);
             Ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
         }
-        else if(ventana.heroe.getExplorar()>=16&&ventana.heroe.getExplorar()<19) {
+        else if(ventana.heroe.getExplorar()>=16) {
             aleatorio= clases.Personaje.numeroAleatorio(0,4);
             Ventana.origenADestino(ventana,"principal", "lucha", aleatorio);
         }
