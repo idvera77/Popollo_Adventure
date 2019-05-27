@@ -7,10 +7,11 @@ import componentes.LabelCombateEvento;
  *
  * @author Ivan Diaz Vera
  */
-public final class Enemigo extends Personaje{ 
-    
+public final class Enemigo extends Personaje {
+
     /**
      * Constructor de Enemigo
+     *
      * @param nombre Variable de tipo String para indicar un nombre.
      * @param descripcion Variable de tipo String para escribir una descripcion.
      * @param saludMaxima Variable de tipo entero que indica la salud maxima.
@@ -23,31 +24,31 @@ public final class Enemigo extends Personaje{
      * @param defensa Variable de tipo entero que indica la defensa actual.
      * @param habilidadesArray Array con las habilidades.
      * @param dinero Variable de tipo entero que indica el dinero actual.
+     * @param experiencia Variable de tipo entero que indica la experencia actual.
      */
-    public Enemigo(String nombre, String descripcion, int saludMaxima, 
-        int salud, int manaMaximo, int mana, int fuerza, int magia, int agilidad, int defensa, 
-        ArrayList<Habilidad> habilidadesArray, int dinero, int experiencia) {
+    public Enemigo(String nombre, String descripcion, int saludMaxima, int salud, int manaMaximo, int mana, int fuerza,
+            int magia, int agilidad, int defensa, ArrayList<Habilidad> habilidadesArray, int dinero, int experiencia) {
         super(nombre, descripcion, saludMaxima, salud, manaMaximo, mana, fuerza, magia, agilidad, defensa, habilidadesArray, dinero, experiencia);
     }
-    
-    //FUNCIONES
+
     /**
      * Funcion que permite utilizar una habilidad del enemigo gastando mana, el heroe recibe el daño de dicha habilidad.
+     *
      * @param heroe Personaje que recibe el daño de una habilidad.
-     * @registro JLabel encargado de mostrar el texto en la pantalla de Lucha.
+     * @param registro JLabel encargado de mostrar el texto en la pantalla de Lucha.
      */
-    public void usarHabilidadesEnemigos(Heroe heroe, LabelCombateEvento registro){
-        int aleatorio = numeroAleatorio(0, 1);  
-        String resultadoUso="<html><center><b>"+getNombre()+" utiliza una habilidad!<br>";
-        if(getMana() >= getHabilidadesArray().get(aleatorio).getManaUtilizado()){
-        	setMana(getMana()-getHabilidadesArray().get(aleatorio).getManaUtilizado());
-            resultadoUso+=(getHabilidadesArray().get(aleatorio).getNombre()+" inflige "
-                +getMagia()*getHabilidadesArray().get(aleatorio).getEspecial() +" puntos de daño.");
-            resultadoUso+="</b></center></html>";
-            registro.setText(resultadoUso);                   
-            dañoHabilidades(heroe, aleatorio); 
-        }else{    
-            registro.setText("<html><center><b>No tiene suficiente mana!!!</b></center></html>");
+    public void usarHabilidadesEnemigos(Heroe heroe, LabelCombateEvento registro) {
+        int aleatorio = numeroAleatorio(0, 1);
+        String resultadoUso = "<html><center><b>" + getNombre() + " utiliza una habilidad.<br>";
+        if (getMana() >= getHabilidadesArray().get(aleatorio).getManaUtilizado()) {
+            setMana(getMana() - getHabilidadesArray().get(aleatorio).getManaUtilizado());
+            resultadoUso += (getHabilidadesArray().get(aleatorio).getNombre() + " inflige "
+                    + getMagia() * getHabilidadesArray().get(aleatorio).getEspecial() + " puntos de daño.");
+            resultadoUso += "</b></center></html>";
+            registro.setText(resultadoUso);
+            dañoHabilidades(heroe, aleatorio);
+        } else {
+            registro.setText("<html><center><b>¡No tiene suficiente mana!</b></center></html>");
         }
-    }    
+    }
 }

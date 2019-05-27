@@ -2,7 +2,6 @@ package componentes;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -13,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 public class BotonesCombate extends JButton {
+
     public BotonesCombate(String txt) {
         super(txt);
 
@@ -23,25 +23,25 @@ public class BotonesCombate extends JButton {
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
         cursor = toolkit.createCustomCursor(img, point, null);
         setCursor(cursor);
-        
+
         //Indicando la fuente y el borde de los botones.
         setBackground(new Color(208, 232, 226));
-        setBorder(new LineBorder(new Color(0, 0, 0), 3));	
-        
+        setBorder(new LineBorder(new Color(0, 0, 0), 3));
+
         //Cuando entramos en un boton debe cambiar de color, engordar el borde y al salir debe volver a su estado original.
-        addMouseListener(new MouseAdapter(){
+        addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 setBackground(new Color(204, 255, 255));
-                setBorder(new LineBorder(new Color(0, 0, 0), 3));			
+                setBorder(new LineBorder(new Color(0, 0, 0), 3));
             }
-            
+
             @Override
-            public void mouseExited(MouseEvent e) {		
+            public void mouseExited(MouseEvent e) {
                 setBackground(null);
                 setBackground(new Color(208, 232, 226));
                 setBorder(new LineBorder(new Color(0, 0, 0), 3));
             }
-        });	
+        });
     }
 }

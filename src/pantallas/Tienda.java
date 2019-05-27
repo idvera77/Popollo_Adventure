@@ -3,7 +3,6 @@ package pantallas;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
-
 import componentes.Botones;
 import componentes.BotonesTienda;
 import componentes.LabelPrincipal;
@@ -14,21 +13,21 @@ import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import clases.Heroe;
 import java.awt.Font;
-import java.awt.Component;
 
-public class Tienda extends Paneles{
+public class Tienda extends Paneles {
+
     private Ventana ventana;
     private Heroe heroe;
 
     public Tienda(Ventana v) {
         super();
-        this.ventana=v;
-        this.heroe=ventana.heroe;
-		
+        this.ventana = v;
+        this.heroe = ventana.heroe;
+
         //Archivos de sonido.
         String sonidoComprar = "./recursos/sonidos/Comprar.wav";
         String sonidoNoMoney = "./recursos/sonidos/NoMoney.wav";
-        
+
         //JFieldText y JPanels para montar la estructura de la tienda.
         TextoTienda panelPrecioObjeto = new TextoTienda();
         panelPrecioObjeto.setText("Precio");
@@ -133,7 +132,7 @@ public class Tienda extends Paneles{
         LabelPrincipal mostrarDinero = new LabelPrincipal();
         mostrarDinero.setFont(new Font("Bahnschrift", Font.BOLD, 15));
         mostrarDinero.setBackground(new Color(204, 204, 204));
-        mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
+        mostrarDinero.setText("Oro: " + Integer.toString(heroe.getDinero()));
         mostrarDinero.setBounds(10, 29, 109, 40);
         add(mostrarDinero);
 
@@ -176,17 +175,17 @@ public class Tienda extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {
                 v.heroe.comprarObjetos(0, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
-                cantidadBombaP.setText(Integer.toString(heroe.getObjetosArray().get(0).getCantidad()));	
+                mostrarDinero.setText("Oro: " + Integer.toString(heroe.getDinero()));
+                cantidadBombaP.setText(Integer.toString(heroe.getObjetosArray().get(0).getCantidad()));
             }
         });
 
         comprarBombaG.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {	
+            public void mouseClicked(MouseEvent e) {
                 heroe.comprarObjetos(1, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
-                cantidadBombaG.setText(Integer.toString(heroe.getObjetosArray().get(1).getCantidad()));					
+                mostrarDinero.setText("Oro: " + Integer.toString(heroe.getDinero()));
+                cantidadBombaG.setText(Integer.toString(heroe.getObjetosArray().get(1).getCantidad()));
             }
         });
 
@@ -194,8 +193,8 @@ public class Tienda extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {
                 heroe.comprarObjetos(2, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
-                cantidadPocion.setText(Integer.toString(heroe.getObjetosArray().get(2).getCantidad()));	
+                mostrarDinero.setText("Oro: " + Integer.toString(heroe.getDinero()));
+                cantidadPocion.setText(Integer.toString(heroe.getObjetosArray().get(2).getCantidad()));
             }
         });
 
@@ -203,7 +202,7 @@ public class Tienda extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {
                 heroe.mejorarEstadisticas(0, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
+                mostrarDinero.setText("Oro: " + Integer.toString(heroe.getDinero()));
                 fuerzaActual.setText(Integer.toString(heroe.getFuerza()));
             }
         });
@@ -212,7 +211,7 @@ public class Tienda extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {
                 heroe.mejorarEstadisticas(1, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
+                mostrarDinero.setText("Oro: " + Integer.toString(heroe.getDinero()));
                 magiaActual.setText(Integer.toString(heroe.getMagia()));
             }
         });
@@ -221,7 +220,7 @@ public class Tienda extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {
                 heroe.mejorarEstadisticas(2, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
+                mostrarDinero.setText("Oro: " + Integer.toString(heroe.getDinero()));
                 defensaActual.setText(Integer.toString(heroe.getDefensa()));
             }
         });
@@ -230,7 +229,7 @@ public class Tienda extends Paneles{
             @Override
             public void mouseClicked(MouseEvent e) {
                 heroe.mejorarEstadisticas(3, sonidoComprar, sonidoNoMoney);
-                mostrarDinero.setText("Oro: "+Integer.toString(heroe.getDinero()));
+                mostrarDinero.setText("Oro: " + Integer.toString(heroe.getDinero()));
                 agilidadActual.setText(Integer.toString(heroe.getAgilidad()));
                 defensaActual.setText(Integer.toString(heroe.getDefensa()));
             }
@@ -255,7 +254,7 @@ public class Tienda extends Paneles{
         cuadro2.setOpaque(true);
         cuadro2.setBorder(new LineBorder(new Color(0, 0, 0), 3));
         cuadro2.setBounds(39, 242, 339, 191);
-        add(cuadro2);		
+        add(cuadro2);
 
         //Imagen de fondo
         JLabel imagenTienda = new JLabel("");
@@ -263,4 +262,4 @@ public class Tienda extends Paneles{
         imagenTienda.setIcon(new ImageIcon("./recursos/imagenes/tienda.jpg"));
         add(imagenTienda);
     }
-}	
+}

@@ -16,77 +16,83 @@ import componentes.LabelCombateEvento;
 import componentes.Paneles;
 import javax.swing.JProgressBar;
 import java.awt.Font;
+import javax.swing.SwingConstants;
 
-public class Lucha extends Paneles{
+public class Lucha extends Paneles {
+
     private Ventana ventana;
-    public int adversario;
+    private final int adversario;
     private Heroe heroe;
-    private ArrayList<Enemigo> enemigoArray;
-    private ArrayList<ImageIcon> imagenEnemigoBatalla, imagenEnemigoDerrota;
-    public JProgressBar vidaHeroe, vidaEnemigo, manaHeroe, manaEnemigo;
-    public LabelCombateEvento registroBatallaHeroe, registroBatallaEnemigo, registroVictoriaDerrota, mostrarAtributos, mostrarAtributosEnemigo, Versus;
-    private Botones botonSalir, botonAtras, quitarSeleccion;
-    private BotonesCombate botonAtacar, botonDefender, botonHabilidades, botonObjetos, boton1Habilidad, boton2Habilidad, boton3Habilidad, boton1Objeto, boton2Objeto, boton3Objeto;
-    public JLabel iconoDefensaHeroe, iconoDefensaEnemigo, imagenEnemigo, imagenHeroe;
-    private String sonidoVictoria, sonidoAtaque, sonidoExplosion, sonidoDefensa, sonidoCuracion, sonidoDerrota;
+    private final ArrayList<Enemigo> enemigoArray;
+    private final ArrayList<ImageIcon> imagenEnemigoBatalla, imagenEnemigoDerrota;
+    private final JProgressBar vidaHeroe, vidaEnemigo, manaHeroe, manaEnemigo;
+    private final LabelCombateEvento registroBatallaHeroe, registroBatallaEnemigo, registroVictoriaDerrota,
+            mostrarAtributos, mostrarAtributosEnemigo, Versus;
+    private final Botones botonSalir, botonAtras, quitarSeleccion;
+    private final BotonesCombate botonAtacar, botonDefender, botonHabilidades, botonObjetos, boton1Habilidad,
+            boton2Habilidad, boton3Habilidad, boton1Objeto, boton2Objeto, boton3Objeto;
+    private final JLabel iconoDefensaHeroe, iconoDefensaEnemigo, imagenEnemigo, imagenHeroe;
+    private final String sonidoVictoria, sonidoAtaque, sonidoExplosion, sonidoDefensa, sonidoCuracion, sonidoDerrota;
     private int aleatorio;
-    private boolean defensaHeroe=false;
-    private boolean defensaEnemigo=false;
-    
-    //Dependiendo del numero indicando llamaremos a un enemigo guardado en un ArrayList en la ventana principal.
+    private boolean defensaHeroe, defensaEnemigo;
+
+    //Dependiendo del numero(adversario) indicando llamaremos a un enemigo guardado en un ArrayList en la ventana principal.
     public Lucha(Ventana ventana, int adversario) {
         super();
-        this.ventana=ventana;
-        this.adversario=adversario;
-        this.heroe=ventana.heroe;
-        this.enemigoArray=ventana.enemigosArray;
-        
+        this.ventana = ventana;
+        this.adversario = adversario;
+        this.heroe = ventana.heroe;
+        this.enemigoArray = ventana.enemigosArray;
+
         //Archivos de Sonido
         sonidoVictoria = "./recursos/sonidos/Victoria.wav";
         sonidoAtaque = "./recursos/sonidos/Atacar.wav";
         sonidoExplosion = "./recursos/sonidos/Explosion.wav";
-        sonidoDefensa= "./recursos/sonidos/Defensa.wav";
+        sonidoDefensa = "./recursos/sonidos/Defensa.wav";
         sonidoCuracion = "./recursos/sonidos/Curaciones.wav";
         sonidoDerrota = "./recursos/sonidos/Derrota.wav";
-        
+
         Ventana.comenzarFondo("./recursos/sonidos/Combate.wav");
 
         //Imagenes de los enemigos.
         imagenEnemigoBatalla = new ArrayList<ImageIcon>();
-	        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/poi.gif"));
-	        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/nigromante.gif"));
-		    imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
-		    imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/poi.gif"));
-	        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
-		    imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
-	        
-	    imagenEnemigoDerrota = new ArrayList<ImageIcon>();
-	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/poiD.png"));
-	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/nigromanteD.png"));
-	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/devilingD.png"));
-	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/poiD.png"));
-	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/devilingD.png"));
-	    	imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/devilingD.png"));
-		
+        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/poi.gif"));
+        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/nigromante.gif"));
+        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/dlc.gif"));
+        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/update.gif"));
+        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
+        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
+
+        imagenEnemigoDerrota = new ArrayList<ImageIcon>();
+        imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/poiD.png"));
+        imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/nigromanteD.png"));
+        imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/dlcD.png"));
+        imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/updateD.png"));
+        imagenEnemigoDerrota.add(new ImageIcon("./recursos/imagenes/combate/devilingD.png"));
+        imagenEnemigoBatalla.add(new ImageIcon("./recursos/imagenes/combate/deviling.gif"));
+
         //Paneles Texto
         registroVictoriaDerrota = new LabelCombateEvento();
-        registroVictoriaDerrota.setOpaque(false);
-        registroVictoriaDerrota .setBounds(281, 120, 446, 204);
-        add(registroVictoriaDerrota );
-        
+        registroVictoriaDerrota.setVisible(false);
+        registroVictoriaDerrota.setHorizontalTextPosition(SwingConstants.CENTER);
+        registroVictoriaDerrota.setBounds(281, 112, 446, 205);
+        add(registroVictoriaDerrota);
+
         //Estos atributos permanecen ocultos hasta que pasemos el raton por encima de la imagen del heroe o del enemigo.
         mostrarAtributos = new LabelCombateEvento();
+        mostrarAtributos.setHorizontalTextPosition(SwingConstants.CENTER);
         heroe.mostrarAtributosCombate(mostrarAtributos);
         mostrarAtributos.setVisible(false);
         mostrarAtributos.setBounds(80, 347, 120, 115);
         add(mostrarAtributos);
 
         mostrarAtributosEnemigo = new LabelCombateEvento();
+        mostrarAtributosEnemigo.setHorizontalTextPosition(SwingConstants.CENTER);
         enemigoArray.get(adversario).mostrarAtributosCombate(mostrarAtributosEnemigo);
         mostrarAtributosEnemigo.setVisible(false);
         mostrarAtributosEnemigo.setBounds(807, 347, 120, 115);
         add(mostrarAtributosEnemigo);
-		
+
         //Barras de salud/mana del heroe y del enemigo, gracias a unas funciones mas abajo aumentaran o disminuiran.
         vidaHeroe = new JProgressBar(0, heroe.getSaludMaxima());
         vidaHeroe.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
@@ -97,7 +103,7 @@ public class Lucha extends Paneles{
         vidaHeroe.setBounds(10, 282, 261, 28);
         vidaHeroe.setValue(heroe.getSalud());
         add(vidaHeroe);
-        
+
         manaHeroe = new JProgressBar(0, heroe.getManaMaximo());
         manaHeroe.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
         manaHeroe.setStringPainted(true);
@@ -117,7 +123,7 @@ public class Lucha extends Paneles{
         vidaEnemigo.setBounds(737, 282, 261, 28);
         vidaEnemigo.setValue(enemigoArray.get(adversario).getSalud());
         add(vidaEnemigo);
-        
+
         manaEnemigo = new JProgressBar(0, enemigoArray.get(adversario).getManaMaximo());
         manaEnemigo.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
         manaEnemigo.setStringPainted(true);
@@ -131,11 +137,11 @@ public class Lucha extends Paneles{
         //Botones
         botonSalir = new Botones("Salir del juego");
         botonSalir.setVisible(false);
-        botonSalir.setBounds(395, 277, 215, 23);
+        botonSalir.setBounds(395, 283, 215, 23);
         add(botonSalir);
 
         botonAtras = new Botones("Volver al mapa");
-        botonAtras.setBounds(395, 277, 215, 23);
+        botonAtras.setBounds(395, 283, 215, 23);
         botonAtras.setVisible(false);
         add(botonAtras);
 
@@ -214,17 +220,19 @@ public class Lucha extends Paneles{
         add(iconoDefensaEnemigo);
 
         registroBatallaHeroe = new LabelCombateEvento();
-        registroBatallaHeroe.setBounds(281, 120, 446, 103);
+        registroBatallaHeroe.setHorizontalTextPosition(SwingConstants.CENTER);
+        registroBatallaHeroe.setBounds(281, 112, 446, 103);
         add(registroBatallaHeroe);
 
         registroBatallaEnemigo = new LabelCombateEvento();
-        registroBatallaEnemigo.setBounds(281, 221, 446, 103);
+        registroBatallaEnemigo.setHorizontalTextPosition(SwingConstants.CENTER);
+        registroBatallaEnemigo.setBounds(281, 212, 446, 103);
         add(registroBatallaEnemigo);
 
         Versus = new LabelCombateEvento();
         Versus.setFont(new Font("Bahnschrift", Font.BOLD, 25));
-        Versus.setText("<html><center>"+heroe.getNombre()+" Versus "+enemigoArray.get(adversario).getNombre()+"</b></center></html>");
-        Versus.setBounds(281, 49, 446, 58);
+        Versus.setText(heroe.getNombre() + " Versus " + enemigoArray.get(adversario).getNombre());
+        Versus.setBounds(281, 36, 446, 58);
         add(Versus);
 
         imagenHeroe = new JLabel("");
@@ -243,9 +251,8 @@ public class Lucha extends Paneles{
         JLabel imagenBatalla = new JLabel("");
         imagenBatalla.setBounds(0, 0, 1008, 536);
         imagenBatalla.setIcon(new ImageIcon("./recursos/imagenes/batalla.jpg"));
-        add(imagenBatalla);	
+        add(imagenBatalla);
 
-		
         //Eventos de botones
         botonAtacar.addMouseListener(new MouseAdapter() {
             @Override
@@ -257,7 +264,7 @@ public class Lucha extends Paneles{
         botonDefender.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                usarDefensa();       
+                usarDefensa();
             }
         });
 
@@ -272,7 +279,7 @@ public class Lucha extends Paneles{
 
         botonObjetos.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {			
+            public void mouseClicked(MouseEvent e) {
                 heroe.mostrarObjetosCombate(registroBatallaHeroe);
                 mostrarBotonObjetos();
                 iconoDefensaHeroe.setVisible(false);
@@ -328,12 +335,12 @@ public class Lucha extends Paneles{
             }
         });
 
-
         imagenHeroe.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent arg0) {
                 mostrarAtributos.setVisible(true);
             }
+
             @Override
             public void mouseExited(MouseEvent e) {
                 mostrarAtributos.setVisible(false);
@@ -345,6 +352,7 @@ public class Lucha extends Paneles{
             public void mouseEntered(MouseEvent arg0) {
                 mostrarAtributosEnemigo.setVisible(true);
             }
+
             @Override
             public void mouseExited(MouseEvent e) {
                 mostrarAtributosEnemigo.setVisible(false);
@@ -354,17 +362,16 @@ public class Lucha extends Paneles{
         botonSalir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(ventana.getConnect()!=null) {
+                if (ventana.getConnect() != null) {
                     try {
                         ventana.getConnect().close();
                     } catch (SQLException e1) {
-                        e1.printStackTrace();
                     }
-                }	
-                System.exit(0);  
+                }
+                System.exit(0);
             }
-        });	
-        
+        });
+
         botonAtras.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -373,11 +380,11 @@ public class Lucha extends Paneles{
             }
         });
     }
-    
+
     //FUNCIONES
     /**
-     * Funcion que nos permite mostrar los botones asignados a las habilidades.
-     * Anotacion: Puedo hacer paneles con estos botones pero quizas juego con ellos mas adelante por separado.
+     * Funcion que nos permite mostrar los botones asignados a las habilidades. Anotacion: Puedo hacer paneles con estos
+     * botones pero quizas juego con ellos mas adelante por separado.
      */
     public void mostrarBotonHabilidades() {
         botonAtacar.setVisible(false);
@@ -389,7 +396,7 @@ public class Lucha extends Paneles{
         boton3Habilidad.setVisible(true);
         quitarSeleccion.setVisible(true);
     }
-	
+
     /**
      * Funcion que nos oculta los botones asignados a las habilidades.
      */
@@ -403,7 +410,7 @@ public class Lucha extends Paneles{
         botonObjetos.setVisible(true);
         quitarSeleccion.setVisible(false);
     }
-	
+
     /**
      * Funcion que nos permite mostrar los botones asignados a los objetos.
      */
@@ -417,7 +424,7 @@ public class Lucha extends Paneles{
         boton3Objeto.setVisible(true);
         quitarSeleccion.setVisible(true);
     }
-	
+
     /**
      * Funcion que nos permite ocultar los botones asignados a los objetos.
      */
@@ -445,9 +452,9 @@ public class Lucha extends Paneles{
         botonDefender.setVisible(true);
         botonHabilidades.setVisible(true);
         botonObjetos.setVisible(true);
-        registroBatallaHeroe.setText("<html><b>Piensa mejor las cosas!!!</b></html>");
+        registroBatallaHeroe.setText("¡Piensa mejor las cosas!");
     }
-	
+
     /**
      * Funcion que oculta todos los botones
      */
@@ -461,7 +468,7 @@ public class Lucha extends Paneles{
         botonObjetos.setVisible(false);
         quitarSeleccion.setVisible(false);
     }
-	
+
     /**
      * Funcion que reescribe los valores dentro de la barra de progreso indicando la salud restante del heroe.
      */
@@ -469,7 +476,10 @@ public class Lucha extends Paneles{
         vidaHeroe.setValue(heroe.getSalud());
         vidaHeroe.setString(Integer.toString(heroe.getSalud()));
     }
-    
+
+    /**
+     * Funcion que reescribe los valores dentro de la barra de progreso indicando el mana restante del heroe.
+     */
     public void manaHeroe() {
         manaHeroe.setValue(heroe.getMana());
         manaHeroe.setString(Integer.toString(heroe.getMana()));
@@ -482,18 +492,21 @@ public class Lucha extends Paneles{
         vidaEnemigo.setValue(enemigoArray.get(adversario).getSalud());
         vidaEnemigo.setString(Integer.toString(enemigoArray.get(adversario).getSalud()));
     }
-    
+
+    /**
+     * Funcion que reescribe los valores dentro de la barra de progreso indicando el mana restante del enemigo.
+     */
     public void manaEnemigo() {
-    	manaEnemigo.setValue(enemigoArray.get(adversario).getMana());
-    	manaEnemigo.setString(Integer.toString(enemigoArray.get(adversario).getMana()));
+        manaEnemigo.setValue(enemigoArray.get(adversario).getMana());
+        manaEnemigo.setString(Integer.toString(enemigoArray.get(adversario).getMana()));
     }
 
     /**
      * Conjunto de instrucciones asociadas al boton de ataque
      */
-    public void usarAtaque(){
-    	Ventana.comenzarSonido(sonidoAtaque);
-        heroe.atacar(enemigoArray.get(adversario),registroBatallaHeroe);
+    public void usarAtaque() {
+        Ventana.comenzarSonido(sonidoAtaque);
+        heroe.atacar(enemigoArray.get(adversario), registroBatallaHeroe);
         iconoDefensaHeroe.setVisible(false);
         turnoEnemigo();
     }
@@ -502,28 +515,28 @@ public class Lucha extends Paneles{
      * Conjunto de instrucciones asociados al boton de defensa
      */
     public void usarDefensa() {
-    	Ventana.comenzarSonido(sonidoDefensa);
+        Ventana.comenzarSonido(sonidoDefensa);
         iconoDefensaHeroe.setVisible(true);
-        defensaHeroe=true;
-        registroBatallaHeroe.setText("<html><center><b>"+heroe.getNombre()
-            +" BLOQUEO!<br> Tu defensa natural se multiplica por 2 durante este turno."
-            +"</center></b></html>");
+        defensaHeroe = true;
+        registroBatallaHeroe.setText("¡BLOQUEO!");
         heroe.Bloqueo();
         turnoEnemigo();
     }
 
     /**
      * Conjunto de funciones para el uso de habilidades
+     *
      * @param numero Indica la habilidad a usar
      */
     public void usarHabilidadHeroe(int numero) {
         ocultarBotonHabilidades();
         heroe.usarHabilidades(numero, enemigoArray.get(adversario), registroBatallaHeroe, sonidoExplosion, sonidoCuracion);
-        turnoEnemigo();	
+        turnoEnemigo();
     }
 
     /**
      * Conjunto de funciones para el uso de objetos
+     *
      * @param numero Indica el objeto a usar
      */
     public void usarObjetosHeroe(int numero) {
@@ -533,92 +546,87 @@ public class Lucha extends Paneles{
     }
 
     /**
-     * Funcion que recoge todas las acciones del enemigo y las condiciones de victoria o derrota.
-     * Modifica las imagenes en funcion de conseguir una victoria o una derrota.
-     * Cambia los Jpanel para mostrar mensajes dependiendo de la accion.
-     * Cambia las imagenes de la bonificacion por defensa del boton defender.
+     * Funcion que recoge todas las acciones del enemigo y las condiciones de victoria o derrota. Modifica las imagenes
+     * en funcion de conseguir una victoria o una derrota. Cambia los Jpanel para mostrar mensajes dependiendo de la
+     * accion. Cambia las imagenes de la bonificacion por defensa del boton defender.
      */
     public void turnoEnemigo() {
-    	manaHeroe();
-    	vidaEnemigo();
+        manaHeroe();
+        vidaEnemigo();
         //Comprobacion de que el enemigo tiene la salud suficiente para continuar el combate, de lo contrario ocurre la victoria.
-        if(enemigoArray.get(adversario).getSalud()>0){
+        if (enemigoArray.get(adversario).getSalud() > 0) {
             //Comprobacion de que el enemigo tiene activada la mejora de defensa, si es true la disminuye ya que ha pasado un turno.
-            if(defensaEnemigo==true){
+            if (defensaEnemigo == true) {
                 enemigoArray.get(adversario).BloqueoOff();
-               iconoDefensaEnemigo.setVisible(false);
-               defensaEnemigo=false;
+                iconoDefensaEnemigo.setVisible(false);
+                defensaEnemigo = false;
             }
             //Tirada aleatoria para sacar la accion del enemigo (ataque, defender o uso de habilidades)
             //ATAQUE BASICO
             aleatorio = clases.Personaje.numeroAleatorio(0, 6);
-            if(aleatorio<=3){
+            if (aleatorio <= 3) {
                 enemigoArray.get(adversario).atacar(heroe, registroBatallaEnemigo);
-            //DEFENSA
-            }else if(aleatorio==4){
-                registroBatallaEnemigo.setText("<html><center><b>"+enemigoArray.get(adversario).getNombre()
-                    +" decide usar bloqueo!<br> Su defensa natural se multiplica por 2 durante un turno."
-                    +"</center></b></html>");
+                //DEFENSA
+            } else if (aleatorio == 4) {
+                registroBatallaEnemigo.setText("<html><center>¡BLOQUEO!<br> Aumento x2 de defensa el proximo turno.</center></html>");
                 iconoDefensaEnemigo.setVisible(true);
                 enemigoArray.get(adversario).Bloqueo();
-                defensaEnemigo=true; 
-            //HABILIDADES    
-            }else{
+                defensaEnemigo = true;
+                //HABILIDADES    
+            } else {
                 enemigoArray.get(adversario).usarHabilidadesEnemigos(heroe, registroBatallaEnemigo);
                 manaEnemigo();
             }
-        }else{
+        } else {
             //Si ganamos el combate debemos comprobar si tenemos la defensa activa del hereoe y el enemigo para desactivarla 
             //de lo contrario al inicio del siguiente combate el parametro defensa estara aumentado *2
-            if(defensaEnemigo==true){
+            if (defensaEnemigo == true) {
                 enemigoArray.get(adversario).BloqueoOff();
                 iconoDefensaEnemigo.setVisible(false);
-                defensaEnemigo=false;   
+                defensaEnemigo = false;
             }
-            if(defensaHeroe==true){
+            if (defensaHeroe == true) {
                 heroe.BloqueoOff();
                 iconoDefensaHeroe.setVisible(false);
-                defensaHeroe=false;   
+                defensaHeroe = false;
             }
-            
+            //Cambia el retrato del enemigo y aparece un mensaje de victoria, indicando el dinero y experiencia obtenido.
             imagenEnemigo.setIcon(imagenEnemigoDerrota.get(adversario));
-            registroVictoriaDerrota.setText("<html><center><b>!!!VICTORIA!!!<br><br> Recibes "+enemigoArray.get(adversario).getDinero()+" Monedas de oro y "
-                + enemigoArray.get(adversario).getExperiencia()+" puntos de experiencia."
-                +"</center></b></html>");
+            registroBatallaEnemigo.setText("");
+            registroVictoriaDerrota.setVisible(true);
+            registroVictoriaDerrota.setText("<html><center>¡VICTORIA!<br><br>"
+                    + "* Recibes " + enemigoArray.get(adversario).getDinero() + " Monedas de oro *<br>"
+                    + "* Obtienes " + enemigoArray.get(adversario).getExperiencia() + " puntos de experiencia *"
+                    + "</center></html>");
             registroVictoriaDerrota.setOpaque(true);
-            heroe.setDinero(heroe.getDinero()+enemigoArray.get(adversario).getDinero());
+            heroe.setDinero(heroe.getDinero() + enemigoArray.get(adversario).getDinero());
             ocultarTodo();
             Ventana.pararFondo();
             Ventana.comenzarSonido(sonidoVictoria);
             botonAtras.setVisible(true);
-            vidaEnemigo.setVisible(false);
-            manaEnemigo.setVisible(false);
+            //Si aumenta el nivel del heroe aparece un JOptionPane
             heroe.subirNivel(enemigoArray.get(adversario).getExperiencia());
+            //Restablece la vida del enemigo para volver a luchar contra el en otro combate.
             enemigoArray.get(adversario).restablecerCompleto();
-            
+
         }
-        //Al final de cada turno quitamos al heroe la defensa aumentada.
+        //Al final de cada turno quitamos al heroe la defensa aumentada y mostramos el cambio en sus barras de salud/mana.
         vidaHeroe();
         manaHeroe();
-        if(defensaHeroe==true){
+        if (defensaHeroe == true) {
             heroe.BloqueoOff();
-            defensaHeroe=false;   
+            defensaHeroe = false;
         }
         //Al final del turno enemigo comprobamos si el heroe no tiene la suficiente vida para mostrar un GameOver.
-        if(heroe.getSalud()<=0) {
-        	Ventana.pararFondo();
+        if (heroe.getSalud() <= 0) {
+            Ventana.pararFondo();
             Ventana.comenzarSonido(sonidoDerrota);
-            vidaHeroe.setVisible(false);
-            manaHeroe.setVisible(false);
             imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/combate/popolloD.png"));
-            registroVictoriaDerrota.setText("<html><center><b>!!!DERROTA!!!<br><br> Esfuérzate más la próxima vez."
-                +"</center></b></html>");
+            iconoDefensaHeroe.setVisible(false);
+            registroVictoriaDerrota.setVisible(true);
+            registroVictoriaDerrota.setText("<html><center><b>¡DERROTA!<br><br> Esfuérzate más la próxima vez.</b></center></html>");
             ocultarTodo();
-            registroVictoriaDerrota.setOpaque(true);
             botonSalir.setVisible(true);
-        }	
+        }
     }
 }
-
-
-
