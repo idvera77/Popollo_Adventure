@@ -2,6 +2,7 @@ package pantallas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -114,7 +115,7 @@ public class Principal extends Paneles {
                         objetosHeroe.add(new Objeto("Bomba Pequeña", "Inflige 25 puntos de daño.", 25, 2, "ofensivo", 150));
                         objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 60 puntos de daño.", 60, 1, "ofensivo", 400));
                         objetosHeroe.add(new Objeto("Pocion de Mana", "Restablece 30 puntos de mana.", 30, 2, "curativo", 250));
-                        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 30, 30, 20, 20, 10, 5, 5, 5, habilidadesHeroe, objetosHeroe, 500, 0, 0, 1, 0));
+                        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 30, 30, 20, 20, 10, 5, 5, 5, habilidadesHeroe, objetosHeroe, 500, 0, 0, 1, 20));
                     } catch (InvalidTipoException e1) {
                         e1.printStackTrace();
                     }
@@ -129,7 +130,7 @@ public class Principal extends Paneles {
                         objetosHeroe.add(new Objeto("Bomba Pequeña", "Inflige 25 puntos de daño.", 25, 2, "ofensivo", 150));
                         objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 60 puntos de daño.", 60, 1, "ofensivo", 400));
                         objetosHeroe.add(new Objeto("Pocion de Mana", "Restablece 30 puntos de mana.", 30, 2, "curativo", 250));
-                        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 60, 60, 30, 30, 15, 7, 7, 7, habilidadesHeroe, objetosHeroe, 3000, 0, 0, 1, 0));
+                        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 60, 60, 30, 30, 15, 7, 7, 7, habilidadesHeroe, objetosHeroe, 3000, 0, 0, 1, 20));
                     } catch (InvalidTipoException e1) {
                         e1.printStackTrace();
                     }
@@ -376,6 +377,14 @@ public class Principal extends Paneles {
             }
         });
 
+        //Muestra el dinero y la reputacion obtenida.
+        LabelPrincipal mostrarDineroReputacion = new LabelPrincipal();
+        mostrarDineroReputacion.setText("<html><b>Oro: " + Integer.toString(ventana.heroe.getDinero())
+                + "<br/>Reputacion: " + Integer.toString(ventana.heroe.getReputacion())
+                + "</b></html>");
+        mostrarDineroReputacion.setBounds(10, 29, 130, 51);
+        add(mostrarDineroReputacion);
+        
         //Nos muestra la experiencia total de nuestro heroe.
         barraExperiencia = new JProgressBar(0, (ventana.heroe.getNivel() * 30));
         barraExperiencia.setFont(new Font("Bahnschrift", Font.BOLD, 15));
@@ -403,14 +412,6 @@ public class Principal extends Paneles {
         ventana.heroe.mostrarObjetos(mostrarObjetos);
         mostrarObjetos.setBounds(334, 436, 174, 89);
         add(mostrarObjetos);
-
-        //Muestra el dinero y la reputacion obtenida.
-        LabelPrincipal mostrarDineroReputacion = new LabelPrincipal();
-        mostrarDineroReputacion.setText("<html><b>Oro: " + Integer.toString(ventana.heroe.getDinero())
-                + "<br/>Reputacion: " + Integer.toString(ventana.heroe.getReputacion())
-                + "</b></html>");
-        mostrarDineroReputacion.setBounds(10, 29, 130, 51);
-        add(mostrarDineroReputacion);
 
         //Imagen de fondo
         JLabel imagenMapa = new JLabel("");
@@ -629,17 +630,32 @@ public class Principal extends Paneles {
             //Al llegar a 20 aparece un mensaje final y nos da la opcion de ir a la pantalla de creditos.
             finDelJuego.setVisible(true);
             mensajeBienvenida.setText("<html><center><b>¡Popollo ha conseguido derrotar al infame Pulpoi!</center><br><br> Todos en el reino recordarán la hazaña y cantarán odas en tu honor, <br>"
-                    + "pero ahora lo más importante es... Que a Popollo le ruge el estómago. </b></html>");
+                    + "pero ahora lo más importante es... Que a Popollo le ruge el estómago.<br><br>* Has desbloqueado material adicional, puedes encontrarlo en /recursos/agradecimientos *</b></html>");
             mensajeBienvenida.setVisible(true);
             botonCombateAleatorio.setVisible(false);
             botonDescanso.setVisible(false);
             botonGuardarPartida.setVisible(false);
-            //Archivo escrito simplemente para ver que funciona.
+            //Archivo escrito simplemente para ver que funciona. Ademas de desbloquear una nueva galeria.
             try {
                 FileWriter archivoOculto = new FileWriter("./recursos/agradecimientos/texto.txt");
-                archivoOculto.write("Muchas gracias por terminar el juego, espero que no encontaras muchos bugs ^_^");
+                archivoOculto.write("Muchas gracias por terminar el juego, espero que no encontaras muchos bugs ^_^ ");
+                archivoOculto.write(System.getProperty( "line.separator" ));
+                archivoOculto.write("Al pasarte el juego has desbloqueado unas imagenes extras de futuros proyectos. ");
+                archivoOculto.write(System.getProperty( "line.separator" ));
+                archivoOculto.write("No mirar en el trabajo ni delante de la pareja. ");
+                archivoOculto.write(System.getProperty( "line.separator" ));
                 archivoOculto.flush();
                 archivoOculto.close();
+                ArrayList <File> guiño = new ArrayList<File>();
+                guiño.add(new File("./recursos/agradecimientos/imagenes/1"));
+                guiño.add(new File("./recursos/agradecimientos/imagenes/2"));
+                guiño.add(new File("./recursos/agradecimientos/imagenes/3"));
+                
+                for(int i=0; i<guiño.size();i++) {
+                	guiño.get(i).renameTo( new File( guiño.get(i) + ".png" ));
+                }
+                
+              
                 //quitando el modo oculto a archivos o carpetas, guiño guiño.
                 Runtime.getRuntime().exec("attrib -H " + "./recursos/agradecimientos/imagenes");
             } catch (IOException e1) {
