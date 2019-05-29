@@ -115,7 +115,7 @@ public class Principal extends Paneles {
                         objetosHeroe.add(new Objeto("Bomba Pequeña", "Inflige 25 puntos de daño.", 25, 2, "ofensivo", 150));
                         objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 60 puntos de daño.", 60, 1, "ofensivo", 400));
                         objetosHeroe.add(new Objeto("Pocion de Mana", "Restablece 30 puntos de mana.", 30, 2, "curativo", 250));
-                        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 30, 30, 20, 20, 10, 5, 5, 5, habilidadesHeroe, objetosHeroe, 500, 0, 0, 1, 20));
+                        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 30, 30, 20, 20, 10, 5, 5, 5, habilidadesHeroe, objetosHeroe, 500, 0, 0, 1, 0));
                     } catch (InvalidTipoException e1) {
                         e1.printStackTrace();
                     }
@@ -130,7 +130,7 @@ public class Principal extends Paneles {
                         objetosHeroe.add(new Objeto("Bomba Pequeña", "Inflige 25 puntos de daño.", 25, 2, "ofensivo", 150));
                         objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 60 puntos de daño.", 60, 1, "ofensivo", 400));
                         objetosHeroe.add(new Objeto("Pocion de Mana", "Restablece 30 puntos de mana.", 30, 2, "curativo", 250));
-                        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 60, 60, 30, 30, 15, 7, 7, 7, habilidadesHeroe, objetosHeroe, 3000, 0, 0, 1, 20));
+                        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 60, 60, 30, 30, 1500, 7, 7, 7, habilidadesHeroe, objetosHeroe, 3000, 0, 0, 8, 18));
                     } catch (InvalidTipoException e1) {
                         e1.printStackTrace();
                     }

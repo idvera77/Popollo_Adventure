@@ -97,7 +97,7 @@ public class Inicio extends Paneles {
                         stm.close();
                         if (explorar == 0) {
                             JOptionPane.showMessageDialog(null, "No tienes partidas guardadas.", "Lo sentimos", 1);
-                            ventana.getConnect().close();
+                            ventana.setConnect(null);
                         } else {
                             ventana.cargarPantallaCarga();
                             Ventana.pararFondo();

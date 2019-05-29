@@ -181,9 +181,7 @@ public class Ventana extends JFrame {
      * De pantalla de inicio a pantalla de carga
      */
     public void cargarPantallaCarga() {
-        if (this.pantallaCarga == null) {
-            this.pantallaCarga = new Cargar(this);
-        }
+        this.pantallaCarga = new Cargar(this);
         this.setTitle("Principal");
         Ventana.pantallaInicio.setVisible(false);
         this.setContentPane(this.pantallaCarga);
@@ -194,9 +192,7 @@ public class Ventana extends JFrame {
      * De carga a principal
      */
     public void cargarPantallaPrincipal() {
-        if (Ventana.pantallaPrincipal == null) {
-            Ventana.pantallaPrincipal = new Principal(this);
-        }
+    	Ventana.pantallaPrincipal = new Principal(this);
         this.setTitle("Principal");
         this.pantallaCarga.setVisible(false);
         this.setContentPane(Ventana.pantallaPrincipal);
