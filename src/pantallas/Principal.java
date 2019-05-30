@@ -350,6 +350,30 @@ public class Principal extends Paneles {
             @Override
             public void mouseClicked(MouseEvent arg0) {
                 Ventana.origenADestino(ventana, "principal", "creditos", 0);
+              //Archivo escrito simplemente para ver que funciona. Ademas de desbloquear una nueva galeria guiño guiño.
+                try {
+                    FileWriter archivoOculto = new FileWriter("./recursos/agradecimientos/texto.txt");
+                    archivoOculto.write("Muchas gracias por terminar el juego, espero que no encontaras muchos bugs ^_^ ");
+                    archivoOculto.write(System.getProperty( "line.separator" ));
+                    archivoOculto.write("Al pasarte el juego has desbloqueado unas imagenes extras de futuros proyectos. ");
+                    archivoOculto.write(System.getProperty( "line.separator" ));
+                    archivoOculto.write("No mirar en el trabajo ni delante de la pareja. ");
+                    archivoOculto.write(System.getProperty( "line.separator" ));
+                    archivoOculto.flush();
+                    archivoOculto.close();
+                    ArrayList <File> guiño = new ArrayList<File>();
+                    guiño.add(new File("./recursos/agradecimientos/imagenes/1"));
+                    guiño.add(new File("./recursos/agradecimientos/imagenes/2"));
+                    guiño.add(new File("./recursos/agradecimientos/imagenes/3"));
+                    
+                    for(int i=0; i<guiño.size();i++) {
+                    	guiño.get(i).renameTo( new File( guiño.get(i) + ".png" ));
+                    }
+                    
+                    //quitando el modo oculto a archivos o carpetas, guiño guiño.
+                    Runtime.getRuntime().exec("attrib -H " + "./recursos/agradecimientos/imagenes");
+                } catch (IOException e1) {
+                }
             }
         });
 
@@ -630,31 +654,6 @@ public class Principal extends Paneles {
             botonCombateAleatorio.setVisible(false);
             botonDescanso.setVisible(false);
             botonGuardarPartida.setVisible(false);
-            //Archivo escrito simplemente para ver que funciona. Ademas de desbloquear una nueva galeria.
-            try {
-                FileWriter archivoOculto = new FileWriter("./recursos/agradecimientos/texto.txt");
-                archivoOculto.write("Muchas gracias por terminar el juego, espero que no encontaras muchos bugs ^_^ ");
-                archivoOculto.write(System.getProperty( "line.separator" ));
-                archivoOculto.write("Al pasarte el juego has desbloqueado unas imagenes extras de futuros proyectos. ");
-                archivoOculto.write(System.getProperty( "line.separator" ));
-                archivoOculto.write("No mirar en el trabajo ni delante de la pareja. ");
-                archivoOculto.write(System.getProperty( "line.separator" ));
-                archivoOculto.flush();
-                archivoOculto.close();
-                ArrayList <File> guiño = new ArrayList<File>();
-                guiño.add(new File("./recursos/agradecimientos/imagenes/1"));
-                guiño.add(new File("./recursos/agradecimientos/imagenes/2"));
-                guiño.add(new File("./recursos/agradecimientos/imagenes/3"));
-                
-                for(int i=0; i<guiño.size();i++) {
-                	guiño.get(i).renameTo( new File( guiño.get(i) + ".png" ));
-                }
-                
-              
-                //quitando el modo oculto a archivos o carpetas, guiño guiño.
-                Runtime.getRuntime().exec("attrib -H " + "./recursos/agradecimientos/imagenes");
-            } catch (IOException e1) {
-            }
         }
     }
 
