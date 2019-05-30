@@ -460,6 +460,7 @@ public class Lucha extends Paneles {
         		ventana.origenADestino(ventana, "lucha", "inicio", 0);
         		//Ponemos el heroe a nulo, asi cuando volvamos a la pantalla de inicio no exista ninguno y podamos volver a crearlo.
                 ventana.setHeroe(null);
+                ventana.setConnect(null);
         	}
         });
 
