@@ -104,7 +104,7 @@ public class Principal extends Paneles {
                     System.err.println(ex.getMessage());
                 }
             } else {
-                if (Inicio.getDificultad() == 1) {
+                if (ventana.getPantallaInicio().getDificultad()==1) {
                     try {
                         ArrayList<Habilidad> habilidadesHeroe = new ArrayList<Habilidad>();
                         habilidadesHeroe.add(new Habilidad("Proyectil Magico", "Disparas chispas magicas de tus manos.", 2, 4, "ofensivo"));
@@ -119,7 +119,7 @@ public class Principal extends Paneles {
                     } catch (InvalidTipoException e1) {
                         e1.printStackTrace();
                     }
-                } else if (Inicio.getDificultad() == 0) {
+                } else if (ventana.getPantallaInicio().getDificultad()==0) {
                     try {
                         ArrayList<Habilidad> habilidadesHeroe = new ArrayList<Habilidad>();
                         habilidadesHeroe.add(new Habilidad("Proyectil Magico", "Disparas chispas magicas de tus manos.", 2, 4, "ofensivo"));

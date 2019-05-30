@@ -66,6 +66,7 @@ public class Inicio extends Paneles {
                         ventana.cargarPantallaCarga();
                         Ventana.pararFondo();
                         Ventana.comenzarSonido(sonidoLogin);
+                        setDificultad(0);
                         break;
                     case JOptionPane.NO_OPTION:
                         setDificultad(1);
@@ -98,6 +99,7 @@ public class Inicio extends Paneles {
                         stm.close();
                         if (explorar == 0) {
                             JOptionPane.showMessageDialog(null, "No tienes partidas guardadas.", "Lo sentimos", 1);
+                            ventana.setConnect(null);
                         } else {
                         	Ventana.pararFondo();
                             ventana.cargarPantallaCarga();
@@ -132,11 +134,11 @@ public class Inicio extends Paneles {
         });             
     }
 
-    public static int getDificultad() {
+    public int getDificultad() {
         return dificultad;
     }
 
-    public void setDificultad(int dificultad) {
-        Inicio.dificultad = dificultad;
+    public int setDificultad(int dificultad) {
+        return this.dificultad = dificultad;
     }
 }
