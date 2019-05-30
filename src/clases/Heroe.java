@@ -129,7 +129,7 @@ public final class Heroe extends Personaje {
                         + "Fuerza + 2<br>"
                         + "Defensa + 1</b></center></html>";
                 JOptionPane.showMessageDialog(null, subirNivel);
-                setSaludMaxima(getSaludMaxima() + 20);
+                setSaludMaxima(getSaludMaxima() + 10);
                 setSalud(getSalud() + 10);
                 setFuerza(getFuerza() + 2);
                 setDefensa(getDefensa() + 1);
@@ -172,22 +172,18 @@ public final class Heroe extends Personaje {
         listaHabilidades += "</html>";
         registro.setText(listaHabilidades);
     }
-
+    
     /**
-     * Muestra un listado de las habilidades en Combate
+     * Muestra la informacion de la habilidad al seleccionarla.
      *
      * @param registro JLabel que guarda la informacion y la muestra.
      */
-    public void mostrarHabilidadesCombate(LabelCombateEvento registro) {
-        String listaHabilidades = "";
-        listaHabilidades += "<html><b>";
-        for (int i = 0; i < getHabilidadesArray().size(); i++) {
-            listaHabilidades += getHabilidadesArray().get(i).getNombre()
-                    + " | " + getHabilidadesArray().get(i).getManaUtilizado() + " PM<br>";
-        }
-        listaHabilidades += "</b></html>";
+    public void mostrarHabilidadesCombate(LabelCombateEvento registro, int numero) {
+        String listaHabilidades = getHabilidadesArray().get(numero).getNombre()
+                    + "  * " + getHabilidadesArray().get(numero).getManaUtilizado() + " PM *";
         registro.setText(listaHabilidades);
-    }
+     }
+    
 
     /**
      * Funcion para calcular la curacion realizada por una habilidad, se multiplica el valor de magia por el valor
@@ -254,20 +250,15 @@ public final class Heroe extends Personaje {
     }
 
     /**
-     * Muestra un listado de los objetos en Combate
+     * Muestra la informacion de un objeto al seleccionarlo.
      *
-     * @param registro JLabelText que guarda la informacion y la muestra.
+     * @param registro JLabel que guarda la informacion y la muestra.
      */
-    public void mostrarObjetosCombate(LabelCombateEvento registro) {
-        String listaObjetos = "";
-        listaObjetos += "<html><b>";
-        for (int i = 0; i < getObjetosArray().size(); i++) {
-            listaObjetos += getObjetosArray().get(i).getNombre()
-                    + " | Cantidad: " + getObjetosArray().get(i).getCantidad() + "<br>";
-        }
-        listaObjetos += "</b></html>";
+    public void mostrarObjetosCombate(LabelCombateEvento registro, int numero) {
+           String listaObjetos = getObjetosArray().get(numero).getNombre()
+        		   + "  * Cantidad: " + getObjetosArray().get(numero).getCantidad()+" *";
         registro.setText(listaObjetos);
-    }
+     }
 
     /**
      * Funcion para calcular el daño realizado por un objeto.

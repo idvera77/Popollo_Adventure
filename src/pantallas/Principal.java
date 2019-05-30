@@ -124,13 +124,13 @@ public class Principal extends Paneles {
                         ArrayList<Habilidad> habilidadesHeroe = new ArrayList<Habilidad>();
                         habilidadesHeroe.add(new Habilidad("Proyectil Magico", "Disparas chispas magicas de tus manos.", 2, 4, "ofensivo"));
                         habilidadesHeroe.add(new Habilidad("Flecha Helada", "Lanzas una flecha que congela todo a su paso.", 3, 6, "ofensivo"));
-                        habilidadesHeroe.add(new Habilidad("Curar Heridas", "Sana las heridas superficiales.", 5, 16, "curativo"));
+                        habilidadesHeroe.add(new Habilidad("Curar Heridas", "Sana las heridas superficiales.", 5, 6, "curativo"));
 
                         ArrayList<Objeto> objetosHeroe = new ArrayList<Objeto>();
                         objetosHeroe.add(new Objeto("Bomba Pequeña", "Inflige 25 puntos de daño.", 25, 2, "ofensivo", 150));
                         objetosHeroe.add(new Objeto("Bomba Grande", "Inflige 60 puntos de daño.", 60, 1, "ofensivo", 400));
                         objetosHeroe.add(new Objeto("Pocion de Mana", "Restablece 30 puntos de mana.", 30, 2, "curativo", 250));
-                        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 60, 60, 30, 30, 1500, 7, 7, 7, habilidadesHeroe, objetosHeroe, 3000, 0, 0, 8, 18));
+                        ventana.setHeroe(new Heroe("Popollo", "Un adorable popollito comilon.", 60, 60, 30, 30, 15, 7, 7, 7, habilidadesHeroe, objetosHeroe, 3000, 0, 0, 1, 0));
                     } catch (InvalidTipoException e1) {
                         e1.printStackTrace();
                     }
@@ -299,7 +299,7 @@ public class Principal extends Paneles {
         botonCombateAleatorio.setBounds(522, 436, 215, 23);
         add(botonCombateAleatorio);
 
-        Botones botonSalir = new Botones("Salir del Juego");
+        Botones botonSalir = new Botones("Volver al menu de inicio");
         botonSalir.setBounds(767, 487, 215, 23);
         add(botonSalir);
 
@@ -335,18 +335,13 @@ public class Principal extends Paneles {
         botonSalir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int exit = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", " Cerrar Programa",
+            	int exit = JOptionPane.showConfirmDialog(null, "¿Estas seguro?", " Volver a Inicio",
                         JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
                 if (exit == JOptionPane.YES_OPTION) {
-                    if (ventana.getConnect() != null) {
-                        try {
-                            ventana.getConnect().close();
-                        } catch (SQLException e1) {
-                            //No importa el error que pueda transmitir en este caso.
-                        }
-                    }
-                    System.exit(0);
-                }
+                	ventana.origenADestino(ventana, "principal", "inicio", 0);
+            		//Ponemos el heroe a nulo, asi cuando volvamos a la pantalla de inicio no exista ninguno y podamos volver a crearlo.
+                    ventana.setHeroe(null);
+                }         
             }
         });
 

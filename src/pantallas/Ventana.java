@@ -107,7 +107,87 @@ public class Ventana extends JFrame {
         this.heroe = heroe;
     }
 
-    /**
+    public static Principal getPantallaPrincipal() {
+		return pantallaPrincipal;
+	}
+
+	public static void setPantallaPrincipal(Principal pantallaPrincipal) {
+		Ventana.pantallaPrincipal = pantallaPrincipal;
+	}
+
+	public static Lucha getPantallaLucha() {
+		return pantallaLucha;
+	}
+
+	public static void setPantallaLucha(Lucha pantallaLucha) {
+		Ventana.pantallaLucha = pantallaLucha;
+	}
+	
+	public static Inicio getPantallaInicio() {
+		return pantallaInicio;
+	}
+
+	public static void setPantallaInicio(Inicio pantallaInicio) {
+		Ventana.pantallaInicio = pantallaInicio;
+	}
+
+	public static Galeria getPantallaGaleria() {
+		return pantallaGaleria;
+	}
+
+	public static void setPantallaGaleria(Galeria pantallaGaleria) {
+		Ventana.pantallaGaleria = pantallaGaleria;
+	}
+
+	public static Tienda getPantallaTienda() {
+		return pantallaTienda;
+	}
+
+	public static void setPantallaTienda(Tienda pantallaTienda) {
+		Ventana.pantallaTienda = pantallaTienda;
+	}
+
+	public static Descanso getPantallaDescanso() {
+		return pantallaDescanso;
+	}
+
+	public static void setPantallaDescanso(Descanso pantallaDescanso) {
+		Ventana.pantallaDescanso = pantallaDescanso;
+	}
+
+	public static Evento getPantallaEvento() {
+		return pantallaEvento;
+	}
+
+	public static void setPantallaEvento(Evento pantallaEvento) {
+		Ventana.pantallaEvento = pantallaEvento;
+	}
+
+	public static Afinidad getPantallaAfinidad() {
+		return pantallaAfinidad;
+	}
+
+	public static void setPantallaAfinidad(Afinidad pantallaAfinidad) {
+		Ventana.pantallaAfinidad = pantallaAfinidad;
+	}
+
+	public static Creditos getPantallaCreditos() {
+		return pantallaCreditos;
+	}
+
+	public static void setPantallaCreditos(Creditos pantallaCreditos) {
+		Ventana.pantallaCreditos = pantallaCreditos;
+	}
+
+	public Cargar getPantallaCarga() {
+		return pantallaCarga;
+	}
+
+	public void setPantallaCarga(Cargar pantallaCarga) {
+		this.pantallaCarga = pantallaCarga;
+	}
+
+	/**
      * Funcion que conecta con la base de base de datos para cargar partida y nos devuelve una conexion si no ocurre
      * ningun error.
      *
@@ -209,55 +289,55 @@ public class Ventana extends JFrame {
     public static void origenADestino(Ventana v, String origen, String destino, int numero) {
         switch (destino) {
             case "inicio":
-                Ventana.pantallaInicio = new Inicio(v);
+                pantallaInicio = new Inicio(v);
                 v.setTitle("Popollo Adventure");
                 v.setContentPane(pantallaInicio);
                 Ventana.pantallaInicio.setVisible(true);
                 break;
             case "tienda":
-                Ventana.pantallaTienda = new Tienda(v);
+                pantallaTienda = new Tienda(v);
                 v.setTitle("Tienda");
                 v.setContentPane(Ventana.pantallaTienda);
                 Ventana.pantallaTienda.setVisible(true);
                 break;
             case "descanso":
-                Ventana.pantallaDescanso = new Descanso(v);
+                pantallaDescanso = new Descanso(v);
                 v.setTitle("Descanso");
                 v.setContentPane(Ventana.pantallaDescanso);
                 Ventana.pantallaDescanso.setVisible(true);
                 break;
             case "evento":
-                Ventana.pantallaEvento = new Evento(v, numero);
+                pantallaEvento = new Evento(v, numero);
                 v.setTitle("Evento");
                 v.setContentPane(Ventana.pantallaEvento);
                 Ventana.pantallaEvento.setVisible(true);
                 break;
             case "lucha":
-                Ventana.pantallaLucha = new Lucha(v, numero);
+                pantallaLucha = new Lucha(v, numero);
                 v.setTitle("Lucha");
                 v.setContentPane(Ventana.pantallaLucha);
                 Ventana.pantallaLucha.setVisible(true);
                 break;
             case "principal":
-                Ventana.pantallaPrincipal = new Principal(v);
+                pantallaPrincipal = new Principal(v);
                 v.setTitle("Principal");
                 v.setContentPane(Ventana.pantallaPrincipal);
                 Ventana.pantallaPrincipal.setVisible(true);
                 break;
             case "galeria":
-                Ventana.pantallaGaleria = new Galeria(v);
+                pantallaGaleria = new Galeria(v);
                 v.setTitle("Galeria");
                 v.setContentPane(Ventana.pantallaGaleria);
                 Ventana.pantallaGaleria.setVisible(true);
                 break;
             case "creditos":
-                Ventana.pantallaCreditos = new Creditos(v);
+                pantallaCreditos = new Creditos(v);
                 v.setTitle("Creditos");
                 v.setContentPane(Ventana.pantallaCreditos);
                 Ventana.pantallaCreditos.setVisible(true);
                 break;
             case "afinidad":
-                Ventana.pantallaAfinidad = new Afinidad(v);
+                pantallaAfinidad = new Afinidad(v);
                 v.setTitle("Afinidad");
                 v.setContentPane(Ventana.pantallaAfinidad);
                 Ventana.pantallaAfinidad.setVisible(true);
@@ -265,32 +345,55 @@ public class Ventana extends JFrame {
         }
         switch (origen) {
             case "inicio":
-                Ventana.pantallaInicio.setVisible(false);
+                pantallaInicio.setVisible(false);
+                pantallaInicio.removeAll();
+                setPantallaInicio(null);
                 break;
             case "tienda":
-                Ventana.pantallaTienda.setVisible(false);
+                pantallaTienda.setVisible(false);
+                pantallaTienda.removeAll();
+                setPantallaTienda(null);
                 break;
             case "descanso":
-                Ventana.pantallaDescanso.setVisible(false);
+                pantallaDescanso.setVisible(false);
+                pantallaDescanso.removeAll();
+                setPantallaDescanso(null);
                 break;
             case "evento":
-                Ventana.pantallaEvento.setVisible(false);
+                pantallaEvento.setVisible(false);
+                pantallaEvento.removeAll();
+                setPantallaEvento(null);
                 break;
             case "lucha":
-                Ventana.pantallaLucha.setVisible(false);
+                pantallaLucha.setVisible(false);
+                pantallaLucha.removeAll();
+                setPantallaLucha(null);
                 break;
             case "principal":
-                Ventana.pantallaPrincipal.setVisible(false);
+                pantallaPrincipal.setVisible(false);
+                pantallaPrincipal.removeAll();
+                setPantallaPrincipal(null);
                 break;
             case "creditos":
-                Ventana.pantallaCreditos.setVisible(false);
+                pantallaCreditos.setVisible(false);
+                pantallaCreditos.removeAll();
+                setPantallaCreditos(null);
                 break;
             case "afinidad":
-                Ventana.pantallaAfinidad.setVisible(false);
+                pantallaAfinidad.setVisible(false);
+                pantallaAfinidad.removeAll();
+                setPantallaAfinidad(null);
                 break;
+            case "galeria":
+                pantallaGaleria.setVisible(false);
+                pantallaGaleria.removeAll();
+                setPantallaGaleria(null);
+                break;     
         }
     }
-
+    
+    //AVISO SUPER IMPORTANTE
+    //Al no cerrar el AudioInputStream ocurria un problema de memory leak que 
     //Anotacion, puedo poner la musica guardada en ventana y llamarla por parametro pero he decididio dejarla cada una en su pantalla.
     /**
      * Funcion que nos permite iniciar sonidos.
@@ -318,6 +421,7 @@ public class Ventana extends JFrame {
      */
     public static void pararSonido() {
         clip.stop();
+        clip.close();
     }
 
     /**
@@ -347,5 +451,6 @@ public class Ventana extends JFrame {
      */
     public static void pararFondo() {
         clip2.stop();
+        clip2.close();
     }
 }

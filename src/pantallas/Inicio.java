@@ -22,6 +22,7 @@ public class Inicio extends Paneles {
 
         //Archivo de sonido
         Ventana.comenzarFondo("./recursos/sonidos/menu.wav");
+
         String sonidoLogin = "./recursos/sonidos/Login.wav";
 
         //Añadiendo Botones
@@ -97,10 +98,9 @@ public class Inicio extends Paneles {
                         stm.close();
                         if (explorar == 0) {
                             JOptionPane.showMessageDialog(null, "No tienes partidas guardadas.", "Lo sentimos", 1);
-                            ventana.setConnect(null);
                         } else {
+                        	Ventana.pararFondo();
                             ventana.cargarPantallaCarga();
-                            Ventana.pararFondo();
                         }
                     } catch (SQLException e1) {
                     }
@@ -112,7 +112,7 @@ public class Inicio extends Paneles {
         botonGaleria.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Ventana.pararFondo();
+            	Ventana.pararFondo();
                 Ventana.origenADestino(ventana, "inicio", "galeria", 0);
             }
         });
@@ -129,7 +129,7 @@ public class Inicio extends Paneles {
                 }
                 System.exit(0);
             }
-        });
+        });             
     }
 
     public static int getDificultad() {
@@ -137,6 +137,6 @@ public class Inicio extends Paneles {
     }
 
     public void setDificultad(int dificultad) {
-        this.dificultad = dificultad;
+        Inicio.dificultad = dificultad;
     }
 }

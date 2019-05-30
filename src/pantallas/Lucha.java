@@ -29,9 +29,9 @@ public class Lucha extends Paneles {
     private final ArrayList<ImageIcon> imagenEnemigoBatalla, imagenEnemigoDerrota;
     private final JProgressBar vidaHeroe, vidaEnemigo, manaHeroe, manaEnemigo;
     private final LabelCombateEvento registroBatallaHeroe, registroBatallaEnemigo, registroVictoriaDerrota,
-            mostrarAtributos, mostrarAtributosEnemigo, Versus;
+            mostrarAtributos, mostrarAtributosEnemigo, Versus, mostrarAyuda;
     private final Botones botonContinuar, quitarSeleccion, botonInicio;
-    private final BotonesCombate botonAtacar, botonDefender, botonHabilidades, botonObjetos, boton1Habilidad,
+    public final BotonesCombate botonAtacar, botonDefender, botonHabilidades, botonObjetos, boton1Habilidad,
             boton2Habilidad, boton3Habilidad, boton1Objeto, boton2Objeto, boton3Objeto;
     private final JLabel iconoDefensaHeroe, iconoDefensaEnemigo, imagenEnemigo, imagenHeroe;
     private final String sonidoVictoria, sonidoAtaque, sonidoExplosion, sonidoDefensa, sonidoCuracion, sonidoDerrota;
@@ -81,19 +81,22 @@ public class Lucha extends Paneles {
         add(registroVictoriaDerrota);
 
         //Estos atributos permanecen ocultos hasta que pasemos el raton por encima de la imagen del heroe o del enemigo.
-        mostrarAtributos = new LabelCombateEvento();
-        mostrarAtributos.setHorizontalTextPosition(SwingConstants.CENTER);
+        mostrarAtributos = new LabelCombateEvento();  
         heroe.mostrarAtributosCombate(mostrarAtributos);
         mostrarAtributos.setVisible(false);
         mostrarAtributos.setBounds(80, 355, 120, 115);
         add(mostrarAtributos);
 
         mostrarAtributosEnemigo = new LabelCombateEvento();
-        mostrarAtributosEnemigo.setHorizontalTextPosition(SwingConstants.CENTER);
         enemigoArray.get(adversario).mostrarAtributosCombate(mostrarAtributosEnemigo);
         mostrarAtributosEnemigo.setVisible(false);
         mostrarAtributosEnemigo.setBounds(807, 355, 120, 115);
         add(mostrarAtributosEnemigo);
+        
+        mostrarAyuda = new LabelCombateEvento();
+        mostrarAyuda.setVisible(false);
+        mostrarAyuda.setBounds(291, 307, 425, 33);
+        add(mostrarAyuda);
 
         //Barras de salud/mana del heroe y del enemigo, gracias a unas funciones mas abajo aumentaran o disminuiran.
         vidaHeroe = new JProgressBar(0, heroe.getSaludMaxima());
@@ -148,12 +151,12 @@ public class Lucha extends Paneles {
 
         botonAtacar = new BotonesCombate("");
         botonAtacar.setIcon(new ImageIcon("./recursos/imagenes/botones/botonEspada.png"));
-        botonAtacar.setBounds(252, 355, 115, 115);
+        botonAtacar.setBounds(255, 355, 115, 115);
         add(botonAtacar);
 
         botonDefender = new BotonesCombate("");
         botonDefender.setIcon(new ImageIcon("./recursos/imagenes/botones/botonEscudo.png"));
-        botonDefender.setBounds(381, 355, 115, 115);
+        botonDefender.setBounds(383, 355, 115, 115);
         add(botonDefender);
 
         botonHabilidades = new BotonesCombate("");
@@ -163,7 +166,7 @@ public class Lucha extends Paneles {
 
         botonObjetos = new BotonesCombate("");
         botonObjetos.setIcon(new ImageIcon("./recursos/imagenes/botones/botonObjeto.png"));
-        botonObjetos.setBounds(642, 355, 115, 115);
+        botonObjetos.setBounds(640, 355, 115, 115);
         add(botonObjetos);
 
         boton1Habilidad = new BotonesCombate("1");
@@ -181,7 +184,7 @@ public class Lucha extends Paneles {
         boton3Habilidad = new BotonesCombate("3");
         boton3Habilidad.setVisible(false);
         boton3Habilidad.setIcon(new ImageIcon("./recursos/imagenes/botones/botonHeal.png"));
-        boton3Habilidad.setBounds(577, 355, 115, 115);
+        boton3Habilidad.setBounds(574, 355, 115, 115);
         add(boton3Habilidad);
 
         boton1Objeto = new BotonesCombate("1");
@@ -204,7 +207,7 @@ public class Lucha extends Paneles {
 
         quitarSeleccion = new Botones("Atras");
         quitarSeleccion.setVisible(false);
-        quitarSeleccion.setBounds(395, 307, 215, 33);
+        quitarSeleccion.setBounds(383, 481, 243, 33);
         add(quitarSeleccion);
 
         //Mas JLabel que nos sirven para sacar la imagen del boton defensa, los textos de combate y las imagenes de los luchadores.
@@ -260,6 +263,15 @@ public class Lucha extends Paneles {
             public void mouseClicked(MouseEvent e) {
                 usarAtaque();
             }
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		mostrarAyuda.setText("Realiza un ataque fisico");
+        		mostrarAyuda.setVisible(true);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		mostrarAyuda.setVisible(false);
+        	}
         });
 
         botonDefender.addMouseListener(new MouseAdapter() {
@@ -267,24 +279,51 @@ public class Lucha extends Paneles {
             public void mouseClicked(MouseEvent e) {
                 usarDefensa();
             }
+            @Override
+        	public void mouseEntered(MouseEvent e) {
+        		mostrarAyuda.setText("Aumenta tu defensa durante este turno");
+        		mostrarAyuda.setVisible(true);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		mostrarAyuda.setVisible(false);
+        	}
         });
 
         botonHabilidades.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                heroe.mostrarHabilidadesCombate(registroBatallaHeroe);
+                registroBatallaHeroe.setText("¡Selecciona una habilidad!");
                 mostrarBotonHabilidades();
                 iconoDefensaHeroe.setVisible(false);
             }
+            @Override
+        	public void mouseEntered(MouseEvent e) {
+        		mostrarAyuda.setText("Despliega el menu de habilidades");
+        		mostrarAyuda.setVisible(true);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		mostrarAyuda.setVisible(false);
+        	}
         });
 
         botonObjetos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                heroe.mostrarObjetosCombate(registroBatallaHeroe);
+            	registroBatallaHeroe.setText("¡Selecciona un objeto!");
                 mostrarBotonObjetos();
                 iconoDefensaHeroe.setVisible(false);
             }
+            @Override
+        	public void mouseEntered(MouseEvent e) {
+        		mostrarAyuda.setText("Despliega el menu de objetos");
+        		mostrarAyuda.setVisible(true);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		mostrarAyuda.setVisible(false);
+        	}
         });
 
         boton1Habilidad.addMouseListener(new MouseAdapter() {
@@ -292,6 +331,15 @@ public class Lucha extends Paneles {
             public void mouseClicked(MouseEvent e) {
                 usarHabilidadHeroe(0);
             }
+            @Override
+        	public void mouseEntered(MouseEvent e) {
+            	heroe.mostrarHabilidadesCombate(mostrarAyuda, 0);
+        		mostrarAyuda.setVisible(true);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		mostrarAyuda.setVisible(false);
+        	}
         });
 
         boton2Habilidad.addMouseListener(new MouseAdapter() {
@@ -299,6 +347,15 @@ public class Lucha extends Paneles {
             public void mouseClicked(MouseEvent e) {
                 usarHabilidadHeroe(1);
             }
+            @Override
+        	public void mouseEntered(MouseEvent e) {
+            	heroe.mostrarHabilidadesCombate(mostrarAyuda, 1);
+        		mostrarAyuda.setVisible(true);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		mostrarAyuda.setVisible(false);
+        	}
         });
 
         boton3Habilidad.addMouseListener(new MouseAdapter() {
@@ -306,6 +363,15 @@ public class Lucha extends Paneles {
             public void mouseClicked(MouseEvent e) {
                 usarHabilidadHeroe(2);
             }
+            @Override
+        	public void mouseEntered(MouseEvent e) {
+            	heroe.mostrarHabilidadesCombate(mostrarAyuda, 2);
+        		mostrarAyuda.setVisible(true);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		mostrarAyuda.setVisible(false);
+        	}
         });
 
         boton1Objeto.addMouseListener(new MouseAdapter() {
@@ -313,6 +379,15 @@ public class Lucha extends Paneles {
             public void mouseClicked(MouseEvent e) {
                 usarObjetosHeroe(0);
             }
+            @Override
+        	public void mouseEntered(MouseEvent e) {
+            	heroe.mostrarObjetosCombate(mostrarAyuda, 0);
+        		mostrarAyuda.setVisible(true);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		mostrarAyuda.setVisible(false);
+        	}
         });
 
         boton2Objeto.addMouseListener(new MouseAdapter() {
@@ -320,13 +395,31 @@ public class Lucha extends Paneles {
             public void mouseClicked(MouseEvent e) {
                 usarObjetosHeroe(1);
             }
+            @Override
+        	public void mouseEntered(MouseEvent e) {
+            	heroe.mostrarObjetosCombate(mostrarAyuda, 1);
+        		mostrarAyuda.setVisible(true);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		mostrarAyuda.setVisible(false);
+        	}
         });
 
         boton3Objeto.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                usarObjetosHeroe(2);
+            	usarObjetosHeroe(2);
             }
+            @Override
+        	public void mouseEntered(MouseEvent e) {
+            	heroe.mostrarObjetosCombate(mostrarAyuda, 2);
+        		mostrarAyuda.setVisible(true);
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+        		mostrarAyuda.setVisible(false);
+        	}
         });
 
         quitarSeleccion.addMouseListener(new MouseAdapter() {
@@ -365,6 +458,8 @@ public class Lucha extends Paneles {
         	public void mouseClicked(MouseEvent arg0) {
         		Ventana.pararSonido();
         		ventana.origenADestino(ventana, "lucha", "inicio", 0);
+        		//Ponemos el heroe a nulo, asi cuando volvamos a la pantalla de inicio no exista ninguno y podamos volver a crearlo.
+                ventana.setHeroe(null);
         	}
         });
 
@@ -525,6 +620,7 @@ public class Lucha extends Paneles {
      * @param numero Indica la habilidad a usar
      */
     public void usarHabilidadHeroe(int numero) {
+    	mostrarAyuda.setVisible(false);
         ocultarBotonHabilidades();
         heroe.usarHabilidades(numero, enemigoArray.get(adversario), registroBatallaHeroe, sonidoExplosion, sonidoCuracion);
         turnoEnemigo();
@@ -536,6 +632,7 @@ public class Lucha extends Paneles {
      * @param numero Indica el objeto a usar
      */
     public void usarObjetosHeroe(int numero) {
+    	mostrarAyuda.setVisible(false);
         ocultarBotonObjetos();
         heroe.usarObjetos(numero, enemigoArray.get(adversario), registroBatallaHeroe, sonidoExplosion, sonidoCuracion);
         turnoEnemigo();
@@ -587,6 +684,7 @@ public class Lucha extends Paneles {
                 defensaHeroe = false;
             }
             //Cambia el retrato del enemigo y aparece un mensaje de victoria, indicando el dinero y experiencia obtenido.
+            mostrarAyuda.setVisible(false);
             imagenEnemigo.setIcon(imagenEnemigoDerrota.get(adversario));
             registroBatallaEnemigo.setText("");
             registroVictoriaDerrota.setVisible(true);
@@ -614,16 +712,16 @@ public class Lucha extends Paneles {
         }
         //Al final del turno enemigo comprobamos si el heroe no tiene la suficiente vida para mostrar un GameOver.
         if (heroe.getSalud() <= 0) {
+        	mostrarAyuda.setVisible(false);
             Ventana.pararFondo();
             Ventana.comenzarSonido(sonidoDerrota);
             imagenHeroe.setIcon(new ImageIcon("./recursos/imagenes/combate/popolloD.png"));
             iconoDefensaHeroe.setVisible(false);
             registroVictoriaDerrota.setVisible(true);
             registroVictoriaDerrota.setText("<html><center><b>¡DERROTA!<br><br> Esfuérzate más la próxima vez.</b></center></html>");
+            enemigoArray.get(adversario).restablecerCompleto();
             ocultarTodo();
             botonInicio.setVisible(true);
-            //Ponemos el heroe a nulo, asi cuando volvamos a la pantalla de inicio no exista ninguno y podamos volver a crearlo.
-            ventana.setHeroe(null);
         }
     }
 }
