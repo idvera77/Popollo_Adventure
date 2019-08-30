@@ -45,7 +45,9 @@ public final class Eventos {
             case 3:
                 eventoTexto.setText("<html><center>Buscas en sus bolsillos mientras intenta defenderse aunque no tiene "
                         + "fuerzas para ello.<br><br>"
-                        + "* Obtienes 500 monedas de oro y el atributo agilidad mejora un punto *</center></html>");
+                        + "* Recibes 500 monedas de oro * <br>"
+                        + "* El atributo agilidad aumenta 1 punto *</center></html>");
+                heroe.setAgilidad(heroe.getAgilidad() + 1);
                 heroe.setDinero(heroe.getDinero() + 500);
                 heroe.subirReputacion(-25);
                 break;
@@ -85,7 +87,8 @@ public final class Eventos {
             case 3:
                 eventoTexto.setText("<html><center>Aprovechas el alboroto causado por el ataque del monstruo y saqueas "
                         + "todo lo que puedes.<br><br>"
-                        + "* Obtienes 1000 monedas de oro y el atributo agilidad mejora en 1 punto *</center></html>");
+                        + "* Recibes 1000 monedas de oro * <br>"
+                        + "* El atributo agilidad aumenta 1 punto *</center></html>");
                 heroe.setDinero(heroe.getDinero() + 1000);
                 heroe.setAgilidad(heroe.getAgilidad() + 1);
                 heroe.subirReputacion(-25);
@@ -124,7 +127,7 @@ public final class Eventos {
                 break;
             case 3:
                 eventoTexto.setText("<html><center>Abres el cofre y encuentras una gran cantidad de monedas de oro.<br><br>"
-                        + "* Obtienes 1500 monedas de oro*</center></html>");
+                        + "* Recibes 1500 monedas de oro *</center></html>");
                 heroe.setDinero(heroe.getDinero() + 1500);
                 heroe.subirReputacion(-25);
                 break;
@@ -158,7 +161,7 @@ public final class Eventos {
             case 2:
                 eventoTexto.setText("<html><center>El pequeño poring empieza a darte mimitos y notas una gran calidez "
                         + "en tu corazón.<br><br>"
-                        + "* El atributo magia aumenta en 1 punto *</center></html>");
+                        + "* El atributo magia aumenta 1 punto *</center></html>");
                 heroe.setMagia(heroe.getMagia() + 2);
                 heroe.subirReputacion(25);
                 break;
@@ -194,19 +197,19 @@ public final class Eventos {
         switch (opcion) {
             case 1:
                 eventoTexto.setText("<html><center>Una luz aparece del centro del lago y te impacta directamente en el corazón.<br><br>"
-                        + "* La salud máxima aumenta en 20 puntos *</center></html>");
-                heroe.setSaludMaxima(heroe.getSaludMaxima() + 20);
-                heroe.setSalud(heroe.getSalud() + 20);
+                        + "* La salud máxima aumenta 35 puntos *</center></html>");
+                heroe.setSaludMaxima(heroe.getSaludMaxima() + 35);
+                heroe.setSalud(heroe.getSalud() + 35);
                 break;
             case 2:
                 eventoTexto.setText("<html><center>Una luz aparece del centro del lago y te impacta directamente en el corazón.<br><br>"
-                        + "* El mana máximo aumenta en 10 puntos *</center></html>");
+                        + "* El mana máximo aumenta 10 puntos *</center></html>");
                 heroe.setManaMaximo(heroe.getManaMaximo() + 10);
                 heroe.setMana(heroe.getMana() + 10);
                 break;
             case 3:
                 eventoTexto.setText("<html><center>Una luz aparece del centro del lago y te impacta directamente en el corazón.<br><br>"
-                        + "* El atributo Fuerza aumenta en 10 puntos *</center></html>");
+                        + "* El atributo fuerza aumenta 10 puntos *</center></html>");
                 heroe.setFuerza(heroe.getFuerza() + 10);
                 break;
         }

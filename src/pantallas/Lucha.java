@@ -691,7 +691,7 @@ public class Lucha extends Paneles {
             registroVictoriaDerrota.setVisible(true);
             registroVictoriaDerrota.setText("<html><center>¡VICTORIA!<br><br>"
                     + "* Recibes " + enemigoArray.get(adversario).getDinero() + " Monedas de oro *<br>"
-                    + "* Obtienes " + enemigoArray.get(adversario).getExperiencia() + " puntos de experiencia *"
+                    + "* Aumentas " + enemigoArray.get(adversario).getExperiencia() + " puntos de experiencia *"
                     + "</center></html>");
             registroVictoriaDerrota.setOpaque(true);
             heroe.setDinero(heroe.getDinero() + enemigoArray.get(adversario).getDinero());
